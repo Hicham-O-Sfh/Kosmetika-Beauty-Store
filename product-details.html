@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <!-- page head #generic -->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>✨ LiL Bling © ✨</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Favicon -->
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="assets/img/logo/logo-lil-bling.jpg"
+    />
+
+    <!-- CSS 
+    ========================= -->
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="assets/css/plugins.css" />
+
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <!--modernizr min js here-->
+    <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Main Wrapper Start -->
+    <!--Offcanvas menu area start #generic-->
+    <div class="off_canvars_overlay"></div>
+    <div class="Offcanvas_menu">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="canvas_open">
+              <a href="javascript:void(0)"><i class="ion-navicon"></i></a>
+            </div>
+            <div class="Offcanvas_menu_wrapper">
+              <div class="canvas_close">
+                <a href="javascript:void(0)">
+                  <i class="ion-android-close"></i>
+                </a>
+              </div>
+              <div id="menu" class="text-left">
+                <ul class="offcanvas_main_menu">
+                  <li>
+                    <a href="index.html">Accueil</a>
+                  </li>
+                  <li>
+                    <a href="shop.html">Catalogue</a>
+                  </li>
+                  <li>
+                    <a href="services.html">Services</a>
+                  </li>
+                  <li>
+                    <a href="faq.html">FAQ</a>
+                  </li>
+                  <li>
+                    <a href="contact-us.html">Contactez-nous</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Offcanvas menu area end-->
+
+    <!--header area start #generic-->
+    <header class="header_area">
+      <!--header middel start-->
+      <div class="header_middel">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-5"></div>
+            <div class="col-lg-2 col-md-3 col-4">
+              <div class="logo">
+                <a href="index.html">
+                  <img src="assets/img/logo/logo-lil-bling.jpg" alt="" />
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-5 col-md-7 col-6">
+              <div class="justify-content-end middel_right">
+                <div class="cart_link">
+                  <a href="#">
+                    <i class="ion-android-cart"></i>
+                  </a>
+                  <span class="cart_quantity" id="cart-quantity">0</span>
+                  <!--mini cart-->
+                  <div class="mini_cart">
+                    <div class="cart_close">
+                      <div class="cart_text">
+                        <h3>Mon panier</h3>
+                      </div>
+                      <div class="mini_cart_close">
+                        <a href="javascript:void(0)">
+                          <i class="ion-android-close"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div id="cart-items"></div>
+                    <div class="cart_total">
+                      <span>Totale:</span>
+                      <u>
+                        <span id="subtotal">0 Dhs</span>
+                      </u>
+                    </div>
+                    <div class="mini_cart_footer">
+                      <div class="cart_button checkout">
+                        <a href="#" id="whatsapp-button">
+                          <img
+                            height="40"
+                            width="40"
+                            src="assets/img/logo/WhatsAppLogoWhite.svg"
+                            alt="WhatsApp"
+                          />
+                          <span>Valider la commande !</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <!--mini cart end-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--header middel end-->
+
+      <!--header bottom satrt-->
+      <div class="sticky-header">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <div class="main_menu_inner">
+                <div class="logo_sticky">
+                  <a href="index.html">
+                    <img src="assets/img/logo/logo-lil-bling.jpg" alt="" />
+                  </a>
+                </div>
+                <div class="main_menu">
+                  <nav>
+                    <ul>
+                      <li>
+                        <a href="index.html">Accueil</a>
+                      </li>
+                      <li>
+                        <a href="shop.html">Catalogue</a>
+                      </li>
+                      <li>
+                        <a href="services.html">Services</a>
+                      </li>
+                      <li>
+                        <a href="faq.html">FAQ</a>
+                      </li>
+                      <li>
+                        <a href="contact-us.html">Contactez-nous</a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--header bottom end-->
+    </header>
+    <!--header area end-->
+
+    <!--product details start-->
+    <div class="product_details">
+      <div class="container">
+        <div class="row mt-3">
+          <div class="col-lg-5 col-md-5">
+            <div class="product-details-tab">
+              <div
+                id="img-1"
+                class="zoomWrapper single-zoom big-image-skeleton"
+              >
+                <a href="#">
+                  <img id="zoom1" src="" data-zoom-image="" alt="" />
+                </a>
+              </div>
+
+              <div class="single-zoom-thumb">
+                <ul
+                  class="s-tab-zoom owl-carousel single-product-active"
+                  id="gallery_01"
+                ></ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-7 col-md-7">
+            <div class="product_d_right">
+              <u>
+                <h1 id="product-name" class="text-skeleton">Lorem, ipsum.</h1>
+              </u>
+              <div class="product_price">
+                <span class="current_price text-skeleton" id="product-price">
+                  123 Dhs
+                </span>
+              </div>
+              <div class="product_desc">
+                <p id="product-description" class="text-skeleton">
+                  AApeget velit. Donec ac tempus ante. Fusce ultricies massa
+                  massa. Fusce aliquam, purus eget sagittis vulputate, sapien
+                  libero hendrerit est, sed commodo augue nisi non neque. Lorem
+                  ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor,
+                  lorem et placerat vestibulum, metus nisi posuere nisl, in
+                </p>
+                <p id="second-product-description" class="text-skeleton">
+                  AApeget velit. Donec ac tempus ante. Fusce ultricies massa
+                  massa. Fusce aliquam, purus eget sagittis vulputate, sapien
+                  libero hendrerit est, sed commodo augue nisi non neque. Lorem
+                  ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor,
+                  lorem et placerat vestibulum, metus nisi posuere nisl, in
+                </p>
+              </div>
+
+              <div class="product_variant quantity">
+                <label>Quantité</label>
+                <input
+                  id="product-quantity"
+                  min="1"
+                  step="1"
+                  max="50"
+                  value="1"
+                  type="number"
+                />
+                <button class="button text-skeleton" id="button-add-to-cart">
+                  <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                  &nbsp; Ajouter au panier !
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--product details end-->
+
+    <!--product info start-->
+    <div class="product_d_info">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="product_d_inner">
+              <div class="product_info_button">
+                <ul class="nav" role="tablist">
+                  <li>
+                    <a
+                      class="active"
+                      data-bs-toggle="tab"
+                      role="tab"
+                      aria-controls="info"
+                      style="cursor: auto"
+                      aria-selected="false"
+                    >
+                      Plus d'info !
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content">
+                <div
+                  class="tab-pane fade show active"
+                  id="info"
+                  role="tabpanel"
+                >
+                  <div class="product_info_content">
+                    <p>
+                      Faites votre choix parmis nos meilleurs collection et
+                      tentez d'obtenir un cadeau 🎁🎁 ! Notre collection
+                      représente l'élégance et chaque bijoux fait preuve d'une
+                      sérieuse durabilité, grâce à ✅ des matériaux de première
+                      qualité et à une conception sophistiqué 🎀. Chaque pièce
+                      est une déclaration de style unique, conçue pour durer au
+                      fil du temps ! Nous nous engageons à vous offrir une
+                      satisfaction totale à chaque achat, car votre confiance
+                      est notre priorité. En signe de reconnaissance, nous
+                      aimons glisser dans vos commandes des cadeaux spéciaux 😉
+                      témoignage de notre gratitude pour votre fidélité 💝.
+                      Découvrez dès maintenant nos collections et laissez-vous
+                      séduire par l'excellence et l'attention aux détails qui
+                      font de chaque bijou une œuvre d'art a en profiter pour
+                      toujours.
+                    </p>
+                    <p>
+                      Découvrez l'excellence chez
+                      <span
+                        class="brand-lil-bling-title"
+                        style="font-weight: 600"
+                      >
+                        ✨ LiL Bling
+                        <i class="lil-bling-copyright-logo">©</i> ✨
+                      </span>
+                      ! Nous vous proposons une sélection de bijoux d'une
+                      qualité exceptionnelle 💎, alliant durabilité et élégance
+                      incomparables. Chaque pièce est soigneusement conçue et
+                      selectionné pour offrir le meilleur rapport qualité/prix à
+                      nos chérs clients exigeants 💖.
+                    </p>
+                    <p>
+                      Faites plaisir à vos proches 🫂 avec des cadeaux 🎁 qui
+                      marquent les esprits. Nos bijoux sont trés à la mode et
+                      élégants, et aussi fabriqués avec des matériaux de haute
+                      qualité (voir la section materiel dans chaque page de
+                      produit) assurant une durabilité à toute épreuve. Profitez
+                      d'une communication transparente 💬 à lors de votre
+                      commande et personnalisez votre emballage pour une touche
+                      personnelle unique 💍 comme vous voulez.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--product info end-->
+
+    <!--product section area start-->
+    <section class="product_section p_section1">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="section_title">
+              <h2>Produits similaires</h2>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="product_area">
+              <div class="product_container bottom">
+                <div
+                  class="custom-row product_row1"
+                  id="related-products-section"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--product section area end-->
+
+    <!--footer area start #generic -->
+    <footer class="footer_widgets border-top pt-5">
+      <div class="container">
+        <div class="footer_top">
+          <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-8">
+              <div class="widgets_container contact_us">
+                <h3>
+                  À propos de
+                  <span class="brand-lil-bling-title">
+                    ✨ LiL Bling <i class="lil-bling-copyright-logo">©</i> ✨
+                  </span>
+                </h3>
+                <div class="footer_contact">
+                  <p>
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    Nous livrons à tout le Maroc 💖
+                  </p>
+                  <p>
+                    <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                    GSM:
+                    <u>
+                      <!-- todo: update our phone number (whatsapp) -->
+                      <a href="tel:0123456789"> 0123456789</a>
+                    </u>
+                  </p>
+                  <p>
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    <!-- todo: update mail -->
+                    Email: demo@example.com
+                  </p>
+                  <p>
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    <!-- todo: update instagram -->
+                    Instagram: @instagram
+                  </p>
+                  <p>
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    <!-- todo: update tikTok -->
+                    Tik Tok: @tikTok
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-7">
+              <div
+                class="widgets_container product_widget"
+                id="footer-best-selling-products"
+              ></div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+              <div class="widgets_container widget_menu">
+                <h3>
+                  <i class="fa fa-link" aria-hidden="true"></i>
+                  Liens utiles
+                </h3>
+                <div class="footer_menu">
+                  <ul>
+                    <li>
+                      <a href="faq.html">
+                        Questions/Réponses
+                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="services.html">
+                        Nos autres services
+                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="contact-us.html">
+                        Contactez-nous !
+                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="shop.html">
+                        Notre Catalogue
+                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!--footer area end-->
+
+    <!-- JS
+============================================ -->
+
+    <!-- Plugins JS -->
+    <script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
+    <script src="assets/js/popper.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/owl.carousel.main.js"></script>
+    <script src="assets/js/jquery.nice.select.js"></script>
+    <script src="assets/js/scrollup.js"></script>
+    <script src="assets/js/ajax.chimp.js"></script>
+    <script src="assets/js/jquery.ui.js"></script>
+    <script src="assets/js/jquery.elevatezoom.js"></script>
+    <script src="assets/js/imagesloaded.js"></script>
+    <script src="assets/js/isotope.main.js"></script>
+    <script src="assets/js/jquery.cookie.js"></script>
+    <script src="assets/js/bpopup.js"></script>
+
+    <!-- Main JS -->
+    <script type="module" src="assets/js/main.js"></script>
+  </body>
+</html>

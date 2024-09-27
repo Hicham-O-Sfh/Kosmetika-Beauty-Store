@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <!-- page head #generic -->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>✨ LiL Bling © ✨</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Favicon -->
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="assets/img/logo/logo-lil-bling.jpg"
+    />
+
+    <!-- CSS 
+    ========================= -->
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="assets/css/plugins.css" />
+
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <!--modernizr min js here-->
+    <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Main Wrapper Start -->
+    <!--Offcanvas menu area start #generic-->
+    <div class="off_canvars_overlay"></div>
+    <div class="Offcanvas_menu">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="canvas_open">
+              <a href="javascript:void(0)"><i class="ion-navicon"></i></a>
+            </div>
+            <div class="Offcanvas_menu_wrapper">
+              <div class="canvas_close">
+                <a href="javascript:void(0)">
+                  <i class="ion-android-close"></i>
+                </a>
+              </div>
+              <div id="menu" class="text-left">
+                <ul class="offcanvas_main_menu">
+                  <li class="active">
+                    <a href="index.html">Accueil</a>
+                  </li>
+                  <li>
+                    <a href="shop.html">Catalogue</a>
+                  </li>
+                  <li>
+                    <a href="services.html">Services</a>
+                  </li>
+                  <li>
+                    <a href="faq.html">FAQ</a>
+                  </li>
+                  <li>
+                    <a href="contact-us.html">Contactez-nous</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Offcanvas menu area end-->
+
+    <!--header area start #generic-->
+    <header class="header_area">
+      <!--header middel start-->
+      <div class="header_middel">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-5"></div>
+            <div class="col-lg-2 col-md-3 col-4">
+              <div class="logo">
+                <a href="index.html">
+                  <img src="assets/img/logo/logo-lil-bling.jpg" alt="" />
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-5 col-md-7 col-6">
+              <div class="justify-content-end middel_right">
+                <div class="cart_link">
+                  <a href="#">
+                    <i class="ion-android-cart"></i>
+                  </a>
+                  <span class="cart_quantity" id="cart-quantity">0</span>
+                  <!--mini cart-->
+                  <div class="mini_cart">
+                    <div class="cart_close">
+                      <div class="cart_text">
+                        <h3>Mon panier</h3>
+                      </div>
+                      <div class="mini_cart_close">
+                        <a href="javascript:void(0)">
+                          <i class="ion-android-close"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div id="cart-items"></div>
+                    <div class="cart_total">
+                      <span>Totale:</span>
+                      <u>
+                        <span id="subtotal">0 Dhs</span>
+                      </u>
+                    </div>
+                    <div class="mini_cart_footer">
+                      <div class="cart_button checkout">
+                        <a href="#" id="whatsapp-button">
+                          <img
+                            height="40"
+                            width="40"
+                            src="assets/img/logo/WhatsAppLogoWhite.svg"
+                            alt="WhatsApp"
+                          />
+                          <span>Valider la commande !</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <!--mini cart end-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--header middel end-->
+
+      <!--header bottom satrt-->
+      <div class="sticky-header">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <div class="main_menu_inner">
+                <div class="logo_sticky">
+                  <a href="index.html">
+                    <img src="assets/img/logo/logo-lil-bling.jpg" alt="" />
+                  </a>
+                </div>
+                <div class="main_menu">
+                  <nav>
+                    <ul>
+                      <li class="active">
+                        <a href="index.html">Accueil</a>
+                      </li>
+                      <li>
+                        <a href="shop.html">Catalogue</a>
+                      </li>
+                      <li>
+                        <a href="services.html">Services</a>
+                      </li>
+                      <li>
+                        <a href="faq.html">FAQ</a>
+                      </li>
+                      <li>
+                        <a href="contact-us.html">Contactez-nous</a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--header bottom end-->
+    </header>
+    <!--header area end-->
+
+    <!--slider area start-->
+    <div class="slider_area home_slider_two owl-carousel">
+      <div class="single_slider" data-bgimg="assets/img/slider/slider4.jpg">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <div class="slider_content">
+                <p>Offre exclusive & nouveautés</p>
+                <h1>
+                  Nouvel arrivage
+                  <br />
+                  <br />
+                  saison du printemps🌻
+                </h1>
+                <p class="slider_price">à partir de<span>80 dhs !</span></p>
+                <a class="button" href="shop.html">Acheter maitenant</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="single_slider" data-bgimg="assets/img/slider/slider3.jpg">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <div class="slider_content">
+                <p>Offre exclusive & nouveautés</p>
+                <h1>
+                  Collection chic
+                  <br />
+                  <br />
+                  et élégante 💎
+                </h1>
+                <p class="slider_price">à partir de<span>80 dhs !</span></p>
+                <a class="button" href="shop.html">Acheter maitenant</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--slider area end-->
+
+    <!--banner area start-->
+    <section class="banner_section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6">
+            <div class="single_banner">
+              <div class="banner_thumb">
+                <div>
+                  <img src="assets/img/bg/banner1.jpg" alt="" />
+                </div>
+                <div class="banner_content">
+                  <h2>Finition élégante</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="single_banner">
+              <div class="banner_thumb">
+                <div>
+                  <img src="assets/img/bg/banner2.jpg" alt="" />
+                </div>
+                <div class="banner_content">
+                  <h2>
+                    Matériaux
+                    <br />
+                    de haute qualité
+                  </h2>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="single_banner bottom">
+              <div class="banner_thumb">
+                <div>
+                  <img src="assets/img/bg/banner3.jpg" alt="" />
+                </div>
+                <div class="banner_content">
+                  <h2>Confort et durabilité</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--banner area end-->
+
+    <!--product section area start-->
+    <section class="product_section p_section1">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="product_area">
+              <div class="product_tab_button">
+                <ul class="nav" role="tablist">
+                  <li>
+                    <a
+                      class="active"
+                      data-bs-toggle="tab"
+                      href="#featured"
+                      role="tab"
+                      aria-controls="featured"
+                      aria-selected="true"
+                    >
+                      En vedette
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      data-bs-toggle="tab"
+                      href="#arrivals"
+                      role="tab"
+                      aria-controls="arrivals"
+                      aria-selected="false"
+                    >
+                      Nouvel Arrivage
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      data-bs-toggle="tab"
+                      href="#onsale"
+                      role="tab"
+                      aria-controls="onsale"
+                      aria-selected="false"
+                    >
+                      Promotion
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content">
+                <div
+                  class="tab-pane fade show active"
+                  id="featured"
+                  role="tabpanel"
+                >
+                  <div class="product_container">
+                    <div
+                      class="custom-row product_column3"
+                      id="featured-products-tab"
+                    ></div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="arrivals" role="tabpanel">
+                  <div class="product_container">
+                    <div
+                      class="custom-row product_column3"
+                      id="arrivals-products-tab"
+                    ></div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="onsale" role="tabpanel">
+                  <div class="product_container">
+                    <div
+                      class="custom-row product_column3"
+                      id="onsale-products-tab"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--product section area end-->
+
+    <!--banner fullwidth start-->
+    <section class="banner_fullwidth">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-12">
+            <a href="shop.html">
+              <div class="banner_text">
+                <p>Tentez de gagner un cadeau dans votre commande 🎁</p>
+                <h2>🌻 Nouvelle collection tendance 💎</h2>
+                <span>
+                  Profitez des derniéres nouveautés
+                  <br />
+                  élégance et à la mode !
+                </span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--banner area end-->
+
+    <!--product section area start-->
+    <section class="product_section p_bottom p_section1">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="section_title">
+              <h2>Tendances 💎</h2>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="product_area">
+              <div class="product_container bottom">
+                <div
+                  class="custom-row product_row1"
+                  id="related-products-section"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--product section area end-->
+
+    <!--footer area start #generic -->
+    <footer class="footer_widgets border-top pt-5">
+      <div class="container">
+        <div class="footer_top">
+          <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-8">
+              <div class="widgets_container contact_us">
+                <h3>
+                  À propos de
+                  <span class="brand-lil-bling-title">
+                    ✨ LiL Bling <i class="lil-bling-copyright-logo">©</i> ✨
+                  </span>
+                </h3>
+                <div class="footer_contact">
+                  <p>
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    Nous livrons à tout le Maroc 💖
+                  </p>
+                  <p>
+                    <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                    GSM:
+                    <u>
+                      <!-- todo: update our phone number (whatsapp) -->
+                      <a href="tel:0123456789"> 0123456789</a>
+                    </u>
+                  </p>
+                  <p>
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    <!-- todo: update mail -->
+                    Email: demo@example.com
+                  </p>
+                  <p>
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    <!-- todo: update instagram -->
+                    Instagram: @instagram
+                  </p>
+                  <p>
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    <!-- todo: update tikTok -->
+                    Tik Tok: @tikTok
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-7">
+              <div
+                class="widgets_container product_widget"
+                id="footer-best-selling-products"
+              ></div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+              <div class="widgets_container widget_menu">
+                <h3>
+                  <i class="fa fa-link" aria-hidden="true"></i>
+                  Liens utiles
+                </h3>
+                <div class="footer_menu">
+                  <ul>
+                    <li>
+                      <a href="faq.html">
+                        Questions/Réponses
+                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="services.html">
+                        Nos autres services
+                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="contact-us.html">
+                        Contactez-nous !
+                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="shop.html">
+                        Notre Catalogue
+                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!--footer area end-->
+
+    <!-- JS
+============================================ -->
+
+    <!-- Plugins JS -->
+    <!--jquery min js-->
+    <script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
+    <script src="assets/js/popper.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/owl.carousel.main.js"></script>
+    <script src="assets/js/jquery.nice.select.js"></script>
+    <script src="assets/js/scrollup.js"></script>
+    <script src="assets/js/ajax.chimp.js"></script>
+    <script src="assets/js/jquery.ui.js"></script>
+    <script src="assets/js/jquery.elevatezoom.js"></script>
+    <script src="assets/js/imagesloaded.js"></script>
+    <script src="assets/js/isotope.main.js"></script>
+    <script src="assets/js/jquery.cookie.js"></script>
+    <script src="assets/js/bpopup.js"></script>
+
+    <!-- Main JS -->
+    <script type="module" src="assets/js/main.js"></script>
+  </body>
+</html>
