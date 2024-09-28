@@ -39,57 +39,65 @@ export const MAIN_DATABASE = new Set([
   },
   {
     id: 2,
-    ref: "ref-produit-2",
-    price: 200,
+    ref: "Ana Lmalik, I am the King, 100ml",
+    price: 299,
     description:
-      "p2eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in",
-    secondDescription:
-      "p2eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in",
+      "Découvrez Ana Lmalik, une fragrance royale qui incarne la grandeur et le raffinement. Ce parfum puissant et sophistiqué allie des notes orientales riches à des accords épicés et boisés, créant un sillage captivant et mémorable. Idéal pour ceux qui recherchent une signature olfactive affirmée et élégante, Ana Lmalik se porte avec assurance, de jour comme de nuit. Laissez-vous envelopper par son aura majestueuse et laissez une empreinte royale partout où vous allez.",
+    secondDescription: `
+      <b>Marque:</b> Ard Al Zaafaran, Ana Lmalik.
+      <br>
+      <b>Qualité:</b> Eau de parfum.`,
     pics: [
       {
-        bigPicUrl: "assets/img/product/triple-bracelets-en-un-big.jpg",
-        smallPicUrl: "assets/img/product/triple-bracelets-en-un.jpg",
+        bigPicUrl: "assets/img/product/ard al zaafarn i am king img3 BIG.jpg",
+        smallPicUrl: "assets/img/product/ard al zaafarn i am king img3 SM.jpg",
         isMain: true,
       },
       {
-        bigPicUrl: "assets/img/product/triple-bracelets-en-un-1-big.gif",
-        smallPicUrl: "assets/img/product/triple-bracelets-en-un-1-big.gif",
+        bigPicUrl: "assets/img/product/ard al zaafarn i am king img2 BIG.jpg",
+        smallPicUrl: "assets/img/product/ard al zaafarn i am king img2 SM.jpg",
       },
       {
-        bigPicUrl: "assets/img/product/triple-bracelets-en-un-2-big.png",
-        smallPicUrl: "assets/img/product/triple-bracelets-en-un-2-big.png",
+        bigPicUrl: "assets/img/product/ard al zaafarn i am king img4 BIG.jpg",
+        smallPicUrl: "assets/img/product/ard al zaafarn i am king img4 SM.jpg",
       },
       {
-        bigPicUrl: "assets/img/product/triple-bracelets-en-un-big.jpg",
-        smallPicUrl: "assets/img/product/triple-bracelets-en-un.jpg",
+        bigPicUrl: "assets/img/product/ard al zaafarn i am king img3 BIG.jpg",
+        smallPicUrl: "assets/img/product/ard al zaafarn i am king img3 SM.jpg",
+      },
+      {
+        bigPicUrl: "assets/img/product/ard al zaafarn i am king img5 BIG.jpg",
+        smallPicUrl: "assets/img/product/ard al zaafarn i am king img5 SM.jpg",
       },
     ],
   },
   {
     id: 3,
-    ref: "ref-produit-3",
+    ref: "Yara, 100ml",
     price: 300,
     description:
-      "p3eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in",
-    secondDescription:
-      "p3eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in",
+      "Lattafa Yara est une fragrance délicate et envoûtante qui combine subtilement des notes florales et fruitées, créant une harmonie olfactive douce et rafraîchissante. Idéale pour ceux qui cherchent une touche de légèreté et d’élégance au quotidien, elle laisse un sillage raffiné et captivant. Parfait pour toutes les occasions, Yara évoque la fraîcheur et la modernité avec une allure irrésistible. Un parfum qui sublime chaque moment et attire tous les regards.",
+    secondDescription: `
+      <b>Marque:</b> Lattafa.
+      <br>
+      <b>Qualité:</b> Eau de parfum.`,
     pics: [
       {
-        bigPicUrl: "assets/img/product/product3-big.jpg",
-        smallPicUrl: "assets/img/product/product4.jpg",
+        bigPicUrl: "assets/img/product/yara img1 BIG.jpg",
+        smallPicUrl: "assets/img/product/yara img1 SM.jpg",
         isMain: true,
       },
       {
-        bigPicUrl: "assets/img/product/product1-big.jpg",
-        smallPicUrl: "assets/img/product/product13.jpg",
+        bigPicUrl: "assets/img/product/yara img2 BIG.jpg",
+        smallPicUrl: "assets/img/product/yara img2 SM.jpg",
       },
       {
-        bigPicUrl: "assets/img/product/product2-big.jpg",
-        smallPicUrl: "assets/img/product/product2.jpg",
+        bigPicUrl: "assets/img/product/yara img3 BIG.jpg",
+        smallPicUrl: "assets/img/product/yara img3 SM.jpg",
       },
       {
-        bigPicUrl: "assets/img/product/product3-big.jpg",
-        smallPicUrl: "assets/img/product/product4.jpg",
+        bigPicUrl: "assets/img/product/yara img1 BIG.jpg",
+        smallPicUrl: "assets/img/product/yara img1 SM.jpg",
       },
     ],
   },
