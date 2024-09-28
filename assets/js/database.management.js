@@ -9,31 +9,31 @@ export const PRODUCT_STATUS = Object.freeze({
 export const MAIN_DATABASE = new Set([
   {
     id: 1,
-    ref: "Bracelet de Luxe, Louis Vitton",
-    price: 130,
+    ref: "Toros De Arenas, Splendeur, 100ml",
+    price: 100,
     description:
-      "Élégant et robuste, notre bracelet doré Louis Vuitton est l'accessoire parfait pour tous les jours. Fabriqué en acier inoxydable de qualité, il allie style et solidité. Avec son design chic et intemporel, il ajoutera une touche de classe à toutes vos tenues. Optez pour le luxe au quotidien avec ce bijou qui fera sensation à chaque fois que vous le porterez.",
+      "Découvrez Toros De Arenas, une fragrance captivante qui évoque la richesse des dunes dorées et l'élégance intemporelle. Ce parfum allie des notes florales délicates à des accords chaleureux de bois et d'épices, créant une aura séduisante. Idéal pour ceux qui cherchent à exprimer leur personnalité avec sophistication, il transforme chaque instant en une célébration de la beauté. Un incontournable pour toute collection.",
     secondDescription: `
-        Marque: Louis Vitton.<br>
-        Qualité: Acier Inoxydable.<br>
-        Couleur: OR, Dorée.`,
+        <b>Marque:</b> Splendeur, Toros De Arenas.
+        <br>
+        <b>Qualité:</b> Eau de toilette.`,
     pics: [
       {
-        bigPicUrl: "assets/img/product/bracelet-LV-big.jpg",
-        smallPicUrl: "assets/img/product/bracelet-LV.jpg",
+        bigPicUrl: "assets/img/product/toros de arenas img2 BIG.jpg",
+        smallPicUrl: "assets/img/product/toros de arenas img2 SM.jpg",
         isMain: true,
       },
       {
-        bigPicUrl: "assets/img/product/bracelet-LV-1-big.jpeg",
-        smallPicUrl: "assets/img/product/bracelet-LV-1.jpeg",
+        bigPicUrl: "assets/img/product/toros de arenas img2 BIG.jpg",
+        smallPicUrl: "assets/img/product/toros de arenas img2 SM.jpg",
       },
       {
-        bigPicUrl: "assets/img/product/bracelet-LV-2-big.jpeg",
-        smallPicUrl: "assets/img/product/bracelet-LV-2.jpeg",
+        bigPicUrl: "assets/img/product/toros de arenas img1 BIG.jpg",
+        smallPicUrl: "assets/img/product/toros de arenas img1 SM.jpg",
       },
       {
-        bigPicUrl: "assets/img/product/bracelet-LV-big.jpg",
-        smallPicUrl: "assets/img/product/bracelet-LV.jpg",
+        bigPicUrl: "assets/img/product/toros de arenas img3 BIG.jpg",
+        smallPicUrl: "assets/img/product/toros de arenas img3 SM.jpg",
       },
     ],
   },

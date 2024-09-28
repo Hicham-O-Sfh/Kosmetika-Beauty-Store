@@ -262,6 +262,7 @@ export function projectProductInPage() {
             data-image="${pic.bigPicUrl}"
             data-zoom-image="${pic.bigPicUrl}">
             <img
+              style="height: 120px;"
               src="${pic.smallPicUrl}"
               alt=""/>
           </a>
