@@ -19,21 +19,13 @@ export const MAIN_DATABASE = new Set([
         <b>Qualité:</b> Eau de toilette.`,
     pics: [
       {
-        bigPicUrl: "assets/img/product/toros de arenas img2 BIG.jpg",
-        smallPicUrl: "assets/img/product/toros de arenas img2 SM.jpg",
+        bigPicUrl: "assets/img/product/toros de arenas img1 BIG.png",
+        smallPicUrl: "assets/img/product/toros de arenas img1 SM.png",
         isMain: true,
       },
       {
-        bigPicUrl: "assets/img/product/toros de arenas img2 BIG.jpg",
-        smallPicUrl: "assets/img/product/toros de arenas img2 SM.jpg",
-      },
-      {
-        bigPicUrl: "assets/img/product/toros de arenas img1 BIG.jpg",
-        smallPicUrl: "assets/img/product/toros de arenas img1 SM.jpg",
-      },
-      {
-        bigPicUrl: "assets/img/product/toros de arenas img3 BIG.jpg",
-        smallPicUrl: "assets/img/product/toros de arenas img3 SM.jpg",
+        bigPicUrl: "assets/img/product/toros de arenas img2 BIG.png",
+        smallPicUrl: "assets/img/product/toros de arenas img2 SM.png",
       },
     ],
   },
