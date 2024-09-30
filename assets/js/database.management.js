@@ -1,3 +1,10 @@
+/**
+ * replace image background with pure white (remove.bg)
+ * bulk create 500 x 500 version (imageresizer.com)
+ * bulk create 600 x 600 version (imageresizer.com)
+ * enhance image quality (canva)
+ */
+
 export const PRODUCT_STATUS = Object.freeze({
   OUT_OF_STOCK: -1,
   NORMAL: 0,
@@ -90,6 +97,36 @@ export const MAIN_DATABASE = new Set([
       {
         bigPicUrl: "assets/img/product/yara img1 BIG.jpg",
         smallPicUrl: "assets/img/product/yara img1 SM.jpg",
+      },
+    ],
+  },
+  {
+    id: 4,
+    ref: "Manassik, Gharam wa Hob (100ml)",
+    price: 100,
+    description:
+      "Manassik Gharam wa Hob est une eau de parfum captivante qui incarne la passion et le romantisme. Avec des notes orientales chaleureuses et des accords floraux envoûtants, cette fragrance évoque une histoire d'amour intense et profonde. Parfaite pour ceux qui recherchent un parfum riche en émotions, Gharam wa Hob enveloppe son porteur d'un sillage sensuel et sophistiqué. Idéal pour les moments spéciaux, il transforme chaque instant en une véritable déclaration de séduction et de mystère.",
+    secondDescription: `
+      <b>Marque:</b> Manassik.
+      <br>
+      <b>Qualité:</b> Eau de parfum.`,
+    pics: [
+      {
+        bigPicUrl: "assets/img/product/8439627615236_1.jpg",
+        smallPicUrl: "assets/img/product/8439627615236_1.jpeg",
+        isMain: true,
+      },
+      {
+        bigPicUrl: "assets/img/product/8439627615236_3.jpg",
+        smallPicUrl: "assets/img/product/8439627615236_3.jpeg",
+      },
+      {
+        bigPicUrl: "assets/img/product/8439627615236_2.jpg",
+        smallPicUrl: "assets/img/product/8439627615236_2.jpeg",
+      },
+      {
+        bigPicUrl: "assets/img/product/8439627615236_1.jpg",
+        smallPicUrl: "assets/img/product/8439627615236_1.jpeg",
       },
     ],
   },
