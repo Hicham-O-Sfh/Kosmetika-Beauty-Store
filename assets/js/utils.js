@@ -131,7 +131,7 @@ export function applyElevateZoom() {
     gallery: "gallery_01",
     responsive: true,
     cursor: "crosshair",
-    zoomType: "inner",
+    zoomType: "lens",
   });
   setTimeout(function () {
     $(".zoomWindow").css("border-radius", "20px");
