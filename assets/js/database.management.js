@@ -82,27 +82,27 @@ export const MAIN_DATABASE = new Set([
       <b>Qualité:</b> Eau de parfum.`,
     pics: [
       {
-        bigPicUrl: "assets/img/product/yara img1 BIG.jpg",
-        smallPicUrl: "assets/img/product/yara img1 SM.jpg",
+        bigPicUrl: "assets/img/product/6291108730515_1-BIG.png",
+        smallPicUrl: "assets/img/product/6291108730515_1-SM.png",
         isMain: true,
       },
       {
-        bigPicUrl: "assets/img/product/yara img2 BIG.jpg",
-        smallPicUrl: "assets/img/product/yara img2 SM.jpg",
+        bigPicUrl: "assets/img/product/latafaYara-BIG.jpg",
+        smallPicUrl: "assets/img/product/latafaYara-SM.jpg",
       },
       {
-        bigPicUrl: "assets/img/product/yara img3 BIG.jpg",
-        smallPicUrl: "assets/img/product/yara img3 SM.jpg",
+        bigPicUrl: "assets/img/product/latafaYara2-BIG.png",
+        smallPicUrl: "assets/img/product/latafaYara2-SM.png",
       },
       {
-        bigPicUrl: "assets/img/product/yara img1 BIG.jpg",
-        smallPicUrl: "assets/img/product/yara img1 SM.jpg",
+        bigPicUrl: "assets/img/product/6291108730515_1-BIG.png",
+        smallPicUrl: "assets/img/product/6291108730515_1-SM.png",
       },
     ],
   },
   {
     id: 4,
-    ref: "Manassik, Gharam wa Hob (100ml)",
+    ref: "Gharam wa Hob (100ml)",
     price: 100,
     description:
       "Manassik Gharam wa Hob est une eau de parfum captivante qui incarne la passion et le romantisme. Avec des notes orientales chaleureuses et des accords floraux envoûtants, cette fragrance évoque une histoire d'amour intense et profonde. Parfaite pour ceux qui recherchent un parfum riche en émotions, Gharam wa Hob enveloppe son porteur d'un sillage sensuel et sophistiqué. Idéal pour les moments spéciaux, il transforme chaque instant en une véritable déclaration de séduction et de mystère.",
@@ -112,13 +112,9 @@ export const MAIN_DATABASE = new Set([
       <b>Qualité:</b> Eau de parfum.`,
     pics: [
       {
-        bigPicUrl: "assets/img/product/8439627615236_1.jpg",
-        smallPicUrl: "assets/img/product/8439627615236_1.jpeg",
-        isMain: true,
-      },
-      {
         bigPicUrl: "assets/img/product/8439627615236_3.jpg",
         smallPicUrl: "assets/img/product/8439627615236_3.jpeg",
+        isMain: true,
       },
       {
         bigPicUrl: "assets/img/product/8439627615236_2.jpg",
@@ -127,6 +123,10 @@ export const MAIN_DATABASE = new Set([
       {
         bigPicUrl: "assets/img/product/8439627615236_1.jpg",
         smallPicUrl: "assets/img/product/8439627615236_1.jpeg",
+      },
+      {
+        bigPicUrl: "assets/img/product/8439627615236_3.jpg",
+        smallPicUrl: "assets/img/product/8439627615236_3.jpeg",
       },
     ],
   },
