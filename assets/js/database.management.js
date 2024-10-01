@@ -48,25 +48,21 @@ export const MAIN_DATABASE = new Set([
       <b>Qualité:</b> Eau de parfum.`,
     pics: [
       {
-        bigPicUrl: "assets/img/product/ard al zaafarn i am king img3 BIG.jpg",
-        smallPicUrl: "assets/img/product/ard al zaafarn i am king img3 SM.jpg",
+        bigPicUrl: "assets/img/product/i-am-king-BIG.png",
+        smallPicUrl: "assets/img/product/i-am-king-SM.jpg",
         isMain: true,
       },
       {
-        bigPicUrl: "assets/img/product/ard al zaafarn i am king img2 BIG.jpg",
-        smallPicUrl: "assets/img/product/ard al zaafarn i am king img2 SM.jpg",
+        bigPicUrl: "assets/img/product/i-am-king-2-BIG.jpg",
+        smallPicUrl: "assets/img/product/i-am-king-2-SM.png",
       },
       {
-        bigPicUrl: "assets/img/product/ard al zaafarn i am king img4 BIG.jpg",
-        smallPicUrl: "assets/img/product/ard al zaafarn i am king img4 SM.jpg",
+        bigPicUrl: "assets/img/product/i-am-king-client-BIG.png",
+        smallPicUrl: "assets/img/product/i-am-king-client-SM.png",
       },
       {
-        bigPicUrl: "assets/img/product/ard al zaafarn i am king img3 BIG.jpg",
-        smallPicUrl: "assets/img/product/ard al zaafarn i am king img3 SM.jpg",
-      },
-      {
-        bigPicUrl: "assets/img/product/ard al zaafarn i am king img5 BIG.jpg",
-        smallPicUrl: "assets/img/product/ard al zaafarn i am king img5 SM.jpg",
+        bigPicUrl: "assets/img/product/i-am-king-BIG.png",
+        smallPicUrl: "assets/img/product/i-am-king-SM.jpg",
       },
     ],
   },
