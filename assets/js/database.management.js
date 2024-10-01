@@ -16,29 +16,37 @@ export const PRODUCT_STATUS = Object.freeze({
 export const MAIN_DATABASE = new Set([
   {
     id: 1,
-    ref: "Toros De Arenas, Splendeur, 100ml",
+    ref: "Crystal Noir (100ml)",
     price: 100,
     description:
-      "Découvrez Toros De Arenas, une fragrance captivante qui évoque la richesse des dunes dorées et l'élégance intemporelle. Ce parfum allie des notes florales délicates à des accords chaleureux de bois et d'épices, créant une aura séduisante. Idéal pour ceux qui cherchent à exprimer leur personnalité avec sophistication, il transforme chaque instant en une célébration de la beauté. Un incontournable pour toute collection.",
+      "Diamond Crystal Noir est une fragrance sensuelle et mystérieuse, mêlant des notes orientales épicées à des touches florales délicates. Élégante et envoûtante, elle révèle un charme irrésistible, parfait pour les soirées sophistiquées.",
     secondDescription: `
-        <b>Marque:</b> Splendeur, Toros De Arenas.
+        <b>Marque: Diamond</b> 
         <br>
-        <b>Qualité:</b> Eau de toilette.`,
+        <b>Qualité:</b> Eau de parfum.`,
     pics: [
       {
-        bigPicUrl: "assets/img/product/toros de arenas img1 BIG.png",
-        smallPicUrl: "assets/img/product/toros de arenas img1 SM.png",
+        bigPicUrl: "assets/img/product/diamond-crystal-noir-3-BIG.png",
+        smallPicUrl: "assets/img/product/diamond-crystal-noir-3-SM.png",
         isMain: true,
       },
       {
-        bigPicUrl: "assets/img/product/toros de arenas img2 BIG.png",
-        smallPicUrl: "assets/img/product/toros de arenas img2 SM.png",
+        bigPicUrl: "assets/img/product/dyamond-crystal-noir-2-BIG.png",
+        smallPicUrl: "assets/img/product/dyamond-crystal-noir-2-SM.png",
+      },
+      {
+        bigPicUrl: "assets/img/product/Dyamond-crystal-noir-BIG.png",
+        smallPicUrl: "assets/img/product/Dyamond-crystal-noir-SM.png",
+      },
+      {
+        bigPicUrl: "assets/img/product/diamond-crystal-noir-3-BIG.png",
+        smallPicUrl: "assets/img/product/diamond-crystal-noir-3-SM.png",
       },
     ],
   },
   {
     id: 2,
-    ref: "Ana Lmalik, I am the King, 100ml",
+    ref: "Ana Lmalik (100ml)",
     price: 299,
     description:
       "Découvrez Ana Lmalik, une fragrance royale qui incarne la grandeur et le raffinement. Ce parfum puissant et sophistiqué allie des notes orientales riches à des accords épicés et boisés, créant un sillage captivant et mémorable. Idéal pour ceux qui recherchent une signature olfactive affirmée et élégante, Ana Lmalik se porte avec assurance, de jour comme de nuit. Laissez-vous envelopper par son aura majestueuse et laissez une empreinte royale partout où vous allez.",
@@ -68,7 +76,7 @@ export const MAIN_DATABASE = new Set([
   },
   {
     id: 3,
-    ref: "Yara, 100ml",
+    ref: "Yara (100ml)",
     price: 300,
     description:
       "Lattafa Yara est une fragrance délicate et envoûtante qui combine subtilement des notes florales et fruitées, créant une harmonie olfactive douce et rafraîchissante. Idéale pour ceux qui cherchent une touche de légèreté et d’élégance au quotidien, elle laisse un sillage raffiné et captivant. Parfait pour toutes les occasions, Yara évoque la fraîcheur et la modernité avec une allure irrésistible. Un parfum qui sublime chaque moment et attire tous les regards.",
