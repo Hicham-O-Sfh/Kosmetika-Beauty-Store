@@ -26,8 +26,8 @@ export const MAIN_DATABASE = new Set([
         <b>Qualité:</b> Eau de parfum.`,
     pics: [
       {
-        bigPicUrl: "assets/img/product/diamond-crystal-noir-3-BIG.png",
-        smallPicUrl: "assets/img/product/diamond-crystal-noir-3-SM.png",
+        bigPicUrl: "assets/img/product/Versace-Diamond-Crystal-Noir-BIG.png",
+        smallPicUrl: "assets/img/product/Versace-Diamond-Crystal-Noir-SM.png",
         isMain: true,
       },
       {
@@ -41,6 +41,10 @@ export const MAIN_DATABASE = new Set([
       {
         bigPicUrl: "assets/img/product/diamond-crystal-noir-3-BIG.png",
         smallPicUrl: "assets/img/product/diamond-crystal-noir-3-SM.png",
+      },
+      {
+        bigPicUrl: "assets/img/product/Versace-Diamond-Crystal-Noir-BIG.png",
+        smallPicUrl: "assets/img/product/Versace-Diamond-Crystal-Noir-SM.png",
       },
     ],
   },

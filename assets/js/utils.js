@@ -503,37 +503,10 @@ export function projectProductsInHomeTabs() {
     .catch((error) => console.log(error));
 }
 
-export function projectSpecialProductsInShopPage(specialProduct) {
-  const productMainPic = specialProduct.pics.shiftOutAndDelete(
-    (pic) => pic.isMain === true
-  ).smallPicUrl;
-  $("#product-diamond-crytal-noir").html(`
-        <div class="single_product">
-          <div class="product_thumb">
-            <a class="primary_img" href="product-details.html?productId=${specialProduct.id}">
-              <img src="${productMainPic}" alt="" />
-            </a>
-          </div>
-          <div class="product_content">
-            <h3>
-              <a href="product-details.html?productId=${specialProduct.id}">${specialProduct.ref}</a>
-            </h3>
-            <div class="price_box">
-              <span class="current_price">${specialProduct.price} Dhs</span>
-            </div>
-          </div>
-        </div>
-    `);
-}
 export function projectAllProductsInShopPage() {
   getAllProductsFromDatabase()
     .then((products) => {
       $("#shop-products-container").empty();
-
-      const product_crystal_noir = products.shiftOutAndDelete(
-        (prod) => prod.id === 1
-      );
-      projectSpecialProductsInShopPage(product_crystal_noir);
 
       Array.from(products).forEach((prod) => {
         const productMainPic = prod.pics.shiftOutAndDelete(
