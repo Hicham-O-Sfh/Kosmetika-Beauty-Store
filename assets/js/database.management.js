@@ -16,7 +16,9 @@ export const PRODUCT_STATUS = Object.freeze({
 export const MAIN_DATABASE = new Set([
   {
     id: 1,
-    ref: "Crystal Noir (100ml)",
+    ref: `Diamond - Crystal Noir 
+          <br> 
+          (100ml)`,
     price: 100,
     description:
       "Diamond Crystal Noir s'inspire de l'emblématique parfum Versace Crystal Noir, offrant une alternative élégante et raffinée. Ses notes florales et orientales créent une fragrance envoûtante, parfaite pour ceux qui recherchent un parfum sophistiqué et séduisant, à la hauteur de l'original.",
@@ -27,24 +29,16 @@ export const MAIN_DATABASE = new Set([
     pics: [
       {
         bigPicUrl: "assets/img/product/Versace-Diamond-Crystal-Noir-BIG.png",
-        smallPicUrl: "assets/img/product/Versace-Diamond-Crystal-Noir-SM.png",
         isMain: true,
       },
       {
         bigPicUrl: "assets/img/product/dyamond-crystal-noir-2-BIG.png",
-        smallPicUrl: "assets/img/product/dyamond-crystal-noir-2-SM.png",
       },
       {
         bigPicUrl: "assets/img/product/Dyamond-crystal-noir-BIG.png",
-        smallPicUrl: "assets/img/product/Dyamond-crystal-noir-SM.png",
       },
       {
         bigPicUrl: "assets/img/product/diamond-crystal-noir-3-BIG.png",
-        smallPicUrl: "assets/img/product/diamond-crystal-noir-3-SM.png",
-      },
-      {
-        bigPicUrl: "assets/img/product/Versace-Diamond-Crystal-Noir-BIG.png",
-        smallPicUrl: "assets/img/product/Versace-Diamond-Crystal-Noir-SM.png",
       },
     ],
   },
@@ -61,20 +55,13 @@ export const MAIN_DATABASE = new Set([
     pics: [
       {
         bigPicUrl: "assets/img/product/i-am-king-BIG.png",
-        smallPicUrl: "assets/img/product/i-am-king-SM.jpg",
         isMain: true,
       },
       {
         bigPicUrl: "assets/img/product/i-am-king-2-BIG.jpg",
-        smallPicUrl: "assets/img/product/i-am-king-2-SM.png",
       },
       {
         bigPicUrl: "assets/img/product/i-am-king-client-BIG.png",
-        smallPicUrl: "assets/img/product/i-am-king-client-SM.png",
-      },
-      {
-        bigPicUrl: "assets/img/product/i-am-king-BIG.png",
-        smallPicUrl: "assets/img/product/i-am-king-SM.jpg",
       },
     ],
   },
@@ -91,20 +78,13 @@ export const MAIN_DATABASE = new Set([
     pics: [
       {
         bigPicUrl: "assets/img/product/6291108730515_1-BIG.png",
-        smallPicUrl: "assets/img/product/6291108730515_1-SM.png",
         isMain: true,
       },
       {
         bigPicUrl: "assets/img/product/latafaYara-BIG.jpg",
-        smallPicUrl: "assets/img/product/latafaYara-SM.jpg",
       },
       {
         bigPicUrl: "assets/img/product/latafaYara2-BIG.png",
-        smallPicUrl: "assets/img/product/latafaYara2-SM.png",
-      },
-      {
-        bigPicUrl: "assets/img/product/6291108730515_1-BIG.png",
-        smallPicUrl: "assets/img/product/6291108730515_1-SM.png",
       },
     ],
   },
@@ -121,20 +101,13 @@ export const MAIN_DATABASE = new Set([
     pics: [
       {
         bigPicUrl: "assets/img/product/8439627615236_3.jpg",
-        smallPicUrl: "assets/img/product/8439627615236_3.jpeg",
         isMain: true,
       },
       {
         bigPicUrl: "assets/img/product/8439627615236_2.jpg",
-        smallPicUrl: "assets/img/product/8439627615236_2.jpeg",
       },
       {
         bigPicUrl: "assets/img/product/8439627615236_1.jpg",
-        smallPicUrl: "assets/img/product/8439627615236_1.jpeg",
-      },
-      {
-        bigPicUrl: "assets/img/product/8439627615236_3.jpg",
-        smallPicUrl: "assets/img/product/8439627615236_3.jpeg",
       },
     ],
   },
@@ -151,20 +124,13 @@ export const MAIN_DATABASE = new Set([
     pics: [
       {
         bigPicUrl: "assets/img/product/aqua-img-1-BIG.png",
-        smallPicUrl: "assets/img/product/aqua-img-1-SM.png",
         isMain: true,
       },
       {
-        bigPicUrl: "assets/img/product/aqua-img-2-SM.png",
-        smallPicUrl: "assets/img/product/aqua-img-2-SM.png",
+        bigPicUrl: "assets/img/product/aqua-img-2-BIG.png",
       },
       {
-        bigPicUrl: "assets/img/product/aqua-img-3-SM.png",
-        smallPicUrl: "assets/img/product/aqua-img-3-SM.png",
-      },
-      {
-        bigPicUrl: "assets/img/product/aqua-img-1-BIG.png",
-        smallPicUrl: "assets/img/product/aqua-img-1-SM.png",
+        bigPicUrl: "assets/img/product/aqua-img-3-BIG.png",
       },
     ],
   },
@@ -181,20 +147,13 @@ export const MAIN_DATABASE = new Set([
     pics: [
       {
         bigPicUrl: "assets/img/product/allery-exchange-img-2-BIG.png",
-        smallPicUrl: "assets/img/product/allery-exchange-img-2-BIG.png",
         isMain: true,
       },
       {
         bigPicUrl: "assets/img/product/allery-exchange-img-3-BIG.png",
-        smallPicUrl: "assets/img/product/allery-exchange-img-3-BIG.png",
       },
       {
         bigPicUrl: "assets/img/product/allery-exchange-img-1-BIG.png",
-        smallPicUrl: "assets/img/product/allery-exchange-img-1-SM.png",
-      },
-      {
-        bigPicUrl: "assets/img/product/allery-exchange-img-2-BIG.png",
-        smallPicUrl: "assets/img/product/allery-exchange-img-2-BIG.png",
       },
     ],
   },
@@ -211,20 +170,13 @@ export const MAIN_DATABASE = new Set([
     pics: [
       {
         bigPicUrl: "assets/img/product/raghba-img-1-BIG.png",
-        smallPicUrl: "assets/img/product/raghba-img-1-SM.png",
         isMain: true,
       },
       {
         bigPicUrl: "assets/img/product/raghba-img-3-BIG.png",
-        smallPicUrl: "assets/img/product/raghba-img-3-SM.png",
       },
       {
         bigPicUrl: "assets/img/product/raghba-img-2-BIG.png",
-        smallPicUrl: "assets/img/product/raghba-img-2-SM.png",
-      },
-      {
-        bigPicUrl: "assets/img/product/raghba-img-1-BIG.png",
-        smallPicUrl: "assets/img/product/raghba-img-1-SM.png",
       },
     ],
   },
