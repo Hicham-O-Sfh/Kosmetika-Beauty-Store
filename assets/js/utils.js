@@ -103,7 +103,7 @@ export function applyOwlCarousel() {
     loop: true,
     nav: true,
     items: 3,
-    margin: 15,
+    margin: 10,
     dots: false,
     navText: [
       '<i class="fa fa-angle-left"></i>',
@@ -311,7 +311,9 @@ export function projectRelatedProductsInPage() {
                     ${prod.ref}
                   </a>
                 </h3>
-                <span class="current_price">${prod.price} Dhs</span>
+                <div class="price_box">
+                  <span class="current_price">${prod.price} Dhs</span>
+                </div>
               </div>
             </div>
           </div>
@@ -495,19 +497,37 @@ export function projectAllProductsInShopPage() {
           <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="single_product">
               <div class="product_thumb">
-                <a class="primary_img" href="product-details.html?productId=${prod.id}">
+                <a 
+                  class="primary_img" 
+                  href="product-details.html?productId=${prod.id}">
                   <img src="${productMainPic}" alt="" />
+                </a>
+                <a
+                  class="secondary_img"
+                  href="product-details.html?productId=${prod.id}">
+                  <img src="${prod.pics[1].bigPicUrl}" alt="" />
                 </a>
               </div>
               <div class="product_content">
                 <h3>
-                  <a href="product-details.html?productId=${prod.id}">${prod.ref}</a>
+                  <a href="product-details.html?productId=${prod.id}">
+                    ${prod.ref}
+                  </a>
                 </h3>
                 <div class="price_box">
                   <span class="current_price">${prod.price} Dhs</span>
                 </div>
+                <div class="product_hover">
+                  <div class="price_box">
+                    <span class="current_price">${prod.price} Dhs</span>
+                  </div>
+                  <div class="product_desc">
+                    <p>
+                      ${prod.description.slice(0, 150)}...
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
           </div>
         `
         );
