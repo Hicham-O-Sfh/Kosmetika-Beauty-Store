@@ -97,7 +97,9 @@ export function applySlickForSectionHomeTabs(homeProductsTab) {
 // OwlCarousel
 export function applyOwlCarousel() {
   $(".single-product-active").owlCarousel({
-    autoplay: false,
+    autoplay: true,
+    autoplayTimeout: 3000,
+    autoplayHoverPause: true,
     loop: true,
     nav: true,
     items: 3,
@@ -199,9 +201,9 @@ export function buildVisualCart() {
   Array.from(userCart).forEach((order) => {
     getProductFromDatabase(order.productId)
       .then((mappedProductFromDb) => {
-        const productMainPic = mappedProductFromDb.pics.shiftOutAndDelete(
+        const productMainPic = mappedProductFromDb.pics.find(
           (pic) => pic.isMain === true
-        ).smallPicUrl;
+        ).bigPicUrl;
         subTotal += order.quantity * mappedProductFromDb.price;
         $("#cart-items").append(
           `
@@ -248,7 +250,7 @@ export function projectProductInPage() {
       $("#second-product-description").html(product.secondDescription);
 
       // product's pictures & zoom management
-      const productMainPic = product.pics.shiftOutAndDelete(
+      const productMainPic = product.pics.find(
         (pic) => pic.isMain === true
       ).bigPicUrl;
       product.pics.forEach((pic) => {
@@ -262,8 +264,7 @@ export function projectProductInPage() {
             data-image="${pic.bigPicUrl}"
             data-zoom-image="${pic.bigPicUrl}">
             <img
-              style="height: 120px;"
-              src="${pic.smallPicUrl}"
+              src="${pic.bigPicUrl}"
               alt=""/>
           </a>
         </li>
@@ -300,8 +301,7 @@ export function projectRelatedProductsInPage() {
                   href="product-details.html?productId=${prod.id}">
                   <img 
                     src="${
-                      prod.pics.shiftOutAndDelete((pic) => pic.isMain === true)
-                        .bigPicUrl
+                      prod.pics.find((pic) => pic.isMain === true).bigPicUrl
                     }" alt="" />
                 </a>
               </div>
@@ -341,8 +341,7 @@ export function projectBestSellingProductsInFooter() {
               <a href="product-details.html?productId=${product.id}">
                 <img 
                 src="${
-                  product.pics.shiftOutAndDelete((pic) => pic.isMain === true)
-                    .bigPicUrl
+                  product.pics.find((pic) => pic.isMain === true).bigPicUrl
                 }" 
                 alt=""/>
               </a>
@@ -373,12 +372,6 @@ export function projectProductsInHomeTabs() {
   // fill featured products tab
   getAllProductsFromDatabase(12)
     .then((products) => {
-      // todo : to remove when there's more than 12 products in DB *****************//
-      products = [
-        ...JSON.parse(JSON.stringify(products)),
-        ...JSON.parse(JSON.stringify(products)),
-      ];
-      //*****************************************************************************/
       const $featuredProductsTab = $("#featured-products-tab");
       $featuredProductsTab.empty();
       products.forEach((prod) => {
@@ -392,8 +385,7 @@ export function projectProductsInHomeTabs() {
                   href="product-details.html?productId=${prod.id}">
                   <img 
                     src="${
-                      prod.pics.shiftOutAndDelete((pic) => pic.isMain === true)
-                        .bigPicUrl
+                      prod.pics.find((pic) => pic.isMain === true).bigPicUrl
                     }" alt="" />
                 </a>
               </div>
@@ -417,12 +409,6 @@ export function projectProductsInHomeTabs() {
   // fill arrivals products tab
   getAllProductsFromDatabase(12)
     .then((products) => {
-      // todo : to remove when there's more than 12 products in DB *****************//
-      products = [
-        ...JSON.parse(JSON.stringify(products)),
-        ...JSON.parse(JSON.stringify(products)),
-      ];
-      //*****************************************************************************/
       const $arrivalsProductsTab = $("#arrivals-products-tab");
       $arrivalsProductsTab.empty();
       products.forEach((prod) => {
@@ -436,8 +422,7 @@ export function projectProductsInHomeTabs() {
                   href="product-details.html?productId=${prod.id}">
                   <img
                     src="${
-                      prod.pics.shiftOutAndDelete((pic) => pic.isMain === true)
-                        .bigPicUrl
+                      prod.pics.find((pic) => pic.isMain === true).bigPicUrl
                     }" alt="" />
                 </a>
               </div>
@@ -461,12 +446,6 @@ export function projectProductsInHomeTabs() {
   // fill onsale products tab
   getAllProductsFromDatabase(12)
     .then((products) => {
-      // todo : to remove when there's more than 12 products in DB *****************//
-      products = [
-        ...JSON.parse(JSON.stringify(products)),
-        ...JSON.parse(JSON.stringify(products)),
-      ];
-      //*****************************************************************************/
       const $onsaleProductsTab = $("#onsale-products-tab");
       $onsaleProductsTab.empty();
       products.forEach((prod) => {
@@ -480,8 +459,7 @@ export function projectProductsInHomeTabs() {
                   href="product-details.html?productId=${prod.id}">
                   <img
                     src="${
-                      prod.pics.shiftOutAndDelete((pic) => pic.isMain === true)
-                        .bigPicUrl
+                      prod.pics.find((pic) => pic.isMain === true).bigPicUrl
                     }" alt="" />
                 </a>
               </div>
@@ -509,9 +487,9 @@ export function projectAllProductsInShopPage() {
       $("#shop-products-container").empty();
 
       Array.from(products).forEach((prod) => {
-        const productMainPic = prod.pics.shiftOutAndDelete(
+        const productMainPic = prod.pics.find(
           (pic) => pic.isMain === true
-        ).smallPicUrl;
+        ).bigPicUrl;
         $("#shop-products-container").append(
           `
           <div class="col-lg-3 col-md-4 col-sm-6">
@@ -608,8 +586,3 @@ export function bindProductDetailsPageEvents() {
     buildVisualCart();
   });
 }
-
-/**
-todo ?
-- remove and replace "shiftOutAndDelete" by "find", remove pics duplications in all products    
-*/
