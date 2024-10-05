@@ -1,8 +1,10 @@
 /**
- * replace image background with pure white (remove.bg)
- * bulk create 500 x 500 version (imageresizer.com)
- * bulk create 600 x 600 version (imageresizer.com)
- * enhance image quality (canva)
+ * remove background and replace it with pute white (canva)
+ * save under 1.06 size : 600 x 600 (canva)
+ * enhance image quality, only if really needed ! (canva)
+ *
+ * ! todo:
+ * - ajouter catégorie: homme/femme/mono
  */
 
 export const PRODUCT_STATUS = Object.freeze({
@@ -16,16 +18,19 @@ export const PRODUCT_STATUS = Object.freeze({
 export const MAIN_DATABASE = new Set([
   {
     id: 1,
-    ref: `Diamond - Crystal Noir 
+    ref: `Diamond® - Crystal Noir 
           <br> 
           (100ml)`,
     price: 100,
     description:
-      "Diamond Crystal Noir s'inspire de l'emblématique parfum Versace Crystal Noir, offrant une alternative élégante et raffinée. Ses notes florales et orientales créent une fragrance envoûtante, parfaite pour ceux qui recherchent un parfum sophistiqué et séduisant, à la hauteur de l'original.",
+      "<b>Diamond Crystal Noir</b> s'inspire du célèbre parfum <b>Versace Crystal Noir</b>, offrant une alternative <b>élégante</b> et <b>raffinée</b> ✨. Ses notes <b>florales</b> et <b>orientales</b> créent une fragrance <b>envoûtante</b>, parfaite pour ceux qui recherchent un parfum <b>sophistiqué</b> et <b>séduisant</b>, à la hauteur de l'original.",
     secondDescription: `
         <b>Marque:</b> Diamond®.
         <br>
-        <b>Qualité:</b> Eau de parfum.`,
+        <b>Qualité:</b> Eau de parfum.
+        <br>
+        <b>Catégorie:</b> Femme.
+        `,
     pics: [
       {
         bigPicUrl: "assets/img/product/Versace-Diamond-Crystal-Noir-BIG.png",
@@ -44,14 +49,18 @@ export const MAIN_DATABASE = new Set([
   },
   {
     id: 2,
-    ref: "Ana Lmalik (100ml)",
+    ref: `Ard Al Zaafaran® - Ana Lmalik 
+          <br>
+          (100ml)`,
     price: 299,
     description:
-      "Découvrez Ana Lmalik, une fragrance royale qui incarne la grandeur et le raffinement. Ce parfum puissant et sophistiqué allie des notes orientales riches à des accords épicés et boisés, créant un sillage captivant et mémorable. Idéal pour ceux qui recherchent une signature olfactive affirmée et élégante, Ana Lmalik se porte avec assurance, de jour comme de nuit. Laissez-vous envelopper par son aura majestueuse et laissez une empreinte royale partout où vous allez.",
+      "<b>Ana Lmalik</b> est une fragrance <b>royale</b> qui allie des notes <b>orientales</b> et <b>boisées</b> pour un sillage <b>captivant</b> 👑. Parfait pour une <b>signature élégante</b> de jour comme de nuit 🌙. Laissez une <b>empreinte royale</b> partout où vous allez.",
     secondDescription: `
       <b>Marque:</b> Ard Al Zaafaran®.
       <br>
-      <b>Qualité:</b> Eau de parfum.`,
+      <b>Qualité:</b> Eau de parfum.
+      <br>
+      <b>Catégorie:</b> Homme.`,
     pics: [
       {
         bigPicUrl: "assets/img/product/i-am-king-BIG.png",
@@ -67,14 +76,18 @@ export const MAIN_DATABASE = new Set([
   },
   {
     id: 3,
-    ref: "Yara (100ml)",
+    ref: `Lattafa® - Yara 
+          <br>
+          (100ml)`,
     price: 300,
     description:
-      "Lattafa Yara est une fragrance délicate et envoûtante qui combine subtilement des notes florales et fruitées, créant une harmonie olfactive douce et rafraîchissante. Idéale pour ceux qui cherchent une touche de légèreté et d’élégance au quotidien, elle laisse un sillage raffiné et captivant. Parfait pour toutes les occasions, Yara évoque la fraîcheur et la modernité avec une allure irrésistible. Un parfum qui sublime chaque moment et attire tous les regards.",
+      "<b>Lattafa Yara</b> est une fragrance <b>délicate</b> et <b>envoûtante</b> qui combine subtilement des notes <b>florales</b> et <b>fruitées</b> 🍓. Elle offre une harmonie <b>douce</b> et <b>rafraîchissante</b>, parfaite pour une touche de <b>légèreté</b> et d'<b>élégance</b> au quotidien ✨. Avec son sillage <b>raffiné</b>, elle sublime chaque moment et attire tous les regards.",
     secondDescription: `
       <b>Marque:</b> Lattafa®.
       <br>
-      <b>Qualité:</b> Eau de parfum.`,
+      <b>Qualité:</b> Eau de parfum.
+      <br>
+      <b>Catégorie:</b> Femme.`,
     pics: [
       {
         bigPicUrl: "assets/img/product/6291108730515_1-BIG.png",
@@ -90,14 +103,18 @@ export const MAIN_DATABASE = new Set([
   },
   {
     id: 4,
-    ref: "Gharam wa Hob (100ml)",
+    ref: `Manassik® - Gharam wa Hob 
+          <br>
+          (100ml)`,
     price: 100,
     description:
-      "Manassik Gharam wa Hob est une eau de parfum captivante qui incarne la passion et le romantisme. Avec des notes orientales chaleureuses et des accords floraux envoûtants, cette fragrance évoque une histoire d'amour intense et profonde. Parfaite pour ceux qui recherchent un parfum riche en émotions, Gharam wa Hob enveloppe son porteur d'un sillage sensuel et sophistiqué. Idéal pour les moments spéciaux, il transforme chaque instant en une véritable déclaration de séduction et de mystère.",
+      "<b>Manassik Gharam wa Hob</b> est une eau de parfum <b>captivante</b> qui incarne la <b>passion</b> et le <b>romantisme</b> 💖. Ses notes <b>orientales chaleureuses</b> et <b>florales</b> créent un sillage <b>sensuel</b> et <b>mystérieux</b>. Idéal pour les moments <b>spéciaux</b>, ce parfum riche en <b>émotions</b> est une véritable déclaration de <b>séduction</b>.",
     secondDescription: `
       <b>Marque:</b> Manassik®.
       <br>
-      <b>Qualité:</b> Eau de parfum.`,
+      <b>Qualité:</b> Eau de parfum.
+      <br>
+      <b>Catégorie:</b> Femme.`,
     pics: [
       {
         bigPicUrl: "assets/img/product/8439627615236_3.jpg",
@@ -113,14 +130,18 @@ export const MAIN_DATABASE = new Set([
   },
   {
     id: 5,
-    ref: "Aqua (100ml)",
+    ref: `Aqua® - Aqua 
+          <br>
+          (100ml)`,
     price: 100,
     description:
-      "Aqua 🌊 est une fragrance fraîche et vivifiante, inspirée par l'énergie pure de l'océan. Avec des notes marines et des touches d'agrumes 🍋, ce parfum léger et rafraîchissant vous enveloppe d'une sensation de liberté et de pureté 🌿, idéale pour toutes vos journées.",
+      "<b>Aqua</b> 🌊 est une fragrance <b>fraîche</b> et <b>vivifiante</b>, inspirée par l'énergie de l'<b>océan</b>. Ses notes <b>marines</b> et <b>d'agrumes</b> 🍋 offrent une sensation de <b>liberté</b> et de <b>pureté</b> 🌿, parfaite pour toutes vos journées.",
     secondDescription: `
       <b>Marque:</b> Aqua®.
       <br>
-      <b>Qualité:</b> Eau de parfum.`,
+      <b>Qualité:</b> Eau de parfum.
+      <br>
+      <b>Catégorie:</b> Femme.`,
     pics: [
       {
         bigPicUrl: "assets/img/product/aqua-img-1-BIG.png",
@@ -136,14 +157,18 @@ export const MAIN_DATABASE = new Set([
   },
   {
     id: 6,
-    ref: "Exchange (50ml)",
+    ref: `Allerv® - Exchange
+          <br>
+          (50ml)`,
     price: 100,
     description:
-      "Allerv Exchange est un parfum masculin luxueux, inspiré par la sophistication de Bleu de Chanel. Avec ses notes fraîches et boisées, il incarne l'élégance et la modernité. Idéal pour l'homme sûr de lui, ce parfum laisse un sillage raffiné et intemporel, parfait pour toutes les occasions. 🌟",
+      "<b>Allerv Exchange</b> est un parfum masculin <b>luxueux</b>, inspiré par la sophistication de <b>Bleu de Chanel</b> ✨. Avec ses notes <b>fraîches</b> et <b>boisées</b>, il incarne l'<b>élégance</b> et la <b>modernité</b>. Parfait pour l'homme <b>sûr de lui</b>, il laisse un sillage <b>raffiné</b> et <b>intemporel</b>, idéal pour toutes les occasions 🌟.",
     secondDescription: `
       <b>Marque:</b> Allerv®. 
       <br>
-      <b>Qualité:</b> Eau de parfum.`,
+      <b>Qualité:</b> Eau de parfum.
+      <br>
+      <b>Catégorie:</b> Homme.`,
     pics: [
       {
         bigPicUrl: "assets/img/product/allery-exchange-img-2-BIG.png",
@@ -159,14 +184,18 @@ export const MAIN_DATABASE = new Set([
   },
   {
     id: 7,
-    ref: "Raghba (100ml)",
+    ref: `Lattafa® - Raghba 
+          <br>
+          (100ml)`,
     price: 100,
     description:
-      "Lattafa Raghba pour Femme est une fragrance délicieusement sucrée qui enveloppe de ses notes gourmandes de <b>miel</b> 🍯 et de vanille. Séduisante et envoûtante, elle laisse un sillage irrésistible, parfait pour celles qui veulent captiver à chaque instant. Un parfum d’<b>excellence</b>, alliant douceur et <b>séduction</b>, idéal pour les moments spéciaux.",
+      "Lattafa Raghba pour Femme, est une fragrance délicieusement sucrée qui enveloppe de ses notes gourmandes de <b>miel</b> 🍯 et de vanille. Séduisante et envoûtante, elle laisse un sillage irrésistible, parfait pour celles qui veulent captiver à chaque instant. Un parfum d'<b>excellence</b>, alliant douceur et <b>séduction</b>, idéal pour les moments spéciaux.",
     secondDescription: `
       <b>Marque:</b> Lattafa®. 
       <br>
-      <b>Qualité:</b> Eau de parfum.`,
+      <b>Qualité:</b> Eau de parfum.
+      <br>
+      <b>Catégorie:</b> Femme.`,
     pics: [
       {
         bigPicUrl: "assets/img/product/raghba-img-1-BIG.png",
