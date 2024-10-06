@@ -5406,6 +5406,12 @@ textarea:-ms-input-placeholder {
   position: relative;
   margin-bottom: 8px;
 }
+
+.single_product:hover .product_thumb a.secondary_img {
+  opacity: 1;
+  visibility: visible;
+}
+
 .product_thumb a.secondary_img {
   position: absolute;
   top: 0;
@@ -5511,6 +5517,17 @@ textarea:-ms-input-placeholder {
   transition: 0.3s;
   margin-bottom: 30px;
 }
+.single_product:hover {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 0 15px 0 rgba(0, 0, 0, 0.3);
+}
+
+.single_product:hover .product_hover {
+  top: 66%;
+  opacity: 1;
+  visibility: visible;
+}
 
 .product_ratings {
   margin-bottom: 6px;
@@ -5559,10 +5576,10 @@ textarea:-ms-input-placeholder {
 }
 
 .product_desc {
-  margin-bottom: 15px;
   position: relative;
-  padding-bottom: 14px;
+  padding-bottom: 10px;
 }
+
 .product_desc::before {
   background-image: linear-gradient(
     to right,
