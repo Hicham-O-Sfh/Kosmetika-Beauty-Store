@@ -132,7 +132,7 @@ export const MAIN_DATABASE = new Set([
     id: 5,
     ref: `Aqua® - Aqua 
           <br>
-          (100ml)`,
+          (33ml)`,
     price: 100,
     description:
       "<b>Aqua</b> 🌊 est une fragrance <b>fraîche</b> et <b>vivifiante</b>, inspirée par l'énergie de l'<b>océan</b>. Ses notes <b>marines</b> et <b>d'agrumes</b> 🍋 offrent une sensation de <b>liberté</b> et de <b>pureté</b> 🌿, parfaite pour toutes vos journées.",
@@ -206,6 +206,30 @@ export const MAIN_DATABASE = new Set([
       },
       {
         bigPicUrl: "assets/img/product/raghba-img-2-BIG.png",
+      },
+    ],
+  },
+  {
+    id: 8,
+    ref: `Manassik® - Loves Musk 
+          <br>
+          (100ml)`,
+    price: 100,
+    description:
+      "<b>Manassik® - Loves Musk</b> est une fragrance envoûtante qui célèbre la pureté et la douceur du <b>musc</b> 🌸. Avec ses notes chaleureuses et sensuelles ❤️‍🔥, elle laisse un sillage <b>élégant</b> et <b>raffiné</b>, idéal pour les moments de <b>séduction</b>. Un parfum qui incarne la <b>passion</b> et l'<b>intimité</b>, parfait pour ceux qui veulent se démarquer avec subtilité.",
+    secondDescription: `
+      <b>Marque:</b> Manassik®. 
+      <br>
+      <b>Qualité:</b> Eau de parfum.
+      <br>
+      <b>Catégorie:</b> Femme.`,
+    pics: [
+      {
+        bigPicUrl: "assets/img/product/loves-musk-img2.png",
+        isMain: true,
+      },
+      {
+        bigPicUrl: "assets/img/product/loves-musk-img1.png",
       },
     ],
   },
