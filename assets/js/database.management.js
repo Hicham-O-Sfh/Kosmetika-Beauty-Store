@@ -249,11 +249,11 @@ export const MAIN_DATABASE = new Set([
       <b>Catégorie:</b> Homme.`,
     pics: [
       {
-        bigPicUrl: "assets/img/product/Manassik-assalah-img-1.jpg",
+        bigPicUrl: "assets/img/product/manassik-assalah-img-1.jpg",
         isMain: true,
       },
       {
-        bigPicUrl: "assets/img/product/Manassik-assalah-img-3.png",
+        bigPicUrl: "assets/img/product/manassik-assalah-img-3.png",
       },
       {
         bigPicUrl: "assets/img/product/Manassik-assalah-img-2.png",
