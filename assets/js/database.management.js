@@ -18,32 +18,34 @@ export const PRODUCT_STATUS = Object.freeze({
 export const MAIN_DATABASE = new Set([
   {
     id: 1,
-    ref: `Diamond® - Crystal Noir 
-          <br> 
+    ref: `Gucci® - Bloom - Aqua Di Fiori 
+          <br>
           (100ml)`,
     price: 100,
     description:
-      "<b>Diamond Crystal Noir</b> s'inspire du célèbre parfum <b>Versace Crystal Noir</b>, offrant une alternative <b>élégante</b> et <b>raffinée</b> ✨. Ses notes <b>florales</b> et <b>orientales</b> créent une fragrance <b>envoûtante</b>, parfaite pour ceux qui recherchent un parfum <b>sophistiqué</b> et <b>séduisant</b>, à la hauteur de l'original.",
+      "<b>Gucci® - Bloom - Aqua Di Fiori</b> est une fragrance florale fraîche et délicate 🌸. Avec ses notes de <b>jasmin</b>, de <b>tubéreuse</b> et une touche verte rafraîchissante, elle évoque un jardin en pleine éclosion. Parfaite pour celles qui recherchent une <b>fraîcheur naturelle</b> et une <b>élégance subtile</b> ✨. Un parfum qui célèbre la beauté de la nature et la féminité dans sa forme la plus pure.",
     secondDescription: `
-        <b>Marque:</b> Diamond®.
-        <br>
-        <b>Qualité:</b> Eau de parfum.
-        <br>
-        <b>Catégorie:</b> Femme.
-        `,
+      <b>Marque:</b> Gucci®. 
+      <br>
+      <b>Qualité:</b> Eau de toilette.
+      <br>
+      <b>Catégorie:</b> Femme.`,
     pics: [
       {
-        bigPicUrl: "assets/img/product/Versace-Diamond-Crystal-Noir-BIG.png",
+        bigPicUrl: "assets/img/product/gucci-bloom-img-6.jpg",
         isMain: true,
       },
       {
-        bigPicUrl: "assets/img/product/dyamond-crystal-noir-2-BIG.png",
+        bigPicUrl: "assets/img/product/aqua-bloom-img-3.png",
       },
       {
-        bigPicUrl: "assets/img/product/Dyamond-crystal-noir-BIG.png",
+        bigPicUrl: "assets/img/product/aqua-bloom-img-2.png",
       },
       {
-        bigPicUrl: "assets/img/product/diamond-crystal-noir-3-BIG.png",
+        bigPicUrl: "assets/img/product/aqua-bloom-img-4.png",
+      },
+      {
+        bigPicUrl: "assets/img/product/aqua-bloom-img-5.png",
       },
     ],
   },
@@ -262,34 +264,91 @@ export const MAIN_DATABASE = new Set([
   },
   {
     id: 10,
-    ref: `Gucci® - Bloom - Aqua Di Fiori 
-          <br>
+    ref: `Diamond® - Crystal Noir 
+          <br> 
           (100ml)`,
     price: 100,
     description:
-      "<b>Gucci® - Bloom - Aqua Di Fiori</b> est une fragrance florale fraîche et délicate 🌸. Avec ses notes de <b>jasmin</b>, de <b>tubéreuse</b> et une touche verte rafraîchissante, elle évoque un jardin en pleine éclosion. Parfaite pour celles qui recherchent une <b>fraîcheur naturelle</b> et une <b>élégance subtile</b> ✨. Un parfum qui célèbre la beauté de la nature et la féminité dans sa forme la plus pure.",
+      "<b>Diamond Crystal Noir</b> s'inspire du célèbre parfum <b>Versace Crystal Noir</b>, offrant une alternative <b>élégante</b> et <b>raffinée</b> ✨. Ses notes <b>florales</b> et <b>orientales</b> créent une fragrance <b>envoûtante</b>, parfaite pour ceux qui recherchent un parfum <b>sophistiqué</b> et <b>séduisant</b>, à la hauteur de l'original.",
     secondDescription: `
-      <b>Marque:</b> Gucci®. 
-      <br>
-      <b>Qualité:</b> Eau de toilette.
-      <br>
-      <b>Catégorie:</b> Femme.`,
+        <b>Marque:</b> Diamond®.
+        <br>
+        <b>Qualité:</b> Eau de parfum.
+        <br>
+        <b>Catégorie:</b> Femme.
+        `,
     pics: [
       {
-        bigPicUrl: "assets/img/product/aqua-bloom-img-1.png",
-      },
-      {
-        bigPicUrl: "assets/img/product/aqua-bloom-img-3.png",
-      },
-      {
-        bigPicUrl: "assets/img/product/aqua-bloom-img-4.png",
+        bigPicUrl: "assets/img/product/Versace-Diamond-Crystal-Noir-BIG.png",
         isMain: true,
       },
       {
-        bigPicUrl: "assets/img/product/aqua-bloom-img-2.png",
+        bigPicUrl: "assets/img/product/dyamond-crystal-noir-2-BIG.png",
       },
       {
-        bigPicUrl: "assets/img/product/aqua-bloom-img-5.png",
+        bigPicUrl: "assets/img/product/Dyamond-crystal-noir-BIG.png",
+      },
+      {
+        bigPicUrl: "assets/img/product/diamond-crystal-noir-3-BIG.png",
+      },
+    ],
+  },
+  {
+    id: 11,
+    ref: `Khalis Perfumes® - Ameerat Al Arab 
+          <br> 
+          (100ml)`,
+    price: 100,
+    description:
+      "<b>Khalis Perfumes® - Ameerat Al Arab</b> est une fragrance luxueuse qui incarne la <b>grâce</b> et la <b>féminité</b> 🌹. Ses notes riches et <b>orientales</b>, composées de <b>musc</b>, <b>oud</b>, et de touches florales, créent un sillage <b>élégant</b> et <b>envoûtant</b>. Parfait pour celles qui veulent laisser une empreinte royale et <b>sophistiquée</b> à chaque instant. Un parfum digne d'une princesse, à porter en toute occasion spéciale.",
+    secondDescription: `
+        <b>Marque:</b> Khalis Perfumes®.
+        <br>
+        <b>Qualité:</b> Eau de parfum.
+        <br>
+        <b>Catégorie:</b> Femme.
+        `,
+    pics: [
+      {
+        bigPicUrl: "assets/img/product/amirat-al-arab-img-1.png",
+        isMain: true,
+      },
+      {
+        bigPicUrl: "assets/img/product/amirat-al-arab-img-4.png",
+      },
+      {
+        bigPicUrl: "assets/img/product/amirat-al-arab-img-2.png",
+      },
+      {
+        bigPicUrl: "assets/img/product/amirat-al-arab-img-5.png",
+      },
+      {
+        bigPicUrl: "assets/img/product/amirat-al-arab-img-3.png",
+      },
+    ],
+  },
+  {
+    id: 12,
+    ref: `Lattafa Perfumes® - Ethra'a 
+          <br> 
+          (100ml)`,
+    price: 100,
+    description:
+      "<b>Lattafa Perfumes® - Ethra'a</b> est une fragrance orientale riche et sophistiquée ✨. Composée de notes <b>florales</b> et <b>épicées</b>, elle crée un sillage envoûtant et <b>luxueux</b>, parfait pour celles qui recherchent une touche de <b>grâce</b> et de <b>mystère</b> 🌹. Ce parfum allie parfaitement la <b>finesse</b> des traditions orientales à une <b>élégance moderne</b>, idéal pour les occasions spéciales où vous souhaitez vous démarquer.",
+    secondDescription: `
+        <b>Marque:</b> Lattafa Perfumes®.
+        <br>
+        <b>Qualité:</b> Eau de parfum.
+        <br>
+        <b>Catégorie:</b> Femme.
+        `,
+    pics: [
+      {
+        bigPicUrl: "assets/img/product/ethrae-img-1.png",
+        isMain: true,
+      },
+      {
+        bigPicUrl: "assets/img/product/ethrae-img-2.png",
       },
     ],
   },
