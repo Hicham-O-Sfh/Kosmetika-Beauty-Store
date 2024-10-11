@@ -349,6 +349,31 @@ export const MAIN_DATABASE = new Set([
       },
     ],
   },
+  {
+    id: 13,
+    ref: `Cosmo® - Black Afgan 
+          <br> 
+          (100ml)`,
+    price: 100,
+    description:
+      "<b>Cosmo® - Black Afgan</b> est un parfum masculin de <b>luxe</b> et d'<b>élégance</b>, inspiré par les riches notes de l'<b>Oud</b> 🖤. Cette fragrance <b>orientale</b> puissante et envoûtante allie des accords <b>boisés</b> et <b>épicés</b>, créant un sillage <b>intense</b> et <b>raffiné</b>. Parfait pour l'homme qui veut affirmer son style avec une touche de mystère et de distinction 🌟. Un parfum qui ne passe pas inaperçu.",
+    secondDescription: `
+        <b>Marque:</b> Cosmo®.
+        <br>
+        <b>Qualité:</b> Eau de parfum.
+        <br>
+        <b>Catégorie:</b> Homme.
+        `,
+    pics: [
+      {
+        bigPicUrl: "assets/img/product/black-afgan-2.png",
+        isMain: true,
+      },
+      {
+        bigPicUrl: "assets/img/product/black-afgan-1.png",
+      },
+    ],
+  },
 ]);
 
 export function getProductFromDatabase(idProduct) {
