@@ -2,9 +2,6 @@
  * remove background and replace it with pute white (canva)
  * save under 1.06 size : 600 x 600 (canva)
  * enhance image quality, only if really needed ! (canva)
- *
- * ! todo:
- * - ajouter catégorie: homme/femme/mono
  */
 
 export const PRODUCT_STATUS = Object.freeze({
