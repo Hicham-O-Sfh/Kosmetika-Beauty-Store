@@ -399,6 +399,37 @@ export const MAIN_DATABASE = new Set([
       },
     ],
   },
+  {
+    id: 15,
+    ref: `Manasik® - Malikat Al Arab (Rose) 
+          <br> 
+          (100ml)`,
+    price: 100,
+    description:
+      "Plongez dans un monde de <b>luxure florale</b> avec <b>Manasik® - Malikat Al Arab - Rose</b> 🌹. Ce parfum capture l'essence de la <b>rose</b>, enveloppant la peau d'une touche de <b>féminité</b> et de <b>raffinement</b>. Les notes florales s'accordent parfaitement pour créer un sillage <b>sophistiqué</b> et <b>romantique</b>, idéal pour la femme qui souhaite exprimer sa <b>royauté</b> à travers chaque geste. Un véritable hommage à l'<b>élégance orientale</b> 🌸.",
+    secondDescription: `
+        <b>Marque:</b> Manasik®.
+        <br>
+        <b>Qualité:</b> Eau de parfum.
+        <br>
+        <b>Catégorie:</b> Femme.
+        `,
+    pics: [
+      {
+        bigPicUrl: "assets/img/product/malikat-al-arab-img1.png",
+        isMain: true,
+      },
+      {
+        bigPicUrl: "assets/img/product/malikat-al-arab-img3.png",
+      },
+      {
+        bigPicUrl: "assets/img/product/malikat-al-arab-img2.png",
+      },
+      {
+        bigPicUrl: "assets/img/product/malikat-al-arab-img4.png",
+      },
+    ],
+  },
 ]);
 
 export function getProductFromDatabase(idProduct) {
