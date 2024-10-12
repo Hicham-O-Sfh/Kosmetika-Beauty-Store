@@ -53,7 +53,7 @@ export const MAIN_DATABASE = new Set([
           (100ml)`,
     price: 299,
     description:
-      "<b>Ana Lmalik</b> est une fragrance <b>royale</b> qui allie des notes <b>orientales</b> et <b>boisées</b> pour un sillage <b>captivant</b> 👑. Parfait pour une <b>signature élégante</b> de jour comme de nuit 🌙. Laissez une <b>empreinte royale</b> partout où vous allez.",
+      "<b>Ard Al Zaafaran® - Ana Lmalik</b> est une fragrance <b>royale</b> qui allie des notes <b>orientales</b> et <b>boisées</b> pour un sillage <b>captivant</b> 👑. Parfait pour une <b>signature élégante</b> de jour comme de nuit 🌙. Laissez une <b>empreinte royale</b> partout où vous allez.",
     secondDescription: `
       <b>Marque:</b> Ard Al Zaafaran®.
       <br>
@@ -80,7 +80,7 @@ export const MAIN_DATABASE = new Set([
           (100ml)`,
     price: 300,
     description:
-      "<b>Lattafa Yara</b> est une fragrance <b>délicate</b> et <b>envoûtante</b> qui combine subtilement des notes <b>florales</b> et <b>fruitées</b> 🍓. Elle offre une harmonie <b>douce</b> et <b>rafraîchissante</b>, parfaite pour une touche de <b>légèreté</b> et d'<b>élégance</b> au quotidien ✨. Avec son sillage <b>raffiné</b>, elle sublime chaque moment et attire tous les regards.",
+      "<b>Lattafa® - Yara</b> est une fragrance <b>délicate</b> et <b>envoûtante</b> qui combine subtilement des notes <b>florales</b> et <b>fruitées</b> 🍓. Elle offre une harmonie <b>douce</b> et <b>rafraîchissante</b>, parfaite pour une touche de <b>légèreté</b> et d'<b>élégance</b> au quotidien ✨. Avec son sillage <b>raffiné</b>, elle sublime chaque moment et attire tous les regards.",
     secondDescription: `
       <b>Marque:</b> Lattafa®.
       <br>
@@ -107,7 +107,7 @@ export const MAIN_DATABASE = new Set([
           (100ml)`,
     price: 100,
     description:
-      "<b>Manassik Gharam wa Hob</b> est une eau de parfum <b>captivante</b> qui incarne la <b>passion</b> et le <b>romantisme</b> 💖. Ses notes <b>orientales chaleureuses</b> et <b>florales</b> créent un sillage <b>sensuel</b> et <b>mystérieux</b>. Idéal pour les moments <b>spéciaux</b>, ce parfum riche en <b>émotions</b> est une véritable déclaration de <b>séduction</b>.",
+      "<b>Manassik® - Gharam wa Hob</b> est une eau de parfum <b>captivante</b> qui incarne la <b>passion</b> et le <b>romantisme</b> 💖. Ses notes <b>orientales chaleureuses</b> et <b>florales</b> créent un sillage <b>sensuel</b> et <b>mystérieux</b>. Idéal pour les moments <b>spéciaux</b>, ce parfum riche en <b>émotions</b> est une véritable déclaration de <b>séduction</b>.",
     secondDescription: `
       <b>Marque:</b> Manassik®.
       <br>
@@ -134,7 +134,7 @@ export const MAIN_DATABASE = new Set([
           (33ml)`,
     price: 100,
     description:
-      "<b>Aqua</b> 🌊 est une fragrance <b>fraîche</b> et <b>vivifiante</b>, inspirée par l'énergie de l'<b>océan</b>. Ses notes <b>marines</b> et <b>d'agrumes</b> 🍋 offrent une sensation de <b>liberté</b> et de <b>pureté</b> 🌿, parfaite pour toutes vos journées.",
+      "<b>Aqua®</b> 🌊 est une fragrance <b>fraîche</b> et <b>vivifiante</b>, inspirée par l'énergie de l'<b>océan</b>. Ses notes <b>marines</b> et <b>d'agrumes</b> 🍋 offrent une sensation de <b>liberté</b> et de <b>pureté</b> 🌿, parfaite pour toutes vos journées.",
     secondDescription: `
       <b>Marque:</b> Aqua®.
       <br>
@@ -161,7 +161,7 @@ export const MAIN_DATABASE = new Set([
           (50ml)`,
     price: 100,
     description:
-      "<b>Allerv Exchange</b> est un parfum masculin <b>luxueux</b>, inspiré par la sophistication de <b>Bleu de Chanel</b> ✨. Avec ses notes <b>fraîches</b> et <b>boisées</b>, il incarne l'<b>élégance</b> et la <b>modernité</b>. Parfait pour l'homme <b>sûr de lui</b>, il laisse un sillage <b>raffiné</b> et <b>intemporel</b>, idéal pour toutes les occasions 🌟.",
+      "<b>Allerv® - Exchange</b> est un parfum masculin <b>luxueux</b>, inspiré par la sophistication de <b>Bleu de Chanel</b> ✨. Avec ses notes <b>fraîches</b> et <b>boisées</b>, il incarne l'<b>élégance</b> et la <b>modernité</b>. Parfait pour l'homme <b>sûr de lui</b>, il laisse un sillage <b>raffiné</b> et <b>intemporel</b>, idéal pour toutes les occasions 🌟.",
     secondDescription: `
       <b>Marque:</b> Allerv®. 
       <br>
@@ -176,9 +176,6 @@ export const MAIN_DATABASE = new Set([
       {
         bigPicUrl: "assets/img/product/allery-exchange-img-3-BIG.png",
       },
-      {
-        bigPicUrl: "assets/img/product/allery-exchange-img-1-BIG.png",
-      },
     ],
   },
   {
@@ -188,7 +185,7 @@ export const MAIN_DATABASE = new Set([
           (100ml)`,
     price: 100,
     description:
-      "Lattafa Raghba pour Femme, est une fragrance délicieusement sucrée qui enveloppe de ses notes gourmandes de <b>miel</b> 🍯 et de vanille. Séduisante et envoûtante, elle laisse un sillage irrésistible, parfait pour celles qui veulent captiver à chaque instant. Un parfum d'<b>excellence</b>, alliant douceur et <b>séduction</b>, idéal pour les moments spéciaux.",
+      "<b>Lattafa® - Raghba</b> pour Femme, est une fragrance délicieusement sucrée qui enveloppe de ses notes gourmandes de <b>miel</b> 🍯 et de vanille. Séduisante et envoûtante, elle laisse un sillage irrésistible, parfait pour celles qui veulent captiver à chaque instant. Un parfum d'<b>excellence</b>, alliant douceur et <b>séduction</b>, idéal pour les moments spéciaux.",
     secondDescription: `
       <b>Marque:</b> Lattafa®. 
       <br>
@@ -266,7 +263,7 @@ export const MAIN_DATABASE = new Set([
           (100ml)`,
     price: 100,
     description:
-      "<b>Diamond Crystal Noir</b> s'inspire du célèbre parfum <b>Versace Crystal Noir</b>, offrant une alternative <b>élégante</b> et <b>raffinée</b> ✨. Ses notes <b>florales</b> et <b>orientales</b> créent une fragrance <b>envoûtante</b>, parfaite pour ceux qui recherchent un parfum <b>sophistiqué</b> et <b>séduisant</b>, à la hauteur de l'original.",
+      "<b>Diamond® - Crystal Noir</b> s'inspire du célèbre parfum <b>Versace Crystal Noir</b>, offrant une alternative <b>élégante</b> et <b>raffinée</b> ✨. Ses notes <b>florales</b> et <b>orientales</b> créent une fragrance <b>envoûtante</b>, parfaite pour ceux qui recherchent un parfum <b>sophistiqué</b> et <b>séduisant</b>, à la hauteur de l'original.",
     secondDescription: `
         <b>Marque:</b> Diamond®.
         <br>
@@ -371,6 +368,34 @@ export const MAIN_DATABASE = new Set([
       },
       {
         bigPicUrl: "assets/img/product/black-afgan-1.png",
+      },
+    ],
+  },
+  {
+    id: 14,
+    ref: `Al Fakhr Perfumes® - Cheikh Zaid 
+          <br> 
+          (100ml)`,
+    price: 100,
+    description:
+      "<b>Al Fakhr Perfumes® - Cheikh Zaid</b> est une fragrance <b>orientale</b> luxueuse, inspirée par la noblesse et la puissance du <b>Oud</b> 🌿. Avec ses notes riches et <b>boisées</b>, ce parfum évoque l'<b>élégance</b> et la <b>sophistication</b>, parfait pour ceux qui cherchent à affirmer leur présence avec un sillage <b>intense</b> et mémorable. Un parfum digne des plus grands, alliant tradition et modernité 🌟.",
+    secondDescription: `
+        <b>Marque:</b> Al Fakhr Perfumes®.
+        <br>
+        <b>Qualité:</b> Eau de parfum.
+        <br>
+        <b>Catégorie:</b> Homme.
+        `,
+    pics: [
+      {
+        bigPicUrl: "assets/img/product/Check-Zaid-img1.png",
+        isMain: true,
+      },
+      {
+        bigPicUrl: "assets/img/product/Check-Zaid-img2.png",
+      },
+      {
+        bigPicUrl: "assets/img/product/Check-Zaid-img3.png",
       },
     ],
   },
