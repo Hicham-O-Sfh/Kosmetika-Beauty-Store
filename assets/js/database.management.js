@@ -128,29 +128,30 @@ export const MAIN_DATABASE = new Set([
     ],
   },
   {
-    id: 5,
-    ref: `Aqua® - Aqua 
-          <br>
-          (33ml)`,
+    id: 16,
+    ref: `Manasik® - Muski Oud
+          <br> 
+          (100ml)`,
     price: 100,
     description:
-      "<b>Aqua®</b> 🌊 est une fragrance <b>fraîche</b> et <b>vivifiante</b>, inspirée par l'énergie de l'<b>océan</b>. Ses notes <b>marines</b> et <b>d'agrumes</b> 🍋 offrent une sensation de <b>liberté</b> et de <b>pureté</b> 🌿, parfaite pour toutes vos journées.",
+      "<b>Manasik® - Muski Oud</b> fusionne la profondeur du <b>musc</b> et l'intensité de l'<b>oud</b> pour offrir une expérience olfactive audacieuse et envoûtante 🖤. Ce parfum révèle des notes <b>orientales</b> riches et captivantes, parfaites pour ceux qui recherchent une présence affirmée et mystérieuse. Une touche de <b>luxure</b> et de <b>sophistication</b>, idéale pour marquer chaque instant d'un sillage <b>profond</b> et <b>durable</b> 🌟.",
     secondDescription: `
-      <b>Marque:</b> Aqua®.
-      <br>
-      <b>Qualité:</b> Eau de parfum.
-      <br>
-      <b>Catégorie:</b> Femme.`,
+        <b>Marque:</b> Manasik®.
+        <br>
+        <b>Qualité:</b> Eau de parfum.
+        <br>
+        <b>Catégorie:</b> Femme.
+        `,
     pics: [
       {
-        bigPicUrl: "assets/img/product/aqua-img-1-BIG.png",
+        bigPicUrl: "assets/img/product/manasik-muski-oud-1.png",
         isMain: true,
       },
       {
-        bigPicUrl: "assets/img/product/aqua-img-2-BIG.png",
+        bigPicUrl: "assets/img/product/manasik-muski-oud-2.png",
       },
       {
-        bigPicUrl: "assets/img/product/aqua-img-3-BIG.png",
+        bigPicUrl: "assets/img/product/manasik-muski-oud-3.png",
       },
     ],
   },
@@ -230,6 +231,33 @@ export const MAIN_DATABASE = new Set([
     ],
   },
   {
+    id: 5,
+    ref: `Aqua® - Aqua 
+          <br>
+          (33ml)`,
+    price: 100,
+    description:
+      "<b>Aqua®</b> 🌊 est une fragrance <b>fraîche</b> et <b>vivifiante</b>, inspirée par l'énergie de l'<b>océan</b>. Ses notes <b>marines</b> et <b>d'agrumes</b> 🍋 offrent une sensation de <b>liberté</b> et de <b>pureté</b> 🌿, parfaite pour toutes vos journées.",
+    secondDescription: `
+      <b>Marque:</b> Aqua®.
+      <br>
+      <b>Qualité:</b> Eau de parfum.
+      <br>
+      <b>Catégorie:</b> Femme.`,
+    pics: [
+      {
+        bigPicUrl: "assets/img/product/aqua-img-1-BIG.png",
+        isMain: true,
+      },
+      {
+        bigPicUrl: "assets/img/product/aqua-img-2-BIG.png",
+      },
+      {
+        bigPicUrl: "assets/img/product/aqua-img-3-BIG.png",
+      },
+    ],
+  },
+  {
     id: 9,
     ref: `Manassik® - Assalah 
           <br>
@@ -289,7 +317,7 @@ export const MAIN_DATABASE = new Set([
   },
   {
     id: 11,
-    ref: `Khalis Perfumes® - Ameerat Al Arab 
+    ref: `Khalis® - Ameerat Al Arab 
           <br> 
           (100ml)`,
     price: 100,
