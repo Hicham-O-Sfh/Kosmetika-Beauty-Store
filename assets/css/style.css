@@ -3267,75 +3267,6 @@ textarea:-ms-input-placeholder {
   top: 22px;
 }
 
-/*search container css here*/
-.hover_category {
-  position: relative;
-}
-.hover_category::before {
-  content: "";
-  width: 1px;
-  height: 16px;
-  background: #a1a1a1;
-  position: absolute;
-  top: 50%;
-  margin-top: -8px;
-  right: 0;
-}
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .hover_category::before {
-    display: none;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .hover_category::before {
-    display: none;
-  }
-}
-.hover_category .select_option {
-  border: 0;
-  background: inherit;
-  height: 47px;
-  line-height: 47px;
-  padding-left: 13px;
-  padding-right: 30px;
-  font-size: 14px;
-  min-width: 170px;
-}
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .hover_category .select_option {
-    min-width: 150px;
-    padding-right: 28px;
-  }
-}
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .hover_category .select_option {
-    height: 34px;
-    line-height: 35px;
-    font-size: 13px;
-    padding-left: 50px;
-    padding-right: 51px;
-    border: 1px solid #ebebeb;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .hover_category .select_option {
-    height: 34px;
-    line-height: 35px;
-    font-size: 13px;
-    padding-left: 50px;
-    padding-right: 51px;
-    border: 1px solid #ebebeb;
-  }
-}
-.hover_category .select_option::after {
-  top: 54%;
-  right: 13px;
-}
-.hover_category .select_option ul.list {
-  max-height: 300px;
-  overflow: auto;
-}
-
 .search_container_new {
   margin-right: 60px;
 }
@@ -7355,16 +7286,7 @@ textarea:-ms-input-placeholder {
   }
 }
 
-.niceselect_option {
-  height: 35px;
-  line-height: 35px;
-  border-radius: 0;
-}
-@media only screen and (max-width: 767px) {
-  .niceselect_option {
-    margin-bottom: 12px;
-  }
-}
+
 
 .page_amount {
   margin-left: 30px;
@@ -7845,16 +7767,8 @@ textarea:-ms-input-placeholder {
   margin-right: 40px;
   min-width: 50px;
 }
-.product_variant.color .niceselect_option {
-  width: 300px;
-  height: 42px;
-  line-height: 40px;
-}
-@media only screen and (max-width: 767px) {
-  .product_variant.color .niceselect_option {
-    width: 160px;
-  }
-}
+
+
 
 .product_d_action {
   margin-bottom: 22px;
@@ -8291,9 +8205,6 @@ textarea:-ms-input-placeholder {
   .variable_product .product-details-tab {
     margin-bottom: 49px;
   }
-}
-.variable_product .niceselect_option .list {
-  width: 100%;
 }
 
 .product_d_meta {
@@ -8910,17 +8821,7 @@ textarea:-ms-input-placeholder {
   padding: 0 20px;
   color: #5a5a5a;
 }
-.checkout_form .nice-select {
-  width: 100%;
-}
-.checkout_form .nice-select ul.list {
-  width: 100%;
-  height: 180px;
-  overflow: auto;
-}
-.checkout_form .nice-select::after {
-  top: 56%;
-}
+
 .checkout_form label {
   color: #242424;
   font-family: "Playfair Display", serif;
