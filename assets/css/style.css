@@ -4065,26 +4065,26 @@ textarea:-ms-input-placeholder {
   }
 }
 .single_slider .row {
-  height: 627px;
+  height: 500px;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
-  .single_slider .row {
-    height: 450px;
-  }
-}
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
   .single_slider .row {
     height: 400px;
   }
 }
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .single_slider .row {
+    height: 350px;
+  }
+}
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .single_slider .row {
-    height: 380px;
+    height: 300px;
   }
 }
 @media only screen and (max-width: 767px) {
   .single_slider .row {
-    height: 300px;
+    height: 270px;
   }
 }
 
@@ -4680,7 +4680,6 @@ textarea:-ms-input-placeholder {
 }
 
 .banner_fullwidth {
-  background: url(../img/bg/banner4.jpg) no-repeat scroll center center/cover;
   margin-bottom: 64px;
 }
 @media only screen and (max-width: 767px) {
@@ -12068,4 +12067,22 @@ button[disabled] {
   font-size: 9px;
   font-weight: 200;
 }
+
+.video-background {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+.video-background video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
 /*# sourceMappingURL=style.css.map */

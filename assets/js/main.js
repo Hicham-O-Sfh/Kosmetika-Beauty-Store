@@ -53,10 +53,9 @@ Array.prototype.shiftOutAndDelete = function (predicate) {
     autoplay: true,
     loop: true,
     nav: false,
-    autoplay: false,
-    autoplayTimeout: 8000,
+    autoplayTimeout: 6000,
     items: 1,
-    dots: true,
+    dots: false,
   });
 
   /*---product row 2 activation---*/
