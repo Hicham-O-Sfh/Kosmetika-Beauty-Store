@@ -574,11 +574,26 @@ export function bindCartEvent() {
   $("#whatsapp-button").click(function (e) {
     e.preventDefault();
     const cartItems = retrieveUserCartFromLocalStorage();
-    const encodedMessage = encodeURIComponent(
-      `TestTest, Actuellement nombre de produits dans le panier: ${cartItems.length}`
-    );
-    const whatsappURL = "https://wa.me/2120666201740";
-    window.open(`${whatsappURL}?text=${encodedMessage}`);
+    let whatsappMessageRecipe = "";
+    let total = 0;
+
+    const promises = cartItems.map((cartItem) => {
+      return getProductFromDatabase(cartItem.productId).then(
+        (productFromDb) => {
+          const productRef = productFromDb.ref.split("\n")[0];
+          total += +cartItem.quantity * +productFromDb.price;
+          whatsappMessageRecipe += `- (${productRef}) x ${cartItem.quantity} = (${productFromDb.price} Dhs) x ${cartItem.quantity}\n`;
+        }
+      );
+    });
+
+    Promise.all(promises).then(() => {
+      whatsappMessageRecipe += `\n\n --------------------------------------------------\n`;
+      whatsappMessageRecipe += `\t Total = ${total} Dhs`;
+      const encodedMessage = encodeURIComponent(whatsappMessageRecipe);
+      const whatsappURL = "https://wa.me/2120666201740";
+      window.open(`${whatsappURL}?text=${encodedMessage}`);
+    });
   });
 }
 
