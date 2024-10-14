@@ -100,49 +100,6 @@ Array.prototype.shiftOutAndDelete = function (predicate) {
     ],
   });
 
-  /*---blog column3 activation---*/
-  $(".blog_column3").owlCarousel({
-    autoplay: true,
-    loop: true,
-    nav: true,
-    autoplay: false,
-    autoplayTimeout: 8000,
-    items: 3,
-    dots: false,
-    margin: 30,
-    navText: [
-      '<i class="fa fa-angle-left"></i>',
-      '<i class="fa fa-angle-right"></i>',
-    ],
-    responsiveClass: true,
-    responsive: {
-      0: {
-        items: 1,
-      },
-      768: {
-        items: 2,
-      },
-      992: {
-        items: 3,
-      },
-    },
-  });
-
-  /*---blog active activation---*/
-  $(".blog_thumb_active").owlCarousel({
-    autoplay: true,
-    loop: true,
-    nav: true,
-    autoplay: false,
-    autoplayTimeout: 8000,
-    items: 1,
-    dots: true,
-    navText: [
-      '<i class="fa fa-angle-left"></i>',
-      '<i class="fa fa-angle-right"></i>',
-    ],
-  });
-
   /*---testimonial active activation---*/
   $(".testimonial_active").owlCarousel({
     autoplay: true,
@@ -177,15 +134,6 @@ Array.prototype.shiftOutAndDelete = function (predicate) {
     },
   });
 
-  /*--- niceSelect---*/
-  $(".select_option").niceSelect();
-
-  /*--- counterup activation ---*/
-  $(".counter_number").counterUp({
-    delay: 10,
-    time: 1000,
-  });
-
   /*---  ScrollUp Active ---*/
   $.scrollUp({
     scrollText: '<i class="fa fa-angle-double-up"></i>',
@@ -193,40 +141,6 @@ Array.prototype.shiftOutAndDelete = function (predicate) {
     scrollSpeed: 900,
     animation: "fade",
   });
-
-  /*---countdown activation---*/
-  $("[data-countdown]").each(function () {
-    var $this = $(this),
-      finalDate = $(this).data("countdown");
-    $this.countdown(finalDate, function (event) {
-      $this.html(
-        event.strftime(
-          '<div class="countdown_area"><div class="single_countdown"><div class="countdown_number">%D</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">%H</div><div class="countdown_title">hrs</div></div><div class="single_countdown"><div class="countdown_number">%M</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">%S</div><div class="countdown_title">secs</div></div></div>'
-        )
-      );
-    });
-  });
-
-  /*---MailChimp---*/
-  $("#mc-form").ajaxChimp({
-    language: "en",
-    callback: mailChimpResponse,
-    // ADD YOUR MAILCHIMP URL BELOW HERE!
-    url: "",
-  });
-  function mailChimpResponse(resp) {
-    if (resp.result === "success") {
-      $(".mailchimp-success").addClass("active");
-      $(".mailchimp-success")
-        .html("" + resp.msg)
-        .fadeIn(900);
-      $(".mailchimp-error").fadeOut(400);
-    } else if (resp.result === "error") {
-      $(".mailchimp-error")
-        .html("" + resp.msg)
-        .fadeIn(900);
-    }
-  }
 
   /*---slider-range here---*/
   $("#slider-range").slider({
@@ -244,29 +158,6 @@ Array.prototype.shiftOutAndDelete = function (predicate) {
       " - $" +
       $("#slider-range").slider("values", 1)
   );
-
-  /*niceSelect*/
-  $(".niceselect_option").niceSelect();
-
-  /*---portfolio Isotope activation---*/
-  $(".portfolio_gallery").imagesLoaded(function () {
-    var $grid = $(".portfolio_gallery").isotope({
-      itemSelector: ".gird_item",
-      percentPosition: true,
-      masonry: {
-        columnWidth: ".gird_item",
-      },
-    });
-
-    /*---ilter items on button click---*/
-    $(".portfolio_button").on("click", "button", function () {
-      var filterValue = $(this).attr("data-filter");
-      $grid.isotope({ filter: filterValue });
-
-      $(this).siblings(".active").removeClass("active");
-      $(this).addClass("active");
-    });
-  });
 
   /*---tooltip---*/
   $('[data-bs-toggle="tooltip"]').tooltip();
