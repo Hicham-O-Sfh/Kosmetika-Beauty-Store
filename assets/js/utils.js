@@ -332,7 +332,7 @@ export function projectBestSellingProductsInFooter() {
   $("#footer-best-selling-products").html(`
     <h3>✅ Produits les plus vendus</h3>
   `);
-  const bestSellingProductsIds = [2, 3];
+  const bestSellingProductsIds = [1, 16];
   bestSellingProductsIds.forEach((productId) => {
     getProductFromDatabase(productId)
       .then((product) => {
