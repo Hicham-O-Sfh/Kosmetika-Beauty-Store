@@ -4,6 +4,15 @@
  * enhance image quality, only if really needed ! (canva)
  */
 
+export const WHATSAPP_NUMBER = "+212 0700 6484 01";
+export const WHATSAPP_NUMBER_LINK = "";
+export const INSTAGRAM = "islam.beauty.store";
+export const INSTAGRAM_LINK = "";
+export const FACEBOOK = "ISLAM BEAUTY STORE";
+export const FACEBOOK_LINK = "";
+export const TIKTOK = "ISLAM BEAUTY STORE";
+export const TIKTOK_LINK = "";
+
 export const PRODUCT_STATUS = Object.freeze({
   OUT_OF_STOCK: -1,
   NORMAL: 0,

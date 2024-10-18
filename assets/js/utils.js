@@ -1,8 +1,12 @@
 "use strict";
 
 import {
+  FACEBOOK,
   getAllProductsFromDatabase,
   getProductFromDatabase,
+  INSTAGRAM,
+  TIKTOK,
+  WHATSAPP_NUMBER,
 } from "../js/database.management.js";
 
 /*---pluggin dynamic usage---*/
@@ -326,6 +330,22 @@ export function projectRelatedProductsInPage() {
     .catch((error) => {
       console.log(error);
     });
+}
+
+export function projectDataInFooter() {
+  projectContactInfoInFooter();
+  projectBestSellingProductsInFooter();
+}
+
+export function projectContactInfoInFooter() {
+  // todo :
+  // inject in contact page also
+  // inject in href in order to redirect
+  $("#whatsapp-footer").text(WHATSAPP_NUMBER);
+  $("#whatsapp-footer").attr("href", `tel:${WHATSAPP_NUMBER}`);
+  $("#instagram-footer").text(INSTAGRAM);
+  $("#facebook-footer").text(FACEBOOK);
+  $("#tikTok-footer").text(TIKTOK);
 }
 
 export function projectBestSellingProductsInFooter() {
