@@ -4,10 +4,10 @@ import {
   bindProductDetailsPageEvents,
   buildVisualCart,
   projectAllProductsInShopPage,
-  projectBestSellingProductsInFooter,
+  projectDataInFooter,
   projectProductInPage,
   projectProductsInHomeTabs,
-  projectRelatedProductsInPage,
+  projectRelatedProductsInPage
 } from "../js/utils.js";
 
 // generic & custom addons for app
@@ -261,7 +261,7 @@ Array.prototype.shiftOutAndDelete = function (predicate) {
     /* all pages */
     buildVisualCart();
     bindCartEvent();
-    projectBestSellingProductsInFooter();
+    projectDataInFooter();
 
     /* Product-details */
     if (currentPage.pathname.includes("product-details.html")) {

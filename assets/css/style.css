@@ -7286,8 +7286,6 @@ textarea:-ms-input-placeholder {
   }
 }
 
-
-
 .page_amount {
   margin-left: 30px;
 }
@@ -7767,8 +7765,6 @@ textarea:-ms-input-placeholder {
   margin-right: 40px;
   min-width: 50px;
 }
-
-
 
 .product_d_action {
   margin-bottom: 22px;
@@ -11986,4 +11982,7 @@ button[disabled] {
   object-fit: cover;
 }
 
+.link-to-social {
+  text-decoration: underline !important;
+}
 /*# sourceMappingURL=style.css.map */
