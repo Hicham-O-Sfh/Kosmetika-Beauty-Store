@@ -467,6 +467,34 @@ export const MAIN_DATABASE = new Set([
       },
     ],
   },
+  {
+    id: 17,
+    ref: `Lattafa® - Qimmah
+          <br> 
+          (100ml)`,
+    price: 100,
+    description:
+      "<b>Lattafa® - Qimmah</b> est l'incarnation de la <b>noblesse</b> et de la <b>grandeur</b> 🌌. Ce parfum unique associe des notes orientales et épicées, créant un sillage à la fois <b>élégant</b> et <b>audacieux</b>, parfait pour ceux qui souhaitent affirmer leur <b>présence</b>. Avec sa profondeur boisée et ses touches épicées, <b>Qimmah</b> exprime la force et la distinction à chaque instant, laissant une empreinte <b>inoubliable</b> 🌟.",
+    secondDescription: `
+        <b>Marque:</b> Lattafa®.
+        <br>
+        <b>Qualité:</b> Eau de parfum.
+        <br>
+        <b>Catégorie:</b> Femme.
+        `,
+    pics: [
+      {
+        bigPicUrl: "assets/img/product/Qimmah-img-1.webp",
+        isMain: true,
+      },
+      {
+        bigPicUrl: "assets/img/product/Qimmah-img-2.png",
+      },
+      {
+        bigPicUrl: "assets/img/product/Qimmah-img-3.png",
+      },
+    ],
+  },
 ]);
 
 export function getProductFromDatabase(idProduct) {
