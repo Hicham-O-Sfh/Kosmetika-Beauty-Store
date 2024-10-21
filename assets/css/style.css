@@ -9305,7 +9305,7 @@ textarea:-ms-input-placeholder {
   text-align: left;
   color: #c09578;
   font-size: 90%;
-  font-family: cursive;
+  font-family: monospace;
   font-weight: 700;
 }
 .card-header.card_accor button.btn-link.collapsed {
