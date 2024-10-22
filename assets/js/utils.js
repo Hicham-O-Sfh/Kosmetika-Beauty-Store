@@ -2,11 +2,16 @@
 
 import {
   FACEBOOK,
+  FACEBOOK_LINK,
   getAllProductsFromDatabase,
   getProductFromDatabase,
   INSTAGRAM,
+  INSTAGRAM_LINK,
+  TEL_NUMBER_LINK,
   TIKTOK,
+  TIKTOK_LINK,
   WHATSAPP_NUMBER,
+  WHATSAPP_NUMBER_LINK,
 } from "../js/database.management.js";
 
 /*---pluggin dynamic usage---*/
@@ -338,14 +343,33 @@ export function projectDataInFooter() {
 }
 
 export function projectContactInfoInFooter() {
-  // todo :
-  // inject in contact page also
-  // inject in href in order to redirect
+  // Phone number
+  $(".phone-number").text(WHATSAPP_NUMBER);
+  $(".phone-number").attr("href", TEL_NUMBER_LINK);
+
+  // WhatsApp
   $("#whatsapp-footer").text(WHATSAPP_NUMBER);
-  $("#whatsapp-footer").attr("href", `tel:${WHATSAPP_NUMBER}`);
+  $("#whatsapp-footer").attr("href", WHATSAPP_NUMBER_LINK);
+  $(".whatsapp-number").text(WHATSAPP_NUMBER);
+  $(".whatsapp-number").attr("href", WHATSAPP_NUMBER_LINK);
+
+  // Instagram
   $("#instagram-footer").text(INSTAGRAM);
+  $("#instagram-footer").attr("href", INSTAGRAM_LINK);
+  $(".instagram-account").text(INSTAGRAM);
+  $(".instagram-account").attr("href", INSTAGRAM_LINK);
+
+  // Facebook
   $("#facebook-footer").text(FACEBOOK);
+  $("#facebook-footer").attr("href", FACEBOOK_LINK);
+  $(".facebook-account").text(FACEBOOK);
+  $(".facebook-account").attr("href", FACEBOOK_LINK);
+
+  // TikTok
   $("#tikTok-footer").text(TIKTOK);
+  $("#tikTok-footer").attr("href", TIKTOK_LINK);
+  $(".tikTok-account").text(TIKTOK);
+  $(".tikTok-account").attr("href", TIKTOK_LINK);
 }
 
 export function projectBestSellingProductsInFooter() {
@@ -564,7 +588,7 @@ export function bindContactPageEvents() {
       // if message is written (form is valid)
       // then redirect & send in our WhatsApp discussion
       const encodedMessage = encodeURIComponent($("#message-text-area").val());
-      const whatsappURL = "https://wa.me/2120666201740";
+      const whatsappURL = WHATSAPP_NUMBER_LINK;
       window.open(`${whatsappURL}?text=${encodedMessage}`);
     }
   });
@@ -611,7 +635,7 @@ export function bindCartEvent() {
       whatsappMessageRecipe += `\n\n --------------------------------------------------\n`;
       whatsappMessageRecipe += `\t Total = ${total} Dhs`;
       const encodedMessage = encodeURIComponent(whatsappMessageRecipe);
-      const whatsappURL = "https://wa.me/2120666201740";
+      const whatsappURL = WHATSAPP_NUMBER_LINK;
       window.open(`${whatsappURL}?text=${encodedMessage}`);
     });
   });

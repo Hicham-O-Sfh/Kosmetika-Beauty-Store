@@ -4,14 +4,15 @@
  * enhance image quality, only if really needed ! (canva)
  */
 
-export const WHATSAPP_NUMBER = "+212 0700 6484 01";
-export const WHATSAPP_NUMBER_LINK = "";
-export const INSTAGRAM = "islam.beauty.store";
-export const INSTAGRAM_LINK = "";
-export const FACEBOOK = "ISLAM BEAUTY STORE";
-export const FACEBOOK_LINK = "";
-export const TIKTOK = "ISLAM BEAUTY STORE";
-export const TIKTOK_LINK = "";
+export const TEL_NUMBER_LINK = `tel:212666201740`;
+export const WHATSAPP_NUMBER = "+212 666 2017 40";
+export const WHATSAPP_NUMBER_LINK = "https://wa.me/2120666201740";
+export const INSTAGRAM = "KosmetikaIG";
+export const INSTAGRAM_LINK = "INSTAGRAM_LINK";
+export const FACEBOOK = "KosmetikaFB";
+export const FACEBOOK_LINK = "FACEBOOK_LINK";
+export const TIKTOK = "Kosmetika";
+export const TIKTOK_LINK = "TIKTOK_LINK";
 
 export const PRODUCT_STATUS = Object.freeze({
   OUT_OF_STOCK: -1,
