@@ -13,6 +13,7 @@ import {
   WHATSAPP_NUMBER,
   WHATSAPP_NUMBER_LINK,
 } from "../js/database.management.js";
+import { updateProductOrderStats } from "./firebase-management.js";
 
 /*---pluggin dynamic usage---*/
 // Slick
@@ -641,6 +642,7 @@ export function bindCartEvent() {
       const encodedMessage = encodeURIComponent(whatsappMessageRecipe);
       const whatsappURL = WHATSAPP_NUMBER_LINK;
       window.open(`${whatsappURL}?text=${encodedMessage}`);
+      updateProductOrderStats(cartItems);
       emptyCartInLocalStorage();
       buildVisualCart();
     });
