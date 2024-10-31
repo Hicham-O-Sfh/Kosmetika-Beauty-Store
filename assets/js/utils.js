@@ -150,7 +150,7 @@ export function applyElevateZoom() {
 }
 
 export function isValidNumberInputValue(value) {
-  return !isNaN(value) && parseInt(value) > 0;
+  return !isNaN(value) && parseInt(value) >= 1 && value <= 50;
 }
 
 // Cart management
@@ -663,5 +663,16 @@ export function bindProductDetailsPageEvents() {
 
     // update the cart display on DOM
     buildVisualCart();
+
+    var notyf = new Notyf();
+    notyf.success({
+      message: "HOP!! Au panier!",
+      dismissible: true,
+      ripple: true,
+      position: {
+        x: "right",
+        y: "top",
+      },
+    });
   });
 }
