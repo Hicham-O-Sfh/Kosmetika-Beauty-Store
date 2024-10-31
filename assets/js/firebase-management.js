@@ -32,7 +32,7 @@ const db = getFirestore(app);
 
 // 🔐 Protection App Check (ReCaptcha v3)
 initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider("6Ld58mYrAAAAAAVQ9RshkoduL9smednpQ_FJx_f5"),
+  provider: new ReCaptchaV3Provider("6LdNL2grAAAAAJvxG379yH3QhzxKMKx8xcuS1bai"),
   isTokenAutoRefreshEnabled: true,
 });
 
