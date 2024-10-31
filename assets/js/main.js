@@ -7,18 +7,8 @@ import {
   projectDataInFooter,
   projectProductInPage,
   projectProductsInHomeTabs,
-  projectRelatedProductsInPage
+  projectRelatedProductsInPage,
 } from "../js/utils.js";
-
-// generic & custom addons for app
-Array.prototype.shiftOutAndDelete = function (predicate) {
-  var uniqueIterator;
-  for (uniqueIterator in this) {
-    if (predicate(this[uniqueIterator])) {
-      return this.splice(uniqueIterator, 1)[0];
-    }
-  }
-};
 
 (function ($) {
   "use strict";
@@ -134,12 +124,23 @@ Array.prototype.shiftOutAndDelete = function (predicate) {
     },
   });
 
-  /*---  ScrollUp Active ---*/
-  $.scrollUp({
-    scrollText: '<i class="fa fa-angle-double-up"></i>',
-    easingType: "linear",
-    scrollSpeed: 900,
-    animation: "fade",
+  /*---  Custom Scroll Up ---*/
+  const scrollBtn = document.getElementById("scrollUpBtn");
+  // Show/hide on scroll
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 200) {
+      scrollBtn.style.display = "block";
+      requestAnimationFrame(() => (scrollBtn.style.opacity = "1"));
+    } else {
+      scrollBtn.style.opacity = "0";
+      setTimeout(() => {
+        if (scrollBtn.style.opacity === "0") scrollBtn.style.display = "none";
+      }, 300);
+    }
+  });
+  // Smooth scroll to top
+  scrollBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
   /*---slider-range here---*/
