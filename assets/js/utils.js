@@ -158,6 +158,10 @@ export function saveCartInLocalStorage(cart) {
   localStorage.setItem("panier", JSON.stringify(cart));
 }
 
+export function emptyCartInLocalStorage() {
+  localStorage.setItem("panier", JSON.stringify([]));
+}
+
 export function addOrderToCart(orderToAdd) {
   var userCart = retrieveUserCartFromLocalStorage();
   var relatedOrderFromCart = userCart.find(
@@ -621,7 +625,7 @@ export function bindCartEvent() {
     let whatsappMessageRecipe = "";
     let total = 0;
 
-    const promises = cartItems.map((cartItem) => {
+    const promises = cartItems.map(async (cartItem) => {
       return getProductFromDatabase(cartItem.productId).then(
         (productFromDb) => {
           const productRef = productFromDb.ref.split("\n")[0];
@@ -637,6 +641,8 @@ export function bindCartEvent() {
       const encodedMessage = encodeURIComponent(whatsappMessageRecipe);
       const whatsappURL = WHATSAPP_NUMBER_LINK;
       window.open(`${whatsappURL}?text=${encodedMessage}`);
+      emptyCartInLocalStorage();
+      buildVisualCart();
     });
   });
 }
