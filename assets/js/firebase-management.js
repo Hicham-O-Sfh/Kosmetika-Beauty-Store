@@ -1,3 +1,4 @@
+// Firebase Core
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
 import {
   collection,
@@ -8,7 +9,13 @@ import {
   setDoc,
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
-// Web app's Firebase configuration
+// App Check avec ReCaptcha v3
+import {
+  initializeAppCheck,
+  ReCaptchaV3Provider,
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app-check.js";
+
+// ✅ Configuration Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCboMJ_pDDLiB0Kw7V6wws0BRuHFc4Qzz8",
   authDomain: "kosmetika-db.firebaseapp.com",
@@ -19,10 +26,17 @@ const firebaseConfig = {
   measurementId: "G-3PFTL1CG5Y",
 };
 
-// Initialize Firebase
+// 🔧 Initialisation Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// 🔐 Protection App Check (ReCaptcha v3)
+initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider("6Ld58mYrAAAAAAVQ9RshkoduL9smednpQ_FJx_f5"),
+  isTokenAutoRefreshEnabled: true,
+});
+
+// 📥 Récupérer les commandes depuis Firestore
 export async function getOrdersFromFirestore() {
   try {
     const ordersCol = collection(db, "product_order_counts");
@@ -38,6 +52,7 @@ export async function getOrdersFromFirestore() {
   }
 }
 
+// 📤 Mettre à jour les stats de commande d’un produit
 export async function updateProductOrderStats(productOrders) {
   for (const product of productOrders) {
     const productId = product.productId + "";
@@ -55,7 +70,7 @@ export async function updateProductOrderStats(productOrders) {
       );
     } catch (error) {
       console.error(
-        `Erreur lors de la mise à jour des statistiques pour le produit ${productId}:`,
+        `Erreur lors de la mise à jour des stats pour le produit ${productId}:`,
         error
       );
     }
