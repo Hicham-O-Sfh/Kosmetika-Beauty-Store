@@ -4000,7 +4000,7 @@ textarea:-ms-input-placeholder {
 }
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   .single_slider .row {
-    height: 400px;
+    height: 600px;
   }
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -4251,7 +4251,7 @@ textarea:-ms-input-placeholder {
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .home_slider_three .single_slider .row {
-    height: 400px;
+    height: 600px;
   }
 }
 @media only screen and (max-width: 767px) {
@@ -4281,7 +4281,7 @@ textarea:-ms-input-placeholder {
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .slider_black .single_slider .row {
-    height: 400px;
+    height: 600px;
   }
 }
 @media only screen and (max-width: 767px) {
@@ -4998,7 +4998,7 @@ textarea:-ms-input-placeholder {
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .banner_section_five .banner_text {
-    width: 400px;
+    width: 600px;
   }
 }
 @media only screen and (max-width: 767px) {
@@ -12001,4 +12001,25 @@ button[disabled] {
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 9999;
+}
+
+.hero-bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.single_slider {
+  position: relative;
+  color: white;
+  background-color: white;
+}
+
+.slider_content {
+  z-index: 2;
+  position: relative;
 }
