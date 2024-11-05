@@ -1,4 +1,8 @@
 // Firebase Core
+import {
+  initializeAppCheck,
+  ReCaptchaV3Provider,
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app-check.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
 import {
   collection,
@@ -9,11 +13,8 @@ import {
   setDoc,
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
-// App Check avec ReCaptcha v3
-import {
-  initializeAppCheck,
-  ReCaptchaV3Provider,
-} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app-check.js";
+// -todo- App Check avec ReCaptcha v3 : disable in PROD mode
+// self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
 
 // ✅ Configuration Firebase
 const firebaseConfig = {
