@@ -1,20 +1,21 @@
 // Firebase Core
-import {
-  initializeAppCheck,
-  ReCaptchaV3Provider,
-} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app-check.js";
+// -todo- App Check avec ReCaptcha v3 : disable in PROD mode
+self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
 import {
   collection,
   doc,
+  getDoc,
   getDocs,
   getFirestore,
   increment,
   setDoc,
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
-
-// -todo- App Check avec ReCaptcha v3 : disable in PROD mode
-// self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+import {
+  initializeAppCheck,
+  ReCaptchaV3Provider,
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app-check.js";
 
 // ✅ Configuration Firebase
 const firebaseConfig = {
@@ -23,19 +24,25 @@ const firebaseConfig = {
   projectId: "kosmetika-db",
   storageBucket: "kosmetika-db.firebasestorage.app",
   messagingSenderId: "829504996432",
-  appId: "1:829504996432:web:d41522bc3028a1eeeb3d55",
-  measurementId: "G-3PFTL1CG5Y",
+  appId: "1:829504996432:web:9066fc5a2f45b532eb3d55",
+  measurementId: "G-N3HXK87V2S",
 };
 
 // 🔧 Initialisation Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
 // 🔐 Protection App Check (ReCaptcha v3)
 initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider("6LcgRGgrAAAAAPoXgcONsl6UfeLu2GV1W578QqbM"),
+  provider: new ReCaptchaV3Provider("6LfaG2krAAAAAHi1k7LrfTSVPOpu36yoXWyJMQR_"),
   isTokenAutoRefreshEnabled: true,
 });
+const db = getFirestore(app);
+
+// Teste la lecture
+const ref = doc(db, "product_order_counts", "ttDZD01oqZzkBJDnbOBt");
+getDoc(ref)
+  .then((d) => console.log(d.data()))
+  .catch(console.error);
 
 // 📥 Récupérer les commandes depuis Firestore
 export async function getOrdersFromFirestore() {
@@ -58,9 +65,9 @@ export async function updateProductOrderStats(productOrders) {
   for (const product of productOrders) {
     const productId = product.productId + "";
     const quantityOrdered = product.quantity;
-    const productRef = doc(db, "product_order_counts", productId);
 
     try {
+      const productRef = doc(db, "product_order_counts", productId);
       await setDoc(
         productRef,
         {
