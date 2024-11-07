@@ -1,7 +1,4 @@
 // Firebase Core
-// -todo- App Check avec ReCaptcha v3 : disable in PROD mode
-self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
 import {
   collection,
@@ -33,16 +30,10 @@ const app = initializeApp(firebaseConfig);
 
 // 🔐 Protection App Check (ReCaptcha v3)
 initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider("6LfaG2krAAAAAHi1k7LrfTSVPOpu36yoXWyJMQR_"),
+  provider: new ReCaptchaV3Provider("6LcbWmkrAAAAAOjP-7t9vnBRqvaCieACmvgVvMjD"),
   isTokenAutoRefreshEnabled: true,
 });
 const db = getFirestore(app);
-
-// Teste la lecture
-const ref = doc(db, "product_order_counts", "ttDZD01oqZzkBJDnbOBt");
-getDoc(ref)
-  .then((d) => console.log(d.data()))
-  .catch(console.error);
 
 // 📥 Récupérer les commandes depuis Firestore
 export async function getOrdersFromFirestore() {
