@@ -48,129 +48,26 @@ import {
     dots: false,
   });
 
-  /*---product row 2 activation---*/
-  $(".product_row2").slick({
-    centerMode: true,
-    centerPadding: "0",
-    slidesToShow: 4,
-    arrows: true,
-    prevArrow:
-      '<button class="prev_arrow"><i class="fa fa-angle-left"></i></button>',
-    nextArrow:
-      '<button class="next_arrow"><i class="fa fa-angle-right"></i></button>',
-    responsive: [
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 4,
-        },
-      },
-    ],
-  });
-
-  /*---testimonial active activation---*/
-  $(".testimonial_active").owlCarousel({
-    autoplay: true,
-    loop: true,
-    nav: false,
-    autoplay: false,
-    autoplayTimeout: 8000,
-    items: 1,
-    dots: true,
-  });
-
-  /*--- Magnific Popup---*/
-  $(".instagram_pupop").magnificPopup({
-    type: "image",
-    gallery: {
-      enabled: true,
-    },
-  });
-
-  /*--- Magnific Popup Video---*/
-  $(".video_popup").magnificPopup({
-    type: "iframe",
-    removalDelay: 300,
-    mainClass: "mfp-fade",
-  });
-
-  /*--- Magnific Popup Video---*/
-  $(".port_popup").magnificPopup({
-    type: "image",
-    gallery: {
-      enabled: true,
-    },
-  });
-
   /*---  Custom Scroll Up ---*/
   const scrollBtn = document.getElementById("scrollUpBtn");
-  // Show/hide on scroll
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 200) {
-      scrollBtn.style.display = "block";
-      requestAnimationFrame(() => (scrollBtn.style.opacity = "1"));
-    } else {
-      scrollBtn.style.opacity = "0";
-      setTimeout(() => {
-        if (scrollBtn.style.opacity === "0") scrollBtn.style.display = "none";
-      }, 300);
-    }
-  });
-  // Smooth scroll to top
-  scrollBtn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-
-  /*---slider-range here---*/
-  $("#slider-range").slider({
-    range: true,
-    min: 0,
-    max: 500,
-    values: [0, 500],
-    slide: function (event, ui) {
-      $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-    },
-  });
-  $("#amount").val(
-    "$" +
-      $("#slider-range").slider("values", 0) +
-      " - $" +
-      $("#slider-range").slider("values", 1)
-  );
-
-  /*---tooltip---*/
-  $('[data-bs-toggle="tooltip"]').tooltip();
-
-  /*---Tooltip Active---*/
-  $(
-    ".action_links ul li a,.quick_button a,.social_sharing ul li a,.product_d_action a,.priduct_social a"
-  ).tooltip({
-    animated: "fade",
-    placement: "top",
-    container: "body",
-  });
+  if (scrollBtn) {
+    // Show/hide on scroll
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 200) {
+        scrollBtn.style.display = "block";
+        requestAnimationFrame(() => (scrollBtn.style.opacity = "1"));
+      } else {
+        scrollBtn.style.opacity = "0";
+        setTimeout(() => {
+          if (scrollBtn.style.opacity === "0") scrollBtn.style.display = "none";
+        }, 300);
+      }
+    });
+    // Smooth scroll to top
+    scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
 
   /*---categories slideToggle---*/
   $(".categories_title").on("click", function () {
@@ -220,7 +117,7 @@ import {
   $offcanvasNavSubMenu
     .parent()
     .prepend(
-      '<span class="menu-expand"><i class="fa fa-angle-down"></i></span>'
+      '<span class="menu-expand"><i class="fa fa-angle-down"></i></span>',
     );
 
   $offcanvasNavSubMenu.slideUp();
@@ -245,12 +142,12 @@ import {
     if (
       $this.is("a") ||
       $this.is("span") ||
-      $this.attr("clas").match(/\b(menu-expand)\b/)
+      ($this.attr("class") || "").match(/\b(menu-expand)\b/)
     ) {
       $this.parent().toggleClass("menu-open");
     } else if (
       $this.is("li") &&
-      $this.attr("class").match(/\b('menu-item-has-children')\b/)
+      $this.attr("class").match(/\b(menu-item-has-children)\b/)
     ) {
       $this.toggleClass("menu-open");
     }
