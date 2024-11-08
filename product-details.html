@@ -1,465 +1,422 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-  <!-- page head #generic -->
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>✨ Kosmetika © ✨</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Favicon -->
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="assets/img/logo/logo-Kosmetika.png"
-    />
+<!-- page head #generic -->
 
-    <!-- CSS 
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>✨ Kosmetika © ✨</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/logo-Kosmetika.png" />
+
+  <!-- CSS 
     ========================= -->
 
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Plugins CSS -->
-    <link rel="stylesheet" href="assets/css/plugins.css" />
+  <!-- Plugins CSS -->
+  <link rel="stylesheet" href="assets/css/plugins.css" />
 
-    <!-- Main Style CSS -->
-    <link rel="stylesheet" href="assets/css/style.css" />
+  <!-- Main Style CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
 
-    <!--modernizr min js here-->
-    <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
-  </head>
+  <!--modernizr min js here-->
+  <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
+</head>
 
-  <body>
-    <!-- Main Wrapper Start -->
-    <!--Offcanvas menu area start #generic-->
-    <div class="off_canvars_overlay"></div>
-    <div class="Offcanvas_menu">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="canvas_open">
+<body>
+  <!-- Main Wrapper Start -->
+  <!--Offcanvas menu area start #generic-->
+  <div class="off_canvars_overlay"></div>
+  <div class="Offcanvas_menu">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="canvas_open">
+            <a href="javascript:void(0)">
+              <i class="fa-solid fa-bars fa-beat-fade"></i>
+            </a>
+          </div>
+          <div class="Offcanvas_menu_wrapper">
+            <div class="canvas_close">
               <a href="javascript:void(0)">
-                <i class="fa-solid fa-bars fa-beat-fade"></i>
+                <i class="ion-android-close"></i>
               </a>
             </div>
-            <div class="Offcanvas_menu_wrapper">
-              <div class="canvas_close">
-                <a href="javascript:void(0)">
-                  <i class="ion-android-close"></i>
+            <div id="menu" class="text-left">
+              <ul class="offcanvas_main_menu">
+                <li>
+                  <a href="index.html">Accueil</a>
+                </li>
+                <li>
+                  <a href="shop.html">Catalogue</a>
+                </li>
+                <li>
+                  <a href="services.html">Services</a>
+                </li>
+                <li>
+                  <a href="faq.html">FAQ</a>
+                </li>
+                <li>
+                  <a href="contact-us.html">Contactez-nous</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Offcanvas menu area end-->
+
+  <!--header area start #generic-->
+  <header class="header_area">
+    <!--header middel start-->
+    <div class="header_middel">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-5"></div>
+          <div class="col-lg-2 col-md-3 col-4">
+            <div class="logo">
+              <a href="index.html">
+                <img src="assets/img/logo/logo-Kosmetika.png" alt="" />
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-5 col-md-7 col-6">
+            <div class="justify-content-end middel_right">
+              <div class="cart_link">
+                <a href="#">
+                  <i class="ion-android-cart"></i>
                 </a>
-              </div>
-              <div id="menu" class="text-left">
-                <ul class="offcanvas_main_menu">
-                  <li>
-                    <a href="index.html">Accueil</a>
-                  </li>
-                  <li>
-                    <a href="shop.html">Catalogue</a>
-                  </li>
-                  <li>
-                    <a href="services.html">Services</a>
-                  </li>
-                  <li>
-                    <a href="faq.html">FAQ</a>
-                  </li>
-                  <li>
-                    <a href="contact-us.html">Contactez-nous</a>
-                  </li>
-                </ul>
+                <span class="cart_quantity" id="cart-quantity">0</span>
+                <!--mini cart-->
+                <div class="mini_cart">
+                  <div class="cart_close">
+                    <div class="cart_text">
+                      <h3>Mon panier</h3>
+                    </div>
+                    <div class="mini_cart_close">
+                      <a href="javascript:void(0)">
+                        <i class="ion-android-close"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div id="cart-items"></div>
+                  <div class="cart_total">
+                    <span>💸Total:</span>
+                    <u>
+                      <span id="subtotal">0 Dhs</span>
+                    </u>
+                  </div>
+                  <div class="mini_cart_footer">
+                    <div class="cart_button checkout">
+                      <a href="#" id="whatsapp-button">
+                        <img height="40" width="40" src="assets/img/logo/WhatsAppLogoWhite.svg" alt="WhatsApp" />
+                        <span>Valider la commande !</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <!--mini cart end-->
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!--Offcanvas menu area end-->
+    <!--header middel end-->
 
-    <!--header area start #generic-->
-    <header class="header_area">
-      <!--header middel start-->
-      <div class="header_middel">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-lg-5"></div>
-            <div class="col-lg-2 col-md-3 col-4">
-              <div class="logo">
+    <!--header bottom satrt-->
+    <div class="sticky-header">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-12">
+            <div class="main_menu_inner">
+              <div class="logo_sticky">
                 <a href="index.html">
                   <img src="assets/img/logo/logo-Kosmetika.png" alt="" />
                 </a>
               </div>
-            </div>
-            <div class="col-lg-5 col-md-7 col-6">
-              <div class="justify-content-end middel_right">
-                <div class="cart_link">
-                  <a href="#">
-                    <i class="ion-android-cart"></i>
-                  </a>
-                  <span class="cart_quantity" id="cart-quantity">0</span>
-                  <!--mini cart-->
-                  <div class="mini_cart">
-                    <div class="cart_close">
-                      <div class="cart_text">
-                        <h3>Mon panier</h3>
-                      </div>
-                      <div class="mini_cart_close">
-                        <a href="javascript:void(0)">
-                          <i class="ion-android-close"></i>
-                        </a>
-                      </div>
-                    </div>
-                    <div id="cart-items"></div>
-                    <div class="cart_total">
-                      <span>💸Total:</span>
-                      <u>
-                        <span id="subtotal">0 Dhs</span>
-                      </u>
-                    </div>
-                    <div class="mini_cart_footer">
-                      <div class="cart_button checkout">
-                        <a href="#" id="whatsapp-button">
-                          <img
-                            height="40"
-                            width="40"
-                            src="assets/img/logo/WhatsAppLogoWhite.svg"
-                            alt="WhatsApp"
-                          />
-                          <span>Valider la commande !</span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <!--mini cart end-->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--header middel end-->
-
-      <!--header bottom satrt-->
-      <div class="sticky-header">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-12">
-              <div class="main_menu_inner">
-                <div class="logo_sticky">
-                  <a href="index.html">
-                    <img src="assets/img/logo/logo-Kosmetika.png" alt="" />
-                  </a>
-                </div>
-                <div class="main_menu">
-                  <nav>
-                    <ul>
-                      <li>
-                        <a href="index.html">Accueil</a>
-                      </li>
-                      <li>
-                        <a href="shop.html">Catalogue</a>
-                      </li>
-                      <li>
-                        <a href="services.html">Services</a>
-                      </li>
-                      <li>
-                        <a href="faq.html">FAQ</a>
-                      </li>
-                      <li>
-                        <a href="contact-us.html">Contactez-nous</a>
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--header bottom end-->
-    </header>
-    <!--header area end-->
-
-    <!--product details start-->
-    <div class="product_details">
-      <div class="container">
-        <div class="row mt-3">
-          <div class="col-lg-4 col-md-4">
-            <div class="product-details-tab">
-              <div
-                id="img-1"
-                class="zoomWrapper single-zoom big-image-skeleton"
-              >
-                <a href="#">
-                  <img id="zoom1" src="" data-zoom-image="" alt="" />
-                </a>
-              </div>
-
-              <div class="single-zoom-thumb">
-                <ul
-                  class="s-tab-zoom owl-carousel single-product-active"
-                  id="gallery_01"
-                ></ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-8 col-md-8">
-            <div class="product_d_right">
-              <h1 id="product-name" class="text-skeleton"></h1>
-              <div class="product_price">
-                <span class="current_price text-skeleton" id="product-price">
-                </span>
-              </div>
-              <div class="product_desc">
-                <p id="product-description" class="text-skeleton"></p>
-                <p id="second-product-description" class="text-skeleton"></p>
-              </div>
-
-              <div class="product_variant quantity">
-                <label>Quantité</label>
-                <input
-                  id="product-quantity"
-                  min="1"
-                  step="1"
-                  max="50"
-                  value="1"
-                  type="number"
-                />
-                <button class="button text-skeleton" id="button-add-to-cart">
-                  <i class="fa-solid fa-cart-plus"></i>
-                  &nbsp; Ajouter au panier !
-                </button>
+              <div class="main_menu">
+                <nav>
+                  <ul>
+                    <li>
+                      <a href="index.html">Accueil</a>
+                    </li>
+                    <li>
+                      <a href="shop.html">Catalogue</a>
+                    </li>
+                    <li>
+                      <a href="services.html">Services</a>
+                    </li>
+                    <li>
+                      <a href="faq.html">FAQ</a>
+                    </li>
+                    <li>
+                      <a href="contact-us.html">Contactez-nous</a>
+                    </li>
+                  </ul>
+                </nav>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!--product details end-->
+    <!--header bottom end-->
+  </header>
+  <!--header area end-->
 
-    <!--product info start-->
-    <div class="product_d_info">
-      <div class="container">
+  <!--product details start-->
+  <div class="product_details">
+    <div class="container">
+      <div class="row mt-3">
+        <div class="col-lg-4 col-md-4">
+          <div class="product-details-tab">
+            <div id="img-1" class="zoomWrapper single-zoom big-image-skeleton">
+              <a href="#">
+                <img id="zoom1" src="" data-zoom-image="" alt="" />
+              </a>
+            </div>
+
+            <div class="single-zoom-thumb">
+              <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01"></ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-8">
+          <div class="product_d_right">
+            <h1 id="product-name" class="text-skeleton"></h1>
+            <div class="product_price">
+              <span class="current_price text-skeleton" id="product-price">
+              </span>
+            </div>
+            <div class="product_desc">
+              <p id="product-description" class="text-skeleton"></p>
+              <p id="second-product-description" class="text-skeleton"></p>
+            </div>
+
+            <div class="product_variant quantity">
+              <label>Quantité</label>
+              <input id="product-quantity" min="1" step="1" max="50" value="1" type="number" />
+              <button class="button text-skeleton" id="button-add-to-cart">
+                <i class="fa-solid fa-cart-plus"></i>
+                &nbsp; Ajouter au panier !
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--product details end-->
+
+  <!--product info start-->
+  <div class="product_d_info">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="product_d_inner">
+            <div class="product_info_button">
+              <ul class="nav" role="tablist">
+                <li>
+                  <a class="active" data-bs-toggle="tab" role="tab" aria-controls="info" style="cursor: auto"
+                    aria-selected="false">
+                    Plus d'info !
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="info" role="tabpanel">
+                <div class="product_info_content text-center">
+                  <p>
+                    Faites votre choix parmi nos meilleures créations et
+                    tentez d'obtenir un cadeau 🎁🎁 ! Chaque fragrance de
+                    notre collection incarne l'excellence, mêlant des
+                    ingrédients de première qualité pour des senteurs durables
+                    et envoûtantes. Chaque parfum est soigneusement élaboré
+                    pour offrir une expérience olfactive unique qui vous
+                    accompagnera tout au long de la journée 🌸.
+                  </p>
+                  <br />
+                  <p>
+                    Nous nous engageons à vous offrir une satisfaction totale
+                    à chaque achat, car votre bien-être et votre confiance
+                    sont nos priorités absolues. En signe de reconnaissance,
+                    nous glissons souvent des surprises spéciales dans vos
+                    commandes 😉, témoignant de notre gratitude pour votre
+                    fidélité 💝. Découvrez dès maintenant nos collections et
+                    laissez-vous séduire par l'élégance et l'attention aux
+                    détails qui font de chaque parfum une véritable œuvre
+                    d'art olfactive.
+                  </p>
+                  <br />
+                  <p>
+                    Plongez dans le monde fascinant des senteurs avec
+                    <span class="brand-kosmetika-title" style="font-weight: 600">
+                      ✨Kosmetika-Beauty-Store
+                      <i class="kosmetika-copyright-logo">©</i> ✨
+                    </span>
+                    ! Nous vous proposons une sélection de parfums d'une
+                    qualité exceptionnelle 🌿, alliant durabilité et élégance
+                    incomparable. Chaque fragrance est soigneusement conçue et
+                    sélectionnée pour offrir le meilleur rapport qualité/prix
+                    à nos clients les plus exigeants 💖. Faites plaisir à vos
+                    proches 🫂 avec des parfums 🎁 qui laissent une empreinte
+                    mémorable. Nos fragrances sont modernes, élégantes, et
+                    fabriquées avec des ingrédients de haute qualité
+                    (découvrez les détails sur chaque page produit),
+                    garantissant une tenue impeccable. Profitez d'une
+                    communication transparente 💬 lors de votre commande et
+                    personnalisez votre emballage pour une touche unique ✨
+                    comme vous le souhaitez.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--product info end-->
+
+  <!--product section area start-->
+  <section class="product_section p_section1">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="section_title">
+            <h2>Produits similaires</h2>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="product_area">
+            <div class="product_container bottom">
+              <div class="custom-row product_row1" id="related-products-section"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--product section area end-->
+
+  <!--footer area start #generic -->
+  <footer class="footer_widgets border-top pt-5">
+    <div class="container">
+      <div class="footer_top">
         <div class="row">
-          <div class="col-12">
-            <div class="product_d_inner">
-              <div class="product_info_button">
-                <ul class="nav" role="tablist">
+          <div class="col-lg-4 col-md-6 col-sm-8">
+            <div class="widgets_container contact_us">
+              <h3>
+                <span class="brand-kosmetika-title">
+                  ✨ Kosmetika Beauty Store
+                  <i class="kosmetika-copyright-logo">©</i>
+                </span>
+              </h3>
+              <div class="footer_contact">
+                <p>Nous livrons dans tout le Maroc 💖</p>
+                <p>
+                  <i class="fa-brands fa-whatsapp"></i>
+                  <a href="" id="whatsapp-footer" class="link-to-social"></a>
+                </p>
+                <p>
+                  <i class="fa-brands fa-instagram"></i>
+                  <a href="" id="instagram-footer" class="link-to-social"></a>
+                </p>
+                <p>
+                  <i class="fa-brands fa-facebook"></i>
+                  <a href="" id="facebook-footer" class="link-to-social"></a>
+                </p>
+                <p>
+                  <i class="fa-brands fa-tiktok"></i>
+                  <a href="" id="tikTok-footer" class="link-to-social"></a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-sm-7">
+            <div class="widgets_container product_widget" id="footer-best-selling-products"></div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+            <div class="widgets_container widget_menu">
+              <h3>
+                <i class="fa fa-link" aria-hidden="true"></i>
+                Liens utiles
+              </h3>
+              <div class="footer_menu">
+                <ul>
                   <li>
-                    <a
-                      class="active"
-                      data-bs-toggle="tab"
-                      role="tab"
-                      aria-controls="info"
-                      style="cursor: auto"
-                      aria-selected="false"
-                    >
-                      Plus d'info !
+                    <a href="faq.html">
+                      Questions/Réponses
+                      <i class="fa fa-external-link" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="services.html">
+                      Nos autres services
+                      <i class="fa fa-external-link" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="contact-us.html">
+                      Contactez-nous !
+                      <i class="fa fa-external-link" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="shop.html">
+                      Notre Catalogue
+                      <i class="fa fa-external-link" aria-hidden="true"></i>
                     </a>
                   </li>
                 </ul>
               </div>
-              <div class="tab-content">
-                <div
-                  class="tab-pane fade show active"
-                  id="info"
-                  role="tabpanel"
-                >
-                  <div class="product_info_content text-center">
-                    <p>
-                      Faites votre choix parmi nos meilleures créations et
-                      tentez d'obtenir un cadeau 🎁🎁 ! Chaque fragrance de
-                      notre collection incarne l'excellence, mêlant des
-                      ingrédients de première qualité pour des senteurs durables
-                      et envoûtantes. Chaque parfum est soigneusement élaboré
-                      pour offrir une expérience olfactive unique qui vous
-                      accompagnera tout au long de la journée 🌸.
-                    </p>
-                    <br />
-                    <p>
-                      Nous nous engageons à vous offrir une satisfaction totale
-                      à chaque achat, car votre bien-être et votre confiance
-                      sont nos priorités absolues. En signe de reconnaissance,
-                      nous glissons souvent des surprises spéciales dans vos
-                      commandes 😉, témoignant de notre gratitude pour votre
-                      fidélité 💝. Découvrez dès maintenant nos collections et
-                      laissez-vous séduire par l'élégance et l'attention aux
-                      détails qui font de chaque parfum une véritable œuvre
-                      d'art olfactive.
-                    </p>
-                    <br />
-                    <p>
-                      Plongez dans le monde fascinant des senteurs avec
-                      <span
-                        class="brand-kosmetika-title"
-                        style="font-weight: 600"
-                      >
-                        ✨Kosmetika-Beauty-Store
-                        <i class="kosmetika-copyright-logo">©</i> ✨
-                      </span>
-                      ! Nous vous proposons une sélection de parfums d'une
-                      qualité exceptionnelle 🌿, alliant durabilité et élégance
-                      incomparable. Chaque fragrance est soigneusement conçue et
-                      sélectionnée pour offrir le meilleur rapport qualité/prix
-                      à nos clients les plus exigeants 💖. Faites plaisir à vos
-                      proches 🫂 avec des parfums 🎁 qui laissent une empreinte
-                      mémorable. Nos fragrances sont modernes, élégantes, et
-                      fabriquées avec des ingrédients de haute qualité
-                      (découvrez les détails sur chaque page produit),
-                      garantissant une tenue impeccable. Profitez d'une
-                      communication transparente 💬 lors de votre commande et
-                      personnalisez votre emballage pour une touche unique ✨
-                      comme vous le souhaitez.
-                    </p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!--product info end-->
+  </footer>
+  <!--footer area end-->
 
-    <!--product section area start-->
-    <section class="product_section p_section1">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="section_title">
-              <h2>Produits similaires</h2>
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="product_area">
-              <div class="product_container bottom">
-                <div
-                  class="custom-row product_row1"
-                  id="related-products-section"
-                ></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--product section area end-->
+  <!-- Smooth scroll up Btn -->
+  <button id="scrollUpBtn">
+    <i class="fa fa-angle-double-up fa-bounce"></i>
+  </button>
 
-    <!--footer area start #generic -->
-    <footer class="footer_widgets border-top pt-5">
-      <div class="container">
-        <div class="footer_top">
-          <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-8">
-              <div class="widgets_container contact_us">
-                <h3>
-                  <span class="brand-kosmetika-title">
-                    ✨ Kosmetika Beauty Store
-                    <i class="kosmetika-copyright-logo">©</i>
-                  </span>
-                </h3>
-                <div class="footer_contact">
-                  <p>Nous livrons dans tout le Maroc 💖</p>
-                  <p>
-                    <i class="fa-brands fa-whatsapp"></i>
-                    <a href="" id="whatsapp-footer" class="link-to-social"></a>
-                  </p>
-                  <p>
-                    <i class="fa-brands fa-instagram"></i>
-                    <a href="" id="instagram-footer" class="link-to-social"></a>
-                  </p>
-                  <p>
-                    <i class="fa-brands fa-facebook"></i>
-                    <a href="" id="facebook-footer" class="link-to-social"></a>
-                  </p>
-                  <p>
-                    <i class="fa-brands fa-tiktok"></i>
-                    <a href="" id="tikTok-footer" class="link-to-social"></a>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-7">
-              <div
-                class="widgets_container product_widget"
-                id="footer-best-selling-products"
-              ></div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
-              <div class="widgets_container widget_menu">
-                <h3>
-                  <i class="fa fa-link" aria-hidden="true"></i>
-                  Liens utiles
-                </h3>
-                <div class="footer_menu">
-                  <ul>
-                    <li>
-                      <a href="faq.html">
-                        Questions/Réponses
-                        <i class="fa fa-external-link" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="services.html">
-                        Nos autres services
-                        <i class="fa fa-external-link" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="contact-us.html">
-                        Contactez-nous !
-                        <i class="fa fa-external-link" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="shop.html">
-                        Notre Catalogue
-                        <i class="fa fa-external-link" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!--footer area end-->
-
-    <!-- Smooth scroll up Btn -->
-    <button id="scrollUpBtn">
-      <i class="fa fa-angle-double-up fa-bounce"></i>
-    </button>
-
-    <!-- JS
+  <!-- JS
   ============================================ -->
 
-    <!-- Plugins JS -->
-    <script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
-    <script src="assets/js/popper.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/owl.carousel.main.js"></script>
-    <script src="assets/js/jquery.elevatezoom.js"></script>
-    <script src="assets/js/imagesloaded.js"></script>
-    <script src="assets/js/jquery.cookie.js"></script>
-    <script src="assets/js/bpopup.js"></script>
-    <script src="assets/js/fontawesome.min.js"></script>
-    <script src="assets/js/notyf.min.js"></script>
+  <!-- Plugins JS -->
+  <script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
+  <script src="assets/js/popper.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/plugins.js"></script>
+  <script src="assets/js/owl.carousel.main.js"></script>
+  <script src="assets/js/jquery.elevatezoom.js"></script>
+  <script src="assets/js/imagesloaded.js"></script>
+  <script src="assets/js/jquery.cookie.js"></script>
+  <script src="assets/js/bpopup.js"></script>
+  <script src="assets/js/fontawesome.min.js"></script>
+  <script src="assets/js/notyf.min.js"></script>
 
-    <!-- Translator -->
-    <div class="gtranslate_wrapper"></div>
-    <script src="assets/js/gTranslate-flags.js" defer></script>
+  <!-- Translator -->
+  <div class="gtranslate_wrapper"></div>
+  <script src="assets/js/gTranslate-flags.js" defer></script>
 
-    <!-- Main JS -->
-    <script type="module" src="assets/js/main.js"></script>
-  </body>
+  <!-- Main JS -->
+  <script type="module" src="assets/js/main.js"></script>
+</body>
+
 </html>
