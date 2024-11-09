@@ -43,7 +43,7 @@ import {
     autoplay: true,
     loop: true,
     nav: false,
-    autoplayTimeout: 6000,
+    autoplayTimeout: 9000,
     items: 1,
     dots: false,
   });
