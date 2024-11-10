@@ -257,40 +257,38 @@ import {
   });
 
   $(document).ready(function () {
-    const currentPage = new URL(window.location.href);
+    const url = new URL(window.location.href);
+    const raw = url.pathname.split("/").pop(); // ex: "index.html", "contact-us.html", ""
+    const page = (raw || "index").replace(/\.html?$/i, ""); // => "index", "product-details", "shop", "contact-us"
 
     /* all pages */
     buildVisualCart();
     bindCartEvent();
     projectDataInFooter();
 
-    /* Product-details */
-    if (currentPage.pathname.includes("product-details.html")) {
-      bindProductDetailsPageEvents();
-      projectProductInPage();
-    }
+    switch (page) {
+      case "product-details": {
+        bindProductDetailsPageEvents();
+        projectProductInPage();
+        projectRelatedProductsInPage();
+        break;
+      }
 
-    /* Home and Product-details */
-    if (
-      currentPage.pathname.includes("product-details.html") ||
-      currentPage.pathname.includes("index.html")
-    ) {
-      projectRelatedProductsInPage();
-    }
+      case "index": {
+        projectRelatedProductsInPage();
+        projectProductsInHomeTabs();
+        break;
+      }
 
-    /* Home */
-    if (currentPage.pathname.includes("index.html")) {
-      projectProductsInHomeTabs();
-    }
+      case "shop": {
+        projectAllProductsInShopPage();
+        break;
+      }
 
-    /* Shop */
-    if (currentPage.pathname.includes("shop.html")) {
-      projectAllProductsInShopPage();
-    }
-
-    /* Contact-us */
-    if (currentPage.pathname.includes("contact-us")) {
-      bindContactPageEvents();
+      case "contact-us": {
+        bindContactPageEvents();
+        break;
+      }
     }
   });
 })(jQuery);
