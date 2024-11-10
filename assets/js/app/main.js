@@ -8,7 +8,7 @@ import {
   projectProductInPage,
   projectProductsInHomeTabs,
   projectRelatedProductsInPage,
-} from "../js/utils.js";
+} from "./utils.js";
 
 (function ($) {
   "use strict";
