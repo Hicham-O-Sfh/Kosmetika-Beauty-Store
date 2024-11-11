@@ -3,8 +3,6 @@
 import {
   FACEBOOK,
   FACEBOOK_LINK,
-  getAllProductsFromDatabase,
-  getProductFromDatabase,
   INSTAGRAM,
   INSTAGRAM_LINK,
   TEL_NUMBER_LINK,
@@ -12,7 +10,14 @@ import {
   TIKTOK_LINK,
   WHATSAPP_NUMBER,
   WHATSAPP_NUMBER_LINK,
-} from "../js/database.management.js";
+} from "./config/site.config.js";
+import {
+  getAllProducts,
+  getMainPicUrl,
+  getProduct,
+  getProductTitle,
+  getSecondaryPicUrl,
+} from "./data/products.repository.js";
 import { updateProductOrderStats } from "./firebase-management.js";
 
 /*---pluggin dynamic usage---*/
@@ -194,6 +199,16 @@ export function getCurrentDisplayedProductId() {
 }
 
 /**
+ * Build the "Marque / Qualité / Catégorie" info block shown on the product page.
+ * UI text stays in French, the underlying data stays structured.
+ */
+function getSecondaryInfoHtml(product) {
+  const category =
+    product.category.charAt(0).toUpperCase() + product.category.slice(1);
+  return `<b>Marque:</b> ${product.brand}. <br> <b>Qualité:</b> ${product.quality}. <br> <b>Catégorie:</b> ${category}.`;
+}
+
+/**
  * Build visual cart display on page init
  */
 export function buildVisualCart() {
@@ -213,11 +228,9 @@ export function buildVisualCart() {
 
   // loop over all added orders in cart, and display each one correctly
   Array.from(userCart).forEach((order) => {
-    getProductFromDatabase(order.productId)
+    getProduct(order.productId)
       .then((mappedProductFromDb) => {
-        const productMainPic = mappedProductFromDb.pics.find(
-          (pic) => pic.isMain === true
-        ).bigPicUrl;
+        const productMainPic = getMainPicUrl(mappedProductFromDb);
         subTotal += order.quantity * mappedProductFromDb.price;
         $("#cart-items").append(
           `
@@ -228,7 +241,7 @@ export function buildVisualCart() {
               </a>
             </div>
             <div class="cart_info">
-              <a href="product-details.html?productId=${mappedProductFromDb.id}">${mappedProductFromDb.ref}</a>
+              <a href="product-details.html?productId=${mappedProductFromDb.id}">${getProductTitle(mappedProductFromDb)}</a>
               <span class="quantity">quantité: ${order.quantity}</span>
               <span class="price_cart">${mappedProductFromDb.price} Dhs</span>
             </div>
@@ -256,17 +269,15 @@ export function projectProductInPage() {
   // get productId from query string
   const productId = getCurrentDisplayedProductId();
 
-  getProductFromDatabase(productId)
+  getProduct(productId)
     .then((product) => {
-      $("#product-name").html(product.ref);
+      $("#product-name").html(getProductTitle(product));
       $("#product-price").html(`${product.price} Dhs`);
-      $("#product-description").html(product.description);
-      $("#second-product-description").html(product.secondDescription);
+      $("#product-description").html(product.descriptionHtml);
+      $("#second-product-description").html(getSecondaryInfoHtml(product));
 
       // product's pictures & zoom management
-      const productMainPic = product.pics.find(
-        (pic) => pic.isMain === true
-      ).bigPicUrl;
+      const productMainPic = getMainPicUrl(product);
       product.pics.forEach((pic) => {
         $("#gallery_01").append(
           `
@@ -275,10 +286,10 @@ export function projectProductInPage() {
             href="#"
             class="elevatezoom-gallery active"
             data-update=""
-            data-image="${pic.bigPicUrl}"
-            data-zoom-image="${pic.bigPicUrl}">
+            data-image="${pic.url}"
+            data-zoom-image="${pic.url}">
             <img
-              src="${pic.bigPicUrl}"
+              src="${pic.url}"
               alt=""/>
           </a>
         </li>
@@ -301,7 +312,7 @@ export function projectProductInPage() {
 }
 
 export function projectRelatedProductsInPage() {
-  getAllProductsFromDatabase(6)
+  getAllProducts(6)
     .then((products) => {
       $("#related-products-section").empty();
       products.forEach((prod) => {
@@ -310,19 +321,17 @@ export function projectRelatedProductsInPage() {
           <div class="custom-col-5">
             <div class="single_product">
               <div class="product_thumb">
-                <a 
-                  class="primary_img" 
+                <a
+                  class="primary_img"
                   href="product-details.html?productId=${prod.id}">
-                  <img 
-                    src="${
-                      prod.pics.find((pic) => pic.isMain === true).bigPicUrl
-                    }" alt="" />
+                  <img
+                    src="${getMainPicUrl(prod)}" alt="" />
                 </a>
               </div>
               <div class="product_content">
                 <h3>
                   <a href="product-details.html?productId=${prod.id}">
-                    ${prod.ref}
+                    ${getProductTitle(prod)}
                   </a>
                 </h3>
                 <div class="price_box">
@@ -383,17 +392,15 @@ export function projectBestSellingProductsInFooter() {
   `);
   const bestSellingProductsIds = [1, 16];
   bestSellingProductsIds.forEach((productId) => {
-    getProductFromDatabase(productId)
+    getProduct(productId)
       .then((product) => {
         $("#footer-best-selling-products").append(
           `
           <div class="simple_product_items">
             <div class="simple_product_thumb">
               <a href="product-details.html?productId=${product.id}">
-                <img 
-                src="${
-                  product.pics.find((pic) => pic.isMain === true).bigPicUrl
-                }" 
+                <img
+                src="${getMainPicUrl(product)}"
                 alt=""/>
               </a>
             </div>
@@ -401,7 +408,7 @@ export function projectBestSellingProductsInFooter() {
               <div class="product_name">
                 <h3>
                   <a href="product-details.html?productId=${product.id}">
-                    ${product.ref}
+                    ${getProductTitle(product)}
                   </a>
                 </h3>
               </div>
@@ -421,7 +428,7 @@ export function projectBestSellingProductsInFooter() {
 
 export function projectProductsInHomeTabs() {
   // fill featured products tab
-  getAllProductsFromDatabase(12)
+  getAllProducts(12)
     .then((products) => {
       const $featuredProductsTab = $("#featured-products-tab");
       $featuredProductsTab.empty();
@@ -431,19 +438,17 @@ export function projectProductsInHomeTabs() {
           <div class="custom-col-5">
             <div class="single_product">
               <div class="product_thumb">
-                <a 
-                  class="primary_img" 
+                <a
+                  class="primary_img"
                   href="product-details.html?productId=${prod.id}">
-                  <img 
-                    src="${
-                      prod.pics.find((pic) => pic.isMain === true).bigPicUrl
-                    }" alt="" />
+                  <img
+                    src="${getMainPicUrl(prod)}" alt="" />
                 </a>
               </div>
               <div class="product_content">
                 <h3>
                   <a href="product-details.html?productId=${prod.id}">
-                    ${prod.ref}
+                    ${getProductTitle(prod)}
                   </a>
                 </h3>
                 <span class="current_price">${prod.price} Dhs</span>
@@ -458,7 +463,7 @@ export function projectProductsInHomeTabs() {
     .catch((error) => console.log(error));
 
   // fill arrivals products tab
-  getAllProductsFromDatabase(12)
+  getAllProducts(12)
     .then((products) => {
       const $arrivalsProductsTab = $("#arrivals-products-tab");
       $arrivalsProductsTab.empty();
@@ -472,15 +477,13 @@ export function projectProductsInHomeTabs() {
                   class="primary_img"
                   href="product-details.html?productId=${prod.id}">
                   <img
-                    src="${
-                      prod.pics.find((pic) => pic.isMain === true).bigPicUrl
-                    }" alt="" />
+                    src="${getMainPicUrl(prod)}" alt="" />
                 </a>
               </div>
               <div class="product_content">
                 <h3>
                   <a href="product-details.html?productId=${prod.id}">
-                    ${prod.ref}
+                    ${getProductTitle(prod)}
                   </a>
                 </h3>
                 <span class="current_price">${prod.price} Dhs</span>
@@ -495,7 +498,7 @@ export function projectProductsInHomeTabs() {
     .catch((error) => console.log(error));
 
   // fill onsale products tab
-  getAllProductsFromDatabase(12)
+  getAllProducts(12)
     .then((products) => {
       const $onsaleProductsTab = $("#onsale-products-tab");
       $onsaleProductsTab.empty();
@@ -509,15 +512,13 @@ export function projectProductsInHomeTabs() {
                   class="primary_img"
                   href="product-details.html?productId=${prod.id}">
                   <img
-                    src="${
-                      prod.pics.find((pic) => pic.isMain === true).bigPicUrl
-                    }" alt="" />
+                    src="${getMainPicUrl(prod)}" alt="" />
                 </a>
               </div>
               <div class="product_content">
                 <h3>
                   <a href="product-details.html?productId=${prod.id}">
-                    ${prod.ref}
+                    ${getProductTitle(prod)}
                   </a>
                 </h3>
                 <span class="current_price">${prod.price} Dhs</span>
@@ -533,34 +534,32 @@ export function projectProductsInHomeTabs() {
 }
 
 export function projectAllProductsInShopPage() {
-  getAllProductsFromDatabase()
+  getAllProducts()
     .then((products) => {
       $("#shop-products-container").empty();
 
       Array.from(products).forEach((prod) => {
-        const productMainPic = prod.pics.find(
-          (pic) => pic.isMain === true
-        ).bigPicUrl;
+        const productMainPic = getMainPicUrl(prod);
         $("#shop-products-container").append(
           `
           <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="single_product">
               <div class="product_thumb">
-                <a 
-                  class="primary_img" 
+                <a
+                  class="primary_img"
                   href="product-details.html?productId=${prod.id}">
                   <img src="${productMainPic}" alt="" />
                 </a>
                 <a
                   class="secondary_img"
                   href="product-details.html?productId=${prod.id}">
-                  <img src="${prod.pics[1].bigPicUrl}" alt="" />
+                  <img src="${getSecondaryPicUrl(prod)}" alt="" />
                 </a>
               </div>
               <div class="product_content">
                 <h3>
                   <a href="product-details.html?productId=${prod.id}">
-                    ${prod.ref}
+                    ${getProductTitle(prod)}
                   </a>
                 </h3>
                 <div class="price_box">
@@ -572,7 +571,7 @@ export function projectAllProductsInShopPage() {
                   </div>
                   <div class="product_desc">
                     <p>
-                      ${prod.description.slice(0, 150)}...
+                      ${prod.descriptionHtml.slice(0, 150)}...
                     </p>
                   </div>
                 </div>
@@ -627,13 +626,11 @@ export function bindCartEvent() {
     let total = 0;
 
     const promises = cartItems.map(async (cartItem) => {
-      return getProductFromDatabase(cartItem.productId).then(
-        (productFromDb) => {
-          const productRef = productFromDb.ref.split("\n")[0];
-          total += +cartItem.quantity * +productFromDb.price;
-          whatsappMessageRecipe += `- (${productRef}) x ${cartItem.quantity} = (${productFromDb.price} Dhs) x ${cartItem.quantity}\n`;
-        }
-      );
+      return getProduct(cartItem.productId).then((productFromDb) => {
+        const productRef = getProductTitle(productFromDb);
+        total += +cartItem.quantity * +productFromDb.price;
+        whatsappMessageRecipe += `- (${productRef}) x ${cartItem.quantity} = (${productFromDb.price} Dhs) x ${cartItem.quantity}\n`;
+      });
     });
 
     Promise.all(promises).then(() => {
