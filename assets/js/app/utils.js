@@ -20,193 +20,32 @@ import {
   PRODUCT_STATUS,
 } from "./data/products.repository.js";
 import { updateProductOrderStats } from "./firebase-management.js";
-
-/*---pluggin dynamic usage---*/
-// Slick
-export function applySlickForSectionRelatedProducts() {
-  $(".product_row1").slick({
-    centerMode: true,
-    centerPadding: "0",
-    slidesToShow: 5,
-    arrows: true,
-    prevArrow:
-      '<button class="prev_arrow"><i class="fa fa-angle-left"></i></button>',
-    nextArrow:
-      '<button class="next_arrow"><i class="fa fa-angle-right"></i></button>',
-    responsive: [
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-        },
-      },
-    ],
-  });
-}
-
-export function applySlickForSectionHomeTabs(homeProductsTab) {
-  $(homeProductsTab).slick({
-    centerMode: true,
-    centerPadding: "0",
-    slidesToShow: 5,
-    arrows: true,
-    rows: 2,
-    prevArrow:
-      '<button class="prev_arrow"><i class="fa fa-angle-left"></i></button>',
-    nextArrow:
-      '<button class="next_arrow"><i class="fa fa-angle-right"></i></button>',
-    responsive: [
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-        },
-      },
-    ],
-  });
-}
-
-// OwlCarousel
-export function applyOwlCarousel() {
-  $(".single-product-active").owlCarousel({
-    autoplay: true,
-    autoplayTimeout: 3000,
-    autoplayHoverPause: true,
-    loop: true,
-    nav: true,
-    items: 3,
-    margin: 10,
-    dots: false,
-    navText: [
-      '<i class="fa fa-angle-left"></i>',
-      '<i class="fa fa-angle-right"></i>',
-    ],
-    responsiveClass: true,
-    responsive: {
-      0: {
-        items: 1,
-      },
-      320: {
-        items: 2,
-      },
-      992: {
-        items: 3,
-      },
-      1200: {
-        items: 3,
-      },
-    },
-  });
-}
-
-// ElevateZoom
-export function applyElevateZoom() {
-  $("#zoom1").elevateZoom({
-    gallery: "gallery_01",
-    responsive: true,
-    cursor: "crosshair",
-    zoomType: "inner",
-  });
-  setTimeout(function () {
-    $(".zoomWindow").css("border-radius", "20px");
-  }, 100);
-}
-
-export function isValidNumberInputValue(value) {
-  return !isNaN(value) && parseInt(value) >= 1 && value <= 50;
-}
-
-// Cart management
-export function saveCartInLocalStorage(cart) {
-  localStorage.setItem("panier", JSON.stringify(cart));
-}
-
-export function emptyCartInLocalStorage() {
-  localStorage.setItem("panier", JSON.stringify([]));
-}
-
-export function addOrderToCart(orderToAdd) {
-  var userCart = retrieveUserCartFromLocalStorage();
-  var relatedOrderFromCart = userCart.find(
-    (order) => order.productId === orderToAdd.productId,
-  );
-  if (relatedOrderFromCart) {
-    relatedOrderFromCart.quantity += +orderToAdd.quantity;
-  } else {
-    userCart.push(orderToAdd);
-  }
-  saveCartInLocalStorage(userCart);
-}
-
-/**
- * retrieves userCart from local storage
- * and convert it to array
- * @returns array of cart items: userCart
- */
-export function retrieveUserCartFromLocalStorage() {
-  var rawUserCart = localStorage.getItem("panier");
-  var userCart = JSON.parse(rawUserCart);
-  return Array.from(userCart ?? []);
-}
+import {
+  addOrderToCart,
+  emptyCartInLocalStorage,
+  isValidNumberInputValue,
+  retrieveUserCartFromLocalStorage,
+  saveCartInLocalStorage,
+} from "./services/cart.service.js";
+import {
+  applyElevateZoom,
+  applyOwlCarousel,
+  applySlickForSectionHomeTabs,
+  applySlickForSectionRelatedProducts,
+} from "./ui/plugins.js";
+import {
+  getSecondaryInfoHtml,
+  isOutOfStock,
+  outOfStockAlertHtml,
+  outOfStockBadge,
+  outOfStockThumbBadge,
+  renderProductCard,
+} from "./ui/templates.js";
 
 export function getCurrentDisplayedProductId() {
   const url = new URL(window.location.href);
   const productId = +url.searchParams.get("productId");
   return productId;
-}
-
-/**
- * Build the "Marque / Qualité / Catégorie" info block shown on the product page.
- * UI text stays in French, the underlying data stays structured.
- */
-function getSecondaryInfoHtml(product) {
-  const category =
-    product.category.charAt(0).toUpperCase() + product.category.slice(1);
-  return `<b>Marque:</b> ${product.brand}. <br> <b>Qualité:</b> ${product.quality}. <br> <b>Catégorie:</b> ${category}.`;
 }
 
 /**
@@ -267,74 +106,6 @@ export function buildVisualCart() {
         });
       });
   });
-}
-
-/** A product is out of stock when its status says so. Kept orderable anyway. */
-function isOutOfStock(product) {
-  return product.status === PRODUCT_STATUS.OUT_OF_STOCK;
-}
-
-/** Small inline "Épuisé" badge (used next to the product title on its page). */
-function outOfStockBadge(product) {
-  return isOutOfStock(product)
-    ? `<span class="badge" style="background-color: #dc3545; color: #fff; font-size: 0.7em; vertical-align: middle;">Épuisé</span>`
-    : "";
-}
-
-/**
- * "Épuisé" badge pinned to the top-left corner of the product photo.
- * Absolutely positioned so it never shifts the card's title/price alignment.
- * `.product_thumb` is already `position: relative` in style.css, so this anchors
- * to the thumb on every breakpoint (mobile/tablet/desktop).
- */
-function outOfStockThumbBadge(product) {
-  return isOutOfStock(product)
-    ? `<span class="badge" style="position: absolute; top: 6px; left: 6px; z-index: 5; font-size: 10px; padding: 3px 6px; background-color: #dc3545; color: #fff;">Épuisé</span>`
-    : "";
-}
-
-/** Friendly, reassuring out-of-stock notice shown on the product page. */
-function outOfStockAlertHtml() {
-  return `
-    <div class="alert alert-warning" role="alert">
-      Ce parfum est <b>momentanément épuisé (hors stock)</b> 😅 
-      <br />
-      mais pas de
-      panique ! Tu peux quand même l'ajouter au panier et passer commande normalement.
-      On reste en contact direct avec toi sur <b>WhatsApp</b> 💬 (là où se finalise ta
-      commande) et on te tient au courant en toute transparence : 
-      <br />
-      le délai sera juste un peu plus long, rien de méchant 😉. 
-      <br />
-      Merci pour ta patience 💖
-    </div>
-  `;
-}
-
-/** Product card shared by the 3 home-page tabs. */
-function renderProductCard(prod) {
-  return `
-    <div class="custom-col-5">
-      <div class="single_product">
-        <div class="product_thumb">
-          ${outOfStockThumbBadge(prod)}
-          <a
-            class="primary_img"
-            href="product-details.html?productId=${prod.id}">
-            <img src="${getMainPicUrl(prod)}" alt="" />
-          </a>
-        </div>
-        <div class="product_content">
-          <h3>
-            <a href="product-details.html?productId=${prod.id}">
-              ${getProductTitle(prod)}
-            </a>
-          </h3>
-          <span class="current_price">${prod.price} Dhs</span>
-        </div>
-      </div>
-    </div>
-  `;
 }
 
 export function projectProductInPage() {
