@@ -171,7 +171,7 @@ export function emptyCartInLocalStorage() {
 export function addOrderToCart(orderToAdd) {
   var userCart = retrieveUserCartFromLocalStorage();
   var relatedOrderFromCart = userCart.find(
-    (order) => order.productId === orderToAdd.productId
+    (order) => order.productId === orderToAdd.productId,
   );
   if (relatedOrderFromCart) {
     relatedOrderFromCart.quantity += +orderToAdd.quantity;
@@ -234,7 +234,7 @@ export function buildVisualCart() {
         subTotal += order.quantity * mappedProductFromDb.price;
         $("#cart-items").append(
           `
-          <div class="cart_item" id="${order.productId}">
+          <div class="cart_item" data-product-id="${order.productId}">
             <div class="cart_img">
               <a href="product-details.html?productId=${mappedProductFromDb.id}">
                 <img src="${productMainPic}" alt=""/>
@@ -251,7 +251,7 @@ export function buildVisualCart() {
               </a>
             </div>
           </div>
-        `
+        `,
         );
 
         // calcul subtotal
@@ -260,7 +260,10 @@ export function buildVisualCart() {
         $("#cart-items").addClass("cart-items-border");
       })
       .catch((error) => {
-        alert("Erreur lors du chargement du panier", error);
+        console.error("Erreur lors du chargement du panier :", error);
+        new Notyf().error({
+          message: "Impossible de charger un article du panier.",
+        });
       });
   });
 }
@@ -293,7 +296,7 @@ export function projectProductInPage() {
               alt=""/>
           </a>
         </li>
-        `
+        `,
         );
       });
       applyOwlCarousel();
@@ -307,7 +310,8 @@ export function projectProductInPage() {
       $(".text-skeleton").removeClass("text-skeleton");
     })
     .catch((error) => {
-      alert("Erreur lors du chargement du produit :", error);
+      console.error("Erreur lors du chargement du produit :", error);
+      new Notyf().error({ message: "Impossible de charger ce produit." });
     });
 }
 
@@ -340,7 +344,7 @@ export function projectRelatedProductsInPage() {
               </div>
             </div>
           </div>
-          `
+          `,
         );
       });
       $(".product_section").removeClass("d-none");
@@ -417,11 +421,11 @@ export function projectBestSellingProductsInFooter() {
               </div>
             </div>
           </div>
-          `
+          `,
         );
       })
       .catch((error) =>
-        console.log("Error while fetching best selling products", error)
+        console.log("Error while fetching best selling products", error),
       );
   });
 }
@@ -455,7 +459,7 @@ export function projectProductsInHomeTabs() {
               </div>
             </div>
           </div>
-        `
+        `,
         );
       });
       applySlickForSectionHomeTabs($featuredProductsTab);
@@ -490,7 +494,7 @@ export function projectProductsInHomeTabs() {
               </div>
             </div>
           </div>
-        `
+        `,
         );
       });
       applySlickForSectionHomeTabs($arrivalsProductsTab);
@@ -525,7 +529,7 @@ export function projectProductsInHomeTabs() {
               </div>
             </div>
           </div>
-        `
+        `,
         );
       });
       applySlickForSectionHomeTabs($onsaleProductsTab);
@@ -577,7 +581,7 @@ export function projectAllProductsInShopPage() {
                 </div>
               </div>
           </div>
-        `
+        `,
         );
       });
     })
@@ -610,9 +614,8 @@ export function bindCartEvent() {
     var cartItemToDelete = $(this).parent().closest(".cart_item").get(0);
 
     // remove cart item from client storage
-    userCart = userCart.filter(
-      (order) => order.productId != cartItemToDelete.id
-    );
+    const idToDelete = Number(cartItemToDelete.dataset.productId);
+    userCart = userCart.filter((order) => order.productId !== idToDelete);
     saveCartInLocalStorage(userCart);
 
     // remove & update the cart in the DOM
@@ -633,13 +636,13 @@ export function bindCartEvent() {
       });
     });
 
-    Promise.all(promises).then(() => {
+    Promise.all(promises).then(async () => {
       whatsappMessageRecipe += `\n\n --------------------------------------------------\n`;
       whatsappMessageRecipe += `\t Total = ${total} Dhs`;
       const encodedMessage = encodeURIComponent(whatsappMessageRecipe);
       const whatsappURL = WHATSAPP_NUMBER_LINK;
       window.open(`${whatsappURL}?text=${encodedMessage}`);
-      updateProductOrderStats(cartItems);
+      await updateProductOrderStats(cartItems);
       emptyCartInLocalStorage();
       buildVisualCart();
     });
@@ -651,7 +654,7 @@ export function bindProductDetailsPageEvents() {
   $("#product-quantity").on("input", function () {
     $("#button-add-to-cart").prop(
       "disabled",
-      !isValidNumberInputValue($(this).val())
+      !isValidNumberInputValue($(this).val()),
     );
   });
 
