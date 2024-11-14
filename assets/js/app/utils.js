@@ -176,7 +176,7 @@ export function projectRelatedProductsInPage() {
                   class="primary_img"
                   href="product-details.html?productId=${prod.id}">
                   <img
-                    src="${getMainPicUrl(prod)}" alt="" />
+                    src="${getMainPicUrl(prod)}" alt="" width="600" height="600" />
                 </a>
               </div>
               <div class="product_content">
@@ -252,7 +252,7 @@ export function projectBestSellingProductsInFooter() {
               <a href="product-details.html?productId=${product.id}">
                 <img
                 src="${getMainPicUrl(product)}"
-                alt=""/>
+                alt="" width="600" height="600" loading="lazy"/>
               </a>
             </div>
             <div class="simple_product_content">
@@ -315,12 +315,22 @@ export function projectAllProductsInShopPage() {
                 <a
                   class="primary_img"
                   href="product-details.html?productId=${prod.id}">
-                  <img src="${productMainPic}" alt="" />
+                  <img
+                    src="${productMainPic}"
+                    alt=""
+                    width="600"
+                    height="600"
+                    loading="lazy" />
                 </a>
                 <a
                   class="secondary_img"
                   href="product-details.html?productId=${prod.id}">
-                  <img src="${getSecondaryPicUrl(prod)}" alt="" />
+                  <img
+                    src="${getSecondaryPicUrl(prod)}"
+                    alt=""
+                    width="600"
+                    height="600"
+                    loading="lazy" />
                 </a>
               </div>
               <div class="product_content">
