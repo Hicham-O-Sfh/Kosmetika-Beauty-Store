@@ -14,6 +14,10 @@
 
 import products from "./products.js";
 
+// Re-exported so the rest of the app gets the status enum from the single
+// catalogue access point rather than reaching into products.js directly.
+export { PRODUCT_STATUS } from "./products.js";
+
 /** Deep clone, so callers can never mutate the source catalogue. */
 function clone(value) {
   return JSON.parse(JSON.stringify(value));

@@ -17,6 +17,7 @@ import {
   getProduct,
   getProductTitle,
   getSecondaryPicUrl,
+  PRODUCT_STATUS,
 } from "./data/products.repository.js";
 import { updateProductOrderStats } from "./firebase-management.js";
 
@@ -268,16 +269,91 @@ export function buildVisualCart() {
   });
 }
 
+/** A product is out of stock when its status says so. Kept orderable anyway. */
+function isOutOfStock(product) {
+  return product.status === PRODUCT_STATUS.OUT_OF_STOCK;
+}
+
+/** Small inline "Épuisé" badge (used next to the product title on its page). */
+function outOfStockBadge(product) {
+  return isOutOfStock(product)
+    ? `<span class="badge" style="background-color: #dc3545; color: #fff; font-size: 0.7em; vertical-align: middle;">Épuisé</span>`
+    : "";
+}
+
+/**
+ * "Épuisé" badge pinned to the top-left corner of the product photo.
+ * Absolutely positioned so it never shifts the card's title/price alignment.
+ * `.product_thumb` is already `position: relative` in style.css, so this anchors
+ * to the thumb on every breakpoint (mobile/tablet/desktop).
+ */
+function outOfStockThumbBadge(product) {
+  return isOutOfStock(product)
+    ? `<span class="badge" style="position: absolute; top: 6px; left: 6px; z-index: 5; font-size: 10px; padding: 3px 6px; background-color: #dc3545; color: #fff;">Épuisé</span>`
+    : "";
+}
+
+/** Friendly, reassuring out-of-stock notice shown on the product page. */
+function outOfStockAlertHtml() {
+  return `
+    <div class="alert alert-warning" role="alert">
+      Ce parfum est <b>momentanément épuisé (hors stock)</b> 😅 
+      <br />
+      mais pas de
+      panique ! Tu peux quand même l'ajouter au panier et passer commande normalement.
+      On reste en contact direct avec toi sur <b>WhatsApp</b> 💬 (là où se finalise ta
+      commande) et on te tient au courant en toute transparence : 
+      <br />
+      le délai sera juste un peu plus long, rien de méchant 😉. 
+      <br />
+      Merci pour ta patience 💖
+    </div>
+  `;
+}
+
+/** Product card shared by the 3 home-page tabs. */
+function renderProductCard(prod) {
+  return `
+    <div class="custom-col-5">
+      <div class="single_product">
+        <div class="product_thumb">
+          ${outOfStockThumbBadge(prod)}
+          <a
+            class="primary_img"
+            href="product-details.html?productId=${prod.id}">
+            <img src="${getMainPicUrl(prod)}" alt="" />
+          </a>
+        </div>
+        <div class="product_content">
+          <h3>
+            <a href="product-details.html?productId=${prod.id}">
+              ${getProductTitle(prod)}
+            </a>
+          </h3>
+          <span class="current_price">${prod.price} Dhs</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 export function projectProductInPage() {
   // get productId from query string
   const productId = getCurrentDisplayedProductId();
 
   getProduct(productId)
     .then((product) => {
-      $("#product-name").html(getProductTitle(product));
+      $("#product-name").html(
+        `${getProductTitle(product)} ${outOfStockBadge(product)}`,
+      );
       $("#product-price").html(`${product.price} Dhs`);
       $("#product-description").html(product.descriptionHtml);
       $("#second-product-description").html(getSecondaryInfoHtml(product));
+
+      // Out-of-stock notice — the product stays orderable
+      if (isOutOfStock(product)) {
+        $(".product_d_right .product_desc").after(outOfStockAlertHtml());
+      }
 
       // product's pictures & zoom management
       const productMainPic = getMainPicUrl(product);
@@ -431,108 +507,23 @@ export function projectBestSellingProductsInFooter() {
 }
 
 export function projectProductsInHomeTabs() {
-  // fill featured products tab
-  getAllProducts(12)
-    .then((products) => {
-      const $featuredProductsTab = $("#featured-products-tab");
-      $featuredProductsTab.empty();
-      products.forEach((prod) => {
-        $featuredProductsTab.append(
-          `
-          <div class="custom-col-5">
-            <div class="single_product">
-              <div class="product_thumb">
-                <a
-                  class="primary_img"
-                  href="product-details.html?productId=${prod.id}">
-                  <img
-                    src="${getMainPicUrl(prod)}" alt="" />
-                </a>
-              </div>
-              <div class="product_content">
-                <h3>
-                  <a href="product-details.html?productId=${prod.id}">
-                    ${getProductTitle(prod)}
-                  </a>
-                </h3>
-                <span class="current_price">${prod.price} Dhs</span>
-              </div>
-            </div>
-          </div>
-        `,
-        );
-      });
-      applySlickForSectionHomeTabs($featuredProductsTab);
-    })
-    .catch((error) => console.log(error));
+  // Each home tab shows the products carrying its status.
+  const homeTabs = [
+    { selector: "#featured-products-tab", status: PRODUCT_STATUS.FEATURED },
+    { selector: "#arrivals-products-tab", status: PRODUCT_STATUS.NEW_ARRIVALS },
+    { selector: "#onsale-products-tab", status: PRODUCT_STATUS.ONSALE },
+  ];
 
-  // fill arrivals products tab
-  getAllProducts(12)
+  getAllProducts()
     .then((products) => {
-      const $arrivalsProductsTab = $("#arrivals-products-tab");
-      $arrivalsProductsTab.empty();
-      products.forEach((prod) => {
-        $arrivalsProductsTab.append(
-          `
-          <div class="custom-col-5">
-            <div class="single_product">
-              <div class="product_thumb">
-                <a
-                  class="primary_img"
-                  href="product-details.html?productId=${prod.id}">
-                  <img
-                    src="${getMainPicUrl(prod)}" alt="" />
-                </a>
-              </div>
-              <div class="product_content">
-                <h3>
-                  <a href="product-details.html?productId=${prod.id}">
-                    ${getProductTitle(prod)}
-                  </a>
-                </h3>
-                <span class="current_price">${prod.price} Dhs</span>
-              </div>
-            </div>
-          </div>
-        `,
-        );
+      homeTabs.forEach(({ selector, status }) => {
+        const $tab = $(selector);
+        $tab.empty();
+        products
+          .filter((prod) => prod.status === status)
+          .forEach((prod) => $tab.append(renderProductCard(prod)));
+        applySlickForSectionHomeTabs($tab);
       });
-      applySlickForSectionHomeTabs($arrivalsProductsTab);
-    })
-    .catch((error) => console.log(error));
-
-  // fill onsale products tab
-  getAllProducts(12)
-    .then((products) => {
-      const $onsaleProductsTab = $("#onsale-products-tab");
-      $onsaleProductsTab.empty();
-      products.forEach((prod) => {
-        $onsaleProductsTab.append(
-          `
-          <div class="custom-col-5">
-            <div class="single_product">
-              <div class="product_thumb">
-                <a
-                  class="primary_img"
-                  href="product-details.html?productId=${prod.id}">
-                  <img
-                    src="${getMainPicUrl(prod)}" alt="" />
-                </a>
-              </div>
-              <div class="product_content">
-                <h3>
-                  <a href="product-details.html?productId=${prod.id}">
-                    ${getProductTitle(prod)}
-                  </a>
-                </h3>
-                <span class="current_price">${prod.price} Dhs</span>
-              </div>
-            </div>
-          </div>
-        `,
-        );
-      });
-      applySlickForSectionHomeTabs($onsaleProductsTab);
     })
     .catch((error) => console.log(error));
 }
@@ -549,6 +540,7 @@ export function projectAllProductsInShopPage() {
           <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="single_product">
               <div class="product_thumb">
+                ${outOfStockThumbBadge(prod)}
                 <a
                   class="primary_img"
                   href="product-details.html?productId=${prod.id}">

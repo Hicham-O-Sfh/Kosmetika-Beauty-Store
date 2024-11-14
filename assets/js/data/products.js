@@ -217,7 +217,10 @@ export default [
     descriptionHtml:
       "<b>Diamond® - Crystal Noir</b> s'inspire du célèbre parfum <b>Versace Crystal Noir</b>, offrant une alternative <b>élégante</b> et <b>raffinée</b> ✨. Ses notes <b>florales</b> et <b>orientales</b> créent une fragrance <b>envoûtante</b>, parfaite pour ceux qui recherchent un parfum <b>sophistiqué</b> et <b>séduisant</b>, à la hauteur de l'original.",
     pics: [
-      { url: "assets/img/product/Versace-Diamond-Crystal-Noir-BIG.png", isMain: true },
+      {
+        url: "assets/img/product/Versace-Diamond-Crystal-Noir-BIG.png",
+        isMain: true,
+      },
       { url: "assets/img/product/dyamond-crystal-noir-2-BIG.png" },
       { url: "assets/img/product/Dyamond-crystal-noir-BIG.png" },
       { url: "assets/img/product/diamond-crystal-noir-3-BIG.png" },
