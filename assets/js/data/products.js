@@ -53,7 +53,7 @@ export default [
     currency: "MAD",
     quality: "Eau de parfum",
     category: "homme",
-    status: "FEATURED",
+    status: "ONSALE",
     descriptionHtml:
       "<b>Ard Al Zaafaran® - Ana Lmalik</b> est une fragrance <b>royale</b> qui allie des notes <b>orientales</b> et <b>boisées</b> pour un sillage <b>captivant</b> 👑. Parfait pour une <b>signature élégante</b> de jour comme de nuit 🌙. Laissez une <b>empreinte royale</b> partout où vous allez.",
     pics: [
@@ -89,7 +89,7 @@ export default [
     currency: "MAD",
     quality: "Eau de parfum",
     category: "femme",
-    status: "FEATURED",
+    status: "ONSALE",
     descriptionHtml:
       "<b>Manassik® - Gharam wa Hob</b> est une eau de parfum <b>captivante</b> qui incarne la <b>passion</b> et le <b>romantisme</b> 💖. Ses notes <b>orientales chaleureuses</b> et <b>florales</b> créent un sillage <b>sensuel</b> et <b>mystérieux</b>. Idéal pour les moments <b>spéciaux</b>, ce parfum riche en <b>émotions</b> est une véritable déclaration de <b>séduction</b>.",
     pics: [
@@ -107,7 +107,7 @@ export default [
     currency: "MAD",
     quality: "Eau de parfum",
     category: "femme",
-    status: "FEATURED",
+    status: "NEW_ARRIVALS",
     descriptionHtml:
       "<b>Manasik® - Muski Oud</b> fusionne la profondeur du <b>musc</b> et l'intensité de l'<b>oud</b> pour offrir une expérience olfactive audacieuse et envoûtante 🖤. Ce parfum révèle des notes <b>orientales</b> riches et captivantes, parfaites pour ceux qui recherchent une présence affirmée et mystérieuse. Une touche de <b>luxure</b> et de <b>sophistication</b>, idéale pour marquer chaque instant d'un sillage <b>profond</b> et <b>durable</b> 🌟.",
     pics: [
@@ -125,7 +125,7 @@ export default [
     currency: "MAD",
     quality: "Eau de parfum",
     category: "homme",
-    status: "FEATURED",
+    status: "ONSALE",
     descriptionHtml:
       "<b>Allerv® - Exchange</b> est un parfum masculin <b>luxueux</b>, inspiré par la sophistication de <b>Bleu de Chanel</b> ✨. Avec ses notes <b>fraîches</b> et <b>boisées</b>, il incarne l'<b>élégance</b> et la <b>modernité</b>. Parfait pour l'homme <b>sûr de lui</b>, il laisse un sillage <b>raffiné</b> et <b>intemporel</b>, idéal pour toutes les occasions 🌟.",
     pics: [
@@ -142,7 +142,7 @@ export default [
     currency: "MAD",
     quality: "Eau de parfum",
     category: "femme",
-    status: "FEATURED",
+    status: "ONSALE",
     descriptionHtml:
       "<b>Lattafa® - Raghba</b> pour Femme, est une fragrance délicieusement sucrée qui enveloppe de ses notes gourmandes de <b>miel</b> 🍯 et de vanille. Séduisante et envoûtante, elle laisse un sillage irrésistible, parfait pour celles qui veulent captiver à chaque instant. Un parfum d'<b>excellence</b>, alliant douceur et <b>séduction</b>, idéal pour les moments spéciaux.",
     pics: [
@@ -160,7 +160,7 @@ export default [
     currency: "MAD",
     quality: "Eau de parfum",
     category: "femme",
-    status: "FEATURED",
+    status: "ONSALE",
     descriptionHtml:
       "<b>Manassik® - Loves Musk</b> est une fragrance envoûtante qui célèbre la pureté et la douceur du <b>musc</b> 🌸. Avec ses notes chaleureuses et sensuelles ❤️‍🔥, elle laisse un sillage <b>élégant</b> et <b>raffiné</b>, idéal pour les moments de <b>séduction</b>. Un parfum qui incarne la <b>passion</b> et l'<b>intimité</b>, parfait pour ceux qui veulent se démarquer avec subtilité.",
     pics: [
@@ -177,7 +177,7 @@ export default [
     currency: "MAD",
     quality: "Eau de parfum",
     category: "femme",
-    status: "FEATURED",
+    status: "OUT_OF_STOCK",
     descriptionHtml:
       "<b>Aqua®</b> 🌊 est une fragrance <b>fraîche</b> et <b>vivifiante</b>, inspirée par l'énergie de l'<b>océan</b>. Ses notes <b>marines</b> et <b>d'agrumes</b> 🍋 offrent une sensation de <b>liberté</b> et de <b>pureté</b> 🌿, parfaite pour toutes vos journées.",
     pics: [
@@ -195,7 +195,7 @@ export default [
     currency: "MAD",
     quality: "Eau de parfum",
     category: "homme",
-    status: "FEATURED",
+    status: "NEW_ARRIVALS",
     descriptionHtml:
       "<b>Manassik® - Assalah</b> est une eau de parfum masculine de <b>luxe</b> 🐎, incarnant la <b>virilité</b> et l'<b>élégance</b> à travers son design inspiré par la noblesse des chevaux. Ses notes riches et boisées créent un sillage puissant et <b>raffiné</b>, parfait pour l'homme sûr de lui et moderne. Un parfum de <b>beauté</b> intemporelle, conçu pour ceux qui veulent marquer leur présence avec distinction. #luxe #beauté #virilité",
     pics: [
@@ -252,7 +252,7 @@ export default [
     currency: "MAD",
     quality: "Eau de parfum",
     category: "femme",
-    status: "FEATURED",
+    status: "NEW_ARRIVALS",
     descriptionHtml:
       "<b>Lattafa Perfumes® - Ethra'a</b> est une fragrance orientale riche et sophistiquée ✨. Composée de notes <b>florales</b> et <b>épicées</b>, elle crée un sillage envoûtant et <b>luxueux</b>, parfait pour celles qui recherchent une touche de <b>grâce</b> et de <b>mystère</b> 🌹. Ce parfum allie parfaitement la <b>finesse</b> des traditions orientales à une <b>élégance moderne</b>, idéal pour les occasions spéciales où vous souhaitez vous démarquer.",
     pics: [
@@ -269,7 +269,7 @@ export default [
     currency: "MAD",
     quality: "Eau de parfum",
     category: "homme",
-    status: "FEATURED",
+    status: "NEW_ARRIVALS",
     descriptionHtml:
       "<b>Cosmo® - Black Afgan</b> est un parfum masculin de <b>luxe</b> et d'<b>élégance</b>, inspiré par les riches notes de l'<b>Oud</b> 🖤. Cette fragrance <b>orientale</b> puissante et envoûtante allie des accords <b>boisés</b> et <b>épicés</b>, créant un sillage <b>intense</b> et <b>raffiné</b>. Parfait pour l'homme qui veut affirmer son style avec une touche de mystère et de distinction 🌟. Un parfum qui ne passe pas inaperçu.",
     pics: [
@@ -304,7 +304,7 @@ export default [
     currency: "MAD",
     quality: "Eau de parfum",
     category: "femme",
-    status: "FEATURED",
+    status: "NEW_ARRIVALS",
     descriptionHtml:
       "Plongez dans un monde de <b>luxure florale</b> avec <b>Manasik® - Malikat Al Arab - Rose</b> 🌹. Ce parfum capture l'essence de la <b>rose</b>, enveloppant la peau d'une touche de <b>féminité</b> et de <b>raffinement</b>. Les notes florales s'accordent parfaitement pour créer un sillage <b>sophistiqué</b> et <b>romantique</b>, idéal pour la femme qui souhaite exprimer sa <b>royauté</b> à travers chaque geste. Un véritable hommage à l'<b>élégance orientale</b> 🌸.",
     pics: [
