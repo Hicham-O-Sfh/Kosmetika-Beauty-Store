@@ -7,68 +7,47 @@
 
 **Légende :** 🔴 P0 = bug ou blocage · 🟠 P1 = organisation (ta demande principale) · 🟡 P2 = poids/perf · 🔵 P3 = qualité & open source · 🟣 P4 = préparation du scale (JSON)
 
-**Statut :** 🔴 **P0 terminé** (2026-07-26) · 🟣 P4 migration data faite. Restent P1, P2, P3, P5 — et les liens sociaux (reportés).
+**Statut :** 🔴 P0 ✅ · 🟣 P4 migration ✅ · 🟠 **P1.1 ✅** (2026-07-26). Restent P1.2, P2, P3, P5 — et les liens sociaux (reportés).
 **Décisions déjà prises (25/07/2026) :** duplication HTML → statu quo (voir P1.3) · catalogue → futur `data/products.js` en `export default`, pas de `fetch` JSON (voir P4).
 
 ---
 
-## 🔴 P0 — Bugs & code mort actif
+## ✅ Fait (2026-07-26)
 
-> **✅ Terminé le 2026-07-26** — tout est fait, sauf les liens sociaux (reportés, voir plus bas).
-> Certains items (`isMain`/`getMainPicUrl`, `pics[1]`, `Set`→tableau, argument par défaut, n° WhatsApp)
-> avaient déjà été réglés pendant la migration P4.
+**P0 — bugs & code mort** (tout, sauf les liens sociaux) : `jquery.ui.js` (253 Ko) + 6 balises
+`<script>` + blocs morts de `main.js` supprimés ; typo `attr("class")` + garde `scrollBtn` + regex
+nettoyée ; `alert()` → `console.error` + toast Notyf ; panier `data-product-id` + comparaison stricte
+`!==` ; `await` des stats Firestore avant vidage ; **déduplication** des templates → `renderProductCard()` ;
+`PRODUCT_STATUS` branché sur les 3 onglets (FEATURED 6 / NEW_ARRIVALS 5 / ONSALE 5 / OUT_OF_STOCK 1 = Aqua),
+avec badge « Épuisé » en overlay + alerte sur la fiche. Les items `isMain`/`pics[1]`/`Set`/argument par
+défaut/n° WhatsApp avaient été réglés pendant P4.
 
-- [x] **`jquery.ui.js` (253 Ko) est chargé sur les 6 pages pour rien.**
-      Il ne sert qu'à deux blocs de [main.js:146-173](assets/js/main.js#L146-L173) :
-  - `$("#slider-range").slider(...)` → l'id `#slider-range` **n'existe dans aucune page HTML**.
-  - `$('[data-bs-toggle="tooltip"]').tooltip()` et `$(".action_links ...").tooltip()` → **aucun** de ces sélecteurs n'existe dans le HTML, et **aucune** page ne contient d'attribut `title=""` (donc même s'ils existaient, jQuery UI n'afficherait rien).
-    👉 Supprimer les deux blocs + `jquery.ui.js` + les 6 balises `<script>`.
-    ⚠️ Note : `.tooltip()` venait de jQuery UI, **pas** de Bootstrap 5 (BS5 n'expose plus d'API jQuery) — les options passées (`placement`, `container`, `animated`) sont du vocabulaire Bootstrap 3 et étaient ignorées.
+**P4 — migration data** : catalogue dans `app/data/products.js` (modèle propre), `products.repository.js`
+et `app/config/site.config.js` ; `database.management.js` supprimé. Vérifié en live dans le navigateur.
 
-- [x] **Faute de frappe** [main.js:248](assets/js/main.js#L248) : `$this.attr("clas")` → `"class"`.
-      Actuellement masquée par le court-circuit `$this.is("a") || $this.is("span") || ...`, mais elle lèvera un `TypeError` dès qu'un autre type d'élément entrera dans la condition.
+**P1.1 — vendor/app** : libs tierces → `assets/js/vendor/`, code → `assets/js/app/` (avec `config/` et
+`data/`) ; libs mortes supprimées (`bpopup`, `jquery.cookie`, `imagesloaded`, `fontawesome` −1,5 Mo) ;
+`gTranslate-flags.js` scindé en `app/config/gtranslate.settings.js` + `vendor/gtranslate.js` ;
+les 6 blocs `<script>` standardisés (`notyf` désormais partout). Noms de fichiers gardés tels quels.
 
-- [x] **Clé dupliquée** [main.js:94-102](assets/js/main.js#L94-L102) : `autoplay: true` puis `autoplay: false` dans le même objet. La 2ᵉ gagne. À trancher (et de toute façon `.testimonial_active` n'existe dans aucune page → bloc à supprimer).
+---
 
-- [x] **Code mort dans `main.js`** — sélecteurs absents de tout le HTML, à supprimer :
-      `.product_row2` (L52-91), `.testimonial_active` (L94-102), `.instagram_pupop` (L105-110), `.video_popup` (L113-117), `.port_popup` (L120-125), `#slider-range` / `#amount` (L146-161).
-      ⚠️ Après ça, vérifier si `plugins.js` (Slick + Magnific Popup, 80 Ko) est encore nécessaire : Magnific Popup ne servira plus, Slick oui (via `utils.js`).
+## 🔴 P0 — reste
 
-- [x] **`scrollUpBtn` sans garde `null`** [main.js:128](assets/js/main.js#L128) : `document.getElementById(...)` puis `.addEventListener` direct. L'élément est présent sur les 6 pages aujourd'hui, mais une page oubliée casserait **toute l'IIFE** (donc tout le JS de la page). Ajouter `if (!scrollBtn) return;`.
-
-- [x] **`.find(pic => pic.isMain === true).bigPicUrl` répété 7 fois sans garde** (utils.js L217, 267, 318, 395, 439, 476, 513, 541).
-      Un seul produit ajouté sans `isMain: true` = `TypeError` → page blanche. **Risque direct quand tu ajouteras des produits.**
-      👉 Créer `getMainPicUrl(product)` avec fallback sur `pics[0]`.
-
-- [x] **`prod.pics[1].bigPicUrl`** [utils.js:557](assets/js/utils.js#L557) (image "hover" du catalogue) : crash si un produit n'a qu'**une** photo. Aujourd'hui tous en ont ≥ 2, mais c'est une bombe à retardement. → fallback sur l'image principale.
-
-- [x] **`alert("message :", error)`** [utils.js:250](assets/js/utils.js#L250) et [utils.js:299](assets/js/utils.js#L299) : `alert()` ne prend qu'un argument, l'erreur est silencieusement perdue. Utiliser Notyf (déjà présent) + `console.error(error)`.
-
-- [x] **`getAllProductsFromDatabase()` appelé sans argument** [utils.js:536](assets/js/utils.js#L536) : ça marche par accident (`slice(0, undefined)` = tout). Rendre explicite (`maxItems = Infinity` par défaut).
-
-- [x] **`MAIN_DATABASE` est un `Set` d'objets** [database.management.js:25](assets/js/database.management.js#L25) : un `Set` ne déduplique pas les objets littéraux, donc il n'apporte **rien** ici — et oblige à `Array.from(...)` partout. → simple tableau (ou mieux, voir 🟣 P4).
-
-- [x] **`id` HTML numérique** [utils.js:224](assets/js/utils.js#L224) : `<div class="cart_item" id="${order.productId}">` produit `id="1"`. Valide en HTML5 mais incassable via `querySelector("#1")`. → `data-product-id="1"`.
-      Idem [utils.js:615](assets/js/utils.js#L615) : `order.productId != cartItemToDelete.id` repose sur la coercition `number != string`. → `Number(el.dataset.productId)` + `!==`.
-
-- [x] **`updateProductOrderStats()` non attendu** [utils.js:645](assets/js/utils.js#L645) : le panier est vidé juste après, sans `await`. Si l'utilisateur bascule sur WhatsApp et que l'onglet est gelé/fermé, la stat est perdue. → `await` (ou `navigator.sendBeacon`-like) avant `emptyCartInLocalStorage()`.
-
-- [x] **~200 lignes de template dupliquées** : la carte produit est réécrite **4 fois à l'identique** — `projectRelatedProductsInPage` (L307-336), et 3 fois dans `projectProductsInHomeTabs` (L428-455, L465-492, L502-529), qui appelle en plus **3 fois** `getAllProductsFromDatabase(12)` pour afficher **exactement les mêmes produits** dans les 3 onglets (Featured / Nouveautés / Promos).
-      👉 Une fonction `renderProductCard(prod)` + une boucle sur `[{tab, status}]`.
-
-- [x] **`PRODUCT_STATUS`** [database.management.js:17](assets/js/database.management.js#L17) : défini, jamais utilisé. → le brancher sur les 3 onglets (voir ci-dessus) ou le supprimer.
-
-- [ ] ⏸️ *(reporté 2026-07-26 : placeholders gardés pour l'instant)* **`INSTAGRAM_LINK`, `FACEBOOK_LINK`, `TIKTOK_LINK`** valent littéralement `"INSTAGRAM_LINK"`, etc. → liens morts en pied de page sur les 6 pages. Renseigner ou masquer.
-
-- [x] **Incohérence numéro WhatsApp** : `WHATSAPP_NUMBER_LINK = "https://wa.me/2120666201740"` (un `0` en trop après 212) vs `TEL_NUMBER_LINK = "tel:212666201740"`. À vérifier — c'est le lien de validation de commande.
+- [ ] ⏸️ **Liens sociaux placeholder** — `INSTAGRAM_LINK` / `FACEBOOK_LINK` / `TIKTOK_LINK` valent encore
+      littéralement leur nom → liens morts dans le footer des 6 pages.
+      _(reporté 2026-07-26 : placeholders gardés pour l'instant.)_ → renseigner les vraies URLs ou masquer.
 
 ---
 
 ## 🟠 P1 — Organisation du JS (ta demande principale)
 
-### P1.1 — Séparer vendor / app
+### P1.1 — Séparer vendor / app — ✅ **Fait (2026-07-26)**
 
-**Cible :**
+> Structure `vendor/` + `app/` en place, libs mortes supprimées, GTranslate scindé, 6 blocs `<script>`
+> standardisés (+ notyf partout). Noms de fichiers gardés (kebab-case non retenu). Vérifié en live.
+
+**Cible (réalisée) :**
 
 ```
 assets/js/
@@ -192,48 +171,20 @@ _(Options écartées, pour mémoire : build minimal type Eleventy/`posthtml-incl
 
 ---
 
-## 🟣 P4 — Préparer le scale du catalogue (l'approche JSON)
+## 🟣 P4 — reste (catalogue JSON)
 
-> **✅ Migration faite (2026-07-26)** : catalogue dans `data/products.js` (modèle propre) +
-> `products.repository.js` + `config/site.config.js` ; `database.management.js` supprimé.
-> **Restent** : validation `ajv`/CI, champ `order`, incohérences prix/catégories (laissées volontairement).
+> **✅ Migration faite (2026-07-26)** : `data/products.js` (modèle propre) + `products.repository.js`
+>
+> - `config/site.config.js` ; `database.management.js` supprimé.
 
-> Ton intention : le catalogue vit dans un fichier JSON, pas dans une vraie BDD. C'est un choix parfaitement défendable pour ce volume (17 produits) — mais **aujourd'hui ce n'est pas du JSON** : c'est un `Set` d'objets JS en dur dans `database.management.js` (500 lignes), mélangé avec les constantes de contact.
-
-> **Décision (25/07/2026) : rien ne change pour l'instant.** Cible retenue pour plus tard :
-> **`data/products.js` avec `export default [...]`** — c'est-à-dire du JSON dans un module ES.
-> Le `fetch('products.json')` a été **écarté** car il est bloqué par CORS en `file://`, ce qui casserait
-> la promesse "clone & double-clic sur index.html" du readme. L'`export default` donne le même
-> bénéfice (données séparées du code applicatif, éditables sans toucher à la logique) sans exiger
-> de serveur local. Les points ci-dessous restent valables tels quels pour cette cible.
-
-- [ ] **Extraire le catalogue dans `data/products.js`** (`export default [...]`) + un `products.repository.js` qui l'importe et expose `getProduct()` / `getAllProducts()`.
-      ✅ Bénéfices : éditable sans toucher au code, diffable proprement, validable par un schéma, et prêt pour une vraie API (ou un vrai `.json` + `fetch`) le jour où tu passes sur un vrai serveur.
-- [ ] **Sortir les constantes de contact** (`WHATSAPP_*`, `INSTAGRAM_*`, `TEL_*`…) de `database.management.js` vers `config/site.config.js` : elles n'ont rien à faire dans le fichier "base de données".
-- [ ] **Nettoyer le modèle de données.** Aujourd'hui `ref` contient du HTML (`"Gucci® - Bloom <br> (100ml)"`) et `secondDescription` encode marque/qualité/catégorie **en HTML** — donc impossible à filtrer, trier ou traduire, et ça oblige à des bricolages comme `productFromDb.ref.split("\n")[0]` ([utils.js:632](assets/js/utils.js#L632)).
-      Modèle cible :
-      `json
-    {
-      "id": 1,
-      "name": "Bloom - Aqua Di Fiori",
-      "brand": "Gucci®",
-      "volumeMl": 100,
-      "price": 100,
-      "currency": "MAD",
-      "quality": "Eau de toilette",
-      "category": "femme",
-      "status": "FEATURED",
-      "descriptionHtml": "…",
-      "pics": [{ "url": "…", "isMain": true }]
-    }
-    `
-      C'est ce qui débloquera : filtres du catalogue, tri par prix, recherche, et les 3 onglets de l'accueil (via `status`).
-- [ ] **Valider le JSON automatiquement** (`ajv` + un `npm run validate:products` en CI) : `id` unique, `pics` non vide, **exactement un** `isMain: true`, `price > 0`. C'est ça qui empêchera définitivement les crashs 🔴 P0 quand le catalogue grossira.
-- [ ] **Corriger les incohérences actuelles du catalogue** :
-  - 16 des 17 produits sont à `price: 100` (à vérifier — les ids 2 et 3 sont à 299/300)
-  - id `16` est inséré entre les ids `4` et `6` → l'ordre d'affichage suit l'ordre d'insertion, pas l'id. Ajouter un champ `order` explicite si l'ordre compte.
-  - Manasik Muski Oud (id 16) et Malikat Al Arab (id 15) : `Catégorie: Femme` dans une description au champ lexical masculin — à vérifier.
-- [ ] **Au-delà de ~100 produits** : prévoir la pagination ou le rendu incrémental sur `shop.html` (aujourd'hui tout le catalogue est injecté d'un coup dans le DOM), et un index séparé (`products-index.json` léger pour les listes + un fichier par produit pour le détail).
+- [ ] **Valider le catalogue automatiquement** (`ajv` + `npm run validate:products` en CI) : `id` unique,
+      `pics` non vide, **exactement un** `isMain`, `price > 0`, `status` valide.
+      _(Dépend de la décision d'introduire npm/CI — cf. P3. En attendant, une vérif manuelle existe.)_
+- [ ] **Corriger les incohérences du catalogue** (laissées volontairement pour l'instant) :
+  - prix ids 2 (299) & 3 (300) vs 100 ailleurs — à confirmer.
+  - id 16 inséré entre 4 et 6 → l'affichage suit l'ordre d'insertion ; ajouter un champ `order` si besoin.
+  - catégories ids 15 & 16 = `femme` malgré un champ lexical masculin — à confirmer.
+- [ ] **Au-delà de ~100 produits** : pagination / rendu incrémental sur `shop.html` + index séparé.
 
 ---
 
@@ -252,9 +203,9 @@ _(Options écartées, pour mémoire : build minimal type Eleventy/`posthtml-incl
 
 ## ✅ Ordre d'exécution recommandé
 
-1. **P0** — bugs et suppression du code mort (`jquery.ui.js`, blocs orphelins de `main.js`). _Rien ne casse, gain immédiat._
-2. **P2 (suppressions)** — fichiers jamais référencés + `fontawesome.min.js` + polices FA. _~35 Mo et 3,5 Mo de JS en moins, zéro risque._
-3. **P1.1** — réorganisation `vendor/` + `app/`. _Un seul commit dédié, facile à relire._
-4. **P3 (licence, readme, .gitignore, config Firebase)** — avant de communiquer le repo.
-5. **P4** — migration JSON + modèle de données. _À faire avant d'ajouter beaucoup de produits, pas après._
-6. **P1.2 / P1.3 / P2 (médias, CSS)** — les chantiers longs.
+1. ~~P0~~ ✅ · ~~P4 (migration data)~~ ✅ — **faits** (2026-07-26).
+2. **P1.1** ✅ (vendor/app fait) · **P1.2** — éclater `utils.js` = prochain sous-chantier possible.
+3. **P2 (suppressions)** — fichiers jamais référencés + `fontawesome.min.js` + polices FA (~35 Mo).
+4. **P3** — licence, readme, `.gitignore`, config Firebase (avant de communiquer le repo).
+5. **P4 (reste)** — validation CI + incohérences du catalogue.
+6. **P1.2 / P1.3 / P2 (médias, CSS) / P5** — les chantiers longs & investigations.
