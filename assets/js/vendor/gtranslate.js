@@ -1,17 +1,4 @@
 /*! Copyright (C) GTranslate Inc. */
-
-window.gtranslateSettings = {
-  default_language: "fr",
-  native_language_names: true,
-  detect_browser_language: true,
-  languages: ["fr", "de", "en", "ar"],
-  wrapper_selector: ".gtranslate_wrapper",
-  horizontal_position: "left",
-  vertical_position: "bottom",
-  flag_style: "3d",
-  alt_flags: { en: "usa" },
-};
-
 (function () {
   var gt = window.gtranslateSettings || {};
   gt = gt[document.currentScript.getAttribute("data-gt-widget-id")] || gt;
