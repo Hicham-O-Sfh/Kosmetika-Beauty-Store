@@ -7,7 +7,7 @@
 
 **Légende :** 🔴 P0 = bug ou blocage · 🟠 P1 = organisation (ta demande principale) · 🟡 P2 = poids/perf · 🔵 P3 = qualité & open source · 🟣 P4 = préparation du scale (JSON)
 
-**Statut :** 🔴 P0 ✅ · 🟣 P4 migration ✅ · 🟠 **P1.1 ✅** (2026-07-26). Restent P1.2, P2, P3, P5 — et les liens sociaux (reportés).
+**Statut :** 🔴 P0 ✅ · 🟣 P4 migration ✅ · 🟠 **P1 ✅** (P1.1 + P1.2 faits ; P1.3 = statu quo). Restent P2, P3, P5 — et les liens sociaux (reportés).
 **Décisions déjà prises (25/07/2026) :** duplication HTML → statu quo (voir P1.3) · catalogue → futur `data/products.js` en `export default`, pas de `fetch` JSON (voir P4).
 
 ---
@@ -29,6 +29,10 @@ et `app/config/site.config.js` ; `database.management.js` supprimé. Vérifié e
 `data/`) ; libs mortes supprimées (`bpopup`, `jquery.cookie`, `imagesloaded`, `fontawesome` −1,5 Mo) ;
 `gTranslate-flags.js` scindé en `app/config/gtranslate.settings.js` + `vendor/gtranslate.js` ;
 les 6 blocs `<script>` standardisés (`notyf` désormais partout). Noms de fichiers gardés tels quels.
+
+**P1.2 — éclater `utils.js`** : sorti en 3 modules ciblés → `app/services/cart.service.js` (état panier),
+`app/ui/plugins.js` (init jQuery Slick/Owl/Zoom), `app/ui/templates.js` (générateurs HTML). `utils.js`
+garde l'orchestration par page ; `main.js` inchangé. Vérifié en live (toutes pages + panier, 0 erreur).
 
 ---
 
@@ -82,7 +86,13 @@ assets/js/
 
 - [ ] **Uniformiser le nommage** : `database.management.js` (points) / `gTranslate-flags.js` (camelCase) / `owl.carousel.main.js`. → kebab-case partout : `products-repository.js`, `firebase-service.js`, etc.
 
-### P1.2 — Éclater `utils.js` (686 lignes, 5 responsabilités mélangées)
+### P1.2 — Éclater `utils.js` — ✅ **Fait (2026-07-26)**
+
+> Découpage **intermédiaire** : `app/services/cart.service.js` + `app/ui/plugins.js` +
+> `app/ui/templates.js` sortis ; `utils.js` garde l'orchestration par page, `main.js` inchangé.
+> Découpage complet (`ui/pages/`, `analytics.service.js`) non retenu — codebase trop petit. Vérifié en live.
+
+_(Proposition d'origine ci-dessous, pour mémoire.)_
 
 `utils.js` contient aujourd'hui : init des plugins jQuery, gestion du panier, templates HTML, rendu par page, et binding d'événements. Découpage proposé (à faire **après** P1.1, sinon trop de churn d'un coup) :
 
@@ -204,7 +214,7 @@ _(Options écartées, pour mémoire : build minimal type Eleventy/`posthtml-incl
 ## ✅ Ordre d'exécution recommandé
 
 1. ~~P0~~ ✅ · ~~P4 (migration data)~~ ✅ — **faits** (2026-07-26).
-2. **P1.1** ✅ (vendor/app fait) · **P1.2** — éclater `utils.js` = prochain sous-chantier possible.
+2. **P1** ✅ (P1.1 vendor/app + P1.2 éclatement de `utils.js` ; P1.3 statu quo). **Prochain : P2 ou P3.**
 3. **P2 (suppressions)** — fichiers jamais référencés + `fontawesome.min.js` + polices FA (~35 Mo).
 4. **P3** — licence, readme, `.gitignore`, config Firebase (avant de communiquer le repo).
 5. **P4 (reste)** — validation CI + incohérences du catalogue.
