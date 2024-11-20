@@ -7,7 +7,9 @@
 
 **Légende :** 🔴 P0 = bug ou blocage · 🟠 P1 = organisation (ta demande principale) · 🟡 P2 = poids/perf · 🔵 P3 = qualité & open source · 🟣 P4 = préparation du scale (JSON)
 
-**Statut :** 🔴 P0 ✅ · 🟣 P4 migration ✅ · 🟠 **P1 ✅** (P1.1 + P1.2 faits ; P1.3 = statu quo). Restent P2, P3, P5 — et les liens sociaux (reportés).
+**Statut :** 🔴 P0 ✅ · 🟣 P4 migration ✅ · 🟠 **P1 ✅** (P1.1 + P1.2 faits ; P1.3 = statu quo) ·
+🟡 **P2 médias ✅** (suppressions + vidéos + images : `assets/` passé de **~86 Mo à 14,4 Mo**).
+Restent P2 (CSS, `defer`, historique git), P3, P5 — et les liens sociaux (reportés).
 **Décisions déjà prises (25/07/2026) :** duplication HTML → statu quo (voir P1.3) · catalogue → futur `data/products.js` en `export default`, pas de `fetch` JSON (voir P4).
 
 ---
@@ -33,6 +35,48 @@ les 6 blocs `<script>` standardisés (`notyf` désormais partout). Noms de fichi
 **P1.2 — éclater `utils.js`** : sorti en 3 modules ciblés → `app/services/cart.service.js` (état panier),
 `app/ui/plugins.js` (init jQuery Slick/Owl/Zoom), `app/ui/templates.js` (générateurs HTML). `utils.js`
 garde l'orchestration par page ; `main.js` inchangé. Vérifié en live (toutes pages + panier, 0 erreur).
+
+---
+
+## ✅ Fait (2026-07-28) — P2 poids & médias
+
+**Suppressions (−32,5 Mo)** : les 2 GIFs (`parfum-ingredients`, `parfum-kdo`), `official-islam-banner.png`,
+`banner4.jpg`, `favicon.ico`, `slider{2,5,6}.jpg` et les 7 fichiers `assets/fonts/fontawesome-webfont*`
+(aucun `@font-face` ne les cible — seul `ionicons` l'est, `plugins.css:209`).
+⚠️ **Correction du diagnostic initial** : `background-whatsapp.jpg` est **bien utilisé**
+([style.css:1475](assets/css/style.css#L1475) et [9108](assets/css/style.css#L9108)) → **conservé**.
+`fontawesome.min.js` avait déjà été supprimé pendant P1.1.
+
+**Vidéos (39,7 Mo → 10,4 Mo, −74 %)** : `flowers` et `fragrance` ré-encodées en 720p H.264 CRF 28 sans
+piste audio (`-movflags +faststart`), qualité visuellement indiscernable à 100 % de zoom.
+`bg-video-welcome` a un traitement à part (voir ci-dessous). Décodage intégral vérifié sur les 3.
+Plus d'`autoplay` en dur : chaque `<video>` porte `preload="none"` + un `poster` WebP (~30 Ko, extrait de
+la vidéo) + `data-lazy`, et le nouveau module `app/ui/video.js` charge puis lance la lecture via
+`IntersectionObserver` quand la vidéo entre dans le viewport (pause à la sortie). `prefers-reduced-motion`
+respecté : le poster reste affiché et **la vidéo n'est jamais téléchargée**. Appelé depuis `main.js` (page `index`).
+
+**Netteté de `bg-video-welcome.mp4`** : le flou signalé sur cette vidéo **vient de la source**, pas du
+ré-encodage — l'original 1080p sorti de git est déjà mou (énergie de contours 0,54, très basse ; tag
+encodeur `Lavf58.76.100` = déjà transcodé avant d'entrer dans le projet). Aucun filtre CSS en cause.
+La résolution n'était pas le vrai levier : c'est le masque de netteté `unsharp=5:5:1.0:5:5:0.0` de ffmpeg
+qui rend les arêtes franches (il ne crée pas de détail — l'information n'est pas dans le fichier).
+Version retenue : **1080p natif + `unsharp`, CRF 26 = 6,4 Mo** (au lieu de 2,5 Mo en 720p). Le surpoids est
+acceptable parce que `preload="none"` fait que cette vidéo ne se télécharge que si le visiteur descend
+jusqu'à elle ; et elle est affichée sur ~1050 px CSS, soit ~2100 px physiques en retina, où le 720p était
+nettement étiré. Poster régénéré en 1440 px depuis la version nette (30 Ko) pour éviter un saut visuel.
+⚠️ Si cette vidéo est un jour remplacée, **repartir d'une source nette** : c'est le seul vrai correctif.
+
+**Images (11,3 Mo → 1,2 Mo, −89 %)** : 48 PNG (produits, service, bannière) convertis en WebP qualité 82.
+Transparence vérifiée fichier par fichier — seuls `loyalty` et `delivery-express` en avaient, elle est
+préservée (`yuva420p`). Le logo reste en **PNG** : il sert aussi de favicon, et WebP n'est pas fiable en
+favicon sur Safari. 45 références mises à jour dans `data/products.js`, plus `services.html` et `contact-us.html`.
+`width`/`height` ajoutés partout (toutes les images produit sont en 1:1) et `loading="lazy"` sur la grille
+`shop.html`, le footer et les images statiques hors du premier écran — **volontairement pas** dans les
+carrousels Slick, où l'image clippée provoquerait un flash à la navigation.
+
+**Vérifié** : les 6 pages servies en http, 0 erreur console, 0 image cassée, 0 requête 404.
+_(5 `url()` de `style.css` pointent dans le vide — `banner13/14/15.jpg`, `coming-soon.jpg`, `icon/blog-nav.png` —
+mais c'est **antérieur** : ce sont des règles mortes du thème acheté, à nettoyer avec le PurgeCSS de P2.)_
 
 ---
 
@@ -72,19 +116,18 @@ assets/js/
     └── firebase-management.js
 ```
 
-- [ ] Déplacer les libs dans `vendor/`, le code applicatif dans `app/`.
-- [ ] Mettre à jour les `<script>` des 6 pages **et** les imports relatifs (`main.js` importe `"../js/utils.js"` → devient `"./utils.js"`).
-- [ ] **Cas particulier `gTranslate-flags.js`** : ce fichier mélange la **config** (lignes 3-13, `window.gtranslateSettings` : langues, position, drapeaux) et les **533 lignes de lib GTranslate**. La lib lit la config au chargement, donc il faut la définir avant.
-      👉 Découper en `app/config/gtranslate.settings.js` (ta config) + `vendor/gtranslate.js` (lib intacte), chargés dans cet ordre.
+- [x] Déplacer les libs dans `vendor/`, le code applicatif dans `app/`.
+- [x] Mettre à jour les `<script>` des 6 pages **et** les imports relatifs (`main.js` importe `"../js/utils.js"` → devient `"./utils.js"`).
+- [x] **Cas particulier `gTranslate-flags.js`** → découpé en `app/config/gtranslate.settings.js` + `vendor/gtranslate.js`, chargés dans cet ordre.
 
-- [ ] **Supprimer purement et simplement** (chargés sur les 6 pages, jamais appelés dans ton code) :
+- [x] **Supprimer purement et simplement** (chargés sur les 6 pages, jamais appelés dans ton code) :
   - `bpopup.js` (5 Ko) — aucun `.bPopup(` dans le projet
   - `jquery.cookie.js` (3 Ko) — aucun `$.cookie`
   - `imagesloaded.js` (5 Ko) — aucun appel
   - `jquery.ui.js` (253 Ko) — voir P0
   - `fontawesome.min.js` (**1,5 Mo**) — voir P2
 
-- [ ] **Uniformiser le nommage** : `database.management.js` (points) / `gTranslate-flags.js` (camelCase) / `owl.carousel.main.js`. → kebab-case partout : `products-repository.js`, `firebase-service.js`, etc.
+- [x] ⛔ **Uniformiser le nommage** en kebab-case → **décidé : non retenu**, les noms de fichiers sont gardés tels quels.
 
 ### P1.2 — Éclater `utils.js` — ✅ **Fait (2026-07-26)**
 
@@ -128,23 +171,31 @@ _(Options écartées, pour mémoire : build minimal type Eleventy/`posthtml-incl
 
 ## 🟡 P2 — Poids & performance
 
-> Le repo pèse **236 Mo** (dont 71 Mo de vidéos + historique git). C'est énorme pour un site vitrine et pénible à cloner.
+> Le repo pesait **236 Mo** (dont 71 Mo de vidéos + historique git). Après la passe du 28/07/2026,
+> `assets/` est descendu à **14,4 Mo**. L'historique git, lui, pèse toujours autant — **assumé** :
+> le clone lourd n'est pas un problème pour toi, seule la fluidité du site compte.
 
-- [ ] **Supprimer 32 Mo de GIFs jamais référencés** :
-      `assets/video/parfum-ingredients.gif` (18 Mo) et `assets/video/parfum-kdo.gif` (14 Mo) — aucune référence dans le HTML/CSS/JS.
-- [ ] **Autres fichiers jamais référencés** (~700 Ko) :
-      `assets/img/banner/official-islam-banner.png` (360 Ko), `assets/img/bg/background-whatsapp.jpg`, `assets/img/bg/banner4.jpg`, `assets/img/favicon.ico` (le favicon utilisé est le PNG du logo), `assets/img/slider/slider{2,5,6}.jpg`.
-- [ ] **`fontawesome.min.js` (1,5 Mo) chargé sur les 6 pages en doublon du CDN.**
-      Chaque page charge déjà `font-awesome/6.6.0/css/all.min.css` depuis cdnjs. Le JS est la version SVG de FA 6.6.0 : les deux font le même travail. → supprimer le JS.
-- [ ] **`assets/fonts/fontawesome-webfont*` (1,8 Mo)** : référencés par **aucun** CSS du projet. → supprimer (garder `ionicons*`, eux sont bien utilisés par `style.css`).
-- [ ] **La page d'accueil charge 40 Mo de vidéo en `autoplay`** : `flowers.mp4` (8,3 Mo) + `fragrance.mp4` (14 Mo) + `bg-video-welcome.mp4` (18 Mo).
-      👉 Ré-encoder en 720p H.264 CRF 28 (typiquement 1-2 Mo/vidéo) : `ffmpeg -i in.mp4 -vf scale=-2:720 -c:v libx264 -crf 28 -an -movflags +faststart out.mp4` (le `-an` retire l'audio, inutile sur une vidéo `muted`).
-      👉 Ajouter `poster="…"` + `preload="none"` sur les vidéos hors du premier écran, et déclencher la lecture via `IntersectionObserver`.
-      👉 Respecter `prefers-reduced-motion`.
-- [ ] **Images produits : 11 Mo de PNG** → convertir en WebP (un seul l'est déjà : `Qimmah-img-1.webp`). Gain attendu 70-80 %. Ajouter `loading="lazy"` + `width`/`height` (évite le CLS).
+- [x] **Supprimer 32 Mo de GIFs jamais référencés** — `parfum-ingredients.gif` + `parfum-kdo.gif` supprimés.
+- [x] **Autres fichiers jamais référencés** — `official-islam-banner.png`, `banner4.jpg`, `favicon.ico`,
+      `slider{2,5,6}.jpg` supprimés. ⚠️ `background-whatsapp.jpg` **était un faux positif** : il est utilisé
+      par `style.css` (×2) → conservé.
+- [x] **`fontawesome.min.js` (1,5 Mo)** — déjà supprimé pendant P1.1 (doublon du CDN CSS).
+- [x] **`assets/fonts/fontawesome-webfont*`** — 7 fichiers supprimés (aucun `@font-face` ne les cible ;
+      `ionicons*` conservés, eux sont bien référencés par `plugins.css:209`).
+- [x] **La page d'accueil chargeait 40 Mo de vidéo en `autoplay`** → ré-encodées (**10,4 Mo** : 720p CRF 28
+      pour les 2 vidéos du carrousel, 1080p CRF 26 + `unsharp` pour `bg-video-welcome`), `preload="none"` +
+      `poster` + lecture déclenchée par `IntersectionObserver`, `prefers-reduced-motion` respecté.
+      Voir la section « Fait (2026-07-28) ».
+- [x] **Images produits : 11 Mo de PNG** → 48 fichiers convertis en WebP (**1,2 Mo**, −89 %),
+      `loading="lazy"` + `width`/`height` ajoutés. Voir la section « Fait (2026-07-28) ».
+- [ ] _(optionnel)_ **Les 12 `.jpg` restants** (~950 Ko : quelques photos produit, `banner{1,2,3}`,
+      `happy-people`, `background-whatsapp`) n'ont pas été convertis — gain estimé ~600 Ko seulement,
+      et `background-whatsapp` demanderait de toucher `style.css`. À faire si on veut l'homogénéité.
 - [ ] **`style.css` = 12 025 lignes** (thème acheté, très majoritairement inutilisé). → passer un PurgeCSS/UnCSS sur les 6 pages **une fois le JS stabilisé** (attention : les classes injectées par `utils.js` doivent être en safelist).
 - [ ] **11 `<script>` bloquants par page**, tous dans le `<body>` sans `defer`. → ajouter `defer` (les modules le sont déjà par nature) ; à terme, bundler.
-- [ ] **Le poids reste dans l'historique git** même après suppression des fichiers : un `git clone` téléchargera toujours les 32 Mo de GIFs. Si tu veux vraiment un repo léger à cloner, il faut réécrire l'historique (`git filter-repo --path assets/video --invert-paths`) — **à faire une seule fois, avant de communiquer le repo**, et à documenter.
+- [x] ⛔ **Le poids reste dans l'historique git** (un `git clone` téléchargera toujours les 32 Mo de GIFs).
+      → **décidé le 28/07/2026 : on ne réécrit pas l'historique.** Un clone lourd est sans importance ici,
+      seule la fluidité du site final compte.
 
 ---
 
@@ -152,16 +203,18 @@ _(Options écartées, pour mémoire : build minimal type Eleventy/`posthtml-incl
 
 - [ ] **Aucun fichier `LICENSE`.** Sans licence, "open source" n'a pas de valeur juridique : par défaut, personne n'a le droit de cloner/réutiliser. → ajouter MIT (le plus permissif, cohérent avec ton intention) + la mention dans le readme.
       ⚠️ Vérifier aussi la licence du thème HTML d'origine avant de le republier.
-- [ ] **Config Firebase en dur** [firebase-management.js:18-26](assets/js/firebase-management.js#L18-L26) + clé de site reCAPTCHA (L33).
+- [ ] **Config Firebase en dur** [firebase-management.js](assets/js/app/firebase-management.js) + clé de site reCAPTCHA.
       Ce ne sont pas des secrets (les clés Firebase sont publiques par design, la sécurité repose sur les règles Firestore + App Check — c'est bien fait chez toi 👍). **Mais** : un cloneur pointe par défaut sur **ta** base, ses écritures sont rejetées par App Check, et il ne comprend pas pourquoi.
       👉 `app/config/firebase.config.js` (gitignoré) + `firebase.config.example.js` commité + garde dans le code : si la config est absente, désactiver proprement les stats au lieu de planter.
 - [ ] **Le `readme.md` ne correspond pas au repo** :
-  - l'arborescence annonce `database-management.js` (tiret) → c'est `database.management.js` (point)
+  - l'arborescence annonce `database-management.js` → ce fichier **n'existe plus** (supprimé en P4) ;
+    toute la section est à réécrire sur la structure actuelle `vendor/` + `app/{config,data,services,ui}`
   - `services.html` n'apparaît pas dans l'arbre, `README.md` est en fait `readme.md`
   - "Live stock", "quantity selector" → le stock n'est nulle part dans le modèle de données
   - "Validations client & server side" → il n'y a pas de serveur ; c'est la règle Firestore (à reformuler)
   - "Clean code split into modules" → à re-vérifier après P1 🙂
-  - la section Structure ne mentionne pas `assets/video` (71 Mo, c'est l'info la plus utile pour un cloneur)
+  - ~~la section Structure ne mentionne pas `assets/video` (71 Mo…)~~ → l'argument du poids ne tient plus
+    (`assets/` = 10,5 Mo depuis le 28/07/2026), mais la section Structure reste à corriger
 - [ ] **`.gitignore` quasi vide** (`.vscode/*`, sans retour à la ligne final). → ajouter `.DS_Store`, `Thumbs.db`, `node_modules/`, `dist/` (selon P1.3), `app/config/firebase.config.js`.
 - [ ] **Ajouter `.editorconfig` + Prettier + ESLint.** Le code est déjà formaté à la Prettier — autant le figer pour que les contributions restent cohérentes. ESLint aurait attrapé `attr("clas")`, la clé `autoplay` dupliquée et les variables mortes.
 - [ ] **SEO** : les 6 pages partagent le même `<title>` (`✨ Kosmetika © ✨`) et une `meta description` **vide**. `<html lang="en">` alors que tout le contenu est en français.
@@ -214,8 +267,13 @@ _(Options écartées, pour mémoire : build minimal type Eleventy/`posthtml-incl
 ## ✅ Ordre d'exécution recommandé
 
 1. ~~P0~~ ✅ · ~~P4 (migration data)~~ ✅ — **faits** (2026-07-26).
-2. **P1** ✅ (P1.1 vendor/app + P1.2 éclatement de `utils.js` ; P1.3 statu quo). **Prochain : P2 ou P3.**
-3. **P2 (suppressions)** — fichiers jamais référencés + `fontawesome.min.js` + polices FA (~35 Mo).
-4. **P3** — licence, readme, `.gitignore`, config Firebase (avant de communiquer le repo).
+2. ~~**P1**~~ ✅ (P1.1 vendor/app + P1.2 éclatement de `utils.js` ; P1.3 statu quo) — **fait** (2026-07-26).
+3. ~~**P2 (suppressions + médias)**~~ ✅ — **fait** (2026-07-28) : `assets/` de ~86 Mo à 14,4 Mo.
+4. **P3** — licence, readme, `.gitignore`, config Firebase. 👉 **Prochaine étape**, à faire avant de communiquer le repo.
 5. **P4 (reste)** — validation CI + incohérences du catalogue.
-6. **P1.2 / P1.3 / P2 (médias, CSS) / P5** — les chantiers longs & investigations.
+6. **P2 (CSS + `defer`) / P5** — les chantiers longs & investigations.
+
+> ⚠️ Rappel pour la suite : les fichiers du projet sont en **UTF-8 sans BOM**. Ne jamais les réécrire via
+> `Get-Content` / `Set-Content` sous PowerShell 5.1 (lecture en Windows-1252 → double encodage, les accents
+> et emoji sont détruits). Utiliser `[System.IO.File]::ReadAllText` / `WriteAllText` avec un
+> `UTF8Encoding($false)`, ou un éditeur.
