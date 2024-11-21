@@ -1904,10 +1904,6 @@ textarea:-ms-input-placeholder {
 
 /* 15. product details css here */
 
-#img-1 {
-  text-align: center;
-}
-
 #zoom1 {
   width: 600px;
   border-radius: 20px;
@@ -1949,8 +1945,6 @@ textarea:-ms-input-placeholder {
   font-weight: 700;
 }
 .product_d_right .product_desc {
-  margin-bottom: 35px;
-  padding-bottom: 28px;
   border-bottom: 1px solid #ebebeb;
 }
 @media only screen and (max-width: 767px) {
@@ -1982,13 +1976,6 @@ textarea:-ms-input-placeholder {
   }
 }
 
-.product_variant.quantity {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  align-items: center;
-  margin-bottom: 27px;
-}
 @media only screen and (max-width: 767px) {
   .product_variant.quantity {
     margin-bottom: 16px;
@@ -2077,7 +2064,6 @@ textarea:-ms-input-placeholder {
 
 .product_info_button {
   border-bottom: 1px solid #ebebeb;
-  padding-bottom: 15px;
 }
 .product_info_button ul {
   justify-content: center;
@@ -2117,9 +2103,6 @@ textarea:-ms-input-placeholder {
   padding-top: 20px;
 }
 
-.product_d_info {
-  margin-bottom: 57px;
-}
 @media only screen and (max-width: 767px) {
   .product_d_info {
     margin-bottom: 47px;
