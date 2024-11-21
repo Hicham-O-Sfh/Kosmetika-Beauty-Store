@@ -1309,28 +1309,6 @@ textarea:-ms-input-placeholder {
   color: #242424;
 }
 
-.banner_fullwidth {
-  margin-bottom: 64px;
-}
-@media only screen and (max-width: 767px) {
-  .banner_fullwidth {
-    margin-bottom: 55px;
-  }
-}
-.banner_fullwidth .row {
-  height: 350px;
-}
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .banner_fullwidth .row {
-    height: 350px;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .banner_fullwidth .row {
-    height: 310px;
-  }
-}
-
 .banner_text {
   text-align: center;
   cursor: pointer;
@@ -1469,10 +1447,6 @@ textarea:-ms-input-placeholder {
   margin-right: -6px;
 }
 
-.product_tab_button {
-  margin-bottom: 35px;
-  text-align: center;
-}
 .product_tab_button ul {
   justify-content: center;
   margin: 0 auto;
