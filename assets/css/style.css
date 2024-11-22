@@ -456,24 +456,6 @@ textarea:-ms-input-placeholder {
   }
 }
 
-.middel_right {
-  display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  align-items: center;
-}
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .middel_right {
-    justify-content: center;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .middel_right {
-    justify-content: center;
-  }
-}
-
 .cart_link {
   margin-left: 25px;
   position: relative;
@@ -736,9 +718,6 @@ textarea:-ms-input-placeholder {
   max-width: 120px;
 }
 
-.main_menu_inner {
-  text-align: center;
-}
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .main_menu {
