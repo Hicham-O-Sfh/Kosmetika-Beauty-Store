@@ -1,3 +1,9 @@
+/*!
+ * Kosmetika — Beauty Store
+ * Copyright (c) 2024-2026 Hicham Oussama Saffih. All rights reserved.
+ * Distributed under the MIT License — see the LICENSE file at the project root.
+ */
+
 import {
   bindCartEvent,
   bindContactPageEvents,
@@ -19,7 +25,7 @@ import { setupLazyVideos } from "./ui/video.js";
     $("[data-bgimg]").each(function () {
       var bgImgUrl = $(this).data("bgimg");
       $(this).css({
-        "background-image": "url(" + bgImgUrl + ")", // + meaning concat
+        "background-image": "url(" + bgImgUrl + ")",
       });
     });
   }

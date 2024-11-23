@@ -1,3 +1,9 @@
+/*!
+ * Kosmetika — Beauty Store
+ * Copyright (c) 2024-2026 Hicham Oussama Saffih. All rights reserved.
+ * Distributed under the MIT License — see the LICENSE file at the project root.
+ */
+
 // GTranslate widget configuration.
 // Must load BEFORE vendor/gtranslate.js, which reads window.gtranslateSettings on load.
 window.gtranslateSettings = {

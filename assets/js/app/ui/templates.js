@@ -1,9 +1,12 @@
+/*!
+ * Kosmetika — Beauty Store
+ * Copyright (c) 2024-2026 Hicham Oussama Saffih. All rights reserved.
+ * Distributed under the MIT License — see the LICENSE file at the project root.
+ */
+
 "use strict";
 
-/**
- * HTML template builders — pure functions returning markup strings.
- * No DOM access, no side effects.
- */
+/** HTML template builders — pure functions returning markup strings. */
 
 import {
   getMainPicUrl,
@@ -16,10 +19,7 @@ export function isOutOfStock(product) {
   return product.status === PRODUCT_STATUS.OUT_OF_STOCK;
 }
 
-/**
- * Build the "Marque / Qualité / Catégorie" info block shown on the product page.
- * UI text stays in French, the underlying data stays structured.
- */
+/** Build the "Marque / Qualité / Catégorie" info block of the product page. */
 export function getSecondaryInfoHtml(product) {
   const category =
     product.category.charAt(0).toUpperCase() + product.category.slice(1);
@@ -33,12 +33,7 @@ export function outOfStockBadge(product) {
     : "";
 }
 
-/**
- * "Épuisé" badge pinned to the top-left corner of the product photo.
- * Absolutely positioned so it never shifts the card's title/price alignment.
- * `.product_thumb` is already `position: relative` in style.css, so this anchors
- * to the thumb on every breakpoint (mobile/tablet/desktop).
- */
+/** "Épuisé" badge pinned to the top-left corner of the product photo. */
 export function outOfStockThumbBadge(product) {
   return isOutOfStock(product)
     ? `<span class="badge" style="position: absolute; top: 6px; left: 6px; z-index: 5; font-size: 10px; padding: 3px 6px; background-color: #dc3545; color: #fff;">Épuisé</span>`
@@ -59,6 +54,22 @@ export function outOfStockAlertHtml() {
       le délai sera juste un peu plus long, rien de méchant 😉.
       <br />
       Merci pour ta patience 💖
+    </div>
+  `;
+}
+
+/** Shown on `product-details.html` when `?productId=` matches no product. */
+export function productNotFoundHtml() {
+  return `
+    <div class="col-12">
+      <div class="alert alert-warning text-center" role="alert">
+        <b>Oups, ce parfum est introuvable</b> 🧐
+        <br />
+        Le lien est sûrement incomplet ou plus tout jeune 😅
+        <br />
+        Retrouve toute la collection dans le <a href="shop.html">catalogue</a>,
+        ou laisse-toi tenter par les suggestions juste en dessous 👇
+      </div>
     </div>
   `;
 }

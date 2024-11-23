@@ -1,3 +1,9 @@
+/*!
+ * Kosmetika — Beauty Store
+ * Copyright (c) 2024-2026 Hicham Oussama Saffih. All rights reserved.
+ * Distributed under the MIT License — see the LICENSE file at the project root.
+ */
+
 "use strict";
 
 /**
@@ -22,15 +28,11 @@ const PRODUCT_SLIDES_PER_BREAKPOINT = [
 /**
  * Build the Slick options for a product row.
  *
- * Slick sizes every slide at `listWidth / slidesToShow`. So when a row holds
- * fewer slides than `slidesToShow`, the track only covers a fraction of the
- * container and the cards end up squeezed on one side — that is exactly what
- * broke the home tabs on desktop (5 or 6 products = only 3 slides once they are
- * stacked 2 by 2, against `slidesToShow: 5`), while tablet/mobile looked fine
- * because there `slidesToShow` happened to be <= the slide count.
- * Capping `slidesToShow` at the real slide count keeps the row full-width for
- * any number of products, and the carousel comes back on its own as soon as
- * there are more products than columns.
+ * Slick sizes every slide at `listWidth / slidesToShow`, so a row holding fewer
+ * slides than `slidesToShow` renders squeezed on one side. Capping
+ * `slidesToShow` at the real slide count keeps the row full-width whatever the
+ * number of products, and the carousel returns once there are more products
+ * than columns.
  *
  * @param {number} slideCount number of Slick slides (products / `rows`).
  * @param {{rows?: number, centerMode?: boolean}} [options]

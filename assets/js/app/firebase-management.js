@@ -1,3 +1,9 @@
+/*!
+ * Kosmetika — Beauty Store
+ * Copyright (c) 2024-2026 Hicham Oussama Saffih. All rights reserved.
+ * Distributed under the MIT License — see the LICENSE file at the project root.
+ */
+
 // Firebase Core
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
 import {
