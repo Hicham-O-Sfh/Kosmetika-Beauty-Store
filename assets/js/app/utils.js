@@ -100,7 +100,7 @@ export function buildVisualCart() {
           <div class="cart_item" data-product-id="${order.productId}">
             <div class="cart_img">
               <a href="product-details.html?productId=${mappedProductFromDb.id}">
-                <img src="${productMainPic}" alt=""/>
+                <img src="${productMainPic}" alt="${getProductTitle(mappedProductFromDb)}"/>
               </a>
             </div>
             <div class="cart_info">
@@ -168,7 +168,8 @@ export function projectProductInPage() {
 
       // product's pictures & zoom management
       const productMainPic = getMainPicUrl(product);
-      product.pics.forEach((pic) => {
+      const productTitle = getProductTitle(product);
+      product.pics.forEach((pic, index) => {
         $("#gallery_01").append(
           `
         <li>
@@ -180,7 +181,7 @@ export function projectProductInPage() {
             data-zoom-image="${pic.url}">
             <img
               src="${pic.url}"
-              alt=""/>
+              alt="${productTitle} — photo ${index + 1}"/>
           </a>
         </li>
         `,
@@ -189,6 +190,7 @@ export function projectProductInPage() {
       applyOwlCarousel();
 
       $("#zoom1").prop("src", productMainPic);
+      $("#zoom1").prop("alt", productTitle);
       $("#zoom1").data("zoom-image", productMainPic);
       applyElevateZoom();
 
@@ -216,7 +218,10 @@ export function projectRelatedProductsInPage() {
                   class="primary_img"
                   href="product-details.html?productId=${prod.id}">
                   <img
-                    src="${getMainPicUrl(prod)}" alt="" width="600" height="600" />
+                    src="${getMainPicUrl(prod)}"
+                    alt="${getProductTitle(prod)}"
+                    width="600"
+                    height="600" />
                 </a>
               </div>
               <div class="product_content">
@@ -292,7 +297,8 @@ export function projectBestSellingProductsInFooter() {
               <a href="product-details.html?productId=${product.id}">
                 <img
                 src="${getMainPicUrl(product)}"
-                alt="" width="600" height="600" loading="lazy"/>
+                alt="${getProductTitle(product)}"
+                width="600" height="600" loading="lazy"/>
               </a>
             </div>
             <div class="simple_product_content">
@@ -357,7 +363,7 @@ export function projectAllProductsInShopPage() {
                   href="product-details.html?productId=${prod.id}">
                   <img
                     src="${productMainPic}"
-                    alt=""
+                    alt="${getProductTitle(prod)}"
                     width="600"
                     height="600"
                     loading="lazy" />
@@ -367,7 +373,7 @@ export function projectAllProductsInShopPage() {
                   href="product-details.html?productId=${prod.id}">
                   <img
                     src="${getSecondaryPicUrl(prod)}"
-                    alt=""
+                    alt="${getProductTitle(prod)} — autre vue"
                     width="600"
                     height="600"
                     loading="lazy" />

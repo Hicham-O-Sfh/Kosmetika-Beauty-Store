@@ -84,7 +84,11 @@ export function renderProductCard(prod) {
           <a
             class="primary_img"
             href="product-details.html?productId=${prod.id}">
-            <img src="${getMainPicUrl(prod)}" alt="" width="600" height="600" />
+            <img
+              src="${getMainPicUrl(prod)}"
+              alt="${getProductTitle(prod)}"
+              width="600"
+              height="600" />
           </a>
         </div>
         <div class="product_content">

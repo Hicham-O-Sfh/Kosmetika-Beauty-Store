@@ -44,7 +44,9 @@
   <!-- Main Style CSS -->
   <link rel="stylesheet" href="assets/css/style.css" />
 
-  <!--modernizr min js here-->
+  <!-- Modernizr — deliberately NOT deferred: it swaps the .no-js class on
+         <html>, which .no-js .owl-carousel relies on in plugins.css.
+         Deferring it would flash the product-details.html gallery. -->
   <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
 </head>
 
@@ -103,7 +105,7 @@
           <div class="col-lg-2 col-md-3 col-4">
             <div class="logo">
               <a href="index.html">
-                <img src="assets/img/logo/logo-Kosmetika.png" alt="" width="256" height="66" />
+                <img src="assets/img/logo/logo-Kosmetika.png" alt="Kosmetika Beauty Store — retour à l’accueil" width="256" height="66" />
               </a>
             </div>
           </div>
@@ -161,7 +163,7 @@
             <div class="main_menu_inner text-center">
               <div class="logo_sticky">
                 <a href="index.html">
-                  <img src="assets/img/logo/logo-Kosmetika.png" alt="" width="256" height="66" />
+                  <img src="assets/img/logo/logo-Kosmetika.png" alt="Kosmetika Beauty Store — retour à l’accueil" width="256" height="66" />
                 </a>
               </div>
               <div class="main_menu">
@@ -205,7 +207,7 @@
               class="zoomWrapper single-zoom big-image-skeleton text-center"
             >
               <a href="#">
-                <img id="zoom1" src="" data-zoom-image="" alt="" />
+                <img id="zoom1" src="" data-zoom-image="" alt="Photo du parfum" />
               </a>
             </div>
 
@@ -423,17 +425,17 @@
   ============================================ -->
 
     <!-- vendor JS -->
-    <script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
-    <script src="assets/js/vendor/popper.js"></script>
-    <script src="assets/js/vendor/bootstrap.min.js"></script>
-    <script src="assets/js/vendor/slick.js"></script>
-    <script src="assets/js/vendor/owl.carousel.main.js"></script>
-    <script src="assets/js/vendor/jquery.elevatezoom.js"></script>
-    <script src="assets/js/vendor/notyf.min.js"></script>
+    <script src="assets/js/vendor/jquery-3.4.1.min.js" defer></script>
+    <script src="assets/js/vendor/popper.js" defer></script>
+    <script src="assets/js/vendor/bootstrap.min.js" defer></script>
+    <script src="assets/js/vendor/slick.js" defer></script>
+    <script src="assets/js/vendor/owl.carousel.main.js" defer></script>
+    <script src="assets/js/vendor/jquery.elevatezoom.js" defer></script>
+    <script src="assets/js/vendor/notyf.min.js" defer></script>
 
     <!-- Translator (settings must load before the library) -->
     <div class="gtranslate_wrapper"></div>
-    <script src="assets/js/app/config/gtranslate.settings.js"></script>
+    <script src="assets/js/app/config/gtranslate.settings.js" defer></script>
     <script src="assets/js/vendor/gtranslate.js" defer></script>
 
     <!-- App JS -->
