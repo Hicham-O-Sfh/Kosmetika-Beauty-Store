@@ -50,9 +50,9 @@ function buildProductSlickSettings(slideCount, options = {}) {
     slidesToShow: fit(base.slides),
     slidesToScroll: fit(base.slides),
     prevArrow:
-      '<button class="prev_arrow"><i class="fa fa-angle-left"></i></button>',
+      '<button type="button" class="prev_arrow" aria-label="Produits précédents"><i class="fa fa-angle-left"></i></button>',
     nextArrow:
-      '<button class="next_arrow"><i class="fa fa-angle-right"></i></button>',
+      '<button type="button" class="next_arrow" aria-label="Produits suivants"><i class="fa fa-angle-right"></i></button>',
     responsive: responsive.map(({ breakpoint, slides }) => ({
       breakpoint,
       settings: {

@@ -101,11 +101,11 @@ import { setupLazyVideos } from "./ui/video.js";
   });
 
   /*---mini cart activation---*/
-  $(".cart_link > a").on("click", function () {
+  $(".cart_link > button").on("click", function () {
     $(".mini_cart,.off_canvars_overlay").addClass("active");
   });
 
-  $(".mini_cart_close > a,.off_canvars_overlay").on("click", function () {
+  $(".mini_cart_close > button,.off_canvars_overlay").on("click", function () {
     $(".mini_cart,.off_canvars_overlay").removeClass("active");
   });
 
