@@ -9,7 +9,7 @@ The project demonstrates clean code, secure data handling, and production-ready 
 >
 > This application is designed to be instantly _“clone-and-play”_.  
 > All core features work out-of-the-box, no Firebase or reCAPTCHA config needed for a first exploration.  
-> Products and shop data are managed in a global JSON array, order and cart state are safely handled via `localStorage`, and checkout is as simple as sending a WhatsApp message (pre-filled invoice) using the WhatsApp API and query string.
+> The catalogue lives in a plain JS module (`app/data/products.js`), cart state is handled via `localStorage`, and checkout is as simple as sending a WhatsApp message (pre-filled invoice) using the WhatsApp API and query string.
 >
 > ⚡ **Just** `git clone` **the repo and open** `index.html` **in your browser to see the app in action!**
 >
@@ -67,32 +67,23 @@ Pull requests, issues, and suggestions are always welcome.
 
 ## 🚀 Features
 
-- 🔒 **Firebase App Check** (reCAPTCHA v3, debug support)
-- 🛡️ **Secure by Design**: Strict Firestore rules (type checks, anti-tampering), no secrets on frontend
-- 📦 **Firestore Cloud Sync**: Store products, orders, and analytics by product ID
-- 🛒 **Product Catalog & Orders**
-  - Add/remove products
-  - Live stock, quantity selector, dynamic cart
-- 💬 **WhatsApp Checkout**
-  - One-click order confirmation
-  - Pre-filled WhatsApp message with order details
-- 📊 **Live Analytics**
-  - Firestore updates:
-    - `total_orders` (per product)
-    - `total_quantity` (per product)
-- 🌍 **i18n/Internationalization**: GTranslate instant language switch
-- 🎉 **Modern UI/UX**
-  - Responsive, smooth animations, mobile-first
-  - Product carousel (Owl Carousel)
-  - Image zoom (elevateZoom)
-  - Beautiful notifications (Notyf)
-  - FontAwesome icons
-- ⚡ **Instant Feedback & Error Handling**
-  - User-friendly popups and alerts
-  - Validations client & server side
-- 🧩 **Modular & Scalable**
-  - Clean code split into modules
-  - Ready for features: authentication, payment, advanced analytics, etc.
+- 🛒 **Catalog & cart**
+  - 17 products, cart contents and quantities kept in `localStorage`
+  - A cart entry pointing at a since-removed product is pruned automatically instead of crashing
+- 💬 **WhatsApp checkout**
+  - Cart formats into a pre-filled WhatsApp message (deep link) — no payment gateway, no sign-up
+- 📊 **Lightweight order analytics**
+  - One Firestore counter per product (`total_orders`, `total_quantity`) — nothing else is stored
+    server-side; the catalogue itself lives entirely in the frontend
+- 🔒 **Firebase App Check** (reCAPTCHA v3, debug token support) protects that one write path
+- 🛡️ **Secure by design**: strict Firestore rules (type + increment checks), no accounts, no admin
+  panel, no server — there is very little left to attack
+- 🌍 **i18n**: GTranslate instant language switch
+- 🎉 **UI**: responsive, mobile-first, product carousels (Slick, Owl Carousel), image zoom
+  (elevateZoom), toast notifications (Notyf), Font Awesome icons
+- ⚡ **Client-side validation & error handling**: friendly toasts instead of `alert()` or silent failures
+- 🧩 **Modular JS**: `vendor/` (third-party, untouched) vs `app/{config,data,services,ui}`
+  (application code)
 
 ---
 
@@ -102,38 +93,48 @@ Pull requests, issues, and suggestions are always welcome.
 - **Backend**: [Firebase Firestore](https://firebase.google.com/docs/firestore), [Firebase App Check](https://firebase.google.com/docs/app-check)
 - **Security**: App Check (reCAPTCHA v3), strict Firestore rules
 - **UI/UX Plugins**:
-  - [Owl Carousel](https://owlcarousel2.github.io/OwlCarousel2/) – responsive carousel
+  - [Slick Slider](https://kenwheeler.github.io/slick/) & [Owl Carousel](https://owlcarousel2.github.io/OwlCarousel2/) – product carousels
   - [elevateZoom](https://www.elevateweb.co.uk/image-zoom/) – image zoom
   - [Notyf](https://github.com/caroso1222/notyf) – elegant notifications
   - [GTranslate](https://gtranslate.io/) – instant language switcher
-  - FontAwesome – iconography
-- **Other tools**: [GTranslate](https://gtranslate.io/), FontAwesome, [VS Code Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+  - Font Awesome – iconography
+- **No build step**: no bundler, no npm install — any static file server works
 
 ---
 
 ## 🧑‍💻 Project Structure
 
-├── assets/  
-│ ├── css/  
-│ ├── fonts/  
-│ ├── img/  
-│ ├── video/  
-│ ├── js/  
-│ │ ├── database-management.js  
-│ │ ├── firebase-management.js  
-│ │ ├── utils.js  
-│ │ └── main.js  
-│ └── ...  
-├── index.html  
-├── contact-us.html  
-├── faq.html  
-├── shop.html  
-├── product-details.html  
-└── README.md
+```
+├── assets/
+│   ├── css/                     # style.css (site) + plugins.css (vendor bundle)
+│   ├── img/
+│   ├── video/
+│   └── js/
+│       ├── vendor/              # third-party libraries, never modified
+│       └── app/
+│           ├── main.js          # bootstrap + per-page routing
+│           ├── utils.js         # per-page orchestration
+│           ├── firebase-management.js
+│           ├── config/          # site.config.js, gtranslate.settings.js
+│           ├── data/            # products.js (catalogue), products.repository.js
+│           ├── services/        # cart.service.js
+│           └── ui/              # plugins.js, templates.js, video.js
+├── index.html
+├── shop.html
+├── product-details.html
+├── services.html
+├── faq.html
+├── contact-us.html
+├── LICENSE
+└── readme.md
+```
 
-- **`firebase-management.js`**: Firebase/App Check/Firestore logic
-- **`main.js`**: App logic, UI handlers, and business logic
-- **`Plugins`**: All vendor JS (carousel, zoom, notyf, etc...).
+- **`app/main.js`**: bootstraps jQuery plugins and routes to the right per-page setup based on the
+  current filename
+- **`app/utils.js`**: per-page orchestration — renders product grids, the cart, the footer, binds events
+- **`app/firebase-management.js`**: Firebase/App Check/Firestore logic (order counters only)
+- **`app/data/products.js`**: the product catalogue — a plain JS array, edited directly, no build step
+- **`app/ui/`**: HTML template builders, jQuery plugin initializers (Slick/Owl/elevateZoom), lazy video
 
 ---
 
@@ -153,22 +154,26 @@ Pull requests, issues, and suggestions are always welcome.
    git clone https://github.com/hicham-o-sfh/Kosmetika-Beauty-Store.git
    cd Kosmetika-Beauty-Store
    ```
-2. **Configure Firebase:**
-   - In `assets/js/firebase-management.js`, paste your Firebase config and reCAPTCHA site key.
-3. **Enable App Check (debug):**
-   - Before running locally, add your debug token in Firebase Console > App Check > Debug Tokens.
-   - In `index.html`, before main JS, add:
+2. **Serve it over HTTP.** Zero build, zero dependencies — but the app code is loaded as ES modules,
+   which browsers block under `file://` (CORS). Any static server works, e.g.:
+   ```bash
+   npx serve .
+   ```
+   or VS Code's [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+   extension. Open the printed `http://localhost:...` URL — catalogue, cart and WhatsApp checkout all
+   work immediately, no configuration needed.
+3. **(Optional) Configure Firebase** — only needed to unlock live order analytics
+   (`total_orders`/`total_quantity` counters). The cart and checkout work identically without it.
+   - In [`assets/js/app/firebase-management.js`](assets/js/app/firebase-management.js), paste your own
+     Firebase project config and reCAPTCHA v3 site key.
+   - Add your debug token (Firebase Console → App Check → Debug Tokens) before `main.js` loads, in
+     `index.html`:
      ```html
      <script>
        window.FIREBASE_APPCHECK_DEBUG_TOKEN = "YOUR_DEBUG_TOKEN";
      </script>
      ```
-4. **Start local server:**
-   - Using VS Code Live Server (or similar):
-     ```
-     npx live-server
-     ```
-5. **Enjoy!**
+4. **Enjoy!**
 
 ---
 
