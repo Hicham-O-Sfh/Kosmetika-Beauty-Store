@@ -18,3 +18,22 @@ export const FACEBOOK = "KosmetikaFB";
 export const FACEBOOK_LINK = "FACEBOOK_LINK"; // TODO: real Facebook page URL
 export const TIKTOK = "Kosmetika";
 export const TIKTOK_LINK = "TIKTOK_LINK"; // TODO: real TikTok profile URL
+
+/**
+ * Sentinel values the social constants still carry while no real profile URL
+ * has been filled in. Compared literally, never against the constants
+ * themselves: once a constant holds a real URL it must stop matching.
+ */
+const SOCIAL_LINK_PLACEHOLDERS = ["INSTAGRAM_LINK", "FACEBOOK_LINK", "TIKTOK_LINK"];
+
+/**
+ * A social link still holding a sentinel has no destination yet: it opens an
+ * explanatory dialog instead of leading nowhere. Filling in the constant above
+ * turns it back into a plain link, with nothing else to change.
+ *
+ * @param {string} url
+ * @returns {boolean}
+ */
+export function isPlaceholderSocialLink(url) {
+  return SOCIAL_LINK_PLACEHOLDERS.includes(url);
+}

@@ -58,6 +58,41 @@ export function outOfStockAlertHtml() {
   `;
 }
 
+/**
+ * Dialog shown when a social link has no real profile URL yet.
+ * Injected once, on first click — it is not part of any page's markup.
+ */
+export function socialPlaceholderModalHtml() {
+  return `
+    <div
+      class="modal fade"
+      id="social-placeholder-modal"
+      tabindex="-1"
+      aria-labelledby="social-placeholder-title"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content social-placeholder">
+          <div class="modal-body text-center">
+            <h2 id="social-placeholder-title">Bientôt en ligne 🌸</h2>
+            <p>
+              Nos réseaux sociaux ne sont pas encore reliés : ces liens sont des
+              <b>emplacements de démonstration</b>. Ils pointeront vers les vraies
+              pages Instagram, Facebook et TikTok de la boutique dès qu'elles
+              seront ouvertes.
+            </p>
+            <p>
+              En attendant, écris-nous sur <b>WhatsApp</b> 💬, on répond vite !
+            </p>
+            <button type="button" class="button" data-bs-dismiss="modal">
+              Compris
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 /** Shown on `product-details.html` when `?productId=` matches no product. */
 export function productNotFoundHtml() {
   return `

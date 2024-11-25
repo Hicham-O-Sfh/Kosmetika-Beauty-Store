@@ -11,6 +11,7 @@ import {
   FACEBOOK_LINK,
   INSTAGRAM,
   INSTAGRAM_LINK,
+  isPlaceholderSocialLink,
   TEL_NUMBER_LINK,
   TIKTOK,
   TIKTOK_LINK,
@@ -47,6 +48,7 @@ import {
   outOfStockThumbBadge,
   productNotFoundHtml,
   renderProductCard,
+  socialPlaceholderModalHtml,
 } from "./ui/templates.js";
 
 /**
@@ -271,23 +273,54 @@ export function projectContactInfoInFooter() {
   $(".whatsapp-number").text(WHATSAPP_NUMBER);
   $(".whatsapp-number").attr("href", WHATSAPP_NUMBER_LINK);
 
-  // Instagram
-  $("#instagram-footer").text(INSTAGRAM);
-  $("#instagram-footer").attr("href", INSTAGRAM_LINK);
-  $(".instagram-account").text(INSTAGRAM);
-  $(".instagram-account").attr("href", INSTAGRAM_LINK);
+  projectSocialLink("#instagram-footer, .instagram-account", INSTAGRAM, INSTAGRAM_LINK);
+  projectSocialLink("#facebook-footer, .facebook-account", FACEBOOK, FACEBOOK_LINK);
+  projectSocialLink("#tikTok-footer, .tikTok-account", TIKTOK, TIKTOK_LINK);
+  bindSocialPlaceholderDialog();
+}
 
-  // Facebook
-  $("#facebook-footer").text(FACEBOOK);
-  $("#facebook-footer").attr("href", FACEBOOK_LINK);
-  $(".facebook-account").text(FACEBOOK);
-  $(".facebook-account").attr("href", FACEBOOK_LINK);
+/**
+ * Fill one social link everywhere it appears. Without a real profile URL the
+ * link opens an explanatory dialog rather than leading nowhere.
+ */
+function projectSocialLink(selector, label, url) {
+  const $links = $(selector).text(label);
 
-  // TikTok
-  $("#tikTok-footer").text(TIKTOK);
-  $("#tikTok-footer").attr("href", TIKTOK_LINK);
-  $(".tikTok-account").text(TIKTOK);
-  $(".tikTok-account").attr("href", TIKTOK_LINK);
+  if (isPlaceholderSocialLink(url)) {
+    $links
+      .attr("href", "#")
+      .attr("aria-haspopup", "dialog")
+      .addClass("social-placeholder-link");
+    return;
+  }
+
+  $links.attr("href", url).attr("target", "_blank").attr("rel", "noopener");
+}
+
+/** Build the dialog on first use, then hand it over to Bootstrap. */
+function bindSocialPlaceholderDialog() {
+  $("body").on("click", ".social-placeholder-link", function (event) {
+    event.preventDefault();
+    const trigger = this;
+
+    if (!document.getElementById("social-placeholder-modal")) {
+      $("body").append(socialPlaceholderModalHtml());
+    }
+
+    const dialog = document.getElementById("social-placeholder-modal");
+
+    // Bootstrap 5.0 leaves focus on <body> once the dialog closes; send it back
+    // to the link that opened it, so keyboard users do not lose their place.
+    dialog.addEventListener(
+      "hidden.bs.modal",
+      () => {
+        trigger.focus();
+      },
+      { once: true },
+    );
+
+    bootstrap.Modal.getOrCreateInstance(dialog).show();
+  });
 }
 
 export function projectBestSellingProductsInFooter() {
