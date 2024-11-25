@@ -6,7 +6,8 @@
 **Légende :** 🔴 P0 = bug/blocage · 🟠 P1 = organisation · 🟡 P2 = poids/perf · 🔵 P3 = qualité & open source · 🟣 P4 = scale (JSON) · 🟤 P5 = investigation
 
 **Statut :** P0 ✅ (sauf liens sociaux) · P1 ✅ · P2 médias ✅ · P2 CSS ✅ · P2 polices ✅ · P4 migration ✅ ·
-P3 bien avancé (licence, `.gitignore`, en-têtes copyright, résidus de template — tous faits 30-31/07).
+P3 bien avancé (licence, `.gitignore`, en-têtes copyright, résidus de template, `readme.md` — tous faits
+30-31/07).
 
 **👉 Prochaine étape : voir tout en bas.**
 
@@ -16,6 +17,9 @@ P3 bien avancé (licence, `.gitignore`, en-têtes copyright, résidus de templat
 - Catalogue en `data/products.js` (`export default`), pas de `fetch` JSON.
 - Historique git non réécrit (clone lourd accepté, seule la fluidité du site compte).
 - Noms de fichiers gardés tels quels (kebab-case écarté).
+- **Config Firebase reportée (31/07)** : ça bloque/bug côté outillage du user, mise en pause volontaire —
+  pas oubliée, juste plus tard. Le readme reflète l'état actuel (clé en dur) sans anticiper le fichier
+  externalisé.
 
 ---
 
@@ -63,18 +67,16 @@ Kosmetika ajouté à tous les fichiers HTML/CSS/JS du projet · commentaires d'h
 
 ## 🔵 P3 — reste
 
-- [ ] **Config Firebase en dur** dans [firebase-management.js](assets/js/app/firebase-management.js). Les
-      clés ne sont pas secrètes (sécurité = règles Firestore + App Check), mais un cloneur pointe par défaut
-      sur **ta** base et ses écritures sont rejetées sans comprendre pourquoi.
-      👉 `app/config/firebase.config.js` (déjà gitignoré) + `firebase.config.example.js` commité + garde :
-      config absente → stats désactivées proprement plutôt qu'un crash.
-- [ ] **`readme.md` partiellement obsolète** (la section licence et « Why this project? » sont à jour, le
-      reste ne l'est pas) :
-  - arborescence : `database-management.js` (supprimé), `assets/fonts/` (supprimé), `services.html` manquant
-  - « Live stock, quantity selector » → aucun stock dans le modèle de données · « Validations client &
-    server side » → pas de serveur · « Clean code split into modules » → à revérifier après P1
-  - Getting Started : chemin `assets/js/firebase-management.js` obsolète (il manque `app/`) et
-    `npx live-server` à recaler sur la vraie procédure — dépend de l'item Firebase ci-dessus
+- [x] **`readme.md` réécrit (31/07)** : arborescence, features et Getting Started recalés sur l'état réel
+      du repo (plus de `database-management.js`/`assets/fonts/`, `services.html` listé, plus de fausses
+      promesses de stock/validation serveur). Le chemin Firebase est resté celui du fichier en dur —
+      voir item ci-dessous, volontairement pas anticipé.
+- [ ] ⏸️ **Config Firebase en dur** dans [firebase-management.js](assets/js/app/firebase-management.js) —
+      **reportée (31/07)**, pas prioritaire pour l'instant. Les clés ne sont pas secrètes (sécurité = règles
+      Firestore + App Check), mais un cloneur pointe par défaut sur **ta** base et ses écritures sont
+      rejetées sans comprendre pourquoi.
+      👉 quand on s'y remet : `app/config/firebase.config.js` (déjà gitignoré) + `firebase.config.example.js`
+      commité + garde : config absente → stats désactivées proprement plutôt qu'un crash.
 - [ ] **`.editorconfig` + Prettier + ESLint** — le code est déjà formaté à la Prettier, autant le figer.
 - [ ] **SEO** : même `<title>` sur les 6 pages, `meta description` vide, `<html lang="en">` alors que tout
       est en français → titres/descriptions uniques, `lang="fr"`, Open Graph (partages WhatsApp).
@@ -110,12 +112,12 @@ Kosmetika ajouté à tous les fichiers HTML/CSS/JS du projet · commentaires d'h
 
 **Suite de P3, dans cet ordre :**
 
-1. **Externaliser la config Firebase** (`firebase.config.js` gitignoré + `.example.js` commité + garde de
-   dégradation propre) — rapide, et débloque la réécriture du readme (Getting Started en dépend).
-2. **Réécrire `readme.md`** (arborescence, features, getting started).
-3. SEO → accessibilité → outillage (Prettier/ESLint/CI) → tests.
+1. SEO (`lang="fr"`, titres/descriptions uniques, Open Graph).
+2. Accessibilité (`alt` descriptifs, `<button>` + `aria-label` au lieu de `<a href="#">`).
+3. Outillage (Prettier/ESLint/`.editorconfig`) → tests → CI.
 
 Puis P4 (validation + incohérences catalogue), P2 (`defer`), P5.
+**Config Firebase** : en pause (voir P3 ci-dessus) — à reprendre séparément, hors de cet ordre.
 
 > ⚠️ Fichiers en **UTF-8 sans BOM** : jamais de `Get-Content`/`Set-Content` PowerShell 5.1 dessus (accents/
 > emoji détruits). Utiliser `[System.IO.File]::ReadAllText`/`WriteAllText` avec `UTF8Encoding($false)`, ou
