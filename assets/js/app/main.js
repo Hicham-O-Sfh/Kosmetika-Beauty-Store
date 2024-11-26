@@ -4,6 +4,7 @@
  * Distributed under the MIT License — see the LICENSE file at the project root.
  */
 
+import { setupLazyVideos } from "./ui/video.js";
 import {
   bindCartEvent,
   bindContactPageEvents,
@@ -15,7 +16,6 @@ import {
   projectProductsInHomeTabs,
   projectRelatedProductsInPage,
 } from "./utils.js";
-import { setupLazyVideos } from "./ui/video.js";
 
 (function ($) {
   "use strict";

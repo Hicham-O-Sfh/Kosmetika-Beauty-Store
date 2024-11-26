@@ -273,8 +273,16 @@ export function projectContactInfoInFooter() {
   $(".whatsapp-number").text(WHATSAPP_NUMBER);
   $(".whatsapp-number").attr("href", WHATSAPP_NUMBER_LINK);
 
-  projectSocialLink("#instagram-footer, .instagram-account", INSTAGRAM, INSTAGRAM_LINK);
-  projectSocialLink("#facebook-footer, .facebook-account", FACEBOOK, FACEBOOK_LINK);
+  projectSocialLink(
+    "#instagram-footer, .instagram-account",
+    INSTAGRAM,
+    INSTAGRAM_LINK,
+  );
+  projectSocialLink(
+    "#facebook-footer, .facebook-account",
+    FACEBOOK,
+    FACEBOOK_LINK,
+  );
   projectSocialLink("#tikTok-footer, .tikTok-account", TIKTOK, TIKTOK_LINK);
   bindSocialPlaceholderDialog();
 }
