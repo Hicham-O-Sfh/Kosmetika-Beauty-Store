@@ -3,7 +3,7 @@
 > Site vitrine/e-commerce statique (99 % front), catalogue en dur côté JS, Firestore uniquement
 > pour compter les commandes. Objectif : repo propre, lisible et clonable par un tiers.
 
-**Légende :** 🔴 P0 = bug/blocage · 🟠 P1 = organisation · 🟡 P2 = poids/perf · 🔵 P3 = qualité & open source · 🟣 P4 = scale (JSON) · 🟤 P5 = investigation
+**Légende :** 🔴 P0 = bug/blocage · 🟠 P1 = organisation · 🟡 P2 = poids/perf · 🔵 P3 = qualité & open source · 🟣 P4 = scale (JSON) · 🟤 P5 = investigation · 🎨 P6 = Bootstrap-first
 
 **Statut :** P0 ✅ (sauf liens sociaux) · P1 ✅ · P2 médias ✅ · P2 CSS ✅ · P2 polices ✅ · P4 migration ✅ ·
 P3 bien avancé (licence, `.gitignore`, en-têtes copyright, résidus de template, `readme.md` — tous faits
@@ -53,6 +53,36 @@ Kosmetika ajouté à tous les fichiers HTML/CSS/JS du projet · commentaires d'h
 
 - [ ] ⏸️ **Liens sociaux placeholder** — `INSTAGRAM_LINK`/`FACEBOOK_LINK`/`TIKTOK_LINK` valent encore
       littéralement leur nom → liens morts dans le footer des 6 pages. Renseigner les vraies URLs ou masquer.
+
+---
+
+## 🎨 P6 — Bootstrap 5 d'abord, CSS custom en dernier recours
+
+> Objectif : tout ce qui est **positionnement / espacement / alignement** passe par les utilities
+> Bootstrap ; le CSS custom ne garde que la **thématisation** (couleurs, tailles de police, fonds).
+> Chaque page migrée = autant de règles supprimées de `style.css`.
+
+⚠️ **Contrainte à connaître** : `plugins.css` contient un Bootstrap **purgé** — la plupart des utilities
+(`d-flex`, `mb-*`, `me-*`, `pb-*`, `img-fluid`…) avaient été supprimées. Il faut **réinjecter chaque
+utility utilisée** dans le bloc Bootstrap de `plugins.css`, sinon la classe posée dans le HTML est inerte.
+Vérifier systématiquement : `grep -o '\.classe\b' assets/css/plugins.css`.
+
+**Méthode de vérification retenue** : capture des styles calculés + géométrie avant/après (1280/768/375),
+diff sur les éléments de contenu (insensible à la suppression de wrappers). Voir le commit de `services.html`.
+
+- [x] **`services.html` + `shop.html` ✅ (31/07)** — wrappers ne portant qu'une marge supprimés
+      (`single_services`, `services_thumb`), `shop_reverse` (no-op : inversait `.row` puis annulait
+      l'inversion) et l'échafaudage `tab-content`/`tab-pane` de `shop.html` (un seul panneau, aucun bouton
+      d'onglet) retirés. `style.css` −100 lignes. Diff vérifié : `shop` identique, `services` à 1 px près
+      sur les 8 blocs texte (`margin-right: 15px` → `me-3` = 16px).
+- [ ] **`index.html`** — la plus grosse : slider, bannières, onglets produits.
+- [ ] **`product-details.html`** — galerie, zoom, bloc quantité.
+- [ ] **`faq.html`** (accordéon déjà Bootstrap) et **`contact-us.html`** (formulaire → `form-control`,
+      `row`/`col`, `btn`).
+- [ ] **Blocs `#generic` (header, offcanvas, footer, mini-panier)** — dupliqués sur les 6 pages, donc à
+      migrer **en une seule passe** et à répercuter partout ; c'est là que se concentre le CSS custom de
+      positionnement le plus lourd.
+- [ ] **Passe finale sur `style.css`** une fois les 6 pages migrées : retirer ce qui n'est plus référencé.
 
 ---
 
@@ -110,7 +140,11 @@ Kosmetika ajouté à tous les fichiers HTML/CSS/JS du projet · commentaires d'h
 
 ## ✅ Prochaine étape
 
-**Suite de P3, dans cet ordre :**
+**🎨 P6 en cours** — migration Bootstrap-first, page par page :
+`services` + `shop` ✅ → **`index.html`** → `product-details.html` → `faq` + `contact-us` →
+blocs `#generic` (header/footer/offcanvas, à répercuter sur les 6 pages) → passe finale sur `style.css`.
+
+**Ensuite, suite de P3 :**
 
 1. SEO (`lang="fr"`, titres/descriptions uniques, Open Graph).
 2. Accessibilité (`alt` descriptifs, `<button>` + `aria-label` au lieu de `<a href="#">`).
