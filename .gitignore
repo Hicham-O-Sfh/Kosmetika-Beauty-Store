@@ -18,8 +18,10 @@ yarn-error.log*
 dist/
 
 # Local secrets & machine-specific config
-# (Firebase keys are public by design, but a cloner must point at *their* project.)
-assets/js/app/config/firebase.config.js
+# (firebase.config.js is deliberately NOT ignored: GitHub Pages serves the site straight
+#  from this repo, so an ignored config would ship a production site with no Firebase.
+#  Those keys are public by design — App Check and its domain allowlist are what protect
+#  the counters, not the secrecy of the config.)
 .env
 .env.local
 
