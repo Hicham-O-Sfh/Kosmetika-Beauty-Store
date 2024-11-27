@@ -127,24 +127,25 @@ function isFilledIn(value) {
 }
 
 /** Keeps the hint below to one line per page rather than one per cart line. */
-let foreignProjectWarned = false;
+let appCheckWarningShown = false;
 
 /**
- * A refused write on a clone nearly always means the same thing: the committed
- * configuration still names the original project, whose App Check only trusts
- * its own domain. Worth saying plainly — the raw Firestore error does not.
+ * A refused write almost always means App Check did not vouch for the page,
+ * and the raw Firestore error says none of it. Two situations produce it, and
+ * the message names both — running the real project locally is as common here
+ * as running a clone.
  *
  * @param {{code?: string}} error
  */
-function warnIfForeignProject(error) {
-  if (foreignProjectWarned || error?.code !== "permission-denied") return;
+function warnAppCheckRejected(error) {
+  if (appCheckWarningShown || error?.code !== "permission-denied") return;
 
-  foreignProjectWarned = true;
+  appCheckWarningShown = true;
   console.warn(
-    "Écriture refusée par Firestore. Sur un clone, c'est attendu : " +
-      "config/firebase.config.js désigne encore le projet d'origine, dont App Check " +
-      "n'accepte que son propre domaine. Renseignez votre propre projet, puis déployez " +
-      "firestore.rules, pour activer les compteurs.",
+    "Écriture refusée par Firestore : App Check n'a pas validé cette page. Deux cas courants — " +
+      "en local, le domaine n'est pas couvert par la clé reCAPTCHA et il faut un jeton de débogage ; " +
+      "sur un clone, config/firebase.config.js désigne encore le projet d'origine, qui n'accepte que " +
+      "son propre domaine. Le panier et la commande WhatsApp ne sont pas affectés, seuls les compteurs.",
   );
 }
 
@@ -190,7 +191,7 @@ export async function updateProductOrderStats(productOrders) {
         `Erreur lors de la mise à jour des stats pour le produit ${productId}:`,
         error,
       );
-      warnIfForeignProject(error);
+      warnAppCheckRejected(error);
     }
   }
 }
