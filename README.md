@@ -45,6 +45,13 @@ order into a clean invoice and hands it to WhatsApp as a deep link. No payment g
 no sign-up wall to abandon — the order lands in the conversation the shop already answers every day.
 The most business-critical feature of the site is also the one with the least code behind it.
 
+**The order history was already there.** What a CRM would have stored — who ordered, what, when, and
+the whole exchange around it — is the WhatsApp thread itself, searchable by phone number, on a device
+the owner already carries. Firestore adds the one thing a thread can't do: aggregate. Two integer
+counters per product turn a pile of conversations into *what actually sells*. Between the two, the
+shop has its history and its monitoring without owning a single row of customer data — which is also
+one less thing to secure, back up, and answer for under a privacy regulation.
+
 **Firebase is optional, deliberately.** It does one job: counting orders per product
 (`total_orders`, `total_quantity`). One isolated module, two integer fields. The day it stops paying
 for itself, removing it is a single commit and the shop keeps selling.
@@ -54,8 +61,70 @@ build step — `git push` _is_ the deployment. A visitor gets a fully static sit
 61 KB of application JavaScript, after a cleanup pass that cut the inherited theme by 83 %.
 
 This is a deliberate trade, not a shortcut, so I'll name its limits: past roughly a hundred products
-the catalogue wants pagination and a real index, and card payments or live stock would genuinely
-require a backend. Until then, adding one would be paying rent on complexity the business doesn't have.
+the catalogue wants pagination and a real index, card payments or live stock would genuinely require
+a backend, and — the one that costs something real — **individual product pages are not indexable by
+search engines**. That last one is worth a section of its own, below. Until then, adding a backend
+would be paying rent on complexity the business doesn't have.
+
+---
+
+## 🔎 SEO — what this demo does, what it doesn't, and what a cloner should do
+
+**Site-level SEO is done.** The five content pages each carry a unique `<title>` and
+`meta description`, a `canonical`, full Open Graph plus `twitter:card` (OG image in **JPEG** — the
+Facebook crawler that feeds WhatsApp previews is unreliable on WebP), `lang="fr"`, and a
+[`robots.txt`](robots.txt) + [`sitemap.xml`](sitemap.xml) pair.
+
+**Product pages are not.** Search for a specific perfume and you will not find this shop. Three
+causes, one root:
+
+1. **One URL for the whole catalogue.** `product-details.html?productId=16` is not a distinct page,
+   and its `canonical` omits the query string — which tells Google the 17 product pages are one
+   generic page. `sitemap.xml` excludes it on purpose rather than advertising an empty page.
+2. **The content is injected by JavaScript.** Googlebot does render JS, but on a second pass, with
+   delay; if that pass fails, what gets indexed is the empty shell.
+3. **Static Open Graph, no JSON-LD.** Sharing a specific perfume shows the generic store preview, and
+   there is nothing for rich results to read.
+
+**This is the honest price of the architecture, and it is the only real one.** Everything else the
+no-backend trade gives up (card payments, live stock) is a business decision. This one is a technical
+consequence: without a server or a build step, there is no way to hand a crawler pre-rendered HTML
+per product. It is stated here rather than buried, because a reviewer will find it in thirty seconds
+and the interesting question is not whether it exists but whether it was priced in.
+
+### If you clone this as the base of a real shop
+
+**Tier 1 — no build step, an afternoon's work.** Meaningful improvement, zero architectural change:
+
+| Change | What it buys |
+|---|---|
+| Rewrite the `canonical` in JS to include the current `?productId=` | Stops Google collapsing 17 pages into one — the single highest-impact line here |
+| List every product URL in `sitemap.xml` | Gives the crawler something to discover in the first place |
+| Inject a JSON-LD `Product` block at hydration (name, brand, price, availability) | Eligibility for rich results — price and availability in the SERP |
+| Update `<title>`, `meta description` and OG tags at hydration | Correct WhatsApp/Facebook link previews; marginal for ranking on its own |
+
+**Tier 2 — the real fix, and the moment you accept a build step.** Generate one static HTML file per
+product from `products.js` (a ~50-line Node script, run before deploy). Real URLs, real server-served
+markup, nothing left for a crawler to guess. This is precisely the trade-off worth understanding:
+**the no-build constraint is what costs you product SEO, and nothing else.** Everything else on this
+site — catalogue, cart, checkout, order monitoring — genuinely does not need a server.
+
+**Tier 3 — the part that isn't code.** For a shop this size, product SEO is not the acquisition
+channel and never was. A custom domain (a `github.io` URL will not outrank Sephora or Amazon on a
+perfume name, however well optimised), a real logo and brand identity, and paid social on
+Meta/TikTok/Instagram are what bring customers. Add Tier 1 because it is nearly free; reach for
+Tier 2 when organic search is actually converting.
+
+### What you are not paying for, in exchange
+
+No server to provision, patch or monitor. No database to back up, migrate or scale. No user accounts,
+so no password storage, no session handling, no account-takeover surface. No server-side cart to
+guard against tampered prices or quantities — there is no server-side price to tamper with, the
+order is a message the shop owner reads and confirms. No payment integration, so no PCI scope. No
+CI/CD pipeline, no staging environment, no runtime bill: `git push` is the deployment, hosting is €0.
+
+The single writable surface in the entire system is one Firestore counter, protected by
+[`firestore.rules`](firestore.rules) and App Check. That is the whole attack surface.
 
 ---
 
