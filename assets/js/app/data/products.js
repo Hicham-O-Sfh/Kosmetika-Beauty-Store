@@ -52,9 +52,8 @@ export default [
     descriptionHtml:
       "<b>Ard Al Zaafaran® - Ana Lmalik</b> est une fragrance <b>royale</b> qui allie des notes <b>orientales</b> et <b>boisées</b> pour un sillage <b>captivant</b> 👑. Parfait pour une <b>signature élégante</b> de jour comme de nuit 🌙. Laissez une <b>empreinte royale</b> partout où vous allez.",
     pics: [
-      { url: "assets/img/product/i-am-king-BIG.webp", isMain: true },
-      { url: "assets/img/product/i-am-king-2-BIG.jpg" },
-      { url: "assets/img/product/i-am-king-client-BIG.webp" },
+      { url: "assets/img/product/i-am-king-img-main.webp", isMain: true },
+      { url: "assets/img/product/i-am-king-BIG.webp" },
     ],
   },
   {
