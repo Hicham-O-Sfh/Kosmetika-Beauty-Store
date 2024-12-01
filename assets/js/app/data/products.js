@@ -88,7 +88,8 @@ export default [
     descriptionHtml:
       "<b>Manassik® - Gharam wa Hob</b> est une eau de parfum <b>captivante</b> qui incarne la <b>passion</b> et le <b>romantisme</b> 💖. Ses notes <b>orientales chaleureuses</b> et <b>florales</b> créent un sillage <b>sensuel</b> et <b>mystérieux</b>. Idéal pour les moments <b>spéciaux</b>, ce parfum riche en <b>émotions</b> est une véritable déclaration de <b>séduction</b>.",
     pics: [
-      { url: "assets/img/product/8439627615236_3.jpg", isMain: true },
+      { url: "assets/img/product/gharam-wa-hob-img-main.webp", isMain: true },
+      { url: "assets/img/product/8439627615236_3.jpg" },
       { url: "assets/img/product/8439627615236_2.jpg" },
       { url: "assets/img/product/8439627615236_1.jpg" },
     ],
