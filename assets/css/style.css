@@ -2391,6 +2391,30 @@ button[disabled] {
   cursor: auto;
 }
 
+/* Dialog telling the visitor the social links have no destination yet.
+   Deliberately plain: one short message and a single way out. */
+.social-placeholder .modal-body {
+  padding: 32px 28px 26px;
+}
+
+.social-placeholder h2 {
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 600;
+  color: #242424;
+  margin-bottom: 14px;
+}
+
+.social-placeholder p {
+  font-size: 14px;
+  line-height: 22px;
+  margin-bottom: 12px;
+}
+
+.social-placeholder .button {
+  margin-top: 12px;
+}
+
 .kosmetika-copyright-logo {
   font-size: 9px;
   font-weight: 200;
