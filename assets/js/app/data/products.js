@@ -70,7 +70,7 @@ export default [
       "<b>Lattafa® - Yara</b> est une fragrance <b>délicate</b> et <b>envoûtante</b> qui combine subtilement des notes <b>florales</b> et <b>fruitées</b> 🍓. Elle offre une harmonie <b>douce</b> et <b>rafraîchissante</b>, parfaite pour une touche de <b>légèreté</b> et d'<b>élégance</b> au quotidien ✨. Avec son sillage <b>raffiné</b>, elle sublime chaque moment et attire tous les regards.",
     pics: [
       { url: "assets/img/product/latafaYara-img-main.webp", isMain: true },
-      { url: "assets/img/product/latafaYara-main.webp" },
+      { url: "assets/img/product/latafaYara.webp" },
       { url: "assets/img/product/latafaYara-BIG.jpg" },
       { url: "assets/img/product/latafaYara2-BIG.webp" },
     ],
@@ -90,8 +90,24 @@ export default [
     pics: [
       { url: "assets/img/product/gharam-wa-hob-img-main.webp", isMain: true },
       { url: "assets/img/product/8439627615236_3.jpg" },
-      { url: "assets/img/product/8439627615236_2.jpg" },
-      { url: "assets/img/product/8439627615236_1.jpg" },
+    ],
+  },
+  {
+    id: 5,
+    name: "Aqua",
+    brand: "Aqua®",
+    volumeMl: 33,
+    price: 100,
+    currency: "MAD",
+    quality: "Eau de parfum",
+    category: "femme",
+    status: PRODUCT_STATUS.OUT_OF_STOCK,
+    descriptionHtml:
+      "<b>Aqua®</b> 🌊 est une fragrance <b>fraîche</b> et <b>vivifiante</b>, inspirée par l'énergie de l'<b>océan</b>. Ses notes <b>marines</b> et <b>d'agrumes</b> 🍋 offrent une sensation de <b>liberté</b> et de <b>pureté</b> 🌿, parfaite pour toutes vos journées.",
+    pics: [
+      { url: "assets/img/product/aqua-img-1-BIG.webp", isMain: true },
+      { url: "assets/img/product/aqua-img-2-BIG.webp" },
+      { url: "assets/img/product/aqua-img-3-BIG.webp" },
     ],
   },
   {
@@ -147,24 +163,6 @@ export default [
     pics: [
       { url: "assets/img/product/loves-musk-img2.webp", isMain: true },
       { url: "assets/img/product/loves-musk-img1.webp" },
-    ],
-  },
-  {
-    id: 5,
-    name: "Aqua",
-    brand: "Aqua®",
-    volumeMl: 33,
-    price: 100,
-    currency: "MAD",
-    quality: "Eau de parfum",
-    category: "femme",
-    status: PRODUCT_STATUS.OUT_OF_STOCK,
-    descriptionHtml:
-      "<b>Aqua®</b> 🌊 est une fragrance <b>fraîche</b> et <b>vivifiante</b>, inspirée par l'énergie de l'<b>océan</b>. Ses notes <b>marines</b> et <b>d'agrumes</b> 🍋 offrent une sensation de <b>liberté</b> et de <b>pureté</b> 🌿, parfaite pour toutes vos journées.",
-    pics: [
-      { url: "assets/img/product/aqua-img-1-BIG.webp", isMain: true },
-      { url: "assets/img/product/aqua-img-2-BIG.webp" },
-      { url: "assets/img/product/aqua-img-3-BIG.webp" },
     ],
   },
   {
