@@ -99,7 +99,10 @@ export function buildVisualCart() {
           `
           <div class="cart_item" data-product-id="${order.productId}">
             <div class="cart_img">
-              <a href="product-details.html?productId=${mappedProductFromDb.id}">
+              <a
+                href="product-details.html?productId=${mappedProductFromDb.id}"
+                tabindex="-1"
+                aria-hidden="true">
                 <img src="${productMainPic}" alt="${getProductTitle(mappedProductFromDb)}"/>
               </a>
             </div>
@@ -109,9 +112,12 @@ export function buildVisualCart() {
               <span class="price_cart">${mappedProductFromDb.price} Dhs</span>
             </div>
             <div class="cart_remove">
-              <a href="#">
-                <i class="fa-solid fa-xmark remove-from-cart"></i>
-              </a>
+              <button
+                type="button"
+                class="remove-from-cart"
+                aria-label="Retirer ${getProductTitle(mappedProductFromDb)} du panier">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
             </div>
           </div>
         `,
@@ -216,7 +222,9 @@ export function projectRelatedProductsInPage() {
               <div class="product_thumb">
                 <a
                   class="primary_img"
-                  href="product-details.html?productId=${prod.id}">
+                  href="product-details.html?productId=${prod.id}"
+                  tabindex="-1"
+                  aria-hidden="true">
                   <img
                     src="${getMainPicUrl(prod)}"
                     alt="${getProductTitle(prod)}"
@@ -294,7 +302,10 @@ export function projectBestSellingProductsInFooter() {
           `
           <div class="simple_product_items">
             <div class="simple_product_thumb">
-              <a href="product-details.html?productId=${product.id}">
+              <a
+                href="product-details.html?productId=${product.id}"
+                tabindex="-1"
+                aria-hidden="true">
                 <img
                 src="${getMainPicUrl(product)}"
                 alt="${getProductTitle(product)}"
@@ -360,7 +371,9 @@ export function projectAllProductsInShopPage() {
                 ${outOfStockThumbBadge(prod)}
                 <a
                   class="primary_img"
-                  href="product-details.html?productId=${prod.id}">
+                  href="product-details.html?productId=${prod.id}"
+                  tabindex="-1"
+                  aria-hidden="true">
                   <img
                     src="${productMainPic}"
                     alt="${getProductTitle(prod)}"
@@ -370,7 +383,9 @@ export function projectAllProductsInShopPage() {
                 </a>
                 <a
                   class="secondary_img"
-                  href="product-details.html?productId=${prod.id}">
+                  href="product-details.html?productId=${prod.id}"
+                  tabindex="-1"
+                  aria-hidden="true">
                   <img
                     src="${getSecondaryPicUrl(prod)}"
                     alt="${getProductTitle(prod)} — autre vue"
@@ -430,7 +445,7 @@ export function bindCartEvent() {
     // get cart item from client storage
     var userCart = retrieveUserCartFromLocalStorage();
     // get cart item from DOM
-    var cartItemToDelete = $(this).parent().closest(".cart_item").get(0);
+    var cartItemToDelete = $(this).closest(".cart_item").get(0);
 
     // remove cart item from client storage
     const idToDelete = Number(cartItemToDelete.dataset.productId);
