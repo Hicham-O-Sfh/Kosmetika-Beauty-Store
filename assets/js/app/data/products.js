@@ -123,11 +123,8 @@ export default [
     descriptionHtml:
       "<b>Allerv® - Exchange</b> est un parfum masculin <b>luxueux</b>, inspiré par la sophistication de <b>Bleu de Chanel</b> ✨. Avec ses notes <b>fraîches</b> et <b>boisées</b>, il incarne l'<b>élégance</b> et la <b>modernité</b>. Parfait pour l'homme <b>sûr de lui</b>, il laisse un sillage <b>raffiné</b> et <b>intemporel</b>, idéal pour toutes les occasions 🌟.",
     pics: [
-      {
-        url: "assets/img/product/allery-exchange-img-2-BIG.webp",
-        isMain: true,
-      },
-      { url: "assets/img/product/allery-exchange-img-3-BIG.webp" },
+      { url: "assets/img/product/allery-exchange-img-main.webp", isMain: true },
+      { url: "assets/img/product/allery-exchange-img-2-BIG.webp" },
     ],
   },
   {
