@@ -1919,35 +1919,28 @@ textarea:-ms-input-placeholder {
 .product_info_button {
   border-bottom: 1px solid #ebebeb;
 }
-.product_info_button ul {
-  justify-content: center;
-}
-.product_info_button ul li a {
-  display: block;
-  float: left;
-  text-transform: capitalize;
+/* Rubik, not the h1-h6 stack: this heading replaced a link and has to keep
+   the body typeface it inherited. */
+.product_info_title {
+  font-family: "Rubik", sans-serif;
   font-size: 24px;
-  color: #212121;
-  font-weight: 500;
-  margin-right: 35px;
   line-height: 26px;
+  font-weight: 500;
+  text-align: center;
+  text-transform: capitalize;
+  color: #c09578;
+  margin-bottom: 0;
 }
 @media only screen and (max-width: 767px) {
-  .product_info_button ul li a {
-    margin-right: 25px;
+  .product_info_title {
     font-size: 18px;
   }
 }
-.product_info_button ul li a.active {
-  color: #c09578;
-}
-.product_info_button ul li a:hover {
-  color: #c09578;
-}
-.product_info_button ul li:last-child a {
-  margin-right: 0;
-}
 
+.product_info_content {
+  /* Was inherited from .tab-content, dropped along with the tab scaffolding. */
+  padding-top: 20px;
+}
 .product_info_content p {
   color: #5a5a5a;
   line-height: 28px;
