@@ -105,7 +105,8 @@ export default [
     descriptionHtml:
       "<b>Aqua®</b> 🌊 est une fragrance <b>fraîche</b> et <b>vivifiante</b>, inspirée par l'énergie de l'<b>océan</b>. Ses notes <b>marines</b> et <b>d'agrumes</b> 🍋 offrent une sensation de <b>liberté</b> et de <b>pureté</b> 🌿, parfaite pour toutes vos journées.",
     pics: [
-      { url: "assets/img/product/aqua-img-1-BIG.webp", isMain: true },
+      { url: "assets/img/product/aqua-img-main.webp", isMain: true },
+      { url: "assets/img/product/aqua-img-1-BIG.webp" },
       { url: "assets/img/product/aqua-img-2-BIG.webp" },
       { url: "assets/img/product/aqua-img-3-BIG.webp" },
     ],
