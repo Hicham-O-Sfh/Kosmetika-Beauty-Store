@@ -1,0 +1,66 @@
+// Kosmetika — Beauty Store
+// Copyright (c) 2024-2026 Hicham Oussama Saffih. All rights reserved.
+// Distributed under the MIT License — see the LICENSE file at the project root.
+
+rules_version = '2';
+
+// The store has no accounts and no backend: every request reaching Firestore is
+// anonymous. Nothing here can be gated on identity, so what is constrained is
+// the *shape* of the write — two integer counters that only ever move forward,
+// by the amounts a real checkout can produce.
+//
+// App Check (reCAPTCHA v3) is the other half of the defence, and it is NOT
+// expressible in this file: enforcement is a console switch, under
+// App Check → APIs → Cloud Firestore → Enforce. Deploying these rules without
+// turning it on leaves the counters open to anyone holding the public API key.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Both counters present, both integers, and nothing else in the document.
+    // increment() is resolved before the rules run, so these read the resulting
+    // values — which is what makes the bounds below meaningful.
+    function isCounterDocument() {
+      return request.resource.data.keys().hasOnly(['total_orders', 'total_quantity'])
+        && request.resource.data.keys().hasAll(['total_orders', 'total_quantity'])
+        && request.resource.data.total_orders is int
+        && request.resource.data.total_quantity is int;
+    }
+
+    // One line of the cart, bounded by the quantity input:
+    // isValidNumberInputValue() in assets/js/app/services/cart.service.js
+    // accepts 1 to 50. Raising that limit means raising this one.
+    function isPlausibleQuantity(delta) {
+      return delta >= 1 && delta <= 50;
+    }
+
+    // Per-product order counters, keyed by the catalogue id as a string.
+    // Written by updateProductOrderStats() in assets/js/app/firebase-management.js.
+    match /product_order_counts/{productId} {
+
+      // Public: the counters are aggregate figures, they carry nothing personal.
+      allow read: if true;
+
+      // First order for a product: the document is created by the same
+      // setDoc(..., { merge: true }) call that updates the following ones.
+      allow create: if isCounterDocument()
+        && request.resource.data.total_orders == 1
+        && isPlausibleQuantity(request.resource.data.total_quantity);
+
+      // Subsequent orders: exactly one more order, and a quantity that grew by
+      // an amount the quantity input can actually produce.
+      allow update: if isCounterDocument()
+        && request.resource.data.total_orders == resource.data.total_orders + 1
+        && isPlausibleQuantity(
+             request.resource.data.total_quantity - resource.data.total_quantity
+           );
+
+      // Counters are never removed by the site.
+      allow delete: if false;
+    }
+
+    // Every other path stays closed.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -9,13 +9,14 @@
 
 ## 👉 Prochaine étape
 
-Plus rien de bloquant : le site n'a aucun bug visible par un client. Ce qui reste est au choix.
+Le site n'a toujours aucun bug visible par un client, mais les compteurs de commandes ne fonctionnent
+plus côté Firebase — invisible depuis la boutique, bien réel côté données.
 
-1. 🟤 **`requestStorageAccess`** — la seule anomalie encore ouverte, sans impact utilisateur.
-2. 🔵 **`CONTRIBUTING.md`** + captures dans le readme — à décider (voir la section).
-3. 🟣 **Incohérences du catalogue** — 3 points à confirmer, 10 minutes.
+1. 🔴 **Firebase HS en production** — déployer `firestore.rules`, puis débloquer App Check.
+   Seul point réellement cassé aujourd'hui ; détail dans la section dédiée.
+2. 🟣 **Incohérences du catalogue** — 3 points à confirmer, 10 minutes.
+3. 🔵 **Captures d'écran du readme** — après la refonte des photos.
 
-**Config Firebase** : en pause, à reprendre dans une session dédiée — hors de cet ordre.
 **Photos produit** : refonte complète prévue via génération IA (Nano Banana / Higgsfield), plus tard.
 Tout travail d'optimisation d'images d'ici là serait jeté.
 
@@ -23,18 +24,43 @@ Tout travail d'optimisation d'images d'ici là serait jeté.
 
 ## 📋 Reste à faire
 
+### 🔴 Firebase hors service en production
+
+Découvert le 04/08 en vérifiant l'externalisation de la config. Invisible depuis la boutique : ni le
+panier ni la commande WhatsApp ne dépendent de Firestore. **Les compteurs, eux, n'enregistrent plus rien.**
+
+**Cause unique : App Check.** L'enforcement est activé sur Cloud Firestore et le panneau App Check
+affiche **0 requête validée sur 4** — donc 100 % du trafic légitime est rejeté, lectures comme écritures.
+Les règles ne sont pas en cause : celles de la console (inchangées depuis juin 2025) sont exactement
+celles que le readme documentait, `allow read: if true` compris. Déployer `firestore.rules` ne
+débloquera donc rien par soi-même.
+
+- [ ] **Prod — le jeton reCAPTCHA est rejeté (`App attestation failed`).** Le domaine
+      `hicham-o-sfh.github.io` a été ajouté aux domaines de la clé le 04/08 : **ça n'a rien changé**,
+      l'échange renvoie toujours `403`. Piste écartée.
+      Un appel direct à `:exchangeRecaptchaV3Token` avec un jeton bidon répond `App attestation failed`
+      et non « API non activée » ou « app inconnue » : l'API App Check est donc **active** et l'app
+      **bien enregistrée**. C'est la vérification du jeton qui échoue. Deux causes restantes, toutes
+      deux visibles sur le même écran (Firebase Console → App Check → **Apps** → l'app web) :
+      1. la **clé secrète** enregistrée dans App Check ne correspond pas à la paire de la clé de site ;
+      2. l'app est enregistrée en **reCAPTCHA Enterprise** et non v3 — dans ce cas le code doit passer
+         à `ReCaptchaEnterpriseProvider`, `ReCaptchaV3Provider` ne peut pas marcher.
+      Contrôle : la métrique « Requêtes validées » doit décoller — elle est lisible **sans**
+      désactiver l'enforcement.
+      _Note : la clé secrète reCAPTCHA a été exposée le 04/08 — la régénérer règle aussi ce point._
+- [ ] **Local — jeton de débogage manquant.** reCAPTCHA v3 ne produit pas de jeton exploitable depuis
+      `localhost` : les requêtes y remontent en « non valides ». Il faut un jeton de débogage
+      (App Check → Jetons de débogage) posé avant `main.js`. **À ne jamais commiter.**
+- [ ] **Durcir les règles** (optionnel, sans rapport avec la panne) : le [firestore.rules](firestore.rules)
+      du repo ajoute `hasAll` (le `hasOnly` seul laisse passer un document amputé d'un compteur), borne
+      la quantité à 1–50 au lieu de `>= 0`, et ferme explicitement toutes les autres collections.
+      ⚠️ Le déploiement **remplace** les règles de la console — l'historique y reste consultable, mais
+      il n'y a pas de sauvegarde locale.
+
 ### 🔵 Qualité & open source
 
-- [ ] ⏸️ **Config Firebase en dur** dans [firebase-management.js](assets/js/app/firebase-management.js).
-      Les clés ne sont pas secrètes (la sécurité tient aux règles Firestore + App Check), mais un cloneur
-      pointe par défaut sur **ta** base et ses écritures sont rejetées sans qu'il comprenne pourquoi.
-      👉 `app/config/firebase.config.js` (déjà gitignoré) + `firebase.config.example.js` commité + garde :
-      config absente → stats désactivées proprement plutôt qu'un crash.
-      👉 Rapatrier aussi `firestore.rules` dans le repo : elles n'existent aujourd'hui que dans la console.
-- [ ] **`CONTRIBUTING.md`** dédié + captures d'écran dans le readme (placeholder `demo-banner.png`
-      commenté). **À décider** : sans CI ni tests, un CONTRIBUTING se réduit à « ouvre `index.html`,
-      respecte le style existant, pas de dépendance ». Le readme peut l'absorber en 5 lignes. Les
-      captures, elles, valent le coup quel que soit le choix — mais après la refonte des photos.
+- [ ] **Captures d'écran dans le readme** — le placeholder `demo-banner.png` est commenté en haut du
+      fichier. À faire **après** la refonte IA des photos, sinon elles seront à refaire.
 
 ### ⏸️ Écarté volontairement (04/08)
 
@@ -54,18 +80,10 @@ Ces points étaient listés ; ils ne le sont plus. Décision assumée, ne pas le
       _(La validation automatique par `ajv` est écartée avec la CI — voir plus haut.)_
 - [ ] **Au-delà de ~100 produits** : pagination / index séparé sur `shop.html`.
 
-### 🟤 À investiguer
+_Plus rien à investiguer : `requestStorageAccess` a été tranché le 04/08 (voir « À savoir »)._
 
-- [ ] **`requestStorageAccess: Permission denied`** en console sur GitHub Pages. Piste principale :
-      les cookies tiers de reCAPTCHA v3 (Firebase App Check) ; GTranslate est l'autre suspect.
-      Sans impact sur le panier (`localStorage` first-party). Identifier, puis décider si on corrige.
-
-### ❓ À trancher
-
-- `product-details.html` : le bloc « Plus d'info ! » est un **faux onglet** — un seul `role="tab"`,
-  aucun bouton de bascule, sur un `<a>` sans `href` (donc ni lien ni focusable). L'`aria-selected` et
-  le `role="presentation"` ont été corrigés le 04/08, mais la structure reste un onglet qui n'en est
-  pas un. Un `<h2>` au-dessus du texte ferait le même effet visuel, en plus simple.
+_Plus rien à trancher : les deux derniers points ont été décidés le 04/08 (faux onglet → `<h2>`,
+CONTRIBUTING → section du readme)._
 
 ---
 
@@ -78,8 +96,29 @@ Ces points étaient listés ; ils ne le sont plus. Décision assumée, ne pas le
 - Historique git non réécrit (clone lourd accepté, seule la fluidité du site compte).
 - Noms de fichiers gardés tels quels (kebab-case écarté).
 
+**`requestStorageAccess: Permission denied` — élucidé le 04/08, rien à corriger.** L'appel vient de
+**reCAPTCHA v3**, donc de Firebase App Check ; **GTranslate est hors de cause**. Deux preuves
+indépendantes : l'iframe `google.com/recaptcha/api2/anchor` est le **seul** cadre tiers de la page
+(or la Storage Access API n'est appelable que depuis un iframe cross-site), et le bundle reCAPTCHA
+référence l'API (`document.hasStorageAccess`) alors que `vendor/gtranslate.js`, servi en first-party
+depuis le repo, n'en contient aucune trace. Le message est émis par du code Google, dans son iframe :
+il n'est pas corrigeable depuis le projet, seulement supprimable en retirant App Check — ce qui
+coûterait la protection des compteurs. Sans effet sur le panier, qui est en `localStorage`
+first-party. **À documenter, pas à corriger.**
+
 **Pièges techniques** :
 
+- **`firebase.config.js` est commité volontairement** (04/08) : GitHub Pages sert le site
+  **directement depuis le dépôt**, donc un fichier gitignoré déploierait une prod sans Firebase.
+  Les clés sont publiques par nature ; ce qui protège les compteurs, c'est App Check et sa liste de
+  domaines, pas le secret du fichier. Contrepartie assumée : un cloneur pointe par défaut sur le
+  projet d'origine et ses écritures sont refusées — d'où le message dédié de
+  `warnIfForeignProject()`, qui l'explique en clair au lieu de laisser l'erreur Firestore brute.
+- **La config Firebase est chargée par `import()` dynamique, jamais en statique** :
+  `firebase-management.js` est atteint depuis `main.js` via `utils.js`. Un `import` statique d'un
+  fichier absent ferait échouer **tout** le graphe de modules — panier compris. Le `try/catch` autour
+  de l'`import()` garantit qu'une config supprimée (par un fork) ne coupe que les compteurs.
+  Ne pas le « simplifier » en import statique.
 - **Fichiers en UTF-8 sans BOM** : jamais de `Get-Content`/`Set-Content` PowerShell 5.1 dessus
   (accents et emoji détruits). Utiliser `[System.IO.File]::ReadAllText`/`WriteAllText` avec
   `UTF8Encoding($false)`, ou un éditeur.
@@ -156,9 +195,26 @@ _Le détail de chaque changement est dans l'historique git ; ce journal ne garde
   → 1. `*:focus { outline: none }` remplacé par un couple `:not(:focus-visible)` / `:focus-visible`.
   Lien mort autour de `#zoom1` retiré. Les 3 règles `.tooltip` inutilisées supprimées et les 6 styles
   inline sortis en classes.
+- **04/08 — config Firebase, règles Firestore, `requestStorageAccess`.** Config sortie de
+  `firebase-management.js` vers `config/firebase.config.js` + `firebase.config.example.js` qui
+  documente chaque valeur. Les deux sont commités : le `.gitignore` a été **rouvert** en cours de
+  route, un fichier ignoré aurait déployé une prod sans Firebase (GitHub Pages sert le dépôt tel
+  quel). Chargement par `import()` dynamique sous `try/catch` : config absente → une ligne
+  d'explication en console et compteurs éteints, le reste du site intact (vérifié fichier retiré :
+  17 cartes produit rendues, footer projeté, zéro erreur). `firestore.rules` + `firebase.json` +
+  `.firebaserc` rapatriés dans le repo, les règles y sont désormais la référence plutôt que la console.
+  `requestStorageAccess` élucidé — reCAPTCHA v3, pas GTranslate (voir « À savoir »). Au passage,
+  **compteurs de commandes HS en production** mis au jour : App Check rejette 100 % du trafic
+  (0 requête validée sur 4), d'où la section 🔴. Les règles, elles, étaient correctes.
 - **04/08 — SEO et liens sociaux.** `robots.txt` + `sitemap.xml` ajoutés (5 pages ; `product-details`
   volontairement exclu, il ne rend rien sans `?productId=` pour un crawler). Les 3 liens sociaux
   sans URL n'aboutissent plus dans le vide : ils ouvrent une modale expliquant que ce sont des
   emplacements de démonstration, avec un bouton « Compris ». Injectée à la première ouverture, jamais
   dupliquée, focus rendu au lien à la fermeture. `.modal-content` et `.modal-dialog-centered`
   réinjectées dans `plugins.css`, la purge les avait retirées.
+- **04/08 — faux onglet et contribution.** Le bloc « Plus d'info ! » de `product-details.html`
+  n'était un onglet que de nom : `<h2 class="product_info_title">`, échafaudage `tablist` /
+  `tab-content` / `tab-pane` retiré, 5 règles CSS mortes supprimées (−15 lignes HTML). Les vrais
+  onglets d'`index.html` sont intacts, ils dépendent d'un bloc CSS distinct (`.product_tab_button`).
+  Pas de `CONTRIBUTING.md` : une section « Contributing » du readme renvoie vers les pièges
+  ci-dessus, qui sont la vraie information utile à un nouveau venu.
