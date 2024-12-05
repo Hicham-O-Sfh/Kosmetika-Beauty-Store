@@ -99,9 +99,9 @@ extensions : le message disparaît. Rien à corriger côté projet.
 **`npx serve` casse les fiches produit — corrigé dans le readme le 04/08.** `serve` fait des
 « clean URLs » : il redirige `/product-details.html?productId=10` vers `/product-details` **en perdant
 la query string**, si bien que `getCurrentDisplayedProductId()` ne trouve plus rien et que la fiche
-reste vide. Le readme conseille désormais Live Server (aucun outillage à installer, et un cloneur n'a
-pas forcément Node) ou `python -m http.server`, avec `--no-clean-urls` mentionné pour ceux qui tiennent
-à `serve`. Ne pas reconseiller `npx serve .` tel quel.
+reste vide. Le readme conseille désormais Live Server en premier (aucun outillage à installer,
+et un cloneur n'a pas forcément Node), puis `npx serve . --no-clean-urls` pour ceux qui ont déjà Node.
+Ne jamais reconseiller `npx serve .` sans le drapeau.
 
 **Pièges techniques** :
 
