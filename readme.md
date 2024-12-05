@@ -177,13 +177,22 @@ Two things worth knowing before a first change:
    cd Kosmetika-Beauty-Store
    ```
 2. **Serve it over HTTP.** Zero build, zero dependencies — but the app code is loaded as ES modules,
-   which browsers block under `file://` (CORS). Any static server works, e.g.:
+   which browsers block under `file://` (CORS). The simplest route needs no toolchain at all: VS Code's
+   [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension,
+   then right-click `index.html` → *Open with Live Server*.
+
+   From a terminal, any static server works — for instance, with Python:
+
    ```bash
-   npx serve .
+   python -m http.server 5500
    ```
-   or VS Code's [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
-   extension. Open the printed `http://localhost:...` URL — catalogue, cart and WhatsApp checkout all
-   work immediately, no configuration needed.
+
+   Open the printed `http://localhost:...` URL — catalogue, cart and WhatsApp checkout all work
+   immediately, no configuration needed.
+
+   > ⚠️ Avoid `npx serve`: its *clean URLs* redirect drops the query string, so
+   > `product-details.html?productId=1` lands on an empty product page. Use
+   > `npx serve . --no-clean-urls` if you want it anyway.
 3. **(Optional) Configure Firebase** — only needed to unlock live order analytics
    (`total_orders`/`total_quantity` counters). The cart and checkout work identically without it.
    - Open [`assets/js/app/config/firebase.config.js`](assets/js/app/config/firebase.config.js) and
