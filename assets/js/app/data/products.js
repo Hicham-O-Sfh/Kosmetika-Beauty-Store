@@ -174,7 +174,10 @@ export default [
     descriptionHtml:
       "<b>Manassik® - Assalah</b> est une eau de parfum masculine de <b>luxe</b> 🐎, incarnant la <b>virilité</b> et l'<b>élégance</b> à travers son design inspiré par la noblesse des chevaux. Ses notes riches et boisées créent un sillage puissant et <b>raffiné</b>, parfait pour l'homme sûr de lui et moderne. Un parfum de <b>beauté</b> intemporelle, conçu pour ceux qui veulent marquer leur présence avec distinction. #luxe #beauté #virilité",
     pics: [
-      { url: "assets/img/product/manassik-assalah-img-main.webp", isMain: true },
+      {
+        url: "assets/img/product/manassik-assalah-img-main.webp",
+        isMain: true,
+      },
       { url: "assets/img/product/manassik-assalah-img-1.jpg" },
     ],
   },
@@ -192,12 +195,10 @@ export default [
       "<b>Diamond® - Crystal Noir</b> s'inspire du célèbre parfum <b>Versace Crystal Noir</b>, offrant une alternative <b>élégante</b> et <b>raffinée</b> ✨. Ses notes <b>florales</b> et <b>orientales</b> créent une fragrance <b>envoûtante</b>, parfaite pour ceux qui recherchent un parfum <b>sophistiqué</b> et <b>séduisant</b>, à la hauteur de l'original.",
     pics: [
       {
-        url: "assets/img/product/Versace-Diamond-Crystal-Noir-BIG.webp",
+        url: "assets/img/product/diamond-crystal-noir-img-main.webp",
         isMain: true,
       },
-      { url: "assets/img/product/dyamond-crystal-noir-2-BIG.webp" },
-      { url: "assets/img/product/Dyamond-crystal-noir-BIG.webp" },
-      { url: "assets/img/product/diamond-crystal-noir-3-BIG.webp" },
+      { url: "assets/img/product/Versace-Diamond-Crystal-Noir-BIG.webp" },
     ],
   },
   {
