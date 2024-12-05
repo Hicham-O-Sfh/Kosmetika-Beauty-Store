@@ -185,7 +185,7 @@ export default [
     id: 10,
     name: "Crystal Noir",
     brand: "Diamond®",
-    volumeMl: 100,
+    volumeMl: 50,
     price: 100,
     currency: "MAD",
     quality: "Eau de parfum",
@@ -234,8 +234,8 @@ export default [
     descriptionHtml:
       "<b>Lattafa Perfumes® - Ethra'a</b> est une fragrance orientale riche et sophistiquée ✨. Composée de notes <b>florales</b> et <b>épicées</b>, elle crée un sillage envoûtant et <b>luxueux</b>, parfait pour celles qui recherchent une touche de <b>grâce</b> et de <b>mystère</b> 🌹. Ce parfum allie parfaitement la <b>finesse</b> des traditions orientales à une <b>élégance moderne</b>, idéal pour les occasions spéciales où vous souhaitez vous démarquer.",
     pics: [
-      { url: "assets/img/product/ethrae-img-1.webp", isMain: true },
-      { url: "assets/img/product/ethrae-img-2.webp" },
+      { url: "assets/img/product/ethrae-img-main.webp", isMain: true },
+      { url: "assets/img/product/ethrae-img-1.webp" },
     ],
   },
   {
