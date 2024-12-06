@@ -1,0 +1,16 @@
+# Le dépôt et la copie de travail utilisent LF, quelle que soit la valeur de core.autocrlf.
+* text=auto eol=lf
+
+# Fichiers binaires : aucune conversion.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.svg text eol=lf
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.pdf binary
