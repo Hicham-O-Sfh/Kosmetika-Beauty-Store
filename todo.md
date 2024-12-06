@@ -3,7 +3,7 @@
 > Site vitrine/e-commerce statique (99 % front), catalogue en dur côté JS, Firestore uniquement
 > pour compter les commandes. Objectif : repo propre, lisible et clonable par un tiers.
 
-**Légende :** 🔴 bug visible · 🟡 poids/perf · 🔵 qualité & open source · 🟣 scale · 🟤 investigation
+**Légende :** 🔴 bug visible · 🔵 qualité & open source · 🟣 scale
 
 ---
 
@@ -74,10 +74,19 @@ Ces points étaient listés ; ils ne le sont plus. Décision assumée, ne pas le
       _(La validation automatique par `ajv` reste écartée avec la CI — voir plus haut.)_
 - [ ] **Au-delà de ~100 produits** : pagination / index séparé sur `shop.html`.
 
-_Plus rien à investiguer : `requestStorageAccess` a été tranché le 04/08 (voir « À savoir »)._
+### 🟣 SEO des fiches produit
 
-_Plus rien à trancher : les deux derniers points ont été décidés le 04/08 (faux onglet → `<h2>`,
-CONTRIBUTING → section du readme)._
+- [ ] **Canonical dynamique + sitemap des fiches.** Le canonical de `product-details.html` pointe sur
+      l'URL **sans** `?productId=` : il dit à Google que toutes les fiches sont une seule et même page.
+      Le réécrire en JS avec l'id courant, et lister les 17 URL dans `sitemap.xml`, est le minimum pour
+      qu'une fiche soit indexable séparément. Sans build, faisable en quelques lignes.
+- [ ] **JSON-LD `Product`.** Aucun `application/ld+json` dans le repo. Injecter nom, marque, prix,
+      disponibilité au moment de l'hydratation ouvre les résultats enrichis. Même coût, quelques lignes.
+- [ ] **Titre et `meta description` mis à jour à l'hydratation** — marginal seul, cohérent avec
+      les deux points ci-dessus.
+
+_Voir « SEO des fiches produit » dans « À savoir » pour la limite de fond, que ces trois points
+n'effacent pas._
 
 ---
 
@@ -128,6 +137,9 @@ Ne jamais reconseiller `npx serve .` sans le drapeau.
   fichier absent ferait échouer **tout** le graphe de modules — panier compris. Le `try/catch` autour
   de l'`import()` garantit qu'une config supprimée (par un fork) ne coupe que les compteurs.
   Ne pas le « simplifier » en import statique.
+- **Fins de ligne en LF, imposées par `.gitattributes`** (`* text=auto eol=lf`) : le fichier a priorité
+  sur le `core.autocrlf=true` installé par défaut par Git for Windows, qui sinon convertit tout en CRLF
+  au checkout et fait apparaître des diffs fantômes. Ne pas le supprimer « parce que ça marche ».
 - **Fichiers en UTF-8 sans BOM** : jamais de `Get-Content`/`Set-Content` PowerShell 5.1 dessus
   (accents et emoji détruits). Utiliser `[System.IO.File]::ReadAllText`/`WriteAllText` avec
   `UTF8Encoding($false)`, ou un éditeur.
@@ -164,9 +176,24 @@ Ne jamais reconseiller `npx serve .` sans le drapeau.
 - **`cart_link` et `footer_top` restent en CSS** : leurs échelles responsives (25/15/20 px et
   61/42/27 px) n'ont pas d'équivalent Bootstrap sans altérer le design à 3 breakpoints.
 
-**Limite assumée — Open Graph** : `product-details.html` a des balises OG **statiques**. Partager le lien
-d'un parfum précis affiche l'aperçu générique de la boutique, pas le produit : les crawlers n'exécutent
-pas le JS et il n'y a pas de rendu serveur. Corrigeable seulement avec un build ou un backend.
+**Limite assumée — SEO des fiches produit et Open Graph.** Une recherche Google sur un parfum précis
+(« Lattafa Yara 100ml ») ne mène **pas** au site, et le partage WhatsApp d'une fiche affiche l'aperçu
+générique de la boutique. Même cause, trois symptômes :
+
+- **Une seule URL pour tout le catalogue.** `product-details.html?productId=16` n'existe pas comme page
+  distincte, et son `canonical` omet la query string : Google fusionne les 17 fiches en une page
+  générique. `sitemap.xml` l'exclut d'ailleurs volontairement.
+- **Le contenu arrive par JS, après un appel Firestore.** Googlebot rend le JS, mais en seconde passe
+  et avec délai ; en cas d'échec il indexe la coquille vide.
+- **Balises OG et JSON-LD statiques ou absents** — rien à donner au crawler Facebook ni aux résultats
+  enrichis.
+
+Les correctifs partiels (canonical dynamique, sitemap des fiches, JSON-LD) sont listés dans « Reste à
+faire » et tiennent en quelques lignes. **La correction de fond — une vraie page HTML par produit —
+exige une étape de génération, donc de casser la contrainte « pas de build ».** À arbitrer seulement
+si le SEO produit devient un canal d'acquisition : sur un domaine `github.io` sans backlinks, ranker
+sur un nom de parfum face aux grandes enseignes reste hors de portée quoi qu'on optimise. Les canaux
+réels aujourd'hui sont WhatsApp, Instagram et le bouche-à-oreille.
 
 **Méthode de vérification d'une refonte CSS/HTML** : capture des styles calculés + géométrie avant/après
 (1280 / 768 / 375), puis diff sur les éléments de contenu — insensible à la suppression de wrappers.
@@ -233,3 +260,9 @@ _Le détail de chaque changement est dans l'historique git ; ce journal ne garde
   onglets d'`index.html` sont intacts, ils dépendent d'un bloc CSS distinct (`.product_tab_button`).
   Pas de `CONTRIBUTING.md` : une section « Contributing » du readme renvoie vers les pièges
   ci-dessus, qui sont la vraie information utile à un nouveau venu.
+- **04/08 — fins de ligne et SEO produit.** `.gitattributes` ajouté (`* text=auto eol=lf`) : GitHub
+  Desktop avertissait que le `core.autocrlf=true` global allait convertir les fichiers LF en CRLF au
+  prochain checkout. Le fichier tranche pour tout le monde, quelle que soit la config locale.
+  Constat SEO au passage, sans changement de code : les fiches produit ne sont pas indexables
+  individuellement — canonical sans `?productId=`, contenu injecté par JS, pas de JSON-LD.
+  La limite et les correctifs partiels sont désormais documentés (« À savoir » + « Reste à faire »).

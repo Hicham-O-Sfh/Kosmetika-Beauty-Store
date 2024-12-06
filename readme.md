@@ -50,8 +50,8 @@ The most business-critical feature of the site is also the one with the least co
 for itself, removing it is a single commit and the shop keeps selling.
 
 **What that trade buys:** €0 hosting on GitHub Pages, no infrastructure, no ops, no runtime bill, no
-build step — `git push` _is_ the deployment. A visitor gets a fully static site: 85 KB of CSS and
-52 KB of application JavaScript, after a cleanup pass that cut the inherited theme by 83 %.
+build step — `git push` _is_ the deployment. A visitor gets a fully static site: 78 KB of CSS and
+61 KB of application JavaScript, after a cleanup pass that cut the inherited theme by 83 %.
 
 This is a deliberate trade, not a shortcut, so I'll name its limits: past roughly a hundred products
 the catalogue wants pagination and a real index, and card payments or live stock would genuinely
@@ -131,7 +131,7 @@ Two things worth knowing before a first change:
 │           ├── main.js          # bootstrap + per-page routing
 │           ├── utils.js         # per-page orchestration
 │           ├── firebase-management.js
-│           ├── config/          # site.config.js, gtranslate.settings.js, firebase.config.example.js
+│           ├── config/          # site.config.js, gtranslate.settings.js, firebase.config[.example].js
 │           ├── data/            # products.js (catalogue), products.repository.js
 │           ├── services/        # cart.service.js
 │           └── ui/              # plugins.js, templates.js, video.js
@@ -144,7 +144,11 @@ Two things worth knowing before a first change:
 ├── firestore.rules              # Firestore security rules — the source of truth, deployed from here
 ├── firebase.json                # tells the Firebase CLI where the rules live
 ├── .firebaserc                  # default Firebase project
+├── .gitattributes               # LF line endings everywhere, whatever the local Git config
+├── robots.txt
+├── sitemap.xml
 ├── LICENSE
+├── todo.md                      # roadmap + the traps you cannot see from the code
 └── readme.md
 ```
 
