@@ -269,7 +269,8 @@ export default [
     descriptionHtml:
       "<b>Al Fakhr Perfumes® - Cheikh Zaid</b> est une fragrance <b>orientale</b> luxueuse, inspirée par la noblesse et la puissance du <b>Oud</b> 🌿. Avec ses notes riches et <b>boisées</b>, ce parfum évoque l'<b>élégance</b> et la <b>sophistication</b>, parfait pour ceux qui cherchent à affirmer leur présence avec un sillage <b>intense</b> et mémorable. Un parfum digne des plus grands, alliant tradition et modernité 🌟.",
     pics: [
-      { url: "assets/img/product/Check-Zaid-img1.webp", isMain: true },
+      { url: "assets/img/product/Check-Zaid-img-main.webp", isMain: true },
+      { url: "assets/img/product/Check-Zaid-img1.webp" },
       { url: "assets/img/product/Check-Zaid-img2.webp" },
       { url: "assets/img/product/Check-Zaid-img3.webp" },
     ],
