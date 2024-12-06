@@ -251,7 +251,8 @@ export default [
     descriptionHtml:
       "<b>Cosmo® - Black Afgan</b> est un parfum masculin de <b>luxe</b> et d'<b>élégance</b>, inspiré par les riches notes de l'<b>Oud</b> 🖤. Cette fragrance <b>orientale</b> puissante et envoûtante allie des accords <b>boisés</b> et <b>épicés</b>, créant un sillage <b>intense</b> et <b>raffiné</b>. Parfait pour l'homme qui veut affirmer son style avec une touche de mystère et de distinction 🌟. Un parfum qui ne passe pas inaperçu.",
     pics: [
-      { url: "assets/img/product/black-afgan-2.webp", isMain: true },
+      { url: "assets/img/product/black-afgan-img-main.webp", isMain: true },
+      { url: "assets/img/product/black-afgan-2.webp" },
       { url: "assets/img/product/black-afgan-1.webp" },
     ],
   },
