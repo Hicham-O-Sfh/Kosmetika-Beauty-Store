@@ -305,9 +305,11 @@ export default [
     descriptionHtml:
       "<b>Manasik® - Muski Oud</b> marie la douceur du <b>musc</b> à la profondeur de l'<b>oud</b> pour une signature <b>audacieuse</b> et envoûtante 🖤. Ses notes <b>orientales</b>, riches et captivantes, s'adressent à celles qui imposent leur présence sans hausser le ton. Une empreinte de <b>luxe</b> et de <b>sophistication</b>, idéale pour marquer chaque instant d'un sillage <b>profond</b> et <b>durable</b> 🌟.",
     pics: [
-      { url: "assets/img/product/manasik-muski-oud-img-main.webp", isMain: true },
+      {
+        url: "assets/img/product/manasik-muski-oud-img-main.webp",
+        isMain: true,
+      },
       { url: "assets/img/product/manasik-muski-oud-1.webp" },
-      { url: "assets/img/product/manasik-muski-oud-2.webp" },
       { url: "assets/img/product/manasik-muski-oud-3.webp" },
     ],
   },
@@ -325,7 +327,6 @@ export default [
       "<b>Lattafa® - Qimmah</b> est l'incarnation de la <b>noblesse</b> et de la <b>grandeur</b> 🌌. Ce parfum unique associe des notes orientales et épicées, créant un sillage à la fois <b>élégant</b> et <b>audacieux</b>, parfait pour ceux qui souhaitent affirmer leur <b>présence</b>. Avec sa profondeur boisée et ses touches épicées, <b>Qimmah</b> exprime la force et la distinction à chaque instant, laissant une empreinte <b>inoubliable</b> 🌟.",
     pics: [
       { url: "assets/img/product/Qimmah-img-1.webp", isMain: true },
-      { url: "assets/img/product/Qimmah-img-2.webp" },
       { url: "assets/img/product/Qimmah-img-3.webp" },
     ],
   },
