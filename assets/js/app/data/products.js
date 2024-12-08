@@ -22,7 +22,7 @@ export const PRODUCT_STATUS = Object.freeze({
 export default [
   {
     id: 1,
-    name: "Bloom - Aqua Di Fiori",
+    name: "Bloom - Acqua Di Fiori",
     brand: "Gucci®",
     volumeMl: 100,
     price: 100,
@@ -31,13 +31,12 @@ export default [
     category: "femme",
     status: PRODUCT_STATUS.FEATURED,
     descriptionHtml:
-      "<b>Gucci® - Bloom - Aqua Di Fiori</b> est une fragrance florale fraîche et délicate 🌸. Avec ses notes de <b>jasmin</b>, de <b>tubéreuse</b> et une touche verte rafraîchissante, elle évoque un jardin en pleine éclosion. Parfaite pour celles qui recherchent une <b>fraîcheur naturelle</b> et une <b>élégance subtile</b> ✨. Un parfum qui célèbre la beauté de la nature et la féminité dans sa forme la plus pure.",
+      "<b>Gucci® - Bloom - Acqua Di Fiori</b> est une fragrance florale fraîche et délicate 🌸. Avec ses notes de <b>jasmin</b>, de <b>tubéreuse</b> et une touche verte rafraîchissante, elle évoque un jardin en pleine éclosion. Parfaite pour celles qui recherchent une <b>fraîcheur naturelle</b> et une <b>élégance subtile</b> ✨. Un parfum qui célèbre la beauté de la nature et la féminité dans sa forme la plus pure.",
     pics: [
-      { url: "assets/img/product/gucci-bloom-img-6.jpg", isMain: true },
-      { url: "assets/img/product/aqua-bloom-img-3.webp" },
-      { url: "assets/img/product/aqua-bloom-img-2.webp" },
-      { url: "assets/img/product/aqua-bloom-img-4.webp" },
-      { url: "assets/img/product/aqua-bloom-img-5.webp" },
+      { url: "assets/img/product/gucci-bloom-img-main.webp", isMain: true },
+      { url: "assets/img/product/gucci-bloom-img-6.jpg" },
+      { url: "assets/img/product/gucci-bloom-img-1.webp" },
+      { url: "assets/img/product/gucci-bloom-img-2.webp" },
     ],
   },
   {

@@ -67,7 +67,7 @@ export function getSecondaryPicUrl(product) {
 }
 
 /**
- * Human-readable product title, e.g. "Gucci® - Bloom - Aqua Di Fiori (100ml)".
+ * Human-readable product title, e.g. "Gucci® - Bloom - Acqua Di Fiori (100ml)".
  * @param {object} product
  * @returns {string}
  */
