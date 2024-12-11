@@ -166,8 +166,11 @@ export default [
     descriptionHtml:
       "<b>Manassik® - Loves Musk</b> est une fragrance envoûtante qui célèbre la pureté et la douceur du <b>musc</b> 🌸. Avec ses notes chaleureuses et sensuelles ❤️‍🔥, elle laisse un sillage <b>élégant</b> et <b>raffiné</b>, idéal pour les moments de <b>séduction</b>. Un parfum qui incarne la <b>passion</b> et l'<b>intimité</b>, parfait pour ceux qui veulent se démarquer avec subtilité.",
     pics: [
-      { url: "assets/img/products/loves-musk-img-main.webp", isMain: true },
-      { url: "assets/img/products/loves-musk-img2.webp" },
+      {
+        url: "assets/img/products/8-manassik-loves-musk-main.webp",
+        isMain: true,
+      },
+      { url: "assets/img/products/8-manassik-loves-musk-1.webp" },
     ],
   },
   {
