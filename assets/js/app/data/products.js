@@ -96,7 +96,7 @@ export default [
     id: 5,
     name: "Aqua",
     brand: "Aqua®",
-    volumeMl: 33,
+    volumeMl: 100,
     price: 100,
     currency: "MAD",
     quality: "Eau de parfum",
@@ -107,7 +107,6 @@ export default [
     pics: [
       { url: "assets/img/product/aqua-img-main.webp", isMain: true },
       { url: "assets/img/product/aqua-img-1-BIG.webp" },
-      { url: "assets/img/product/aqua-img-2-BIG.webp" },
       { url: "assets/img/product/aqua-img-3-BIG.webp" },
     ],
   },
