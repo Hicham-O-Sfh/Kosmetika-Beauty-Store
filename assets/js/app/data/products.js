@@ -223,11 +223,14 @@ export default [
     descriptionHtml:
       "<b>Khalis Perfumes® - Ameerat Al Arab</b> est une fragrance luxueuse qui incarne la <b>grâce</b> et la <b>féminité</b> 🌹. Ses notes riches et <b>orientales</b>, composées de <b>musc</b>, <b>oud</b>, et de touches florales, créent un sillage <b>élégant</b> et <b>envoûtant</b>. Parfait pour celles qui veulent laisser une empreinte royale et <b>sophistiquée</b> à chaque instant. Un parfum digne d'une princesse, à porter en toute occasion spéciale.",
     pics: [
-      { url: "assets/img/products/amirat-al-arab-img-main.webp", isMain: true },
-      { url: "assets/img/products/amirat-al-arab-img-1.webp" },
-      { url: "assets/img/products/amirat-al-arab-img-5.webp" },
-      { url: "assets/img/products/amirat-al-arab-img-3.webp" },
-      { url: "assets/img/products/amirat-al-arab-img-2.webp" },
+      {
+        url: "assets/img/products/11-khalis-ameerat-al-arab-main.webp",
+        isMain: true,
+      },
+      { url: "assets/img/products/11-khalis-ameerat-al-arab-1.webp" },
+      { url: "assets/img/products/11-khalis-ameerat-al-arab-2.webp" },
+      { url: "assets/img/products/11-khalis-ameerat-al-arab-3.webp" },
+      { url: "assets/img/products/11-khalis-ameerat-al-arab-4.webp" },
     ],
   },
   {
