@@ -350,9 +350,9 @@ export default [
     descriptionHtml:
       "<b>Lattafa® - Qimmah</b> est l'incarnation de la <b>noblesse</b> et de la <b>grandeur</b> 🌌. Ce parfum unique associe des notes orientales et épicées, créant un sillage à la fois <b>élégant</b> et <b>audacieux</b>, parfait pour ceux qui souhaitent affirmer leur <b>présence</b>. Avec sa profondeur boisée et ses touches épicées, <b>Qimmah</b> exprime la force et la distinction à chaque instant, laissant une empreinte <b>inoubliable</b> 🌟.",
     pics: [
-      { url: "assets/img/products/Qimmah-img-main.webp", isMain: true },
-      { url: "assets/img/products/Qimmah-img-1.webp" },
-      { url: "assets/img/products/Qimmah-img-3.webp" },
+      { url: "assets/img/products/17-lattafa-qimmah-main.webp", isMain: true },
+      { url: "assets/img/products/17-lattafa-qimmah-1.webp" },
+      { url: "assets/img/products/17-lattafa-qimmah-2.webp" },
     ],
   },
 ];
