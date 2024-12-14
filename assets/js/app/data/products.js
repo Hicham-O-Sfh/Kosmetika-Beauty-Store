@@ -40,6 +40,10 @@ export default [
       { url: "assets/img/products/1-gucci-bloom-acqua-di-fiori-1.jpg" },
       { url: "assets/img/products/1-gucci-bloom-acqua-di-fiori-2.webp" },
       { url: "assets/img/products/1-gucci-bloom-acqua-di-fiori-3.webp" },
+      {
+        url: "assets/img/products/1-gucci-bloom-acqua-di-fiori-hero.webp",
+        isHero: true,
+      },
     ],
   },
   {
@@ -60,6 +64,10 @@ export default [
         isMain: true,
       },
       { url: "assets/img/products/2-ard-al-zaafaran-ana-lmalik-1.webp" },
+      {
+        url: "assets/img/products/2-ard-al-zaafaran-ana-lmalik-hero.webp",
+        isHero: true,
+      },
     ],
   },
   {
@@ -79,6 +87,7 @@ export default [
       { url: "assets/img/products/3-lattafa-yara-1.webp" },
       { url: "assets/img/products/3-lattafa-yara-2.jpg" },
       { url: "assets/img/products/3-lattafa-yara-3.webp" },
+      { url: "assets/img/products/3-lattafa-yara-hero.webp", isHero: true },
     ],
   },
   {
@@ -99,6 +108,10 @@ export default [
         isMain: true,
       },
       { url: "assets/img/products/4-manassik-gharam-wa-hob-1.jpg" },
+      {
+        url: "assets/img/products/4-manassik-gharam-wa-hob-hero.webp",
+        isHero: true,
+      },
     ],
   },
   {
@@ -117,6 +130,7 @@ export default [
       { url: "assets/img/products/5-aqua-main.webp", isMain: true },
       { url: "assets/img/products/5-aqua-1.webp" },
       { url: "assets/img/products/5-aqua-2.webp" },
+      { url: "assets/img/products/5-aqua-hero.webp", isHero: true },
     ],
   },
   {
@@ -134,6 +148,7 @@ export default [
     pics: [
       { url: "assets/img/products/6-allerv-exchange-main.webp", isMain: true },
       { url: "assets/img/products/6-allerv-exchange-1.webp" },
+      { url: "assets/img/products/6-allerv-exchange-hero.webp", isHero: true },
     ],
   },
   {
@@ -151,6 +166,7 @@ export default [
     pics: [
       { url: "assets/img/products/7-lattafa-raghba-main.webp", isMain: true },
       { url: "assets/img/products/7-lattafa-raghba-1.webp" },
+      { url: "assets/img/products/7-lattafa-raghba-hero.webp", isHero: true },
     ],
   },
   {

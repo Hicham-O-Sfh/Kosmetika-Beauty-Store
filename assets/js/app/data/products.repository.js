@@ -67,6 +67,16 @@ export function getSecondaryPicUrl(product) {
 }
 
 /**
+ * Hero picture URL — the showcase visual headlining the product details page,
+ * falling back to the main picture for products without one.
+ * @param {object} product
+ * @returns {string}
+ */
+export function getHeroPicUrl(product) {
+  return product.pics?.find((pic) => pic.isHero)?.url ?? getMainPicUrl(product);
+}
+
+/**
  * Human-readable product title, e.g. "Gucci® - Bloom - Acqua Di Fiori (100ml)".
  * @param {object} product
  * @returns {string}
