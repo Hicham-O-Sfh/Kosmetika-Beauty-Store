@@ -187,6 +187,10 @@ export default [
         isMain: true,
       },
       { url: "assets/img/products/8-manassik-loves-musk-1.webp" },
+      {
+        url: "assets/img/products/8-manassik-loves-musk-hero.webp",
+        isHero: true,
+      },
     ],
   },
   {
@@ -204,6 +208,7 @@ export default [
     pics: [
       { url: "assets/img/products/9-manassik-assalah-main.webp", isMain: true },
       { url: "assets/img/products/9-manassik-assalah-1.jpg" },
+      { url: "assets/img/products/9-manassik-assalah-hero.webp", isHero: true },
     ],
   },
   {
@@ -224,6 +229,10 @@ export default [
         isMain: true,
       },
       { url: "assets/img/products/10-diamond-crystal-noir-1.webp" },
+      {
+        url: "assets/img/products/10-diamond-crystal-noir-hero.webp",
+        isHero: true,
+      },
     ],
   },
   {
@@ -247,6 +256,10 @@ export default [
       { url: "assets/img/products/11-khalis-ameerat-al-arab-2.webp" },
       { url: "assets/img/products/11-khalis-ameerat-al-arab-3.webp" },
       { url: "assets/img/products/11-khalis-ameerat-al-arab-4.webp" },
+      {
+        url: "assets/img/products/11-khalis-ameerat-al-arab-hero.webp",
+        isHero: true,
+      },
     ],
   },
   {
