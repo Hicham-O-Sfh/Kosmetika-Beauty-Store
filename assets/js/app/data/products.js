@@ -305,6 +305,10 @@ export default [
       },
       { url: "assets/img/products/13-cosmo-black-afgan-1.webp" },
       { url: "assets/img/products/13-cosmo-black-afgan-2.webp" },
+      {
+        url: "assets/img/products/13-cosmo-black-afgan-hero.webp",
+        isHero: true,
+      },
     ],
   },
   {
