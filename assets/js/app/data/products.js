@@ -280,6 +280,10 @@ export default [
         isMain: true,
       },
       { url: "assets/img/products/12-lattafa-perfumes-ethraa-1.webp" },
+      {
+        url: "assets/img/products/12-lattafa-perfumes-ethraa-hero.webp",
+        isHero: true,
+      },
     ],
   },
   {
