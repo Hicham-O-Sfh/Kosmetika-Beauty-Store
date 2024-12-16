@@ -355,6 +355,10 @@ export default [
       { url: "assets/img/products/15-manasik-malikat-al-arab-rose-1.webp" },
       { url: "assets/img/products/15-manasik-malikat-al-arab-rose-2.webp" },
       { url: "assets/img/products/15-manasik-malikat-al-arab-rose-3.webp" },
+      {
+        url: "assets/img/products/15-manasik-malikat-al-arab-rose-hero.webp",
+        isHero: true,
+      },
     ],
   },
   {
