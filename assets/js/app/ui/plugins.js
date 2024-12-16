@@ -119,7 +119,38 @@ export function applyOwlCarousel() {
 }
 
 // ElevateZoom
+
+/**
+ * At or below this width the zoom lens swallows touch gestures and blocks the
+ * page scroll, so the plugin is skipped on phones.
+ */
+const ZOOM_DISABLED_QUERY = "(max-width: 480px)";
+
+/**
+ * ElevateZoom owns the thumbnail-to-main-image swap, so it has to be provided
+ * for the screens where the plugin is skipped.
+ */
+function applyGalleryImageSwap() {
+  $("#gallery_01").on("click", "a", function (event) {
+    event.preventDefault();
+
+    const source = $(this).data("image");
+    if (!source) {
+      return;
+    }
+
+    $("#gallery_01 a").removeClass("zoomGalleryActive");
+    $(this).addClass("zoomGalleryActive");
+    $("#zoom1").prop("src", source);
+  });
+}
+
 export function applyElevateZoom() {
+  if (window.matchMedia(ZOOM_DISABLED_QUERY).matches) {
+    applyGalleryImageSwap();
+    return;
+  }
+
   $("#zoom1").elevateZoom({
     gallery: "gallery_01",
     responsive: true,
