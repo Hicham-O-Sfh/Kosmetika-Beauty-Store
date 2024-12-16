@@ -380,6 +380,10 @@ export default [
       },
       { url: "assets/img/products/16-manasik-muski-oud-1.webp" },
       { url: "assets/img/products/16-manasik-muski-oud-2.webp" },
+      {
+        url: "assets/img/products/16-manasik-muski-oud-hero.webp",
+        isHero: true,
+      },
     ],
   },
   {
