@@ -44,10 +44,10 @@ export function outOfStockThumbBadge(product) {
 export function outOfStockAlertHtml() {
   return `
     <div class="alert alert-warning" role="alert">
-      Ce parfum est <b>momentanément épuisé (hors stock)</b> 😅
+      Ce parfum est <b>pour l'instant hors stock</b> 😅
       <br />
       mais pas de
-      panique ! Tu peux quand même l'ajouter au panier et passer commande normalement.
+      panique ! Tu peux quand même l'ajouter au panier et passer la commande normalement.
       On reste en contact direct avec toi sur <b>WhatsApp</b> 💬 (là où se finalise ta
       commande) et on te tient au courant en toute transparence :
       <br />
