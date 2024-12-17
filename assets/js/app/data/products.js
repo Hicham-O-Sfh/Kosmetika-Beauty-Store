@@ -33,10 +33,13 @@ export default [
     descriptionHtml:
       "<b>Gucci® - Bloom - Acqua Di Fiori</b> est une fragrance florale fraîche et délicate 🌸. Avec ses notes de <b>jasmin</b>, de <b>tubéreuse</b> et une touche verte rafraîchissante, elle évoque un jardin en pleine éclosion. Parfaite pour celles qui recherchent une <b>fraîcheur naturelle</b> et une <b>élégance subtile</b> ✨. Un parfum qui célèbre la beauté de la nature et la féminité dans sa forme la plus pure.",
     pics: [
-      { url: "assets/img/products/gucci-bloom-img-main.webp", isMain: true },
-      { url: "assets/img/products/gucci-bloom-img-6.jpg" },
-      { url: "assets/img/products/gucci-bloom-img-1.webp" },
-      { url: "assets/img/products/gucci-bloom-img-2.webp" },
+      {
+        url: "assets/img/products/1-gucci-bloom-acqua-di-fiori-main.webp",
+        isMain: true,
+      },
+      { url: "assets/img/products/1-gucci-bloom-acqua-di-fiori-1.jpg" },
+      { url: "assets/img/products/1-gucci-bloom-acqua-di-fiori-2.webp" },
+      { url: "assets/img/products/1-gucci-bloom-acqua-di-fiori-3.webp" },
     ],
   },
   {
