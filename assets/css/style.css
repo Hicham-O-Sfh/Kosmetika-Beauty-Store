@@ -430,6 +430,13 @@ textarea:-ms-input-placeholder {
 }
 /* 2.2 header middel css here */
 
+/* Le logo est un lettrage sur fond plein : le `border-radius` global des
+   images lui rogne les coins au lieu de l'adoucir. */
+.logo a img,
+.logo_sticky a img {
+  border-radius: 0;
+}
+
 .logo {
   padding: 0 20px;
 }
