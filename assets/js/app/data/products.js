@@ -94,8 +94,11 @@ export default [
     descriptionHtml:
       "<b>Manassik® - Gharam wa Hob</b> est une eau de parfum <b>captivante</b> qui incarne la <b>passion</b> et le <b>romantisme</b> 💖. Ses notes <b>orientales chaleureuses</b> et <b>florales</b> créent un sillage <b>sensuel</b> et <b>mystérieux</b>. Idéal pour les moments <b>spéciaux</b>, ce parfum riche en <b>émotions</b> est une véritable déclaration de <b>séduction</b>.",
     pics: [
-      { url: "assets/img/products/gharam-wa-hob-img-main.webp", isMain: true },
-      { url: "assets/img/products/8439627615236_3.jpg" },
+      {
+        url: "assets/img/products/4-manassik-gharam-wa-hob-main.webp",
+        isMain: true,
+      },
+      { url: "assets/img/products/4-manassik-gharam-wa-hob-1.jpg" },
     ],
   },
   {
@@ -129,7 +132,10 @@ export default [
     descriptionHtml:
       "<b>Allerv® - Exchange</b> est un parfum masculin <b>luxueux</b>, inspiré par la sophistication de <b>Bleu de Chanel</b> ✨. Avec ses notes <b>fraîches</b> et <b>boisées</b>, il incarne l'<b>élégance</b> et la <b>modernité</b>. Parfait pour l'homme <b>sûr de lui</b>, il laisse un sillage <b>raffiné</b> et <b>intemporel</b>, idéal pour toutes les occasions 🌟.",
     pics: [
-      { url: "assets/img/products/allery-exchange-img-main.webp", isMain: true },
+      {
+        url: "assets/img/products/allery-exchange-img-main.webp",
+        isMain: true,
+      },
       { url: "assets/img/products/allery-exchange-img-2-BIG.webp" },
     ],
   },
@@ -292,7 +298,10 @@ export default [
     descriptionHtml:
       "Plongez dans un univers de <b>luxe floral</b> avec <b>Manasik® - Malikat Al Arab - Rose</b> 🌹. Ce parfum capture l'essence de la <b>rose</b>, enveloppant la peau d'une touche de <b>féminité</b> et de <b>raffinement</b>. Les notes florales s'accordent parfaitement pour créer un sillage <b>sophistiqué</b> et <b>romantique</b>, idéal pour la femme qui souhaite exprimer sa <b>royauté</b> à travers chaque geste. Un véritable hommage à l'<b>élégance orientale</b> 🌸.",
     pics: [
-      { url: "assets/img/products/malikat-al-arab-img-main.webp", isMain: true },
+      {
+        url: "assets/img/products/malikat-al-arab-img-main.webp",
+        isMain: true,
+      },
       { url: "assets/img/products/malikat-al-arab-img1.webp" },
       { url: "assets/img/products/malikat-al-arab-img2.webp" },
       { url: "assets/img/products/malikat-al-arab-img4.webp" },
