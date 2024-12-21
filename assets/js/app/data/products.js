@@ -61,7 +61,7 @@ export default [
         url: "assets/img/products/2-ard-al-zaafaran-ana-lmalik-main.webp",
         isMain: true,
       },
-      { url: "assets/img/products/2-ard-al-zaafaran-ana-lmalik-1.webp" },
+      { url: "assets/img/products/2-ard-al-zaafaran-ana-lmalik-box.webp" },
       {
         url: "assets/img/products/2-ard-al-zaafaran-ana-lmalik-hero.webp",
         isHero: true,
