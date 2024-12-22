@@ -105,7 +105,7 @@ export default [
         url: "assets/img/products/4-manassik-gharam-wa-hob-main.webp",
         isMain: true,
       },
-      { url: "assets/img/products/4-manassik-gharam-wa-hob-1.jpg" },
+      { url: "assets/img/products/4-manassik-gharam-wa-hob-box.webp" },
       {
         url: "assets/img/products/4-manassik-gharam-wa-hob-hero.webp",
         isHero: true,
