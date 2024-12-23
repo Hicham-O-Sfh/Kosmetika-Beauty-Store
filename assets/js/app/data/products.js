@@ -162,7 +162,7 @@ export default [
       "<b>Lattafa® - Raghba</b> pour Femme, est une fragrance délicieusement sucrée qui enveloppe de ses notes gourmandes de <b>miel</b> 🍯 et de vanille. Séduisante et envoûtante, elle laisse un sillage irrésistible, parfait pour celles qui veulent captiver à chaque instant. Un parfum d'<b>excellence</b>, alliant douceur et <b>séduction</b>, idéal pour les moments spéciaux.",
     pics: [
       { url: "assets/img/products/7-lattafa-raghba-main.webp", isMain: true },
-      { url: "assets/img/products/7-lattafa-raghba-1.webp" },
+      { url: "assets/img/products/7-lattafa-raghba-box.webp" },
       { url: "assets/img/products/7-lattafa-raghba-hero.webp", isHero: true },
     ],
   },
