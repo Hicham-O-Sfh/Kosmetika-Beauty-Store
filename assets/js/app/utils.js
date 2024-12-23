@@ -20,6 +20,7 @@ import {
 } from "./config/site.config.js";
 import {
   getAllProducts,
+  getHeroPicUrl,
   getMainPicUrl,
   getProduct,
   getProductTitle,
@@ -175,7 +176,7 @@ export function projectProductInPage() {
       }
 
       // product's pictures & zoom management
-      const productMainPic = getMainPicUrl(product);
+      const productHeroPic = getHeroPicUrl(product);
       const productTitle = getProductTitle(product);
       product.pics.forEach((pic, index) => {
         $("#gallery_01").append(
@@ -197,9 +198,9 @@ export function projectProductInPage() {
       });
       applyOwlCarousel();
 
-      $("#zoom1").prop("src", productMainPic);
+      $("#zoom1").prop("src", productHeroPic);
       $("#zoom1").prop("alt", productTitle);
-      $("#zoom1").data("zoom-image", productMainPic);
+      $("#zoom1").data("zoom-image", productHeroPic);
       applyElevateZoom();
 
       // disable the skeleton loader
