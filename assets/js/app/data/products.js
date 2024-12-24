@@ -329,6 +329,10 @@ export default [
         isMain: true,
       },
       { url: "assets/img/products/14-al-fakhr-perfumes-cheikh-zaid-1.webp" },
+      {
+        url: "assets/img/products/14-al-fakhr-perfumes-cheikh-zaid-hero.webp",
+        isHero: true,
+      },
     ],
   },
   {
