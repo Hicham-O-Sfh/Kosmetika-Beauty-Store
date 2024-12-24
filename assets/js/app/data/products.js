@@ -183,7 +183,7 @@ export default [
         url: "assets/img/products/8-manassik-loves-musk-main.webp",
         isMain: true,
       },
-      { url: "assets/img/products/8-manassik-loves-musk-1.webp" },
+      { url: "assets/img/products/8-manassik-loves-musk-box.webp" },
       {
         url: "assets/img/products/8-manassik-loves-musk-hero.webp",
         isHero: true,
