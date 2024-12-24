@@ -204,7 +204,7 @@ export default [
       "<b>Manassik® - Assalah</b> est une eau de parfum masculine de <b>luxe</b> 🐎, incarnant la <b>virilité</b> et l'<b>élégance</b> à travers son design inspiré par la noblesse des chevaux. Ses notes riches et boisées créent un sillage puissant et <b>raffiné</b>, parfait pour l'homme sûr de lui et moderne. Un parfum de <b>beauté</b> intemporelle, conçu pour ceux qui veulent marquer leur présence avec distinction. #luxe #beauté #virilité",
     pics: [
       { url: "assets/img/products/9-manassik-assalah-main.webp", isMain: true },
-      { url: "assets/img/products/9-manassik-assalah-1.jpg" },
+      { url: "assets/img/products/9-manassik-assalah-box.webp" },
       { url: "assets/img/products/9-manassik-assalah-hero.webp", isHero: true },
     ],
   },
