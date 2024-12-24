@@ -225,7 +225,7 @@ export default [
         url: "assets/img/products/10-diamond-crystal-noir-main.webp",
         isMain: true,
       },
-      { url: "assets/img/products/10-diamond-crystal-noir-1.webp" },
+      { url: "assets/img/products/10-diamond-crystal-noir-box.webp" },
       {
         url: "assets/img/products/10-diamond-crystal-noir-hero.webp",
         isHero: true,
