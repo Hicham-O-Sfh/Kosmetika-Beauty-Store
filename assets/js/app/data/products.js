@@ -345,14 +345,14 @@ export default [
       "Plongez dans un univers de <b>luxe floral</b> avec <b>Manassik® - Malikat Al Arab - Rose</b> 🌹. Ce parfum capture l'essence de la <b>rose</b>, enveloppant la peau d'une touche de <b>féminité</b> et de <b>raffinement</b>. Les notes florales s'accordent parfaitement pour créer un sillage <b>sophistiqué</b> et <b>romantique</b>, idéal pour la femme qui souhaite exprimer sa <b>royauté</b> à travers chaque geste. Un véritable hommage à l'<b>élégance orientale</b> 🌸.",
     pics: [
       {
-        url: "assets/img/products/15-manasik-malikat-al-arab-rose-main.webp",
+        url: "assets/img/products/15-manassik-malikat-al-arab-rose-main.webp",
         isMain: true,
       },
-      { url: "assets/img/products/15-manasik-malikat-al-arab-rose-1.webp" },
-      { url: "assets/img/products/15-manasik-malikat-al-arab-rose-2.webp" },
-      { url: "assets/img/products/15-manasik-malikat-al-arab-rose-3.webp" },
+      { url: "assets/img/products/15-manassik-malikat-al-arab-rose-box.webp" },
+      { url: "assets/img/products/15-manassik-malikat-al-arab-rose-1.webp" },
+      { url: "assets/img/products/15-manassik-malikat-al-arab-rose-2.webp" },
       {
-        url: "assets/img/products/15-manasik-malikat-al-arab-rose-hero.webp",
+        url: "assets/img/products/15-manassik-malikat-al-arab-rose-hero.webp",
         isHero: true,
       },
     ],
