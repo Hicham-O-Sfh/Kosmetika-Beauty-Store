@@ -249,10 +249,10 @@ export default [
         url: "assets/img/products/11-khalis-ameerat-al-arab-main.webp",
         isMain: true,
       },
+      { url: "assets/img/products/11-khalis-ameerat-al-arab-box.webp" },
       { url: "assets/img/products/11-khalis-ameerat-al-arab-1.webp" },
       { url: "assets/img/products/11-khalis-ameerat-al-arab-2.webp" },
       { url: "assets/img/products/11-khalis-ameerat-al-arab-3.webp" },
-      { url: "assets/img/products/11-khalis-ameerat-al-arab-4.webp" },
       {
         url: "assets/img/products/11-khalis-ameerat-al-arab-hero.webp",
         isHero: true,
