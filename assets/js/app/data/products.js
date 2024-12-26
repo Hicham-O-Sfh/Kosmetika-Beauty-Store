@@ -402,6 +402,7 @@ export default [
       { url: "assets/img/products/17-lattafa-qimmah-main.webp", isMain: true },
       { url: "assets/img/products/17-lattafa-qimmah-1.webp" },
       { url: "assets/img/products/17-lattafa-qimmah-2.webp" },
+      { url: "assets/img/products/17-lattafa-qimmah-hero.webp", isHero: true },
     ],
   },
 ];
