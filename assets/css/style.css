@@ -220,16 +220,29 @@ textarea:-ms-input-placeholder {
 
 /* 02. Element */
 .button {
-  background: #c09578;
-  box-shadow: none;
+  background: linear-gradient(135deg, #d0a888 0%, #c09578 45%, #a97957 100%);
+  box-shadow: 0 6px 16px rgba(169, 121, 87, 0.35);
   color: #ffffff;
   display: inline-block;
   height: 45px;
   line-height: 45px;
-  padding: 0 22px;
+  padding: 0 26px;
   text-transform: uppercase;
   font-size: 13px;
-  border-radius: 3px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  border-radius: 30px;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(169, 121, 87, 0.45);
+  color: #ffffff;
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(169, 121, 87, 0.35);
 }
 /* 01. header css here*/
 .sticky-header.sticky {
@@ -1108,9 +1121,6 @@ textarea:-ms-input-placeholder {
   line-height: 50px;
   padding: 0 35px;
 }
-.slider_content a:hover {
-  background: #212121;
-}
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .slider_content a {
     margin-top: 25px;
@@ -1878,10 +1888,10 @@ textarea:-ms-input-placeholder {
   border: 0;
   font-size: 100%;
   margin-left: 20px;
-  background: #c09578;
   height: 42px;
   line-height: 42px;
-  text-transform: capitalize;
+  /* `capitalize` mettait une majuscule à chaque mot de « Je le veux ! ». */
+  text-transform: none;
   min-width: 270px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -1901,7 +1911,7 @@ textarea:-ms-input-placeholder {
   }
 }
 .product_variant.quantity button:hover {
-  background: #242424;
+  background: linear-gradient(135deg, #c69d80 0%, #b0855f 45%, #96683f 100%);
 }
 .product_variant.color {
   margin-bottom: 35px;
