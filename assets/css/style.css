@@ -1993,9 +1993,21 @@ textarea:-ms-input-placeholder {
   left: auto;
 }
 
-@media only screen and (max-width: 767px) {
+/* Sous `lg` la galerie passe au-dessus de la fiche : il lui faut la respiration
+   que la gouttière de la grille ne fournit plus une fois les colonnes empilées. */
+@media only screen and (max-width: 991px) {
   .product-details-tab {
     margin-bottom: 55px;
+  }
+}
+
+/* Empilée, la galerie prendrait les 720px du conteneur et les vignettes
+   suivraient : on la ramène à la largeur qu'elle a en mobile. */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .product-details-tab {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 .product-details-tab:hover .s-tab-zoom.owl-carousel .owl-nav div {
