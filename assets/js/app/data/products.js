@@ -38,8 +38,6 @@ export default [
         isMain: true,
       },
       { url: "assets/img/products/1-gucci-bloom-acqua-di-fiori-1.jpg" },
-      { url: "assets/img/products/1-gucci-bloom-acqua-di-fiori-2.webp" },
-      { url: "assets/img/products/1-gucci-bloom-acqua-di-fiori-3.webp" },
       {
         url: "assets/img/products/1-gucci-bloom-acqua-di-fiori-hero.webp",
         isHero: true,
@@ -129,7 +127,6 @@ export default [
     pics: [
       { url: "assets/img/products/5-aqua-main.webp", isMain: true },
       { url: "assets/img/products/5-aqua-1.webp" },
-      { url: "assets/img/products/5-aqua-2.webp" },
       { url: "assets/img/products/5-aqua-hero.webp", isHero: true },
     ],
   },
@@ -304,7 +301,6 @@ export default [
         isMain: true,
       },
       { url: "assets/img/products/13-cosmo-black-afgan-1.webp" },
-      { url: "assets/img/products/13-cosmo-black-afgan-2.webp" },
       {
         url: "assets/img/products/13-cosmo-black-afgan-hero.webp",
         isHero: true,
@@ -401,7 +397,6 @@ export default [
     pics: [
       { url: "assets/img/products/17-lattafa-qimmah-main.webp", isMain: true },
       { url: "assets/img/products/17-lattafa-qimmah-1.webp" },
-      { url: "assets/img/products/17-lattafa-qimmah-2.webp" },
       { url: "assets/img/products/17-lattafa-qimmah-hero.webp", isHero: true },
     ],
   },
