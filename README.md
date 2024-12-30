@@ -25,12 +25,11 @@ The project demonstrates clean code, secure data handling, and production-ready 
    cd Kosmetika-Beauty-Store
    ```
 2. **Serve it over HTTP.** Zero build, zero dependencies, but the app code is loaded as ES modules,
-   which browsers block under `file://` (CORS). Two ways:
+   which browsers block under `file://` (CORS). Use VS Code's
+   [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer):
+   right-click `index.html` → _Open with Live Server_. Nothing to install beyond the extension.
 
-   - **VS Code's [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)**:
-     right-click `index.html` → _Open with Live Server_. Nothing to install beyond the extension.
-   Open the printed `http://localhost:...` URL. Catalogue, cart and WhatsApp checkout all work
-   immediately, no configuration needed.
+   Catalogue, cart and WhatsApp checkout all work immediately, no configuration needed.
 
 3. **(Optional) Configure Firebase**, only needed to unlock live order analytics
    (`total_orders`/`total_quantity` counters). The cart and checkout work identically without it.
@@ -300,6 +299,7 @@ looks right and isn't.
 - **Files are UTF-8 without BOM**: never run PowerShell 5.1 `Get-Content`/`Set-Content` over them
   (accents and emoji are destroyed). Use `[System.IO.File]::ReadAllText`/`WriteAllText` with
   `UTF8Encoding($false)`, or an editor.
+
 ### Console noise that is not a bug
 
 - **App Check rejections in local development** are expected: `localhost` is not on the reCAPTCHA
