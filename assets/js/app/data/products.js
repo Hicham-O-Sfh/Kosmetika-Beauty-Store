@@ -334,7 +334,7 @@ export default [
   {
     id: 15,
     name: "Malikat Al Arab (Rose)",
-    brand: "Manasik®",
+    brand: "Manassik®",
     volumeMl: 100,
     price: 100,
     currency: "MAD",
@@ -342,7 +342,7 @@ export default [
     category: "femme",
     status: PRODUCT_STATUS.NEW_ARRIVALS,
     descriptionHtml:
-      "Plongez dans un univers de <b>luxe floral</b> avec <b>Manasik® - Malikat Al Arab - Rose</b> 🌹. Ce parfum capture l'essence de la <b>rose</b>, enveloppant la peau d'une touche de <b>féminité</b> et de <b>raffinement</b>. Les notes florales s'accordent parfaitement pour créer un sillage <b>sophistiqué</b> et <b>romantique</b>, idéal pour la femme qui souhaite exprimer sa <b>royauté</b> à travers chaque geste. Un véritable hommage à l'<b>élégance orientale</b> 🌸.",
+      "Plongez dans un univers de <b>luxe floral</b> avec <b>Manassik® - Malikat Al Arab - Rose</b> 🌹. Ce parfum capture l'essence de la <b>rose</b>, enveloppant la peau d'une touche de <b>féminité</b> et de <b>raffinement</b>. Les notes florales s'accordent parfaitement pour créer un sillage <b>sophistiqué</b> et <b>romantique</b>, idéal pour la femme qui souhaite exprimer sa <b>royauté</b> à travers chaque geste. Un véritable hommage à l'<b>élégance orientale</b> 🌸.",
     pics: [
       {
         url: "assets/img/products/15-manasik-malikat-al-arab-rose-main.webp",
@@ -360,7 +360,7 @@ export default [
   {
     id: 16,
     name: "Muski Oud",
-    brand: "Manasik®",
+    brand: "Manassik®",
     volumeMl: 100,
     price: 100,
     currency: "MAD",
@@ -368,7 +368,7 @@ export default [
     category: "femme",
     status: PRODUCT_STATUS.NEW_ARRIVALS,
     descriptionHtml:
-      "<b>Manasik® - Muski Oud</b> marie la douceur du <b>musc</b> à la profondeur de l'<b>oud</b> pour une signature <b>audacieuse</b> et envoûtante 🖤. Ses notes <b>orientales</b>, riches et captivantes, s'adressent à celles qui imposent leur présence sans hausser le ton. Une empreinte de <b>luxe</b> et de <b>sophistication</b>, idéale pour marquer chaque instant d'un sillage <b>profond</b> et <b>durable</b> 🌟.",
+      "<b>Manassik® - Muski Oud</b> marie la douceur du <b>musc</b> à la profondeur de l'<b>oud</b> pour une signature <b>audacieuse</b> et envoûtante 🖤. Ses notes <b>orientales</b>, riches et captivantes, s'adressent à celles qui imposent leur présence sans hausser le ton. Une empreinte de <b>luxe</b> et de <b>sophistication</b>, idéale pour marquer chaque instant d'un sillage <b>profond</b> et <b>durable</b> 🌟.",
     pics: [
       {
         url: "assets/img/products/16-manasik-muski-oud-main.webp",
