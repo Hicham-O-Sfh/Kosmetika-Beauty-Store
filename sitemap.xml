@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Kosmetika — Beauty Store
-  Copyright (c) 2024-2026 Hicham Oussama Saffih. Tous droits réservés.
-  Distribué sous licence MIT — voir le fichier LICENSE à la racine.
+  Copyright (c) 2024-2026 Hicham Oussama Saffih. All rights reserved.
+  Distributed under the MIT License — see the LICENSE file at the project root.
 
   product-details.html n'est volontairement pas listé : sans ?productId= la page
   ne rend rien, et les crawlers n'exécutent pas le JS qui la remplit. L'annoncer
