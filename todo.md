@@ -22,14 +22,6 @@ Tout travail d'optimisation d'images d'ici là serait jeté.
 
 ## 📋 Reste à faire
 
-### 🔵 Firestore
-
-- [x] **Règles durcies déployées le 04/08.** `firestore.rules` du repo est désormais la version active
-      (compilation OK, `released rules to cloud.firestore`). Elles ajoutent `hasAll` en plus de
-      `hasOnly`, bornent la quantité à 1–50 au lieu de `>= 0`, et ferment explicitement toutes les
-      autres collections. Le repo et la console ne peuvent plus diverger : redéployer après chaque
-      modification du fichier.
-
 ### 🔵 Qualité & open source
 
 - [ ] **Captures d'écran dans le readme** — le placeholder `demo-banner.png` est commenté en haut du
@@ -45,7 +37,7 @@ Ces points étaient listés ; ils ne le sont plus. Décision assumée, ne pas le
   erreur brute. La prod, elle, est vérifiée fonctionnelle. Ajouter `localhost` à la clé reCAPTCHA
   n'est **pas** une alternative : ça affaiblirait la clé de production.
 - **Outillage** (`.editorconfig`, Prettier, ESLint), **fichier de conventions de code**, **tests**,
-  **CI** — hors périmètre. Le projet reste sans build, sans `npm install`, sans pipeline. Le code est
+  **CI**, **validation du catalogue par `ajv`** — hors périmètre. Le projet reste sans build, sans `npm install`, sans pipeline. Le code est
   déjà formaté à la Prettier de fait ; le figer par de l'outillage n'apporterait rien ici.
 - **Optimisation des 12 `.jpg` restants** — toutes les photos produit vont être **régénérées** par IA
   (Nano Banana / Higgsfield). Optimiser des images destinées à disparaître serait du travail perdu.
@@ -59,10 +51,6 @@ Ces points étaient listés ; ils ne le sont plus. Décision assumée, ne pas le
 
 ### 🟣 Scale du catalogue
 
-- [x] **Incohérences connues — réglées le 04/08.** Tous les prix alignés à 100 MAD · id 16 remis dans
-      l'ordre · catégories 15/16 tranchées : le 15 était cohérent, le 16 reste `femme` et sa description
-      a été reprise (elle s'adressait à « ceux » et disait « luxure » pour « luxe »).
-      _(La validation automatique par `ajv` reste écartée avec la CI — voir plus haut.)_
 - [ ] **Au-delà de ~100 produits** : pagination / index séparé sur `shop.html`.
 
 ---
@@ -263,3 +251,13 @@ _Le détail de chaque changement est dans l'historique git ; ce journal ne garde
   qui l'expose et donne au cloneur les trois niveaux de correction, plus le décompte de ce que
   l'absence de backend fait économiser (pas de serveur, pas de BDD, pas de comptes, pas de panier à
   garder côté serveur, pas de PCI, pas de CI/CD). Le todo n'en garde qu'une ligne dans « Écarté ».
+- **11/08 — images déformées et favicons.** Trois visuels étirés remis à leur ratio natif. La bannière
+  de `contact-us.html` était forcée en `width:60%` / `height:250px`, soit 2,7:1 imposé à un 3:2 :
+  remplacée par `max-width` + `aspect-ratio`. Le logo, lui, était déformé **dans le fichier** —
+  l'artwork quasi carré de la bannière compressé en 256×66 — et aucun CSS ne pouvait le rattraper ;
+  recadré sur le lettrage (bbox mesurée au pixel, 1028×254) et réexporté en 640×173. Le
+  `border-radius: 20px` global des `img` rognait au passage les coins du lettrage : neutralisé pour le
+  logo seul. Vrai jeu de favicons enfin, découpé dans le flacon de la bannière : `.ico` 16/32/48,
+  apple-touch 180, icônes 192/512 et `site.webmanifest` — les pages servaient jusqu'ici un PNG de
+  640 px comme favicon. Cinq photos produit retirées des galeries au passage, dont une déjà absente
+  du disque mais encore référencée.
