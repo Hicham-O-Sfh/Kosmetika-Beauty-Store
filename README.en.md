@@ -122,8 +122,7 @@ itself, it comes out in one commit and the shop keeps selling.
 - **Bootstrap 5**, **jQuery** and its plugins: Slick and Owl Carousel (carousels), elevateZoom
   (zoom), Notyf (notifications), GTranslate (languages), Font Awesome (icons).
 - **Firebase Firestore + App Check** (reCAPTCHA v3) for the order counters.
-- **Site-level SEO**: unique titles and descriptions, `canonical`, Open Graph, `robots.txt`,
-  `sitemap.xml`.
+- **Site-level SEO**: unique titles and descriptions, `canonical`, Open Graph, `sitemap.xml`.
 - **Accessibility**: alt text, real buttons, visible keyboard focus.
 - 🎨 The main product visuals are **AI-generated**, then normalised to 1024×1024 WebP.
 

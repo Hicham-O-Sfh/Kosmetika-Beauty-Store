@@ -126,8 +126,7 @@ on l'enlève en un commit et la boutique continue de vendre.
 - **Bootstrap 5**, **jQuery** et ses plugins : Slick et Owl Carousel (carrousels), elevateZoom
   (zoom), Notyf (notifications), GTranslate (langues), Font Awesome (icônes).
 - **Firebase Firestore + App Check** (reCAPTCHA v3) pour les compteurs de commandes.
-- **SEO de site** : titres et descriptions uniques, `canonical`, Open Graph, `robots.txt`,
-  `sitemap.xml`.
+- **SEO de site** : titres et descriptions uniques, `canonical`, Open Graph, `sitemap.xml`.
 - **Accessibilité** : textes alternatifs, vrais boutons, focus visible au clavier.
 - 🎨 Les visuels produit principaux sont **générés par IA**, puis normalisés en WebP 1024×1024.
 
