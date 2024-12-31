@@ -37,7 +37,7 @@ export default [
         url: "assets/img/products/1-gucci-bloom-acqua-di-fiori-main.webp",
         isMain: true,
       },
-      { url: "assets/img/products/1-gucci-bloom-acqua-di-fiori-1.jpg" },
+      { url: "assets/img/products/1-gucci-bloom-acqua-di-fiori-box.webp" },
       {
         url: "assets/img/products/1-gucci-bloom-acqua-di-fiori-hero.webp",
         isHero: true,
