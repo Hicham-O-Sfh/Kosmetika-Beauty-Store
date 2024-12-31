@@ -111,7 +111,7 @@ La **seule** surface en écriture de tout le système : deux compteurs Firestore
 
 - 🔒 **Firebase App Check** (reCAPTCHA v3) : seule la vraie boutique, sur son propre domaine,
   peut écrire.
-- 📜 **Règles Firestore strictes** ([`firestore.rules`](firestore.rules)) : deux entiers, qui ne
+- 📜 **Règles Firestore strictes** ([`firebase/firestore.rules`](firebase/firestore.rules)) : deux entiers, qui ne
   font qu'avancer, et seulement des quantités qu'un vrai panier peut produire. Tout le reste
   est fermé.
 
@@ -167,7 +167,12 @@ restent refusés en local : `localhost` n'est pas un domaine autorisé par App C
    [`firebase.config.example.js`](assets/js/app/config/firebase.config.example.js) indique d'où
    vient chaque valeur. Ce fichier est commité exprès : GitHub Pages sert le dépôt tel quel, et
    les clés Firebase sont publiques par nature. C'est App Check qui protège.
-2. Pointer [`.firebaserc`](.firebaserc) vers votre projet, puis déployer les règles :
+2. Pointer [`firebase/.firebaserc`](firebase/.firebaserc) vers votre projet, puis déployer les
+   règles depuis le dossier `firebase/` :
+
+   ```bash
+   cd firebase
+   ```
 
    ```bash
    npx --yes firebase-tools login
@@ -194,7 +199,7 @@ assets/js/app/services/                        le panier
 assets/js/app/ui/                              gabarits et plugins
 assets/js/app/firebase-management.js           compteurs de commandes (Firebase)
 assets/js/vendor/                              librairies tierces, non modifiées
-firestore.rules                                règles de sécurité Firestore
+firebase/                                      règles Firestore et config de la CLI Firebase
 ```
 
 ---

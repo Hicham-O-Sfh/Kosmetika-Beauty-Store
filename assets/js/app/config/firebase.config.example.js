@@ -13,8 +13,8 @@
  * it over `firebase.config.js` and fill in your own project.
  *
  * These keys are public by design — they identify the project, they do not
- * grant access to it. Access is controlled by `firestore.rules` at the
- * repository root and by App Check.
+ * grant access to it. Access is controlled by `firebase/firestore.rules`
+ * and by App Check.
  *
  * Firebase Console → Project settings → General → Your apps → SDK setup.
  * Any value still starting with `YOUR_` is treated as unset: the order

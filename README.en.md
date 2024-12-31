@@ -108,7 +108,7 @@ The **only** writable surface in the whole system: two Firestore counters per pr
 (`total_orders`, `total_quantity`), locked down twice over:
 
 - 🔒 **Firebase App Check** (reCAPTCHA v3): only the real store, on its own domain, can write.
-- 📜 **Strict Firestore rules** ([`firestore.rules`](firestore.rules)): two integers that only
+- 📜 **Strict Firestore rules** ([`firebase/firestore.rules`](firebase/firestore.rules)): two integers that only
   move forward, by amounts a real cart can produce. Every other path is closed.
 
 Firebase is **optional**: its only job is knowing *what sells*. The day it stops paying for
@@ -163,7 +163,12 @@ locally: `localhost` isn't a domain App Check allows, on purpose.
    [`firebase.config.example.js`](assets/js/app/config/firebase.config.example.js) says where each
    value comes from. This file is committed on purpose: GitHub Pages serves the repository as is,
    and Firebase keys are public by design. App Check is what protects it.
-2. Point [`.firebaserc`](.firebaserc) at your project, then deploy the rules:
+2. Point [`firebase/.firebaserc`](firebase/.firebaserc) at your project, then deploy the rules
+   from the `firebase/` folder:
+
+   ```bash
+   cd firebase
+   ```
 
    ```bash
    npx --yes firebase-tools login
@@ -190,7 +195,7 @@ assets/js/app/services/                        the cart
 assets/js/app/ui/                              templates and plugins
 assets/js/app/firebase-management.js           order counters (Firebase)
 assets/js/vendor/                              third-party libraries, untouched
-firestore.rules                                Firestore security rules
+firebase/                                      Firestore rules and Firebase CLI config
 ```
 
 ---

@@ -12,7 +12,7 @@
  * production site with no Firebase at all.
  *
  * These keys are public by design — they name the project, they do not open it.
- * What keeps the counters safe is `firestore.rules` plus App Check, whose reCAPTCHA
+ * What keeps the counters safe is `firebase/firestore.rules` plus App Check, whose reCAPTCHA
  * key only accepts the store's own domain.
  *
  * **Cloning this project?** Replace every value below with your own — see
