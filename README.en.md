@@ -64,6 +64,7 @@ WhatsApp opens with the invoice already written:
 - (Khalis® - Ameerat Al Arab (100ml)) x 2 = (100 Dhs) x 2
 - (Manassik® - Muski Oud (100ml)) x 1 = (100 Dhs) x 1
 
+
  --------------------------------------------------
 	 Total = 400 Dhs
 ```
