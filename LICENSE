@@ -30,7 +30,8 @@ repository, namely:
   - the application JavaScript in `assets/js/app/` (configuration, product
     data model and repository, cart service, UI modules, Firebase analytics);
   - the page markup written or modified for this project;
-  - the project documentation (`README.md`) and repository layout.
+  - the project documentation (`README.md`, `README.en.md`) and repository
+    layout.
 
 It does NOT cover the third-party material redistributed here. See the
-"License & third-party assets" section of `README.md` for details.
+"License" section of `README.en.md` (or "Licence" in `README.md`) for details.
