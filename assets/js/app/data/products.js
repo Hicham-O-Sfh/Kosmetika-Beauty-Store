@@ -82,9 +82,9 @@ export default [
       "<b>Lattafa® - Yara</b> est une fragrance <b>délicate</b> et <b>envoûtante</b> qui combine subtilement des notes <b>florales</b> et <b>fruitées</b> 🍓. Elle offre une harmonie <b>douce</b> et <b>rafraîchissante</b>, parfaite pour une touche de <b>légèreté</b> et d'<b>élégance</b> au quotidien ✨. Avec son sillage <b>raffiné</b>, elle sublime chaque moment et attire tous les regards.",
     pics: [
       { url: "assets/img/products/3-lattafa-yara-main.webp", isMain: true },
-      { url: "assets/img/products/3-lattafa-yara-1.webp" },
-      { url: "assets/img/products/3-lattafa-yara-2.jpg" },
-      { url: "assets/img/products/3-lattafa-yara-3.webp" },
+      { url: "assets/img/products/3-lattafa-yara-box.webp" },
+      { url: "assets/img/products/3-lattafa-yara-1.jpg" },
+      { url: "assets/img/products/3-lattafa-yara-2.webp" },
       { url: "assets/img/products/3-lattafa-yara-hero.webp", isHero: true },
     ],
   },
