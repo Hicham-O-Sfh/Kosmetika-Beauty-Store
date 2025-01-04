@@ -300,7 +300,7 @@ export default [
         url: "assets/img/products/13-cosmo-black-afgan-main.webp",
         isMain: true,
       },
-      { url: "assets/img/products/13-cosmo-black-afgan-1.webp" },
+      { url: "assets/img/products/13-cosmo-black-afgan-box.webp" },
       {
         url: "assets/img/products/13-cosmo-black-afgan-hero.webp",
         isHero: true,
