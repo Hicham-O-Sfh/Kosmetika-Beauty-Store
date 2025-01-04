@@ -276,7 +276,7 @@ export default [
         url: "assets/img/products/12-lattafa-perfumes-ethraa-main.webp",
         isMain: true,
       },
-      { url: "assets/img/products/12-lattafa-perfumes-ethraa-1.webp" },
+      { url: "assets/img/products/12-lattafa-perfumes-ethraa-box.webp" },
       {
         url: "assets/img/products/12-lattafa-perfumes-ethraa-hero.webp",
         isHero: true,
