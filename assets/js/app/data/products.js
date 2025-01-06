@@ -371,13 +371,13 @@ export default [
       "<b>Manassik® - Muski Oud</b> marie la douceur du <b>musc</b> à la profondeur de l'<b>oud</b> pour une signature <b>audacieuse</b> et envoûtante 🖤. Ses notes <b>orientales</b>, riches et captivantes, s'adressent à celles qui imposent leur présence sans hausser le ton. Une empreinte de <b>luxe</b> et de <b>sophistication</b>, idéale pour marquer chaque instant d'un sillage <b>profond</b> et <b>durable</b> 🌟.",
     pics: [
       {
-        url: "assets/img/products/16-manasik-muski-oud-main.webp",
+        url: "assets/img/products/16-manassik-muski-oud-main.webp",
         isMain: true,
       },
-      { url: "assets/img/products/16-manasik-muski-oud-1.webp" },
-      { url: "assets/img/products/16-manasik-muski-oud-2.webp" },
+      { url: "assets/img/products/16-manassik-muski-oud-box.webp" },
+      { url: "assets/img/products/16-manassik-muski-oud-1.webp" },
       {
-        url: "assets/img/products/16-manasik-muski-oud-hero.webp",
+        url: "assets/img/products/16-manassik-muski-oud-hero.webp",
         isHero: true,
       },
     ],
