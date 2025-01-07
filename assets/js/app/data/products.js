@@ -83,7 +83,7 @@ export default [
     pics: [
       { url: "assets/img/products/3-lattafa-yara-main.webp", isMain: true },
       { url: "assets/img/products/3-lattafa-yara-box.webp" },
-      { url: "assets/img/products/3-lattafa-yara-1.jpg" },
+      { url: "assets/img/products/3-lattafa-yara-1.webp" },
       { url: "assets/img/products/3-lattafa-yara-2.webp" },
       { url: "assets/img/products/3-lattafa-yara-hero.webp", isHero: true },
     ],
