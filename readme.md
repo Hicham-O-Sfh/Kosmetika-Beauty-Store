@@ -115,7 +115,7 @@ perfume name, however well optimised), a real logo and brand identity, and paid 
 Meta/TikTok/Instagram are what bring customers. Add Tier 1 because it is nearly free; reach for
 Tier 2 when organic search is actually converting.
 
-### What you are not paying for, in exchange
+### 😎 What you are not paying for, in exchange
 
 No server to provision, patch or monitor. No database to back up, migrate or scale. No user accounts,
 so no password storage, no session handling, no account-takeover surface. No server-side cart to
@@ -136,17 +136,113 @@ Nothing to install, nothing to run: clone it, serve the folder over HTTP
 (see [Getting Started](#-getting-started-local-dev)) and edit. No bundler, no test suite, no CI —
 a deliberate constraint of this project rather than an omission, so please don't add one in a PR.
 
-Two things worth knowing before a first change:
+**Match the surrounding code.** Identifiers and comments in English, interface copy in French,
+`const`/`let` over `var`, and the formatting Prettier would produce. Every source file carries the
+Kosmetika copyright header.
 
-- **Match the surrounding code.** Identifiers and comments in English, interface copy in French,
-  `const`/`let` over `var`, and the formatting Prettier would produce. Every source file carries the
-  Kosmetika copyright header.
-- **Read _« À savoir avant de toucher au projet »_ in [`todo.md`](todo.md).** It collects the traps
-  you cannot see from the code: `plugins.css` ships a **purged** Bootstrap, so a utility class added
-  to the HTML stays inert until its rule is reinjected; Modernizr must stay non-deferred; the gallery
-  thumbnails must stay `<a>` elements or ElevateZoom silently stops switching photos; `.owl-*` and
-  `.slick-*` are never dead CSS; the files are UTF-8 **without BOM**, which PowerShell 5.1 destroys
-  on contact. That section is the shortest path to a change that looks right and isn't.
+### Traps you cannot see from the code
+
+Each of these has already cost a debugging session. They are the shortest path to a change that
+looks right and isn't.
+
+**Catalogue & product photos**
+
+- **The `pics` array has an ordering contract, not just flags.** Three functions in
+  `products.repository.js` read it differently: `getMainPicUrl()` looks for `isMain`,
+  `getHeroPicUrl()` looks for `isHero`, but **`getSecondaryPicUrl()` takes `pics[1]` by position** —
+  that is the hover photo on product cards. Hence the rule: **`main` first, `hero` last, gallery
+  photos in between**. Moving the `hero` to index 1 would make it the hover image of every card.
+- **The product page gallery renders `pics` in full, `hero` included**, so the big opening photo is
+  also the last thumbnail. That is intentional — filtering the `hero` out would remove the thumbnail
+  matching the displayed photo.
+- **Photo naming**: `assets/img/products/{id}-{brand}-{name}-{main|box|hero|N}.webp`, lowercase and
+  unaccented, `N` numbering gallery photos from 1. The `{id}` prefix must match the product's `id` —
+  that is what makes the catalogue verifiable at a glance. AI-generated visuals (`main`, `hero`) are
+  **1024×1024**, WebP q92.
+
+**Firebase**
+
+- **`firebase.config.js` is committed on purpose.** GitHub Pages serves the site straight from the
+  repository, so a gitignored file would deploy a Firebase-less production. The keys are public by
+  nature; what protects the counters is App Check and its domain list, not the file being secret.
+- **The config is loaded through a dynamic `import()`, never a static one.** A static import of a
+  missing file would break the *entire* module graph, cart included. The `try/catch` around the
+  `import()` is what keeps a deleted config (in a fork) from costing anything but the counters.
+
+**CSS & markup**
+
+- **`plugins.css` ships a purged Bootstrap 5.0.2.** Most utilities (`d-flex`, `mb-*`, `me-*`,
+  `img-fluid`…) were removed, so any utility class added to the HTML stays inert until its rule is
+  reinjected. Check with `grep -o '\.class\b' assets/css/plugins.css`. Bootstrap 5.3 classes (`z-1`…)
+  do not exist here.
+- **`.owl-*` and `.slick-*` are never dead CSS** — those classes are applied at runtime by the
+  libraries, so they are invisible to a search through the HTML.
+- **Carousels stay on the custom grid**: `custom-row` / `custom-col-5` (6 px gutters) form the grid
+  *inside* Slick/Owl, which set slide widths inline. Substituting `.row`/`.col-*` would put two
+  layout systems in conflict.
+- **A `<button>` replacing an `<a>` needs its native chrome stripped** (background, border, padding,
+  font). A block at the top of `style.css` does this for interface buttons; it must stay **before**
+  the component rules, which then win on equal specificity.
+- **Never restore `*:focus { outline: none }`** — that is what made keyboard navigation impossible to
+  follow. The current rule hides the ring for pointer users (`:not(:focus-visible)`) and shows it for
+  keyboard users (`:focus-visible`).
+- **If a CSS purge is ever re-run**: PurgeCSS (fast-glob) silently ignores Windows `\` paths;
+  `@keyframes` referenced only by `animation-name:` escape class-based detection; a `greedy` safelist
+  keeps a whole compound selector as soon as one fragment matches.
+
+**JS plugins**
+
+- **Modernizr is deliberately not deferred**: it swaps the `.no-js` class on `<html>`, which
+  `.no-js .owl-carousel { display: block }` depends on. Deferring it makes the product gallery flash.
+- **Gallery thumbnails must stay `<a>` elements**: ElevateZoom hardcodes `$('#' + gallery + ' a')`,
+  and the touch fallback `applyGalleryImageSwap()` delegates on `$('#gallery_01').on('click', 'a', …)`.
+  Turning them into `<button>` would silently break photo switching **on both paths**. Their
+  accessible name comes from the image `alt` — that is the accepted trade-off.
+- **ElevateZoom is skipped at 480 px and below** (`ZOOM_DISABLED_QUERY`, `ui/plugins.js`): the
+  magnifier listened to `touchmove` / `touchend` on the big photo and swallowed the swipe, blocking
+  page scrolling. Since the plugin also owns click-to-switch, that behaviour is reimplemented by hand
+  in `applyGalleryImageSwap()` — **any gallery change must be carried into both branches**. The media
+  query is evaluated **once, on load**: resizing past 480 px does not re-enable zoom without a reload.
+- **Bootstrap 5.0 does not restore focus after a modal** (added in 5.3). If another modal is ever
+  added, repeat the `hidden.bs.modal` → `trigger.focus()` of `bindSocialPlaceholderDialog()`.
+- **The social links are a one-line fix**: replace `INSTAGRAM_LINK` / `FACEBOOK_LINK` /
+  `TIKTOK_LINK` in [`site.config.js`](assets/js/app/config/site.config.js) with a real URL and
+  `isPlaceholderSocialLink()` stops matching — the placeholder dialog disappears on its own.
+
+**Files & tooling**
+
+- **LF line endings, enforced by `.gitattributes`** (`* text=auto eol=lf`), which overrides the
+  `core.autocrlf=true` that Git for Windows installs by default. Do not remove it "because it works".
+- **Files are UTF-8 without BOM**: never run PowerShell 5.1 `Get-Content`/`Set-Content` over them
+  (accents and emoji are destroyed). Use `[System.IO.File]::ReadAllText`/`WriteAllText` with
+  `UTF8Encoding($false)`, or an editor.
+- **`npx serve` needs `-c .claude/serve.json`** (see [Getting Started](#-getting-started-local-dev)):
+  without it, `serve` rewrites `/product-details.html?productId=10` to `/product-details` and drops
+  the query string, leaving every product page blank. There is no command-line flag for it.
+
+### Console noise that is not a bug
+
+- **`requestStorageAccess: Permission denied`** comes from **reCAPTCHA v3** (App Check), inside a
+  Google iframe — not from GTranslate, and not fixable from this project. No effect on the cart,
+  which is first-party `localStorage`.
+- **`ERR_BLOCKED_BY_CLIENT` on `firestore.googleapis.com/…/Write/channel`**: a browser extension
+  (ad blocker, privacy shield) cutting the call. The blocked request carries `TYPE=terminate` — it
+  closes the channel *after* the write succeeded, so the order is recorded regardless.
+- **App Check rejections in local development** are expected: `localhost` is not on the reCAPTCHA
+  key's domain list, and adding it would weaken the production key. Everything but the Firestore
+  counters works locally, and `warnAppCheckRejected()` says so in the console.
+
+### Decisions already made — don't reopen without a new reason
+
+- **HTML duplication across the 6 pages is kept**: no build step, no JS injection.
+- **The catalogue lives in `data/products.js`** (`export default`), not a fetched JSON file.
+- **No tooling** (`.editorconfig`, Prettier, ESLint), no tests, no CI, no `ajv` catalogue validation.
+  The code is already Prettier-formatted in practice; freezing that with tooling would buy nothing.
+- **Product photos**: `main` and `hero` are AI-regenerated, the 25 secondary gallery photos are the
+  originals and stay that way.
+- **Product SEO is a documented limitation, not a task** — see the [SEO section](#-seo--what-this-demo-does-what-it-doesnt-and-what-a-cloner-should-do).
+- **The git history was rewritten once**, on 31/07 (`git filter-branch`), to strip co-author
+  attribution. Every SHA before that date changed. No further rewrite is planned.
 
 ---
 
@@ -254,8 +350,10 @@ Two things worth knowing before a first change:
 
    - **VS Code's [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)**
      — right-click `index.html` → *Open with Live Server*. Nothing to install beyond the extension.
-   - **Already have Node?** `npx serve . --no-clean-urls` — the flag is required, without it the
-     `?productId=` query is dropped and product pages come up empty.
+   - **Already have Node?** `npx serve -c .claude/serve.json .` — the config is required. `serve`
+     rewrites `/product-details.html?productId=10` to `/product-details` and **drops the query
+     string**, so product pages come up empty; that file just sets `"cleanUrls": false`. There is no
+     command-line flag for it — `--no-clean-urls` is not a `serve` option and makes it exit.
 
    Open the printed `http://localhost:...` URL — catalogue, cart and WhatsApp checkout all work
    immediately, no configuration needed.
