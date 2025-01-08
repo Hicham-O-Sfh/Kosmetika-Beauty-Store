@@ -69,9 +69,9 @@ async function loadConfig() {
     config = await import(CONFIG_MODULE_URL);
   } catch (error) {
     console.info(
-      "Statistiques de commande désactivées : config/firebase.config.js est introuvable ou invalide. " +
-        "Copier config/firebase.config.example.js à côté, sous ce nom, pour les activer. " +
-        "Le panier et la commande WhatsApp fonctionnent sans.",
+      "Order stats are off: config/firebase.config.js is missing or invalid. " +
+        "Copy config/firebase.config.example.js next to it, under that name, to turn them on. " +
+        "The cart and the WhatsApp checkout work without it.",
       error,
     );
     return null;
@@ -82,8 +82,8 @@ async function loadConfig() {
   );
   if (missingKeys.length > 0) {
     console.warn(
-      `Statistiques de commande désactivées : firebase.config.js n'a pas de valeur pour ${missingKeys.join(", ")}. ` +
-        "Le panier et la commande WhatsApp fonctionnent sans.",
+      `Order stats are off: firebase.config.js has no value for ${missingKeys.join(", ")}. ` +
+        "The cart and the WhatsApp checkout work without it.",
     );
     return null;
   }
@@ -101,8 +101,8 @@ async function loadConfig() {
 function setUpAppCheck(app, siteKey) {
   if (!isFilledIn(siteKey)) {
     console.warn(
-      "App Check n'est pas initialisé : recaptchaV3SiteKey est absent de firebase.config.js. " +
-        "Les écritures seront rejetées si le projet impose App Check.",
+      "App Check is not set up: recaptchaV3SiteKey is missing from firebase.config.js. " +
+        "Writes will be rejected if the project enforces App Check.",
     );
     return;
   }
@@ -120,9 +120,7 @@ function setUpAppCheck(app, siteKey) {
  */
 function isFilledIn(value) {
   return (
-    typeof value === "string" &&
-    value !== "" &&
-    !PLACEHOLDER_VALUE.test(value)
+    typeof value === "string" && value !== "" && !PLACEHOLDER_VALUE.test(value)
   );
 }
 
@@ -142,14 +140,15 @@ function warnAppCheckRejected(error) {
 
   appCheckWarningShown = true;
   console.warn(
-    "Écriture refusée par Firestore : App Check n'a pas validé cette page. Deux cas courants — " +
-      "en local, le domaine n'est pas couvert par la clé reCAPTCHA et il faut un jeton de débogage ; " +
-      "sur un clone, config/firebase.config.js désigne encore le projet d'origine, qui n'accepte que " +
-      "son propre domaine. Le panier et la commande WhatsApp ne sont pas affectés, seuls les compteurs.",
+    "Firestore refused the write: App Check did not vouch for this page. Two common cases. " +
+      "Locally, the domain is not covered by the reCAPTCHA key and you need a debug token. " +
+      "On a clone, config/firebase.config.js still points at the original project, which only " +
+      "accepts its own domain. Only the counters are affected, the cart and the WhatsApp " +
+      "checkout keep working.",
   );
 }
 
-// 📥 Récupérer les commandes depuis Firestore
+// 📥 Read the order counters from Firestore
 export async function getOrdersFromFirestore() {
   const db = await firestoreReady;
   if (!db) return [];
@@ -162,12 +161,12 @@ export async function getOrdersFromFirestore() {
       ...orderDoc.data(),
     }));
   } catch (error) {
-    console.error("Erreur lors de la récupération des commandes :", error);
+    console.error("Could not read the order counters:", error);
     return [];
   }
 }
 
-// 📤 Mettre à jour les stats de commande d’un produit
+// 📤 Update one product's order counters
 export async function updateProductOrderStats(productOrders) {
   const db = await firestoreReady;
   if (!db) return;
@@ -188,7 +187,7 @@ export async function updateProductOrderStats(productOrders) {
       );
     } catch (error) {
       console.error(
-        `Erreur lors de la mise à jour des stats pour le produit ${productId}:`,
+        `Could not update the counters for product ${productId}:`,
         error,
       );
       warnAppCheckRejected(error);
