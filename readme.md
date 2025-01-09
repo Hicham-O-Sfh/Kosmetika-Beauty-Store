@@ -3,7 +3,7 @@
 **Kosmetika Beauty Store** is a modern, responsive e-commerce web application for beauty products, built from scratch with HTML, JavaScript, Firebase, and the latest security best practices (including Firebase App Check).  
 The project demonstrates clean code, secure data handling, and production-ready architecture for a real-world e-commerce scenario.
 
-![Kosmetika Demo Banner](assets/img/demo-banner.png)
+![Kosmetika Demo Banner](assets/img/demo-banner.webp)
 
 > ### **Quick Start, No Setup Required**
 >
