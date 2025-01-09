@@ -348,7 +348,6 @@ looks right and isn't.
 ├── robots.txt
 ├── sitemap.xml
 ├── LICENSE
-├── todo.md                      # the few tasks still open, and nothing else
 └── readme.md
 ```
 
@@ -406,7 +405,7 @@ clone, modify and reuse it, as long as the copyright notice is kept.
 - the application JavaScript in `assets/js/app/`: `config/`, `data/` (product model and
   repository), `services/` (cart, Firebase analytics), `ui/` (plugins, templates, video), `main.js`
 - the page markup written or modified for this project
-- the documentation (`readme.md`, `todo.md`) and the repository layout
+- the documentation (`readme.md`) and the repository layout
 
 **What it does NOT cover**
 
