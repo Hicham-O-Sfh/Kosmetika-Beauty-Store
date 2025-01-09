@@ -3,17 +3,68 @@
 **Kosmetika Beauty Store** is a modern, responsive e-commerce web application for beauty products, built from scratch with HTML, JavaScript, Firebase, and the latest security best practices (including Firebase App Check).  
 The project demonstrates clean code, secure data handling, and production-ready architecture for a real-world e-commerce scenario.
 
-<!-- ![Kosmetika Demo Banner](assets/img/demo-banner.png) -->
+![Kosmetika Demo Banner](assets/img/demo-banner.png)
 
 > ### **Quick Start, No Setup Required**
 >
 > This application is designed to be instantly _“clone-and-play”_.  
 > All core features work out-of-the-box, no Firebase or reCAPTCHA config needed for a first exploration.  
-> The catalogue lives in a plain JS module (`app/data/products.js`), cart state is handled via `localStorage`, and checkout is as simple as sending a WhatsApp message (pre-filled invoice) using the WhatsApp API and query string.
+> The catalogue lives in a plain JS module (`app/data/products.js`), cart state is handled via `localStorage`, and checkout is as simple as sending a WhatsApp message (pre-filled invoice) using the WhatsApp API.
 >
 > ⚡ **Just** `git clone` **the repo and open** `index.html` **in your browser to see the app in action!**
 >
 > _If you want to unlock the full, production-ready power, realtime analytics, App Check (reCAPTCHA) protection, and live stats via Firebase: just follow the config steps. But if you only need a quick demo, or want to skip advanced integrations, it’s ready for you out of the box!_
+
+---
+
+## 🚀 Getting Started (Local Dev)
+
+1. **Clone the repo:**
+   ```bash
+   git clone https://github.com/hicham-o-sfh/Kosmetika-Beauty-Store.git
+   cd Kosmetika-Beauty-Store
+   ```
+2. **Serve it over HTTP.** Zero build, zero dependencies, but the app code is loaded as ES modules,
+   which browsers block under `file://` (CORS). Two ways:
+
+   - **VS Code's [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)**:
+     right-click `index.html` → _Open with Live Server_. Nothing to install beyond the extension.
+   - **Already have Node?** `npx serve -c .claude/serve.json .`, where the config is required. `serve`
+     rewrites `/product-details.html?productId=10` to `/product-details` and **drops the query
+     string**, so product pages come up empty; that file just sets `"cleanUrls": false`. There is no
+     command-line flag for it: `--no-clean-urls` is not a `serve` option and makes it exit.
+
+   Open the printed `http://localhost:...` URL. Catalogue, cart and WhatsApp checkout all work
+   immediately, no configuration needed.
+
+3. **(Optional) Configure Firebase**, only needed to unlock live order analytics
+   (`total_orders`/`total_quantity` counters). The cart and checkout work identically without it.
+   - Open [`assets/js/app/config/firebase.config.js`](assets/js/app/config/firebase.config.js) and
+     replace every value with your own project's, plus your reCAPTCHA v3 site key.
+     [`firebase.config.example.js`](assets/js/app/config/firebase.config.example.js) next to it says
+     where each value comes from.
+     **This file is committed on purpose**: GitHub Pages serves the site straight from the repository,
+     so ignoring it would deploy a store with no Firebase. The keys are public by design. App Check,
+     which only trusts the store's own domain, is what protects the counters.
+     Left untouched, the clone points at the original project and every write is refused; the console
+     says so explicitly. Delete the file entirely and the counters just stay off. Either way the
+     catalogue, the cart and the WhatsApp checkout are unaffected.
+   - Deploy the rules to your own project (see **Firestore Rules** below), otherwise every write is
+     rejected.
+   - Add your debug token (Firebase Console → App Check → Debug Tokens) before `main.js` loads, in
+     `index.html`:
+     ```html
+     <script>
+       window.FIREBASE_APPCHECK_DEBUG_TOKEN = "YOUR_DEBUG_TOKEN";
+     </script>
+     ```
+4. **Enjoy!**
+
+---
+
+## 🌐 Live Demo
+
+[**Try the deployed app on GitHub Pages →**](https://hicham-o-sfh.github.io/Kosmetika-Beauty-Store/): hicham-o-sfh.github.io/Kosmetika-Beauty-Store
 
 ---
 
@@ -260,27 +311,9 @@ looks right and isn't.
 
 ### Console noise that is not a bug
 
-- **`requestStorageAccess: Permission denied`** comes from **reCAPTCHA v3** (App Check), inside a
-  Google iframe, not from GTranslate, and it is not fixable from this project. No effect on the cart,
-  which is first-party `localStorage`.
-- **`ERR_BLOCKED_BY_CLIENT` on `firestore.googleapis.com/…/Write/channel`**: a browser extension
-  (ad blocker, privacy shield) cutting the call. The blocked request carries `TYPE=terminate`: it
-  closes the channel _after_ the write succeeded, so the order is recorded regardless.
 - **App Check rejections in local development** are expected: `localhost` is not on the reCAPTCHA
   key's domain list, and adding it would weaken the production key. Everything but the Firestore
   counters works locally, and `warnAppCheckRejected()` says so in the console.
-
-### Decisions already made (don't reopen without a new reason)
-
-- **HTML duplication across the 6 pages is kept**: no build step, no JS injection.
-- **The catalogue lives in `data/products.js`** (`export default`), not a fetched JSON file.
-- **No tooling** (`.editorconfig`, Prettier, ESLint), no tests, no CI, no `ajv` catalogue validation.
-  The code is already Prettier-formatted in practice; freezing that with tooling would buy nothing.
-- **Product photos**: `main` and `hero` are AI-regenerated, the secondary gallery photos are the
-  originals and stay that way.
-- **Product SEO is a documented limitation, not a task**, see the [SEO section](#-seo).
-- **The git history was rewritten once**, on 31/07 (`git filter-branch`), to strip co-author
-  attribution. Every SHA before that date changed. No further rewrite is planned.
 
 ---
 
@@ -311,6 +344,7 @@ looks right and isn't.
 ├── firebase.json                # tells the Firebase CLI where the rules live
 ├── .firebaserc                  # default Firebase project
 ├── .gitattributes               # LF line endings everywhere, whatever the local Git config
+├── .claude/serve.json           # keeps `npx serve` from dropping the ?productId= query string
 ├── robots.txt
 ├── sitemap.xml
 ├── LICENSE
@@ -337,57 +371,6 @@ looks right and isn't.
 - **[`firestore.rules`](firestore.rules)** constrains the shape of every write (two integer counters,
   moving forward only, by amounts a real checkout can produce) and closes every other path.
 - **Best practices** for safe local development (debug token) and production
-
----
-
-## 🚀 Getting Started (Local Dev)
-
-1. **Clone the repo:**
-   ```bash
-   git clone https://github.com/hicham-o-sfh/Kosmetika-Beauty-Store.git
-   cd Kosmetika-Beauty-Store
-   ```
-2. **Serve it over HTTP.** Zero build, zero dependencies, but the app code is loaded as ES modules,
-   which browsers block under `file://` (CORS). Two ways:
-
-   - **VS Code's [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)**:
-     right-click `index.html` → _Open with Live Server_. Nothing to install beyond the extension.
-   - **Already have Node?** `npx serve -c .claude/serve.json .`, where the config is required. `serve`
-     rewrites `/product-details.html?productId=10` to `/product-details` and **drops the query
-     string**, so product pages come up empty; that file just sets `"cleanUrls": false`. There is no
-     command-line flag for it: `--no-clean-urls` is not a `serve` option and makes it exit.
-
-   Open the printed `http://localhost:...` URL. Catalogue, cart and WhatsApp checkout all work
-   immediately, no configuration needed.
-
-3. **(Optional) Configure Firebase**, only needed to unlock live order analytics
-   (`total_orders`/`total_quantity` counters). The cart and checkout work identically without it.
-   - Open [`assets/js/app/config/firebase.config.js`](assets/js/app/config/firebase.config.js) and
-     replace every value with your own project's, plus your reCAPTCHA v3 site key.
-     [`firebase.config.example.js`](assets/js/app/config/firebase.config.example.js) next to it says
-     where each value comes from.
-     **This file is committed on purpose**: GitHub Pages serves the site straight from the repository,
-     so ignoring it would deploy a store with no Firebase. The keys are public by design. App Check,
-     which only trusts the store's own domain, is what protects the counters.
-     Left untouched, the clone points at the original project and every write is refused; the console
-     says so explicitly. Delete the file entirely and the counters just stay off. Either way the
-     catalogue, the cart and the WhatsApp checkout are unaffected.
-   - Deploy the rules to your own project (see **Firestore Rules** below), otherwise every write is
-     rejected.
-   - Add your debug token (Firebase Console → App Check → Debug Tokens) before `main.js` loads, in
-     `index.html`:
-     ```html
-     <script>
-       window.FIREBASE_APPCHECK_DEBUG_TOKEN = "YOUR_DEBUG_TOKEN";
-     </script>
-     ```
-4. **Enjoy!**
-
----
-
-## 🌐 Live Demo
-
-[**Try the deployed app on GitHub Pages →**](https://hicham-o-sfh.github.io/Kosmetika-Beauty-Store/): hicham-o-sfh.github.io/Kosmetika-Beauty-Store
 
 ---
 

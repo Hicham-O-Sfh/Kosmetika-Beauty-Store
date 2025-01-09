@@ -4,7 +4,14 @@
     {
       "name": "kosmetika-static",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["--yes", "serve", "--no-clipboard", "."],
+      "runtimeArgs": [
+        "--yes",
+        "serve",
+        "--no-clipboard",
+        "--config",
+        ".claude/serve.json",
+        "."
+      ],
       "autoPort": true
     }
   ]
