@@ -9,6 +9,7 @@ import {
   projectProductsInHomeTabs,
   projectRelatedProductsInPage,
 } from "./utils.js";
+import { setupLazyVideos } from "./ui/video.js";
 
 (function ($) {
   "use strict";
@@ -174,6 +175,7 @@ import {
       case "index": {
         projectRelatedProductsInPage();
         projectProductsInHomeTabs();
+        setupLazyVideos();
         break;
       }
 

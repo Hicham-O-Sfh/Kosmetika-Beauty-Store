@@ -188,8 +188,16 @@
     <!-- slider area start -->
     <div class="slider_area home_slider_two owl-carousel">
       <div class="single_slider position-relative overflow-hidden">
-        <video class="hero-bg-video" autoplay muted loop playsinline>
-          <source src="assets/video/flowers.mp4" type="video/mp4" />
+        <video
+          class="hero-bg-video"
+          muted
+          loop
+          playsinline
+          preload="none"
+          poster="assets/video/flowers-poster.webp"
+          data-lazy
+        >
+          <source data-src="assets/video/flowers.mp4" type="video/mp4" />
         </video>
 
         <div class="container position-relative z-1">
@@ -213,8 +221,16 @@
       </div>
 
       <div class="single_slider position-relative overflow-hidden">
-        <video class="hero-bg-video" autoplay muted loop playsinline>
-          <source src="assets/video/fragrance.mp4" type="video/mp4" />
+        <video
+          class="hero-bg-video"
+          muted
+          loop
+          playsinline
+          preload="none"
+          poster="assets/video/fragrance-poster.webp"
+          data-lazy
+        >
+          <source data-src="assets/video/fragrance.mp4" type="video/mp4" />
         </video>
 
         <div class="container position-relative z-1">
@@ -384,9 +400,16 @@
             </div>
           </a>
           <div class="video-background">
-            <video autoplay loop muted>
+            <video
+              muted
+              loop
+              playsinline
+              preload="none"
+              poster="assets/video/bg-video-welcome-poster.webp"
+              data-lazy
+            >
               <source
-                src="assets/video/bg-video-welcome.mp4"
+                data-src="assets/video/bg-video-welcome.mp4"
                 type="video/mp4"
               />
             </video>
