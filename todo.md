@@ -73,16 +73,42 @@ diff sur les éléments de contenu (insensible à la suppression de wrappers). V
 - [x] **`services.html` + `shop.html` ✅ (31/07)** — wrappers ne portant qu'une marge supprimés
       (`single_services`, `services_thumb`), `shop_reverse` (no-op : inversait `.row` puis annulait
       l'inversion) et l'échafaudage `tab-content`/`tab-pane` de `shop.html` (un seul panneau, aucun bouton
-      d'onglet) retirés. `style.css` −100 lignes. Diff vérifié : `shop` identique, `services` à 1 px près
-      sur les 8 blocs texte (`margin-right: 15px` → `me-3` = 16px).
-- [ ] **`index.html`** — la plus grosse : slider, bannières, onglets produits.
-- [ ] **`product-details.html`** — galerie, zoom, bloc quantité.
-- [ ] **`faq.html`** (accordéon déjà Bootstrap) et **`contact-us.html`** (formulaire → `form-control`,
-      `row`/`col`, `btn`).
-- [ ] **Blocs `#generic` (header, offcanvas, footer, mini-panier)** — dupliqués sur les 6 pages, donc à
-      migrer **en une seule passe** et à répercuter partout ; c'est là que se concentre le CSS custom de
-      positionnement le plus lourd.
-- [ ] **Passe finale sur `style.css`** une fois les 6 pages migrées : retirer ce qui n'est plus référencé.
+      d'onglet) retirés. Diff vérifié : `shop` identique, `services` à 1 px près sur les 8 blocs texte
+      (`margin-right: 15px` → `me-3` = 16px).
+- [x] **`index.html` ✅ (31/07)** — `banner_fullwidth` : wrapper `align-items-center` (inerte, sans
+      `d-flex`) et `col-12` orphelin (hors `.row`) supprimés, d'où 3 règles `.banner_fullwidth .row` mortes
+      retirées ; `z-1` retiré des 2 slides (**c'est du Bootstrap 5.3, le projet est en 5.0.2** — la classe
+      n'existait dans aucun CSS) ; `product_tab_button` → `text-center mb-4`.
+- [x] **`product-details.html` ✅ (31/07)** — `product_variant.quantity` → `d-flex align-items-center mb-4`,
+      `product_desc` → `mb-4 pb-4`, `product_info_button` → `pb-3`, `product_d_info` → `mb-5`,
+      `#img-1 { text-align:center }` → `text-center`.
+- [x] **`faq.html` + `contact-us.html` ✅ (31/07)** — `faq_content_area`, `about_section`, `about_thumb`,
+      `contact_area` entièrement remplacées par des utilities (classes supprimées du HTML) ;
+      `accordion_area` gardée comme point d'accroche pour `.collapse.show`. Accordéon Bootstrap retesté.
+- [x] **Blocs `#generic` ✅ (31/07)** — `middel_right` → `d-flex justify-content-center
+      justify-content-lg-end align-items-center` (**correspondance exacte** : `lg` = ≥992 px, comme les
+      media queries d'origine) et `main_menu_inner` → `text-center`, répercutés sur les 6 pages.
+      ⛔ `cart_link` (25/15/20 px) et `footer_top` (61/42/27 px) **laissés en CSS** : leurs échelles
+      responsives n'ont pas d'équivalent Bootstrap sans altérer le design à 3 breakpoints.
+- [x] **Passe de nettoyage `style.css` ✅** — résidus **meanMenu** supprimés (`.mean-container`, `.mean-bar`,
+      `.mean-nav`, `.meanmenu-reveal` : la lib était partie le 30/07), plus `.fix` et `.clear` inutilisées.
+      ⚠️ `.owl-*` / `.slick-*` **conservées** : posées à l'exécution par les librairies, invisibles à une
+      recherche dans le HTML.
+
+**⛔ Non migré, volontairement — les carrousels.** `custom-row` / `custom-col-5` (gouttières de 6 px)
+forment le système de grille **interne à Slick/Owl**, qui pilote lui-même la largeur des slides en inline.
+Y substituer `.row`/`.col-*` ferait entrer en conflit deux systèmes de layout. C'est un cas légitime de
+CSS custom.
+
+**❓ À trancher (signalé, non modifié) :**
+
+- `index.html` : la section `<section class="banner_section d-none">` (3 bannières) est **masquée en
+  permanence**. 15 règles CSS la servent. La supprimer ? ou la réactiver ?
+- `style.css` : les 3 règles d'override `.tooltip` / `.tooltip-inner` ne servent à rien — aucun
+  `data-bs-toggle="tooltip"` dans le HTML, aucune initialisation JS. Gardées par prudence (le JS Bootstrap
+  embarque le composant, donc réactivable).
+- `contact-us.html` : `style="width: 60%; height: 250px"` en inline sur la bannière — pas d'équivalent
+  Bootstrap (60 %), à sortir en classe projet si tu veux zéro style inline.
 
 ---
 
@@ -140,11 +166,10 @@ diff sur les éléments de contenu (insensible à la suppression de wrappers). V
 
 ## ✅ Prochaine étape
 
-**🎨 P6 en cours** — migration Bootstrap-first, page par page :
-`services` + `shop` ✅ → **`index.html`** → `product-details.html` → `faq` + `contact-us` →
-blocs `#generic` (header/footer/offcanvas, à répercuter sur les 6 pages) → passe finale sur `style.css`.
+**🎨 P6 terminé (31/07)** — les 6 pages + les blocs `#generic` sont migrés, `style.css` nettoyé
+(2736 → 2497 lignes). Restent 3 points à trancher, listés en fin de section P6.
 
-**Ensuite, suite de P3 :**
+**Suite de P3 :**
 
 1. SEO (`lang="fr"`, titres/descriptions uniques, Open Graph).
 2. Accessibilité (`alt` descriptifs, `<button>` + `aria-label` au lieu de `<a href="#">`).
