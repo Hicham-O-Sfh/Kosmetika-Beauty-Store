@@ -158,16 +158,8 @@ ul {
 /*-- 
     - Common Classes
 -----------------------------------------*/
-.fix {
-  overflow: hidden;
-}
-
 .hidden {
   display: none;
-}
-
-.clear {
-  clear: both;
 }
 
 @media only screen and (max-width: 767px) {
@@ -772,44 +764,6 @@ textarea:-ms-input-placeholder {
   display: block;
   font-weight: 400;
 }
-/*mobaile menu css here*/
-.mean-container .mean-bar {
-  background: inherit;
-  position: absolute;
-  z-index: 9;
-  top: 43px;
-  left: 0;
-  width: 100%;
-}
-.mean-container .mean-bar::after {
-  top: -33px;
-  left: 22px;
-}
-@media only screen and (max-width: 767px) {
-  .mean-container .mean-bar::after {
-    left: 22px;
-    font-size: 15px;
-  }
-}
-.mean-container .mean-nav {
-  max-height: 300px;
-  overflow: auto;
-}
-.mean-container .mean-nav ul li a {
-  font-weight: 400;
-}
-.mean-container a.meanmenu-reveal {
-  float: left;
-  right: 17px;
-  top: -34px;
-}
-@media only screen and (max-width: 767px) {
-  .mean-container a.meanmenu-reveal {
-    right: 15px;
-    top: -34px;
-  }
-}
-
 /*-- 2.3 Categories menu css here --*/
 
 .categories_title {
