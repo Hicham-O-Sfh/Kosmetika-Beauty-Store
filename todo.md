@@ -134,8 +134,16 @@ CSS custom.
       👉 quand on s'y remet : `app/config/firebase.config.js` (déjà gitignoré) + `firebase.config.example.js`
       commité + garde : config absente → stats désactivées proprement plutôt qu'un crash.
 - [ ] **`.editorconfig` + Prettier + ESLint** — le code est déjà formaté à la Prettier, autant le figer.
-- [ ] **SEO** : même `<title>` sur les 6 pages, `meta description` vide, `<html lang="en">` alors que tout
-      est en français → titres/descriptions uniques, `lang="fr"`, Open Graph (partages WhatsApp).
+- [x] **SEO ✅ (31/07)** — `lang="fr"` sur les 6 pages, titre + `meta description` uniques (calibrés :
+      titre < 60 car., description < 160), `<link rel="canonical">`, Open Graph complet + `twitter:card`.
+      Image OG **1200×630 en JPEG** générée depuis la bannière (`assets/img/banner/og-kosmetika.jpg`, 44 Ko)
+      — **pas de WebP** : le crawler Facebook, qui alimente aussi les aperçus WhatsApp, ne le rend pas
+      de façon fiable. GTranslate revérifié après le passage à `lang="fr"` (widget + 4 langues intacts).
+      ⚠️ **Limite assumée** : `product-details.html` a des balises OG **statiques**. Partager le lien d'un
+      parfum précis affichera l'aperçu générique de la boutique, pas le produit — les crawlers n'exécutent
+      pas le JS, et il n'y a pas de rendu serveur. Corrigeable seulement avec un build ou un backend.
+- [ ] _(optionnel, complément SEO)_ `robots.txt` + `sitemap.xml` — 2 petits fichiers statiques, aident
+      l'indexation des 6 pages.
 - [ ] **Accessibilité** : ~20 images `alt=""` (logo + toutes les photos produit générées par les templates)
       → `alt` descriptif · `<a href="#">` utilisés comme boutons (panier) → `<button>` + `aria-label`.
 - [ ] **Conventions de code** : mélange `var`/`const`, FR/EN dans noms et commentaires →
@@ -168,12 +176,14 @@ CSS custom.
 
 **🎨 P6 terminé (31/07)** — les 6 pages + les blocs `#generic` sont migrés, `style.css` nettoyé
 (2736 → 2497 lignes). Restent 3 points à trancher, listés en fin de section P6.
+**🔵 SEO terminé (31/07)** — voir P3.
 
 **Suite de P3 :**
 
-1. SEO (`lang="fr"`, titres/descriptions uniques, Open Graph).
-2. Accessibilité (`alt` descriptifs, `<button>` + `aria-label` au lieu de `<a href="#">`).
-3. Outillage (Prettier/ESLint/`.editorconfig`) → tests → CI.
+1. **Accessibilité** — `alt` descriptifs (~20 images, dont toutes les photos produit générées par les
+   templates), `<button>` + `aria-label` au lieu des `<a href="#">` du panier.
+2. Outillage (Prettier/ESLint/`.editorconfig`) → tests → CI.
+3. _(optionnel)_ `robots.txt` + `sitemap.xml`.
 
 Puis P4 (validation + incohérences catalogue), P2 (`defer`), P5.
 **Config Firebase** : en pause (voir P3 ci-dessus) — à reprendre séparément, hors de cet ordre.
