@@ -1,1 +1,29 @@
+# Editors / IDE
 .vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node (only used for one-off tooling: PurgeCSS, image/video encoding…)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Build output (not used today — the site is served as-is)
+dist/
+
+# Local secrets & machine-specific config
+# (Firebase keys are public by design, but a cloner must point at *their* project.)
+assets/js/app/config/firebase.config.js
+.env
+.env.local
+
+# Scratch files
+*.bak
+*.orig
+*.tmp
