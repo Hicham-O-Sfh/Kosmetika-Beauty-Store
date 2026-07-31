@@ -1,9 +1,12 @@
+/*!
+ * Kosmetika — Beauty Store
+ * Copyright (c) 2024-2026 Hicham Oussama Saffih. All rights reserved.
+ * Distributed under the MIT License — see the LICENSE file at the project root.
+ */
+
 "use strict";
 
-/**
- * Cart state — persisted in localStorage under the "panier" key.
- * Pure data layer: no DOM, no rendering.
- */
+/** Cart state — persisted in localStorage under the "panier" key. */
 
 export function isValidNumberInputValue(value) {
   return !isNaN(value) && parseInt(value) >= 1 && value <= 50;
@@ -30,11 +33,7 @@ export function addOrderToCart(orderToAdd) {
   saveCartInLocalStorage(userCart);
 }
 
-/**
- * retrieves userCart from local storage
- * and convert it to array
- * @returns array of cart items: userCart
- */
+/** @returns {object[]} the cart items stored in localStorage */
 export function retrieveUserCartFromLocalStorage() {
   var rawUserCart = localStorage.getItem("panier");
   var userCart = JSON.parse(rawUserCart);

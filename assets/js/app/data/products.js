@@ -1,18 +1,14 @@
+/*!
+ * Kosmetika — Beauty Store
+ * Copyright (c) 2024-2026 Hicham Oussama Saffih. All rights reserved.
+ * Distributed under the MIT License — see the LICENSE file at the project root.
+ */
+
 "use strict";
 
 /**
- * Product catalogue — single source of truth.
- *
- * Edit products here; the rest of the app reads them through
- * `products.repository.js`. Order in this array = display order.
- *
- * Field notes:
- *  - `name` / `brand` / `volumeMl` replace the former HTML `ref` string.
- *  - `quality` / `category` replace the former HTML `secondDescription`.
- *  - `category` is a lowercase, unaccented key ("femme" | "homme").
- *  - `descriptionHtml` is intentionally rich HTML (editorial copy).
- *  - `pics[].url` (was `bigPicUrl`); exactly one picture must have `isMain: true`.
- *  - `status` uses PRODUCT_STATUS; currently all FEATURED (see repository/home tabs).
+ * Product catalogue — source of truth; array order = display order.
+ * Exactly one picture per product carries `isMain: true`.
  */
 
 export const PRODUCT_STATUS = Object.freeze({

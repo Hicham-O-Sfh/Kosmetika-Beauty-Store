@@ -1,11 +1,12 @@
+/*!
+ * Kosmetika — Beauty Store
+ * Copyright (c) 2024-2026 Hicham Oussama Saffih. All rights reserved.
+ * Distributed under the MIT License — see the LICENSE file at the project root.
+ */
+
 "use strict";
 
-/**
- * Site-wide contact & social links.
- * Displayed in the footer (all pages), the cart and the contact page.
- * Moved out of the former `database.management.js` — these belong to the site
- * configuration, not to the product catalogue.
- */
+/** Site-wide contact & social links (footer, cart, contact page). */
 
 export const TEL_NUMBER_LINK = "tel:212666201740";
 export const WHATSAPP_NUMBER = "+212 666 2017 40";

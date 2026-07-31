@@ -1,21 +1,15 @@
+/*!
+ * Kosmetika — Beauty Store
+ * Copyright (c) 2024-2026 Hicham Oussama Saffih. All rights reserved.
+ * Distributed under the MIT License — see the LICENSE file at the project root.
+ */
+
 "use strict";
 
-/**
- * Products repository — the single access point to the catalogue.
- *
- * The data lives in `products.js` (a plain array). This module exposes a small
- * read API plus safe accessors, so the rest of the app never touches the raw
- * product shape directly.
- *
- * The `getProduct` / `getAllProducts` functions return Promises even though the
- * data is local and synchronous: it keeps the calling code (`.then(...)`)
- * unchanged and leaves the door open for a real backend later.
- */
+/** Single access point to the product catalogue. Read-only, Promise-based. */
 
 import products from "./products.js";
 
-// Re-exported so the rest of the app gets the status enum from the single
-// catalogue access point rather than reaching into products.js directly.
 export { PRODUCT_STATUS } from "./products.js";
 
 /** Deep clone, so callers can never mutate the source catalogue. */
@@ -54,7 +48,6 @@ export function getAllProducts(maxItems = Infinity) {
 
 /**
  * Main picture URL, with a safe fallback on the first picture.
- * Prevents the "TypeError → blank page" crash when a product has no `isMain`.
  * @param {object} product
  * @returns {string}
  */
@@ -75,7 +68,6 @@ export function getSecondaryPicUrl(product) {
 
 /**
  * Human-readable product title, e.g. "Gucci® - Bloom - Aqua Di Fiori (100ml)".
- * Single source of truth for how a product is labelled across the UI.
  * @param {object} product
  * @returns {string}
  */

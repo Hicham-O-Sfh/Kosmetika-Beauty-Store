@@ -1,12 +1,14 @@
+/*!
+ * Kosmetika — Beauty Store
+ * Copyright (c) 2024-2026 Hicham Oussama Saffih. All rights reserved.
+ * Distributed under the MIT License — see the LICENSE file at the project root.
+ */
+
 "use strict";
 
 /**
  * Deferred playback for the decorative background videos of the home page.
- *
  * Markup contract: `<video data-lazy preload="none" poster="…"><source data-src="…"></video>`.
- * The file is only downloaded once the video enters the viewport, and playback is
- * paused as soon as it leaves. Visitors who asked for reduced motion keep the poster
- * and never download the video at all.
  */
 
 function loadAndPlay(video) {

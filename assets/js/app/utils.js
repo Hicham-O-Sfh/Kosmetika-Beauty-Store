@@ -1,3 +1,9 @@
+/*!
+ * Kosmetika — Beauty Store
+ * Copyright (c) 2024-2026 Hicham Oussama Saffih. All rights reserved.
+ * Distributed under the MIT License — see the LICENSE file at the project root.
+ */
+
 "use strict";
 
 import {
@@ -39,13 +45,19 @@ import {
   outOfStockAlertHtml,
   outOfStockBadge,
   outOfStockThumbBadge,
+  productNotFoundHtml,
   renderProductCard,
 } from "./ui/templates.js";
 
+/**
+ * Product id carried by the `?productId=` query string.
+ * `null` when the parameter is missing or malformed.
+ * @returns {number|null}
+ */
 export function getCurrentDisplayedProductId() {
   const url = new URL(window.location.href);
-  const productId = +url.searchParams.get("productId");
-  return productId;
+  const productId = Number(url.searchParams.get("productId"));
+  return Number.isInteger(productId) && productId > 0 ? productId : null;
 }
 
 /**
@@ -70,6 +82,17 @@ export function buildVisualCart() {
   Array.from(userCart).forEach((order) => {
     getProduct(order.productId)
       .then((mappedProductFromDb) => {
+        // Entry pointing at nothing: drop it instead of crashing on
+        // `undefined` at every page load.
+        if (!mappedProductFromDb) {
+          const cleanedCart = retrieveUserCartFromLocalStorage().filter(
+            (item) => item.productId !== order.productId,
+          );
+          saveCartInLocalStorage(cleanedCart);
+          $("#cart-quantity").html(cleanedCart.length);
+          return;
+        }
+
         const productMainPic = getMainPicUrl(mappedProductFromDb);
         subTotal += order.quantity * mappedProductFromDb.price;
         $("#cart-items").append(
@@ -87,7 +110,7 @@ export function buildVisualCart() {
             </div>
             <div class="cart_remove">
               <a href="#">
-                <i class="ion-android-close remove-from-cart"></i>
+                <i class="fa-solid fa-xmark remove-from-cart"></i>
               </a>
             </div>
           </div>
@@ -108,12 +131,29 @@ export function buildVisualCart() {
   });
 }
 
+/** Replace the whole product block with a friendly "introuvable" message. */
+function showProductNotFound() {
+  $(".product_details .row").html(productNotFoundHtml());
+}
+
 export function projectProductInPage() {
   // get productId from query string
   const productId = getCurrentDisplayedProductId();
 
+  // page opened without a usable `?productId=` — nothing to fetch
+  if (productId === null) {
+    showProductNotFound();
+    return;
+  }
+
   getProduct(productId)
     .then((product) => {
+      // well-formed id, but no such product in the catalogue
+      if (!product) {
+        showProductNotFound();
+        return;
+      }
+
       $("#product-name").html(
         `${getProductTitle(product)} ${outOfStockBadge(product)}`,
       );
@@ -380,7 +420,7 @@ export function bindContactPageEvents() {
  * in all existing & new added related elements
  */
 export function bindCartEvent() {
-  $("body").on("click", ".ion-android-close.remove-from-cart", function () {
+  $("body").on("click", ".remove-from-cart", function () {
     // get cart item from client storage
     var userCart = retrieveUserCartFromLocalStorage();
     // get cart item from DOM
