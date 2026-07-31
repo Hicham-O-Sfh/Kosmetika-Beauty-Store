@@ -2273,18 +2273,6 @@ textarea:-ms-input-placeholder {
   }
 }
 /* 16. faq page css here */
-.faq_content_area {
-  padding-bottom: 66px;
-}
-@media only screen and (max-width: 767px) {
-  .faq_content_area {
-    padding-bottom: 56px;
-  }
-}
-
-.accordion_area {
-  padding-bottom: 70px;
-}
 @media only screen and (max-width: 767px) {
   .accordion_area {
     padding-bottom: 60px;
@@ -2365,11 +2353,9 @@ textarea:-ms-input-placeholder {
 }
 
 .faq_content_wrapper h4 {
-  text-align: center;
   font-size: 18px;
   color: #242424;
   font-weight: 700;
-  margin-bottom: 15px;
   line-height: 30px;
 }
 @media only screen and (max-width: 767px) {
