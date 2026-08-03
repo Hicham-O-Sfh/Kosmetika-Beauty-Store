@@ -9,23 +9,19 @@
 
 ## 👉 Prochaine étape
 
-1. 🔴 **Liens sociaux** — le seul bug encore visible par un client. Il ne manque que les 3 URLs.
-2. 🔵 _(optionnel)_ `robots.txt` + `sitemap.xml` — complète le SEO du 31/07.
-3. 🔵 **Outillage** — Prettier/ESLint/`.editorconfig`, puis tests, puis CI.
-4. 🔵 **Conventions de code** — `var`/`const` et FR/EN mélangés.
+Plus rien de bloquant : le site n'a aucun bug visible par un client. Ce qui reste est au choix.
 
-Puis 🟣 P4 (validation + incohérences catalogue) et 🟤 P5.
+1. 🟤 **`requestStorageAccess`** — la seule anomalie encore ouverte, sans impact utilisateur.
+2. 🔵 **`CONTRIBUTING.md`** + captures dans le readme — à décider (voir la section).
+3. 🟣 **Incohérences du catalogue** — 3 points à confirmer, 10 minutes.
+
 **Config Firebase** : en pause, à reprendre dans une session dédiée — hors de cet ordre.
+**Photos produit** : refonte complète prévue via génération IA (Nano Banana / Higgsfield), plus tard.
+Tout travail d'optimisation d'images d'ici là serait jeté.
 
 ---
 
 ## 📋 Reste à faire
-
-### 🔴 Bug visible
-
-- [ ] **Liens sociaux placeholder** — `INSTAGRAM_LINK`/`FACEBOOK_LINK`/`TIKTOK_LINK`
-      ([site.config.js](assets/js/app/config/site.config.js)) valent encore littéralement leur nom
-      → 3 liens morts dans le footer des 6 pages. Renseigner les vraies URLs ou masquer.
 
 ### 🔵 Qualité & open source
 
@@ -35,25 +31,27 @@ Puis 🟣 P4 (validation + incohérences catalogue) et 🟤 P5.
       👉 `app/config/firebase.config.js` (déjà gitignoré) + `firebase.config.example.js` commité + garde :
       config absente → stats désactivées proprement plutôt qu'un crash.
       👉 Rapatrier aussi `firestore.rules` dans le repo : elles n'existent aujourd'hui que dans la console.
-- [ ] **`.editorconfig` + Prettier + ESLint** — le code est déjà formaté à la Prettier, autant le figer.
-- [ ] **Conventions de code** : mélange `var`/`const`, FR/EN dans les noms et commentaires
-      → code + commentaires en anglais, textes d'interface en français, `const`/`let` uniquement.
-- [ ] **Zéro test** — 3-4 tests Vitest sur `cart.service` (ajout, quantité, suppression, total).
-- [ ] **Zéro CI** — GitHub Action (Prettier + ESLint + validation HTML + déploiement Pages), ~30 lignes.
-- [ ] **`CONTRIBUTING.md`** dédié + captures d'écran dans le readme (placeholder `demo-banner.png` commenté).
-- [ ] _(optionnel)_ **`robots.txt` + `sitemap.xml`** — 2 fichiers statiques, aident l'indexation des 6 pages.
+- [ ] **`CONTRIBUTING.md`** dédié + captures d'écran dans le readme (placeholder `demo-banner.png`
+      commenté). **À décider** : sans CI ni tests, un CONTRIBUTING se réduit à « ouvre `index.html`,
+      respecte le style existant, pas de dépendance ». Le readme peut l'absorber en 5 lignes. Les
+      captures, elles, valent le coup quel que soit le choix — mais après la refonte des photos.
 
-### 🟡 Poids / perf
+### ⏸️ Écarté volontairement (04/08)
 
-- [ ] _(optionnel)_ **12 `.jpg` restants** (~950 Ko, dont `background-whatsapp` qui touche `style.css`)
-      → gain estimé ~600 Ko, homogénéité uniquement.
+Ces points étaient listés ; ils ne le sont plus. Décision assumée, ne pas les rouvrir :
+
+- **Outillage** (`.editorconfig`, Prettier, ESLint), **fichier de conventions de code**, **tests**,
+  **CI** — hors périmètre. Le projet reste sans build, sans `npm install`, sans pipeline. Le code est
+  déjà formaté à la Prettier de fait ; le figer par de l'outillage n'apporterait rien ici.
+- **Optimisation des 12 `.jpg` restants** — toutes les photos produit vont être **régénérées** par IA
+  (Nano Banana / Higgsfield). Optimiser des images destinées à disparaître serait du travail perdu.
+  À reconsidérer une fois les nouveaux visuels en place, en une seule passe.
 
 ### 🟣 Scale du catalogue
 
-- [ ] **Valider le catalogue automatiquement** (`ajv` + `npm run validate:products` en CI) : `id` unique,
-      `pics` non vide, un seul `isMain`, `price > 0`, `status` valide. _(Dépend de la décision npm/CI.)_
 - [ ] **Incohérences connues** (laissées volontairement) : prix des ids 2/3 différents des autres · id 16
       inséré hors ordre (ajouter un champ `order` si besoin un jour) · catégories 15/16 à confirmer.
+      _(La validation automatique par `ajv` est écartée avec la CI — voir plus haut.)_
 - [ ] **Au-delà de ~100 produits** : pagination / index séparé sur `shop.html`.
 
 ### 🟤 À investiguer
@@ -101,6 +99,12 @@ Puis 🟣 P4 (validation + incohérences catalogue) et 🟤 P5.
 - **Ne jamais remettre `*:focus { outline: none }`** : c'est ce qui rendait la navigation au clavier
   impossible à suivre. La règle actuelle masque l'anneau à la souris (`:not(:focus-visible)`) et
   l'affiche au clavier (`:focus-visible`).
+- **Les liens sociaux se réparent en une ligne** : remplacer la valeur de `INSTAGRAM_LINK` /
+  `FACEBOOK_LINK` / `TIKTOK_LINK` dans [site.config.js](assets/js/app/config/site.config.js) par une
+  vraie URL suffit — `isPlaceholderSocialLink()` cesse de matcher et le lien redevient un lien normal
+  (nouvel onglet, `rel="noopener"`). Rien d'autre à toucher, la modale disparaît d'elle-même.
+- **Bootstrap 5.0 ne rend pas le focus après une modale** (ajouté en 5.3) : si une autre modale est
+  créée un jour, refaire le `hidden.bs.modal` → `trigger.focus()` de `bindSocialPlaceholderDialog()`.
 - **Si une purge CSS est refaite** : PurgeCSS (fast-glob) ignore silencieusement les chemins Windows
   en `\` ; les `@keyframes` référencées seulement par `animation-name:` échappent à la recherche par
   classe ; la safelist `greedy` garde tout un sélecteur composé dès qu'un fragment matche.
@@ -152,3 +156,9 @@ _Le détail de chaque changement est dans l'historique git ; ce journal ne garde
   → 1. `*:focus { outline: none }` remplacé par un couple `:not(:focus-visible)` / `:focus-visible`.
   Lien mort autour de `#zoom1` retiré. Les 3 règles `.tooltip` inutilisées supprimées et les 6 styles
   inline sortis en classes.
+- **04/08 — SEO et liens sociaux.** `robots.txt` + `sitemap.xml` ajoutés (5 pages ; `product-details`
+  volontairement exclu, il ne rend rien sans `?productId=` pour un crawler). Les 3 liens sociaux
+  sans URL n'aboutissent plus dans le vide : ils ouvrent une modale expliquant que ce sont des
+  emplacements de démonstration, avec un bouton « Compris ». Injectée à la première ouverture, jamais
+  dupliquée, focus rendu au lien à la fermeture. `.modal-content` et `.modal-dialog-centered`
+  réinjectées dans `plugins.css`, la purge les avait retirées.

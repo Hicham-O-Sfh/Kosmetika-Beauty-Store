@@ -1,0 +1,8 @@
+# Kosmetika — Beauty Store
+# Copyright (c) 2024-2026 Hicham Oussama Saffih. All rights reserved.
+# Distributed under the MIT License — see the LICENSE file at the project root.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://hicham-o-sfh.github.io/Kosmetika-Beauty-Store/sitemap.xml
