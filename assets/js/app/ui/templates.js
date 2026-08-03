@@ -29,14 +29,14 @@ export function getSecondaryInfoHtml(product) {
 /** Small inline "Épuisé" badge (used next to the product title on its page). */
 export function outOfStockBadge(product) {
   return isOutOfStock(product)
-    ? `<span class="badge" style="background-color: #dc3545; color: #fff; font-size: 0.7em; vertical-align: middle;">Épuisé</span>`
+    ? `<span class="badge badge-out-of-stock">Épuisé</span>`
     : "";
 }
 
 /** "Épuisé" badge pinned to the top-left corner of the product photo. */
 export function outOfStockThumbBadge(product) {
   return isOutOfStock(product)
-    ? `<span class="badge" style="position: absolute; top: 6px; left: 6px; z-index: 5; font-size: 10px; padding: 3px 6px; background-color: #dc3545; color: #fff;">Épuisé</span>`
+    ? `<span class="badge badge-out-of-stock-thumb">Épuisé</span>`
     : "";
 }
 
@@ -83,7 +83,9 @@ export function renderProductCard(prod) {
           ${outOfStockThumbBadge(prod)}
           <a
             class="primary_img"
-            href="product-details.html?productId=${prod.id}">
+            href="product-details.html?productId=${prod.id}"
+            tabindex="-1"
+            aria-hidden="true">
             <img
               src="${getMainPicUrl(prod)}"
               alt="${getProductTitle(prod)}"

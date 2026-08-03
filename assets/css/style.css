@@ -112,6 +112,21 @@ button {
   cursor: pointer;
 }
 
+/* Interface buttons that replaced former links: strip the browser's native
+   button chrome so the component rules further down apply unchanged. */
+.canvas_open button,
+.canvas_close button,
+.cart_link > button,
+.mini_cart_close > button,
+.cart_remove button,
+.cart_button button {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  text-align: inherit;
+}
+
 .btn:focus {
   box-shadow: none;
 }
@@ -124,8 +139,16 @@ span {
   transition: all 0.3s ease 0s;
 }
 
-*:focus {
+/* No focus ring for pointer users, a clearly visible one for keyboard users.
+   A blanket `outline: none` would leave anyone navigating with Tab unable to
+   tell where they are. */
+*:focus:not(:focus-visible) {
   outline: none !important;
+}
+
+*:focus-visible {
+  outline: 2px solid #c09578;
+  outline-offset: 2px;
 }
 
 a:focus {
@@ -347,7 +370,7 @@ textarea:-ms-input-placeholder {
   top: 10px;
   right: 13px;
 }
-.canvas_close a {
+.canvas_close button {
   font-size: 18px;
   text-transform: uppercase;
   font-weight: 500;
@@ -359,7 +382,7 @@ textarea:-ms-input-placeholder {
   border: 1px solid #ebebeb;
   border-radius: 50%;
 }
-.canvas_close a:hover {
+.canvas_close button:hover {
   background: #c09578;
   border-color: #c09578;
   color: #fff;
@@ -382,7 +405,7 @@ textarea:-ms-input-placeholder {
     top: 22px;
   }
 }
-.canvas_open a {
+.canvas_open button {
   font-size: 22px;
   color: #5a5a5a;
   width: 43px;
@@ -394,14 +417,14 @@ textarea:-ms-input-placeholder {
   border-radius: 3px;
 }
 @media only screen and (max-width: 767px) {
-  .canvas_open a {
+  .canvas_open button {
     width: 35px;
     height: 34px;
     line-height: 34px;
     font-size: 24px;
   }
 }
-.canvas_open a:hover {
+.canvas_open button:hover {
   color: #c09578;
   border-color: #c09578;
 }
@@ -482,7 +505,7 @@ textarea:-ms-input-placeholder {
     font-size: 12px;
   }
 }
-.cart_link > a {
+.cart_link > button {
   font-size: 14px;
   font-weight: 500;
   text-transform: capitalize;
@@ -493,15 +516,15 @@ textarea:-ms-input-placeholder {
   border-radius: 3px;
   display: block;
 }
-.cart_link > a:hover {
+.cart_link > button:hover {
   color: #c09578;
 }
 @media only screen and (max-width: 575px) {
-  .cart_link > a {
+  .cart_link > button {
     padding: 6px 9px 10px 12px;
   }
 }
-.cart_link > a i.fa-cart-shopping {
+.cart_link > button i.fa-cart-shopping {
   font-size: 19px;
   margin-right: 10px;
   position: relative;
@@ -509,24 +532,24 @@ textarea:-ms-input-placeholder {
   padding-right: 3px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .cart_link > a i.fa-cart-shopping {
+  .cart_link > button i.fa-cart-shopping {
     font-size: 19px;
     margin-right: 4px;
   }
 }
 @media only screen and (max-width: 575px) {
-  .cart_link > a i.fa-cart-shopping {
+  .cart_link > button i.fa-cart-shopping {
     margin-right: 0;
     padding-right: 0;
     border-right: 0;
   }
 }
-.cart_link > a i.fa-angle-down {
+.cart_link > button i.fa-angle-down {
   font-size: 17px;
   margin-left: 3px;
 }
 @media only screen and (max-width: 575px) {
-  .cart_link > a i.fa-angle-down {
+  .cart_link > button i.fa-angle-down {
     display: none;
   }
 }
@@ -546,10 +569,10 @@ textarea:-ms-input-placeholder {
   margin-bottom: 0;
 }
 
-.mini_cart_close > a {
+.mini_cart_close > button {
   font-size: 25px;
 }
-.mini_cart_close > a:hover {
+.mini_cart_close > button:hover {
   color: #c09578;
 }
 
@@ -654,11 +677,11 @@ textarea:-ms-input-placeholder {
   width: 10%;
   text-align: right;
 }
-.cart_remove a {
+.cart_remove button {
   color: #212121;
   font-size: 18px;
 }
-.cart_remove a:hover {
+.cart_remove button:hover {
   color: #c09578;
 }
 
@@ -684,7 +707,7 @@ textarea:-ms-input-placeholder {
   border-radius: 10px;
 }
 
-.cart_button a {
+.cart_button button {
   border-radius: 5px;
   font-weight: 400;
   color: #ffffff;
@@ -695,10 +718,10 @@ textarea:-ms-input-placeholder {
   margin-bottom: 0;
   padding: 13px 0px 11px;
 }
-.cart_button a:hover {
+.cart_button button:hover {
   background: #c09578;
 }
-.cart_button a.active {
+.cart_button button.active {
   background: #c09578;
 }
 /* 2.4 main menu css here */
@@ -1246,26 +1269,6 @@ textarea:-ms-input-placeholder {
     line-height: 34px;
     font-size: 12px;
   }
-}
-/*------ custom tooltip start -------*/
-.tooltip.show {
-  opacity: 1;
-}
-
-.tooltip > .tooltip-inner {
-  font-size: 13px;
-  background-color: #d8373e;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0;
-}
-
-.tooltip-inner {
-  padding: 2px 10px 5px;
-  border-radius: 2px;
-  font-size: 12px;
-  line-height: 20px;
-  background: #242424 !important;
 }
 
 .product_section {
@@ -2347,6 +2350,45 @@ button[disabled] {
 
 .brand-kosmetika-title {
   font-family: "Rubik", sans-serif !important;
+  font-weight: 600;
+}
+
+/* "Épuisé" badge next to the product title. */
+.badge-out-of-stock {
+  background-color: #dc3545;
+  color: #fff;
+  font-size: 0.7em;
+  vertical-align: middle;
+}
+
+/* Same badge, pinned to the top-left corner of a product photo. */
+.badge-out-of-stock-thumb {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  z-index: 5;
+  padding: 3px 6px;
+  font-size: 10px;
+  background-color: #dc3545;
+  color: #fff;
+}
+
+/* Contact page banner: 60% has no Bootstrap equivalent. */
+.contact-banner-img {
+  width: 60%;
+  height: 250px;
+}
+
+/* Scoped through .contact_message so it outweighs `.contact_message h3`,
+   which the page's other heading still needs. */
+.contact_message h3.contact-whatsapp-title {
+  text-transform: none;
+  line-height: 13px;
+}
+
+/* Single, non-switchable tab: nothing to click, so no pointer cursor. */
+.tab-static {
+  cursor: auto;
 }
 
 .kosmetika-copyright-logo {

@@ -10,9 +10,9 @@
 ## 👉 Prochaine étape
 
 1. 🔴 **Liens sociaux** — le seul bug encore visible par un client. Il ne manque que les 3 URLs.
-2. 🔵 **Fin de l'accessibilité** — `<button>` + `aria-label` à la place des `<a href="#">` du panier.
-3. 🔵 _(optionnel)_ `robots.txt` + `sitemap.xml` — complète le SEO du 31/07.
-4. 🔵 **Outillage** — Prettier/ESLint/`.editorconfig`, puis tests, puis CI.
+2. 🔵 _(optionnel)_ `robots.txt` + `sitemap.xml` — complète le SEO du 31/07.
+3. 🔵 **Outillage** — Prettier/ESLint/`.editorconfig`, puis tests, puis CI.
+4. 🔵 **Conventions de code** — `var`/`const` et FR/EN mélangés.
 
 Puis 🟣 P4 (validation + incohérences catalogue) et 🟤 P5.
 **Config Firebase** : en pause, à reprendre dans une session dédiée — hors de cet ordre.
@@ -29,10 +29,6 @@ Puis 🟣 P4 (validation + incohérences catalogue) et 🟤 P5.
 
 ### 🔵 Qualité & open source
 
-- [ ] **Accessibilité — ce qui reste** : `<a href="#">` utilisés comme boutons (panier,
-      ouverture/fermeture du mini-panier, vignette `secondary_img` qui duplique un lien déjà présent)
-      → `<button>` + `aria-label`, et `tabindex="-1"` sur le lien dupliqué.
-      _(Le volet `alt` est terminé — 03/08.)_
 - [ ] ⏸️ **Config Firebase en dur** dans [firebase-management.js](assets/js/app/firebase-management.js).
       Les clés ne sont pas secrètes (la sécurité tient aux règles Firestore + App Check), mais un cloneur
       pointe par défaut sur **ta** base et ses écritures sont rejetées sans qu'il comprenne pourquoi.
@@ -68,11 +64,10 @@ Puis 🟣 P4 (validation + incohérences catalogue) et 🟤 P5.
 
 ### ❓ À trancher
 
-- `style.css` : les 3 règles d'override `.tooltip` / `.tooltip-inner` ne servent à rien — aucun
-  `data-bs-toggle="tooltip"` dans le HTML, aucune initialisation JS. Gardées par prudence (le JS
-  Bootstrap embarque le composant, donc réactivable).
-- `contact-us.html` : `style="width: 60%; height: 250px"` en inline sur la bannière — pas d'équivalent
-  Bootstrap (60 %), à sortir en classe projet si tu veux zéro style inline.
+- `product-details.html` : le bloc « Plus d'info ! » est un **faux onglet** — un seul `role="tab"`,
+  aucun bouton de bascule, sur un `<a>` sans `href` (donc ni lien ni focusable). L'`aria-selected` et
+  le `role="presentation"` ont été corrigés le 04/08, mais la structure reste un onglet qui n'en est
+  pas un. Un `<h2>` au-dessus du texte ferait le même effet visuel, en plus simple.
 
 ---
 
@@ -97,6 +92,15 @@ Puis 🟣 P4 (validation + incohérences catalogue) et 🟤 P5.
 - **Modernizr n'est pas différé, volontairement** : il remplace la classe `.no-js` de `<html>`, dont
   dépend `.no-js .owl-carousel { display: block }`. Le différer ferait clignoter la galerie de
   `product-details.html`. Un commentaire dans les 6 pages le rappelle.
+- **Les vignettes de la galerie doivent rester des `<a>`** : ElevateZoom câble en dur
+  `$('#' + gallery + ' a')`. Les passer en `<button>` casserait silencieusement le changement de photo.
+  Elles ont un nom accessible via l'`alt` de leur image, c'est le compromis retenu.
+- **Un `<button>` qui remplace un `<a>` a besoin d'être dépouillé** : fond, bordure, `padding` et
+  `font` natifs. Un bloc en tête de `style.css` s'en charge pour les boutons d'interface ; il doit
+  rester **avant** les règles de composant, qui gagnent alors l'égalité de spécificité.
+- **Ne jamais remettre `*:focus { outline: none }`** : c'est ce qui rendait la navigation au clavier
+  impossible à suivre. La règle actuelle masque l'anneau à la souris (`:not(:focus-visible)`) et
+  l'affiche au clavier (`:focus-visible`).
 - **Si une purge CSS est refaite** : PurgeCSS (fast-glob) ignore silencieusement les chemins Windows
   en `\` ; les `@keyframes` référencées seulement par `animation-name:` échappent à la recherche par
   classe ; la safelist `greedy` garde tout un sélecteur composé dès qu'un fragment matche.
@@ -123,7 +127,7 @@ _Le détail de chaque changement est dans l'historique git ; ce journal ne garde
 
 - **26/07 — bugs, architecture JS, catalogue.** Code mort nettoyé (`jquery.ui.js`, scripts morts,
   `alert()` → toast, dédup des templates, badges stock). Catalogue migré vers `app/data/products.js`
-  + `products.repository.js`. JS séparé en `vendor/` + `app/{config,data,services,ui}`.
+  - `products.repository.js`. JS séparé en `vendor/` + `app/{config,data,services,ui}`.
 - **28/07 — médias.** `assets/` 86 Mo → 14,4 Mo : fichiers morts (−32,5 Mo), vidéos ré-encodées (−74 %,
   lecture différée par `IntersectionObserver` + `prefers-reduced-motion`), 48 PNG → WebP (−89 %).
 - **30/07 — CSS & polices.** PurgeCSS + 7 libs mortes retirées : 753 Ko → 129 Ko (−83 %), 0 différence
@@ -139,3 +143,12 @@ _Le détail de chaque changement est dans l'historique git ; ce journal ne garde
   7 dans les templates JS, titre du parfum injecté). `defer` sur les 8 scripts différables des 6 pages.
   `banner_section` masquée supprimée : photos de bijoux et textes génériques hérités du template,
   −46 lignes HTML, −15 règles CSS, −91 Ko d'images.
+- **04/08 — accessibilité (fin), CSS.** Les 37 faux liens des 6 pages passés en
+  `<button type="button">` + `aria-label` (menu, panier, validation, envoi du formulaire), plus le
+  bouton « retirer » du panier — dont l'activation au clavier **ne fonctionnait pas** : le gestionnaire
+  écoutait `.remove-from-cart` posé sur l'icône, que `Entrée` ne cible jamais. Les 8 boutons du site
+  ont désormais un nom (flèches Slick et « remonter » compris). Les liens-images qui doublaient le
+  lien-titre sont rendus non focusables (`tabindex="-1"` + `aria-hidden`) : 3 liens par carte produit
+  → 1. `*:focus { outline: none }` remplacé par un couple `:not(:focus-visible)` / `:focus-visible`.
+  Lien mort autour de `#zoom1` retiré. Les 3 règles `.tooltip` inutilisées supprimées et les 6 styles
+  inline sortis en classes.

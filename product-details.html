@@ -59,15 +59,15 @@
       <div class="row">
         <div class="col-12">
           <div class="canvas_open">
-            <a href="javascript:void(0)">
+            <button type="button" aria-label="Ouvrir le menu">
               <i class="fa-solid fa-bars fa-beat-fade"></i>
-            </a>
+            </button>
           </div>
           <div class="Offcanvas_menu_wrapper">
             <div class="canvas_close">
-              <a href="javascript:void(0)">
+              <button type="button" aria-label="Fermer le menu">
                 <i class="fa-solid fa-xmark"></i>
-              </a>
+              </button>
             </div>
             <div id="menu" class="text-left">
               <ul class="offcanvas_main_menu">
@@ -114,9 +114,9 @@
                 class="d-flex justify-content-center justify-content-lg-end align-items-center middel_right"
               >
               <div class="cart_link">
-                <a href="#">
+                <button type="button" aria-label="Ouvrir le panier">
                   <i class="fa-solid fa-cart-shopping"></i>
-                </a>
+                </button>
                 <span class="cart_quantity" id="cart-quantity">0</span>
                 <!--mini cart-->
                 <div class="mini_cart">
@@ -125,9 +125,9 @@
                       <h3>Mon panier</h3>
                     </div>
                     <div class="mini_cart_close">
-                      <a href="javascript:void(0)">
+                      <button type="button" aria-label="Fermer le panier">
                         <i class="fa-solid fa-xmark"></i>
-                      </a>
+                      </button>
                     </div>
                   </div>
                   <div id="cart-items"></div>
@@ -139,10 +139,10 @@
                   </div>
                   <div class="mini_cart_footer">
                     <div class="cart_button checkout">
-                      <a href="#" id="whatsapp-button">
+                      <button type="button" id="whatsapp-button">
                         <img height="40" width="40" src="assets/img/logo/WhatsAppLogoWhite.svg" alt="WhatsApp" />
                         <span>Valider la commande !</span>
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -206,9 +206,7 @@
               id="img-1"
               class="zoomWrapper single-zoom big-image-skeleton text-center"
             >
-              <a href="#">
-                <img id="zoom1" src="" data-zoom-image="" alt="Photo du parfum" />
-              </a>
+              <img id="zoom1" src="" data-zoom-image="" alt="Photo du parfum" />
             </div>
 
             <div class="single-zoom-thumb">
@@ -251,9 +249,13 @@
           <div class="product_d_inner">
             <div class="product_info_button pb-3">
               <ul class="nav" role="tablist">
-                <li>
-                  <a class="active" data-bs-toggle="tab" role="tab" aria-controls="info" style="cursor: auto"
-                    aria-selected="false">
+                <li role="presentation">
+                  <a
+                    class="active tab-static"
+                    data-bs-toggle="tab"
+                    role="tab"
+                    aria-controls="info"
+                    aria-selected="true">
                     Plus d'info !
                   </a>
                 </li>
@@ -286,7 +288,7 @@
                   <br />
                   <p>
                     Plongez dans le monde fascinant des senteurs avec
-                    <span class="brand-kosmetika-title" style="font-weight: 600">
+                    <span class="brand-kosmetika-title">
                       ✨Kosmetika-Beauty-Store
                       <i class="kosmetika-copyright-logo">©</i> ✨
                     </span>
@@ -417,7 +419,7 @@
   <!--footer area end-->
 
   <!-- Smooth scroll up Btn -->
-  <button id="scrollUpBtn">
+  <button id="scrollUpBtn" type="button" aria-label="Revenir en haut de la page">
     <i class="fa fa-angle-double-up fa-bounce"></i>
   </button>
 
