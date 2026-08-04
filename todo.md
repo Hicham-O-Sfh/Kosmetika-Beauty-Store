@@ -12,9 +12,12 @@
 Plus rien de bloquant : le site n'a aucun bug visible par un client, et la chaîne de commande a été
 vérifiée de bout en bout en production le 04/08 — la commande s'enregistre bien dans Firestore.
 
-1. 🟣 **Incohérences du catalogue** — 3 points à confirmer, 10 minutes.
-2. 🔵 **Captures d'écran du readme** — après la refonte des photos.
-3. 🔵 **Déployer les règles durcies** — optionnel, une commande, rien n'est cassé sans.
+1. 🔴 **Une commande de test en prod** — 2 minutes. Les règles durcies déployées le 04/08 n'ont pas
+   encore vu d'achat réel ; c'est la seule vérification qui reste sur le chantier Firebase.
+2. 📸 **Refonte des photos produit par IA** — le dernier gros levier, et le seul qui débloque autre
+   chose (captures du readme, puis passe d'optimisation d'images, en une fois).
+3. 🔵 **Afficher les meilleures ventes** — `getOrdersFromFirestore()` est exportée mais **personne ne
+   l'appelle** : les compteurs enregistrent des données que le site n'affiche jamais.
 
 **Photos produit** : refonte complète prévue via génération IA (Nano Banana / Higgsfield), plus tard.
 Tout travail d'optimisation d'images d'ici là serait jeté.
@@ -25,18 +28,27 @@ Tout travail d'optimisation d'images d'ici là serait jeté.
 
 ### 🔵 Firestore
 
-- [ ] **Déployer les règles durcies** (optionnel — rien n'est cassé sans). Les règles de la console
-      datent de juin 2025 et fonctionnent ; celles du repo les resserrent : `hasAll` en plus de
-      `hasOnly` (seul, il laisse passer un document amputé d'un compteur), quantité bornée à 1–50 au
-      lieu de `>= 0`, et toutes les autres collections explicitement fermées.
-      `npx --yes firebase-tools deploy --only firestore:rules`
-      ⚠️ Le déploiement **remplace** les règles de la console — l'historique y reste consultable, mais
-      il n'y a pas de sauvegarde locale.
+- [x] **Règles durcies déployées le 04/08.** `firestore.rules` du repo est désormais la version active
+      (compilation OK, `released rules to cloud.firestore`). Elles ajoutent `hasAll` en plus de
+      `hasOnly`, bornent la quantité à 1–50 au lieu de `>= 0`, et ferment explicitement toutes les
+      autres collections. Le repo et la console ne peuvent plus diverger : redéployer après chaque
+      modification du fichier.
+- [ ] **Confirmer par une vraie commande.** Les nouvelles règles sont **plus strictes** que celles de
+      juin 2025 : une commande de test depuis la prod, dans un vrai navigateur, reste à passer pour
+      vérifier qu'un achat légitime les franchit toujours. Contrôle : le document du produit
+      s'incrémente dans Firestore → Données.
+      _Ne peut pas être vérifié depuis un navigateur piloté — reCAPTCHA le rejette (voir journal 04/08)._
 
 ### 🔵 Qualité & open source
 
 - [ ] **Captures d'écran dans le readme** — le placeholder `demo-banner.png` est commenté en haut du
       fichier. À faire **après** la refonte IA des photos, sinon elles seront à refaire.
+- [ ] **Exploiter les compteurs de commandes.** `getOrdersFromFirestore()` est exportée par
+      [firebase-management.js](assets/js/app/firebase-management.js) mais **aucun appelant** dans tout
+      le repo : Firestore accumule des `total_orders` / `total_quantity` que le site n'affiche nulle
+      part. Un bloc « meilleures ventes » alimenté par ces chiffres leur donnerait enfin un usage —
+      et justifierait le `allow read: if true` des règles. Prévoir un repli propre si la lecture
+      échoue (elle renvoie déjà `[]`).
 
 ### ⏸️ Écarté volontairement (04/08)
 
@@ -205,6 +217,10 @@ _Le détail de chaque changement est dans l'historique git ; ce journal ne garde
   la commande s'enregistre bien dans Firestore. Les `403 App Check` vus pendant la session venaient
   du navigateur automatisé de test, que reCAPTCHA v3 note comme un robot — pas d'une panne du site.
   Leçon retenue : ne jamais conclure à une panne reCAPTCHA depuis un navigateur piloté.
+  En fin de session, `firestore.rules` a été **déployé** : le repo et la console sont alignés, et le
+  fichier devient la référence — toute modification doit être redéployée pour prendre effet.
+  Catalogue au passage : prix tous à 100 MAD, id 16 remis en ordre, `status` bascule sur l'enum
+  `PRODUCT_STATUS`, et « luxure » (débauche) remplacé par « luxe » sur les ids 15 et 16.
 - **04/08 — SEO et liens sociaux.** `robots.txt` + `sitemap.xml` ajoutés (5 pages ; `product-details`
   volontairement exclu, il ne rend rien sans `?productId=` pour un crawler). Les 3 liens sociaux
   sans URL n'aboutissent plus dans le vide : ils ouvrent une modale expliquant que ce sont des
