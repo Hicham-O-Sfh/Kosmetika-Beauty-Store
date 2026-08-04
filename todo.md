@@ -16,8 +16,6 @@ vérifiée de bout en bout en production le 04/08 — la commande s'enregistre b
    encore vu d'achat réel ; c'est la seule vérification qui reste sur le chantier Firebase.
 2. 📸 **Refonte des photos produit par IA** — le dernier gros levier, et le seul qui débloque autre
    chose (captures du readme, puis passe d'optimisation d'images, en une fois).
-3. 🔵 **Afficher les meilleures ventes** — `getOrdersFromFirestore()` est exportée mais **personne ne
-   l'appelle** : les compteurs enregistrent des données que le site n'affiche jamais.
 
 **Photos produit** : refonte complète prévue via génération IA (Nano Banana / Higgsfield), plus tard.
 Tout travail d'optimisation d'images d'ici là serait jeté.
@@ -65,6 +63,12 @@ Ces points étaient listés ; ils ne le sont plus. Décision assumée, ne pas le
 - **Optimisation des 12 `.jpg` restants** — toutes les photos produit vont être **régénérées** par IA
   (Nano Banana / Higgsfield). Optimiser des images destinées à disparaître serait du travail perdu.
   À reconsidérer une fois les nouveaux visuels en place, en une seule passe.
+- **SEO des fiches produit** — ce n'est pas une dette de *ce* projet. Kosmetika est une démonstration :
+  qu'un tunnel catalogue → fiche → panier → commande, avec monitoring des ventes et historique client,
+  tient sans backend ni base de données. Le SEO produit est une problématique de **boutique réelle**,
+  pas de POC, et l'optimiser ici ne prouverait rien de plus. La limite et le chemin de correction
+  (3 niveaux, du canonical dynamique à la génération de pages) sont documentés dans le readme,
+  section « SEO », **à destination du cloneur** qui reprendrait le socle pour un vrai commerce.
 
 ### 🟣 Scale du catalogue
 
@@ -73,20 +77,6 @@ Ces points étaient listés ; ils ne le sont plus. Décision assumée, ne pas le
       a été reprise (elle s'adressait à « ceux » et disait « luxure » pour « luxe »).
       _(La validation automatique par `ajv` reste écartée avec la CI — voir plus haut.)_
 - [ ] **Au-delà de ~100 produits** : pagination / index séparé sur `shop.html`.
-
-### 🟣 SEO des fiches produit
-
-- [ ] **Canonical dynamique + sitemap des fiches.** Le canonical de `product-details.html` pointe sur
-      l'URL **sans** `?productId=` : il dit à Google que toutes les fiches sont une seule et même page.
-      Le réécrire en JS avec l'id courant, et lister les 17 URL dans `sitemap.xml`, est le minimum pour
-      qu'une fiche soit indexable séparément. Sans build, faisable en quelques lignes.
-- [ ] **JSON-LD `Product`.** Aucun `application/ld+json` dans le repo. Injecter nom, marque, prix,
-      disponibilité au moment de l'hydratation ouvre les résultats enrichis. Même coût, quelques lignes.
-- [ ] **Titre et `meta description` mis à jour à l'hydratation** — marginal seul, cohérent avec
-      les deux points ci-dessus.
-
-_Voir « SEO des fiches produit » dans « À savoir » pour la limite de fond, que ces trois points
-n'effacent pas._
 
 ---
 
@@ -113,7 +103,7 @@ first-party. **À documenter, pas à corriger.**
 Observé le 04/08 après une commande réussie. `BY_CLIENT` désigne le navigateur lui-même : c'est une
 extension (bloqueur de pub, anti-tracking, bouclier de confidentialité) qui coupe l'appel, pas le
 serveur ni le code. Et la requête bloquée porte `TYPE=terminate` : c'est la **fermeture** du canal
-WebChannel, envoyée *après* que l'écriture a abouti — d'où une commande bien enregistrée dans
+WebChannel, envoyée _après_ que l'écriture a abouti — d'où une commande bien enregistrée dans
 Firestore malgré le message rouge. Pour confirmer, rouvrir la page en navigation privée sans
 extensions : le message disparaît. Rien à corriger côté projet.
 
@@ -188,12 +178,12 @@ générique de la boutique. Même cause, trois symptômes :
 - **Balises OG et JSON-LD statiques ou absents** — rien à donner au crawler Facebook ni aux résultats
   enrichis.
 
-Les correctifs partiels (canonical dynamique, sitemap des fiches, JSON-LD) sont listés dans « Reste à
-faire » et tiennent en quelques lignes. **La correction de fond — une vraie page HTML par produit —
-exige une étape de génération, donc de casser la contrainte « pas de build ».** À arbitrer seulement
-si le SEO produit devient un canal d'acquisition : sur un domaine `github.io` sans backlinks, ranker
-sur un nom de parfum face aux grandes enseignes reste hors de portée quoi qu'on optimise. Les canaux
-réels aujourd'hui sont WhatsApp, Instagram et le bouche-à-oreille.
+**Limite assumée, pas une tâche** : le projet est un POC sans backend, le SEO produit est un sujet de
+boutique réelle. Le readme lui consacre une section (« SEO — what this demo does, what it doesn't,
+and what a cloner should do ») qui détaille les trois niveaux de correction, du canonical dynamique
+en quelques lignes jusqu'à la génération d'une page HTML par produit — la seule correction de fond,
+et la seule chose que la contrainte « pas de build » coûte réellement. **Ne pas rouvrir ce point
+comme un todo** ; s'il est traité un jour, ce sera pour une vraie boutique, avec domaine propre.
 
 **Méthode de vérification d'une refonte CSS/HTML** : capture des styles calculés + géométrie avant/après
 (1280 / 768 / 375), puis diff sur les éléments de contenu — insensible à la suppression de wrappers.
@@ -264,5 +254,8 @@ _Le détail de chaque changement est dans l'historique git ; ce journal ne garde
   Desktop avertissait que le `core.autocrlf=true` global allait convertir les fichiers LF en CRLF au
   prochain checkout. Le fichier tranche pour tout le monde, quelle que soit la config locale.
   Constat SEO au passage, sans changement de code : les fiches produit ne sont pas indexables
-  individuellement — canonical sans `?productId=`, contenu injecté par JS, pas de JSON-LD.
-  La limite et les correctifs partiels sont désormais documentés (« À savoir » + « Reste à faire »).
+  individuellement — canonical sans `?productId=`, contenu injecté par JS, pas de JSON-LD. Traité
+  comme une **limite assumée de POC** et non comme une dette : le readme gagne une section « SEO »
+  qui l'expose et donne au cloneur les trois niveaux de correction, plus le décompte de ce que
+  l'absence de backend fait économiser (pas de serveur, pas de BDD, pas de comptes, pas de panier à
+  garder côté serveur, pas de PCI, pas de CI/CD). Le todo n'en garde qu'une ligne dans « Écarté ».
