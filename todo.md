@@ -56,9 +56,10 @@ Ces points étaient listés ; ils ne le sont plus. Décision assumée, ne pas le
 
 ### 🟣 Scale du catalogue
 
-- [ ] **Incohérences connues** (laissées volontairement) : prix des ids 2/3 différents des autres · id 16
-      inséré hors ordre (ajouter un champ `order` si besoin un jour) · catégories 15/16 à confirmer.
-      _(La validation automatique par `ajv` est écartée avec la CI — voir plus haut.)_
+- [x] **Incohérences connues — réglées le 04/08.** Tous les prix alignés à 100 MAD · id 16 remis dans
+      l'ordre · catégories 15/16 tranchées : le 15 était cohérent, le 16 reste `femme` et sa description
+      a été reprise (elle s'adressait à « ceux » et disait « luxure » pour « luxe »).
+      _(La validation automatique par `ajv` reste écartée avec la CI — voir plus haut.)_
 - [ ] **Au-delà de ~100 produits** : pagination / index séparé sur `shop.html`.
 
 _Plus rien à investiguer : `requestStorageAccess` a été tranché le 04/08 (voir « À savoir »)._
@@ -94,6 +95,13 @@ serveur ni le code. Et la requête bloquée porte `TYPE=terminate` : c'est la **
 WebChannel, envoyée *après* que l'écriture a abouti — d'où une commande bien enregistrée dans
 Firestore malgré le message rouge. Pour confirmer, rouvrir la page en navigation privée sans
 extensions : le message disparaît. Rien à corriger côté projet.
+
+**`npx serve` casse les fiches produit — corrigé dans le readme le 04/08.** `serve` fait des
+« clean URLs » : il redirige `/product-details.html?productId=10` vers `/product-details` **en perdant
+la query string**, si bien que `getCurrentDisplayedProductId()` ne trouve plus rien et que la fiche
+reste vide. Le readme conseille désormais Live Server (aucun outillage à installer, et un cloneur n'a
+pas forcément Node) ou `python -m http.server`, avec `--no-clean-urls` mentionné pour ceux qui tiennent
+à `serve`. Ne pas reconseiller `npx serve .` tel quel.
 
 **Pièges techniques** :
 
