@@ -63,6 +63,22 @@ require a backend. Until then, adding one would be paying rent on complexity the
 
 Pull requests, issues, and suggestions are always welcome.
 
+Nothing to install, nothing to run: clone it, serve the folder over HTTP
+(see [Getting Started](#-getting-started-local-dev)) and edit. No bundler, no test suite, no CI —
+a deliberate constraint of this project rather than an omission, so please don't add one in a PR.
+
+Two things worth knowing before a first change:
+
+- **Match the surrounding code.** Identifiers and comments in English, interface copy in French,
+  `const`/`let` over `var`, and the formatting Prettier would produce. Every source file carries the
+  Kosmetika copyright header.
+- **Read _« À savoir avant de toucher au projet »_ in [`todo.md`](todo.md).** It collects the traps
+  you cannot see from the code: `plugins.css` ships a **purged** Bootstrap, so a utility class added
+  to the HTML stays inert until its rule is reinjected; Modernizr must stay non-deferred; the gallery
+  thumbnails must stay `<a>` elements or ElevateZoom silently stops switching photos; `.owl-*` and
+  `.slick-*` are never dead CSS; the files are UTF-8 **without BOM**, which PowerShell 5.1 destroys
+  on contact. That section is the shortest path to a change that looks right and isn't.
+
 ---
 
 ## 🚀 Features
@@ -115,7 +131,7 @@ Pull requests, issues, and suggestions are always welcome.
 │           ├── main.js          # bootstrap + per-page routing
 │           ├── utils.js         # per-page orchestration
 │           ├── firebase-management.js
-│           ├── config/          # site.config.js, gtranslate.settings.js
+│           ├── config/          # site.config.js, gtranslate.settings.js, firebase.config.example.js
 │           ├── data/            # products.js (catalogue), products.repository.js
 │           ├── services/        # cart.service.js
 │           └── ui/              # plugins.js, templates.js, video.js
@@ -125,6 +141,9 @@ Pull requests, issues, and suggestions are always welcome.
 ├── services.html
 ├── faq.html
 ├── contact-us.html
+├── firestore.rules              # Firestore security rules — the source of truth, deployed from here
+├── firebase.json                # tells the Firebase CLI where the rules live
+├── .firebaserc                  # default Firebase project
 ├── LICENSE
 └── readme.md
 ```
@@ -140,9 +159,12 @@ Pull requests, issues, and suggestions are always welcome.
 
 ## 🚦 Security
 
-- **App Check** is enforced in both code and Firestore rules
-- **No secret keys** are exposed on the frontend
-- **Firestore rules** control both field types and logical consistency
+- **App Check** (reCAPTCHA v3) attests the browser before Firestore accepts it. Enforcement itself is
+  a console switch — App Check → APIs → Cloud Firestore — not something the rules file can express.
+- **No secret keys** are exposed on the frontend: the Firebase config identifies the project, it does
+  not grant access to it. Access is decided by the rules below and by App Check.
+- **[`firestore.rules`](firestore.rules)** constrains the shape of every write — two integer counters,
+  moving forward only, by amounts a real checkout can produce — and closes every other path.
 - **Best practices** for safe local development (debug token) and production
 
 ---
@@ -164,8 +186,18 @@ Pull requests, issues, and suggestions are always welcome.
    work immediately, no configuration needed.
 3. **(Optional) Configure Firebase** — only needed to unlock live order analytics
    (`total_orders`/`total_quantity` counters). The cart and checkout work identically without it.
-   - In [`assets/js/app/firebase-management.js`](assets/js/app/firebase-management.js), paste your own
-     Firebase project config and reCAPTCHA v3 site key.
+   - Open [`assets/js/app/config/firebase.config.js`](assets/js/app/config/firebase.config.js) and
+     replace every value with your own project's, plus your reCAPTCHA v3 site key.
+     [`firebase.config.example.js`](assets/js/app/config/firebase.config.example.js) next to it says
+     where each value comes from.
+     **This file is committed on purpose**: GitHub Pages serves the site straight from the repository,
+     so ignoring it would deploy a store with no Firebase. The keys are public by design — App Check,
+     which only trusts the store's own domain, is what protects the counters.
+     Left untouched, the clone points at the original project and every write is refused; the console
+     says so explicitly. Delete the file entirely and the counters just stay off. Either way the
+     catalogue, the cart and the WhatsApp checkout are unaffected.
+   - Deploy the rules to your own project (see **Firestore Rules** below), otherwise every write is
+     rejected.
    - Add your debug token (Firebase Console → App Check → Debug Tokens) before `main.js` loads, in
      `index.html`:
      ```html
@@ -183,31 +215,25 @@ Pull requests, issues, and suggestions are always welcome.
 
 ---
 
-## 📖 Firestore Rules Example
+## 📖 Firestore Rules
 
-```js
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /product_order_counts/{productId} {
-      allow read: if true;
-      allow create: if
-        request.resource.data.keys().hasOnly(['total_orders', 'total_quantity']) &&
-        request.resource.data.total_orders is int &&
-        request.resource.data.total_quantity is int &&
-        request.resource.data.total_orders == 1 &&
-        request.resource.data.total_quantity >= 0;
-      allow update: if
-        request.resource.data.keys().hasOnly(['total_orders', 'total_quantity']) &&
-        request.resource.data.total_orders is int &&
-        request.resource.data.total_quantity is int &&
-        request.resource.data.total_orders == resource.data.total_orders + 1 &&
-        request.resource.data.total_quantity >= resource.data.total_quantity;
-      allow delete: if false;
-    }
-  }
-}
+The rules live in [`firestore.rules`](firestore.rules) — that file is the source of truth, not the
+copy shown in the Firebase console. Read it there; it is commented.
+
+Point [`.firebaserc`](.firebaserc) at your own project, then deploy. The Firebase CLI is a one-off
+tool, not a runtime dependency, so `npx` is enough — nothing is added to the site:
+
+```bash
+npx --yes firebase-tools login
 ```
+
+```bash
+npx --yes firebase-tools deploy --only firestore:rules
+```
+
+Before deploying over an existing project, copy the console's current rules somewhere safe
+(Firestore Database → **Rules**): deploying replaces them outright, and the console keeps a version
+history but no local backup.
 
 ---
 
