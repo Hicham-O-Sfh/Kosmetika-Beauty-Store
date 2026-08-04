@@ -9,13 +9,12 @@
 
 ## 👉 Prochaine étape
 
-Le site n'a toujours aucun bug visible par un client, mais les compteurs de commandes ne fonctionnent
-plus côté Firebase — invisible depuis la boutique, bien réel côté données.
+Plus rien de bloquant : le site n'a aucun bug visible par un client, et la chaîne de commande a été
+vérifiée de bout en bout en production le 04/08 — la commande s'enregistre bien dans Firestore.
 
-1. 🔴 **Firebase HS en production** — déployer `firestore.rules`, puis débloquer App Check.
-   Seul point réellement cassé aujourd'hui ; détail dans la section dédiée.
-2. 🟣 **Incohérences du catalogue** — 3 points à confirmer, 10 minutes.
-3. 🔵 **Captures d'écran du readme** — après la refonte des photos.
+1. 🟣 **Incohérences du catalogue** — 3 points à confirmer, 10 minutes.
+2. 🔵 **Captures d'écran du readme** — après la refonte des photos.
+3. 🔵 **Déployer les règles durcies** — optionnel, une commande, rien n'est cassé sans.
 
 **Photos produit** : refonte complète prévue via génération IA (Nano Banana / Higgsfield), plus tard.
 Tout travail d'optimisation d'images d'ici là serait jeté.
@@ -24,36 +23,13 @@ Tout travail d'optimisation d'images d'ici là serait jeté.
 
 ## 📋 Reste à faire
 
-### 🔴 Firebase hors service en production
+### 🔵 Firestore
 
-Découvert le 04/08 en vérifiant l'externalisation de la config. Invisible depuis la boutique : ni le
-panier ni la commande WhatsApp ne dépendent de Firestore. **Les compteurs, eux, n'enregistrent plus rien.**
-
-**Cause unique : App Check.** L'enforcement est activé sur Cloud Firestore et le panneau App Check
-affiche **0 requête validée sur 4** — donc 100 % du trafic légitime est rejeté, lectures comme écritures.
-Les règles ne sont pas en cause : celles de la console (inchangées depuis juin 2025) sont exactement
-celles que le readme documentait, `allow read: if true` compris. Déployer `firestore.rules` ne
-débloquera donc rien par soi-même.
-
-- [ ] **Prod — le jeton reCAPTCHA est rejeté (`App attestation failed`).** Le domaine
-      `hicham-o-sfh.github.io` a été ajouté aux domaines de la clé le 04/08 : **ça n'a rien changé**,
-      l'échange renvoie toujours `403`. Piste écartée.
-      Un appel direct à `:exchangeRecaptchaV3Token` avec un jeton bidon répond `App attestation failed`
-      et non « API non activée » ou « app inconnue » : l'API App Check est donc **active** et l'app
-      **bien enregistrée**. C'est la vérification du jeton qui échoue. Deux causes restantes, toutes
-      deux visibles sur le même écran (Firebase Console → App Check → **Apps** → l'app web) :
-      1. la **clé secrète** enregistrée dans App Check ne correspond pas à la paire de la clé de site ;
-      2. l'app est enregistrée en **reCAPTCHA Enterprise** et non v3 — dans ce cas le code doit passer
-         à `ReCaptchaEnterpriseProvider`, `ReCaptchaV3Provider` ne peut pas marcher.
-      Contrôle : la métrique « Requêtes validées » doit décoller — elle est lisible **sans**
-      désactiver l'enforcement.
-      _Note : la clé secrète reCAPTCHA a été exposée le 04/08 — la régénérer règle aussi ce point._
-- [ ] **Local — jeton de débogage manquant.** reCAPTCHA v3 ne produit pas de jeton exploitable depuis
-      `localhost` : les requêtes y remontent en « non valides ». Il faut un jeton de débogage
-      (App Check → Jetons de débogage) posé avant `main.js`. **À ne jamais commiter.**
-- [ ] **Durcir les règles** (optionnel, sans rapport avec la panne) : le [firestore.rules](firestore.rules)
-      du repo ajoute `hasAll` (le `hasOnly` seul laisse passer un document amputé d'un compteur), borne
-      la quantité à 1–50 au lieu de `>= 0`, et ferme explicitement toutes les autres collections.
+- [ ] **Déployer les règles durcies** (optionnel — rien n'est cassé sans). Les règles de la console
+      datent de juin 2025 et fonctionnent ; celles du repo les resserrent : `hasAll` en plus de
+      `hasOnly` (seul, il laisse passer un document amputé d'un compteur), quantité bornée à 1–50 au
+      lieu de `>= 0`, et toutes les autres collections explicitement fermées.
+      `npx --yes firebase-tools deploy --only firestore:rules`
       ⚠️ Le déploiement **remplace** les règles de la console — l'historique y reste consultable, mais
       il n'y a pas de sauvegarde locale.
 
@@ -66,6 +42,11 @@ débloquera donc rien par soi-même.
 
 Ces points étaient listés ; ils ne le sont plus. Décision assumée, ne pas les rouvrir :
 
+- **Jeton de débogage App Check** — les compteurs resteront muets en développement local, et c'est
+  accepté. Le site y fonctionne entièrement (catalogue, panier, commande WhatsApp) ; seule l'écriture
+  Firestore est refusée, et `warnAppCheckRejected()` l'explique en console au lieu de laisser une
+  erreur brute. La prod, elle, est vérifiée fonctionnelle. Ajouter `localhost` à la clé reCAPTCHA
+  n'est **pas** une alternative : ça affaiblirait la clé de production.
 - **Outillage** (`.editorconfig`, Prettier, ESLint), **fichier de conventions de code**, **tests**,
   **CI** — hors périmètre. Le projet reste sans build, sans `npm install`, sans pipeline. Le code est
   déjà formaté à la Prettier de fait ; le figer par de l'outillage n'apporterait rien ici.
@@ -105,6 +86,14 @@ depuis le repo, n'en contient aucune trace. Le message est émis par du code Goo
 il n'est pas corrigeable depuis le projet, seulement supprimable en retirant App Check — ce qui
 coûterait la protection des compteurs. Sans effet sur le panier, qui est en `localStorage`
 first-party. **À documenter, pas à corriger.**
+
+**`ERR_BLOCKED_BY_CLIENT` sur `firestore.googleapis.com/…/Write/channel` — pas un bug non plus.**
+Observé le 04/08 après une commande réussie. `BY_CLIENT` désigne le navigateur lui-même : c'est une
+extension (bloqueur de pub, anti-tracking, bouclier de confidentialité) qui coupe l'appel, pas le
+serveur ni le code. Et la requête bloquée porte `TYPE=terminate` : c'est la **fermeture** du canal
+WebChannel, envoyée *après* que l'écriture a abouti — d'où une commande bien enregistrée dans
+Firestore malgré le message rouge. Pour confirmer, rouvrir la page en navigation privée sans
+extensions : le message disparaît. Rien à corriger côté projet.
 
 **Pièges techniques** :
 
@@ -203,9 +192,11 @@ _Le détail de chaque changement est dans l'historique git ; ce journal ne garde
   d'explication en console et compteurs éteints, le reste du site intact (vérifié fichier retiré :
   17 cartes produit rendues, footer projeté, zéro erreur). `firestore.rules` + `firebase.json` +
   `.firebaserc` rapatriés dans le repo, les règles y sont désormais la référence plutôt que la console.
-  `requestStorageAccess` élucidé — reCAPTCHA v3, pas GTranslate (voir « À savoir »). Au passage,
-  **compteurs de commandes HS en production** mis au jour : App Check rejette 100 % du trafic
-  (0 requête validée sur 4), d'où la section 🔴. Les règles, elles, étaient correctes.
+  `requestStorageAccess` élucidé — reCAPTCHA v3, pas GTranslate (voir « À savoir »). Paire de clés
+  reCAPTCHA régénérée au passage. **Chaîne de commande vérifiée de bout en bout en production** :
+  la commande s'enregistre bien dans Firestore. Les `403 App Check` vus pendant la session venaient
+  du navigateur automatisé de test, que reCAPTCHA v3 note comme un robot — pas d'une panne du site.
+  Leçon retenue : ne jamais conclure à une panne reCAPTCHA depuis un navigateur piloté.
 - **04/08 — SEO et liens sociaux.** `robots.txt` + `sitemap.xml` ajoutés (5 pages ; `product-details`
   volontairement exclu, il ne rend rien sans `?productId=` pour un crawler). Les 3 liens sociaux
   sans URL n'aboutissent plus dans le vide : ils ouvrent une modale expliquant que ce sont des
