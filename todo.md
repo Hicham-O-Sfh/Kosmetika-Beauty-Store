@@ -205,6 +205,8 @@ _Le détail de chaque changement est dans l'historique git ; ce journal ne garde
   de rendu. Ionicons retiré, `assets/fonts/` supprimé. Garde `?productId=` sur `product-details.html`.
 - **30-31/07 — open source.** `LICENSE` MIT, `.gitignore` durci, résidus d'aspirateur de site supprimés,
   en-tête copyright sur tous les fichiers, commentaires d'historique retirés du code, `readme.md` réécrit.
+  Historique réécrit par `git filter-branch` pour retirer l'attribution de co-auteur des commits :
+  tous les SHA antérieurs ont changé (séquelle visible côté GitHub, voir « À savoir »).
 - **31/07 — Bootstrap-first (P6).** Les 6 pages + les blocs `#generic` migrés vers les utilities ;
   `style.css` 2736 → 2497 lignes.
 - **31/07 — SEO.** `lang="fr"`, titre + `meta description` uniques par page, `canonical`, Open Graph
