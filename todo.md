@@ -12,9 +12,7 @@
 Plus rien de bloquant : le site n'a aucun bug visible par un client, et la chaîne de commande a été
 vérifiée de bout en bout en production le 04/08 — la commande s'enregistre bien dans Firestore.
 
-1. 🔴 **Une commande de test en prod** — 2 minutes. Les règles durcies déployées le 04/08 n'ont pas
-   encore vu d'achat réel ; c'est la seule vérification qui reste sur le chantier Firebase.
-2. 📸 **Refonte des photos produit par IA** — le dernier gros levier, et le seul qui débloque autre
+1. 📸 **Refonte des photos produit par IA** — le dernier gros levier, et le seul qui débloque autre
    chose (captures du readme, puis passe d'optimisation d'images, en une fois).
 
 **Photos produit** : refonte complète prévue via génération IA (Nano Banana / Higgsfield), plus tard.
@@ -31,22 +29,11 @@ Tout travail d'optimisation d'images d'ici là serait jeté.
       `hasOnly`, bornent la quantité à 1–50 au lieu de `>= 0`, et ferment explicitement toutes les
       autres collections. Le repo et la console ne peuvent plus diverger : redéployer après chaque
       modification du fichier.
-- [ ] **Confirmer par une vraie commande.** Les nouvelles règles sont **plus strictes** que celles de
-      juin 2025 : une commande de test depuis la prod, dans un vrai navigateur, reste à passer pour
-      vérifier qu'un achat légitime les franchit toujours. Contrôle : le document du produit
-      s'incrémente dans Firestore → Données.
-      _Ne peut pas être vérifié depuis un navigateur piloté — reCAPTCHA le rejette (voir journal 04/08)._
 
 ### 🔵 Qualité & open source
 
 - [ ] **Captures d'écran dans le readme** — le placeholder `demo-banner.png` est commenté en haut du
       fichier. À faire **après** la refonte IA des photos, sinon elles seront à refaire.
-- [ ] **Exploiter les compteurs de commandes.** `getOrdersFromFirestore()` est exportée par
-      [firebase-management.js](assets/js/app/firebase-management.js) mais **aucun appelant** dans tout
-      le repo : Firestore accumule des `total_orders` / `total_quantity` que le site n'affiche nulle
-      part. Un bloc « meilleures ventes » alimenté par ces chiffres leur donnerait enfin un usage —
-      et justifierait le `allow read: if true` des règles. Prévoir un repli propre si la lecture
-      échoue (elle renvoie déjà `[]`).
 
 ### ⏸️ Écarté volontairement (04/08)
 
@@ -63,7 +50,7 @@ Ces points étaient listés ; ils ne le sont plus. Décision assumée, ne pas le
 - **Optimisation des 12 `.jpg` restants** — toutes les photos produit vont être **régénérées** par IA
   (Nano Banana / Higgsfield). Optimiser des images destinées à disparaître serait du travail perdu.
   À reconsidérer une fois les nouveaux visuels en place, en une seule passe.
-- **SEO des fiches produit** — ce n'est pas une dette de *ce* projet. Kosmetika est une démonstration :
+- **SEO des fiches produit** — ce n'est pas une dette de _ce_ projet. Kosmetika est une démonstration :
   qu'un tunnel catalogue → fiche → panier → commande, avec monitoring des ventes et historique client,
   tient sans backend ni base de données. Le SEO produit est une problématique de **boutique réelle**,
   pas de POC, et l'optimiser ici ne prouverait rien de plus. La limite et le chemin de correction
@@ -86,7 +73,9 @@ Ces points étaient listés ; ils ne le sont plus. Décision assumée, ne pas le
 
 - Duplication HTML sur les 6 pages **gardée** : pas de build, pas d'injection JS.
 - Catalogue en `data/products.js` (`export default`), pas de `fetch` JSON.
-- Historique git non réécrit (clone lourd accepté, seule la fluidité du site compte).
+- Historique git **réécrit une fois**, le 31/07 (`git filter-branch`), pour retirer l'attribution de
+  co-auteur des commits. Tous les SHA antérieurs ont changé. Pas d'autre réécriture prévue : le poids
+  du clone reste accepté, seule la fluidité du site compte.
 - Noms de fichiers gardés tels quels (kebab-case écarté).
 
 **`requestStorageAccess: Permission denied` — élucidé le 04/08, rien à corriger.** L'appel vient de
@@ -106,6 +95,19 @@ serveur ni le code. Et la requête bloquée porte `TYPE=terminate` : c'est la **
 WebChannel, envoyée _après_ que l'écriture a abouti — d'où une commande bien enregistrée dans
 Firestore malgré le message rouge. Pour confirmer, rouvrir la page en navigation privée sans
 extensions : le message disparaît. Rien à corriger côté projet.
+
+**Un contributeur fantôme dans la barre latérale GitHub — séquelle du `filter-branch` du 31/07.**
+L'encart « Contributors » affiche un second compte qui n'a écrit aucun des 127 commits. Vérifié le
+04/08 sur cinq sources : historique local (aucun auteur, committer, message ni trailer le mentionnant),
+API `commits` (100 % attribués au propriétaire), API `contributors` et `stats/contributors` (une seule
+entrée, 127 commits), plus zéro collaborateur et zéro GitHub App sur le dépôt. L'explication est du
+côté de GitHub : le force-push qui a suivi la réécriture a rendu les anciens commits inaccessibles
+depuis une branche, **mais GitHub ne les supprime pas** et son index de contributeurs, précalculé et
+mis en cache, continue de les compter. D'où le hovercard « Committed in the past week », daté des
+objets d'origine. Vider le cache du navigateur est sans effet : le cache est côté serveur. Seul
+recours actif : demander à GitHub Support un `gc` du dépôt et un recalcul de l'index. Sinon, attendre.
+**Conséquence à connaître** : tant que ce `gc` n'a pas eu lieu, les commits d'avant le 31/07 restent
+récupérables sur GitHub par leur SHA, dépôt public compris.
 
 **`npx serve` casse les fiches produit — corrigé dans le readme le 04/08.** `serve` fait des
 « clean URLs » : il redirige `/product-details.html?productId=10` vers `/product-details` **en perdant
